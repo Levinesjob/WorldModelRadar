@@ -1,4 +1,6 @@
-# World Model Survey Papers Since 2026
+# WorldModel Radar
+
+Tracking 2026+ survey, roadmap, taxonomy, and definition papers on world models.
 
 这是一个面向“世界模型（World Models）”综述论文的轻量仓库，收录范围从
 2026-01-01 到 2026-07-12。
