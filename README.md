@@ -10,17 +10,15 @@
 
 ## Quick View
 
-截至 2026-07-12，本仓库记录了 16 篇 2026 年以来的公开可检索论文，其中：
+截至 2026-07-12，本仓库记录了 14 篇 2026 年以来的公开可检索论文，其中：
 
 - 8 篇 core：直接综述、定义、路线图或 taxonomy 世界模型本体。
 - 5 篇 domain：围绕机器人、医疗、边缘智能、代码智能等领域中的世界模型。
-- 3 篇 adjacent：与世界模型强相关，但主对象更偏视频生成、agent 架构或世界模型机制。
+- 1 篇 adjacent：与世界模型强相关，但主对象更偏视频生成基础模型。
 
 | Date | Relevance | Area | Paper |
 | --- | --- | --- | --- |
 | 2026-07-07 | core | general definition | [A Definition and Roadmap for World Models](https://arxiv.org/abs/2607.06401) |
-| 2026-06-22 | adjacent | agent models | [Critique of Agent Model](https://arxiv.org/abs/2606.23991) |
-| 2026-06-17 | adjacent | grounded modeling | [Dual-Channel Grounded World Modeling (DCGWM)](https://arxiv.org/abs/2606.18688) |
 | 2026-06-15 | domain | healthcare | [Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies](https://arxiv.org/abs/2606.16721) |
 | 2026-06-04 | domain | robotics | [Robots Need More than VLA and World Models](https://arxiv.org/abs/2606.06556) |
 | 2026-05-31 | core | interactive video | [Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends](https://arxiv.org/abs/2606.01164) |

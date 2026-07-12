@@ -39,6 +39,11 @@ These papers are useful context but fall outside the 2026+ window:
 - `AI Agent Systems: Architectures, Applications, and Evaluation` was not placed in
   the main list because it treats world models as one component in a broader agent
   taxonomy.
+- `Critique of Agent Model` was not placed in the main list because its main subject
+  is agent-model critique; world models appear as one architectural component.
+- `Dual-Channel Grounded World Modeling (DCGWM)` was not placed in the main list
+  because it is a problem-formulation/architecture manuscript rather than a survey,
+  review, roadmap, or taxonomy paper.
 - General Wikipedia pages were used only as orientation during search, not as canonical
   metadata sources.
 

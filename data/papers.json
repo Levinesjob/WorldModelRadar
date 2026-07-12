@@ -388,39 +388,5 @@
     "area": "video generation foundations",
     "why_included": "Broad video-generation survey that explicitly frames advanced video generation as a path toward advanced world models.",
     "status": "verified_public_source"
-  },
-  {
-    "id": "hazare-2026-dual-channel-grounded-world-modeling",
-    "title": "Dual-Channel Grounded World Modeling (DCGWM): Structural Prevention of Objective Interference Collapse via Heterogeneous External Grounding with Inward-Only Gradient Flow",
-    "authors": [
-      "Akshay Hazare"
-    ],
-    "date": "2026-06-17",
-    "venue_or_source": "arXiv",
-    "arxiv_id": "2606.18688",
-    "url": "https://arxiv.org/abs/2606.18688",
-    "relevance": "adjacent",
-    "paper_type": "problem formulation/architecture",
-    "area": "grounded world modeling",
-    "why_included": "Not a survey, but included as a candidate-adjacent 2026 framing paper because it defines an architectural problem for grounded world modeling.",
-    "status": "verified_public_source"
-  },
-  {
-    "id": "xing-2026-critique-agent-model",
-    "title": "Critique of Agent Model",
-    "authors": [
-      "Eric Xing",
-      "Mingkai Deng",
-      "Jinyu Hou"
-    ],
-    "date": "2026-06-22",
-    "venue_or_source": "arXiv",
-    "arxiv_id": "2606.23991",
-    "url": "https://arxiv.org/abs/2606.23991",
-    "relevance": "adjacent",
-    "paper_type": "survey/critique",
-    "area": "AI agents",
-    "why_included": "Broad agent-model survey/critique that uses separately trained world models as part of a proposed agent architecture; kept adjacent rather than core.",
-    "status": "verified_public_source"
   }
 ]
