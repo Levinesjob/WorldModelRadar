@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorldModel Radar | A Definition and Roadmap for World Models</title>
+  <meta name="worldmodel-radar:paper-id" content="chen-2026-definition-roadmap-world-models">
+  <meta name="worldmodel-radar:paper-title" content="A Definition and Roadmap for World Models">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2607.06401">
+  <meta name="worldmodel-radar:review-date" content="2026-07-12">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <style>
+    :root {
+      --ink: #17211c;
+      --muted: #5d6a63;
+      --paper: #f7f2e8;
+      --panel: #fffaf1;
+      --line: #d8cdb8;
+      --green: #1d7a61;
+      --blue: #235d86;
+      --red: #af4538;
+      --amber: #b9831e;
+      --black: #0f1512;
+      --shadow: 0 18px 50px rgba(23, 33, 28, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(23, 33, 28, 0.045) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(23, 33, 28, 0.035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 28px 28px;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .page {
+      min-height: 100vh;
+    }
+
+    .masthead {
+      padding: 56px clamp(20px, 5vw, 72px) 38px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(29, 122, 97, 0.13), transparent 28%),
+        linear-gradient(315deg, rgba(175, 69, 56, 0.13), transparent 32%),
+        rgba(255, 250, 241, 0.78);
+    }
+
+    .masthead-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+      gap: clamp(24px, 4vw, 54px);
+      align-items: end;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 18px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--muted);
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 241, 0.85);
+      border-radius: 999px;
+      padding: 6px 10px;
+      white-space: nowrap;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: 96px;
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 24px 0 0;
+      font-size: 24px;
+      color: #33423a;
+    }
+
+    .paper-card {
+      background: var(--black);
+      color: #f7f2e8;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .paper-card h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .paper-meta {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 14px;
+    }
+
+    .paper-meta div {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 12px;
+      border-top: 1px solid rgba(247, 242, 232, 0.18);
+      padding-top: 10px;
+    }
+
+    .paper-meta dt {
+      color: #cfc3ad;
+    }
+
+    .paper-meta dd {
+      margin: 0;
+    }
+
+    .paper-card a {
+      color: #9fd2ff;
+    }
+
+    .section {
+      padding: 46px clamp(20px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 242, 232, 0.78);
+    }
+
+    .section.alt {
+      background: rgba(255, 250, 241, 0.78);
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 30px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 48px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .lens-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .lens {
+      min-height: 156px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .lens strong {
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .lens span {
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .lens:nth-child(1) { border-top: 5px solid var(--red); }
+    .lens:nth-child(2) { border-top: 5px solid var(--blue); }
+    .lens:nth-child(3) { border-top: 5px solid var(--green); }
+    .lens:nth-child(4) { border-top: 5px solid var(--amber); }
+    .lens:nth-child(5) { border-top: 5px solid #7b6a32; }
+    .lens:nth-child(6) { border-top: 5px solid #607a3d; }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .signal {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .signal h3,
+    .matrix h3,
+    .block h3,
+    .tile h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .signal p,
+    .block p,
+    .tile p,
+    .source-note p {
+      margin: 0;
+      color: #33423a;
+    }
+
+    .signal .number {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      color: var(--paper);
+      background: var(--ink);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-weight: 700;
+    }
+
+    .radar {
+      position: relative;
+      min-height: 540px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(29, 122, 97, 0.12) 0 18%, transparent 19%),
+        radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(35, 93, 134, 0.11) 35% 36%, transparent 37%),
+        radial-gradient(circle at 50% 50%, transparent 0 51%, rgba(175, 69, 56, 0.12) 52% 53%, transparent 54%),
+        var(--panel);
+      overflow: hidden;
+    }
+
+    .axis {
+      position: absolute;
+      background: rgba(23, 33, 28, 0.16);
+    }
+
+    .axis.x {
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 1px;
+    }
+
+    .axis.y {
+      top: 7%;
+      bottom: 7%;
+      left: 50%;
+      width: 1px;
+    }
+
+    .axis-label {
+      position: absolute;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255, 250, 241, 0.84);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+    }
+
+    .axis-label.top { top: 14px; left: 50%; transform: translateX(-50%); }
+    .axis-label.bottom { bottom: 14px; left: 50%; transform: translateX(-50%); }
+    .axis-label.left { left: 14px; top: 50%; transform: translateY(-50%); }
+    .axis-label.right { right: 14px; top: 50%; transform: translateY(-50%); }
+
+    .node {
+      position: absolute;
+      width: min(260px, 42vw);
+      border: 1px solid rgba(23, 33, 28, 0.18);
+      border-left: 7px solid var(--green);
+      background: rgba(255, 250, 241, 0.95);
+      border-radius: 8px;
+      padding: 13px 14px;
+      box-shadow: 0 10px 28px rgba(23, 33, 28, 0.11);
+    }
+
+    .node strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .node span {
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .node.n1 { left: 8%; top: 16%; border-left-color: var(--blue); }
+    .node.n2 { right: 8%; top: 18%; border-left-color: var(--red); }
+    .node.n3 { left: 11%; bottom: 19%; border-left-color: var(--amber); }
+    .node.n4 { right: 12%; bottom: 16%; border-left-color: var(--green); }
+    .node.n5 { left: 50%; top: 50%; transform: translate(-50%, -50%); border-left-color: var(--black); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .block,
+    .tile,
+    .matrix {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .block ul,
+    .tile ul,
+    .matrix ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+    }
+
+    .block li,
+    .tile li,
+    .matrix li {
+      margin: 8px 0;
+    }
+
+    .architecture {
+      display: grid;
+      gap: 10px;
+    }
+
+    .lane {
+      display: grid;
+      grid-template-columns: 170px repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .lane-name,
+    .step {
+      min-height: 78px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255, 250, 241, 0.9);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 13px;
+    }
+
+    .lane-name {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      vertical-align: top;
+      padding: 14px 13px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    th {
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 13px;
+      color: var(--paper);
+      background: var(--black);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      min-height: 28px;
+      border-radius: 999px;
+      color: var(--paper);
+      background: var(--green);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .risk { background: var(--red); }
+    .medium { background: var(--amber); }
+    .low { background: var(--blue); }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--panel);
+    }
+
+    .phase {
+      min-height: 260px;
+      padding: 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .phase:last-child {
+      border-right: 0;
+    }
+
+    .phase time {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .phase h3 {
+      margin: 0 0 12px;
+      font-size: 23px;
+      line-height: 1.15;
+    }
+
+    .source-note {
+      border-left: 6px solid var(--blue);
+      background: rgba(255, 250, 241, 0.92);
+      padding: 18px 20px;
+      border-radius: 8px;
+    }
+
+    .template-band {
+      background: var(--black);
+      color: var(--paper);
+    }
+
+    .template-band .section-title p {
+      color: #d9ceb9;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .template-card {
+      min-height: 168px;
+      border: 1px solid rgba(247, 242, 232, 0.22);
+      background: rgba(247, 242, 232, 0.07);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .template-card h3 {
+      margin: 0 0 12px;
+      color: #fff7e5;
+      font-size: 19px;
+    }
+
+    .template-card p {
+      margin: 0;
+      color: #d9ceb9;
+    }
+
+    .footer {
+      padding: 30px clamp(20px, 5vw, 72px);
+      color: var(--muted);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .masthead-grid,
+      .section-title,
+      .two-col,
+      .three-col,
+      .signal-grid,
+      .template-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .lens-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lane {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 64px;
+      }
+
+      .subtitle {
+        font-size: 21px;
+      }
+
+      .section-title h2 {
+        font-size: 38px;
+      }
+
+      .phase {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .phase:last-child {
+        border-bottom: 0;
+      }
+
+      .radar {
+        min-height: 760px;
+      }
+
+      .node {
+        width: calc(100% - 42px);
+        left: 21px !important;
+        right: auto !important;
+        transform: none !important;
+      }
+
+      .node.n1 { top: 88px; }
+      .node.n2 { top: 214px; }
+      .node.n5 { top: 340px; }
+      .node.n3 { bottom: 170px; }
+      .node.n4 { bottom: 44px; }
+    }
+
+    @media (max-width: 560px) {
+      .masthead {
+        padding-top: 34px;
+      }
+
+      .lens-grid {
+        grid-template-columns: 1fr;
+      }
+
+      th,
+      td {
+        padding: 11px 9px;
+        font-size: 14px;
+      }
+
+      .paper-meta div {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .section-title h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div class="masthead-grid">
+        <div>
+          <p class="kicker">
+            <span class="tag">WorldModel Radar</span>
+            <span class="tag">Review Template v1</span>
+            <span class="tag">2026-07-12</span>
+          </p>
+          <h1>世界模型机会雷达</h1>
+          <p class="subtitle">以《A Definition and Roadmap for World Models》为样板，把综述论文读成战略地图、架构蓝图、产品边界和研究路线。</p>
+        </div>
+        <aside class="paper-card" aria-label="Selected paper">
+          <h2>样板论文</h2>
+          <dl class="paper-meta">
+            <div><dt>Paper</dt><dd>A Definition and Roadmap for World Models</dd></div>
+            <div><dt>Source</dt><dd><a href="https://arxiv.org/abs/2607.06401">arXiv:2607.06401</a></dd></div>
+            <div><dt>Type</dt><dd>Perspective / definition / roadmap</dd></div>
+            <div><dt>Why</dt><dd>它定义概念、划分架构、给出瓶颈和路线图，最适合做全部综述的母模板。</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </header>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>阅读配方</h2>
+          <p>这份模板把一篇综述拆成六种视角。权重不是身份表演，而是决策顺序：先看机会与战略，再看系统可落地性，最后回到研究问题是否真实。</p>
+        </div>
+        <div class="lens-grid">
+          <div class="lens"><strong>10%</strong><span>CEO：市场窗口、商业抓手、资源配置</span></div>
+          <div class="lens"><strong>40%</strong><span>架构设计师：系统边界、演进路线、复杂度控制</span></div>
+          <div class="lens"><strong>20%</strong><span>领域专家：物理世界、机器人、科学发现、真实约束</span></div>
+          <div class="lens"><strong>10%</strong><span>开发者：接口、数据流、可测试性、工程债</span></div>
+          <div class="lens"><strong>10%</strong><span>博导：问题定义、研究范式、长期学术路线</span></div>
+          <div class="lens"><strong>10%</strong><span>博士：假设、实验、可证伪指标、论文复现路径</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>核心判断</h2>
+          <p>这篇论文的价值不在“又一个世界模型定义”，而在把世界模型从视频生成的漂亮表面，拉回到可行动、可验证、可闭环的物理智能基础设施。</p>
+        </div>
+        <div class="signal-grid">
+          <article class="signal">
+            <span class="number">1</span>
+            <h3>真正机会在物理闭环，不在生成演示</h3>
+            <p>视频生成会继续热闹，但护城河会转向动作条件数据、物理监督、真实部署反馈和可校准的不确定性。</p>
+          </article>
+          <article class="signal">
+            <span class="number">2</span>
+            <h3>战略中枢是“一态多解码器”</h3>
+            <p>同一个压缩物理状态要能解码为渲染、仿真、规划和控制接口。谁掌握这个中间状态，谁就掌握平台位置。</p>
+          </article>
+          <article class="signal">
+            <span class="number">3</span>
+            <h3>数据瓶颈会重塑行业分工</h3>
+            <p>互联网视频提供广度，机器人轨迹提供干预语义，触觉/力/材料数据提供物理精度。数据生产方式本身就是创业机会。</p>
+          </article>
+          <article class="signal">
+            <span class="number">4</span>
+            <h3>评测会从好看变成可用</h3>
+            <p>未来的核心指标不是 FVD 或视觉偏好，而是闭环成功率、长时稳定性、约束满足、延迟和 OOD 风险识别。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>大图景坐标</h2>
+          <p>每篇综述都应该被放到同一张地图里：横轴是从被动观察到主动干预，纵轴是从感知表面到物理状态。越靠右上，越接近可部署的世界模型平台。</p>
+        </div>
+        <div class="radar" role="img" aria-label="World model landscape map">
+          <span class="axis x"></span>
+          <span class="axis y"></span>
+          <span class="axis-label top">物理状态 / 因果 / 约束</span>
+          <span class="axis-label bottom">像素 / 外观 / 语义</span>
+          <span class="axis-label left">被动预测</span>
+          <span class="axis-label right">主动干预</span>
+          <div class="node n1"><strong>Renderer</strong><span>生成未来观测，适合内容、数据增强、可视化。</span></div>
+          <div class="node n2"><strong>Planner</strong><span>比较可控未来，服务策略、任务分解和风险选择。</span></div>
+          <div class="node n3"><strong>Latent Simulator</strong><span>压缩状态转移，降低 rollout 成本和视觉噪声。</span></div>
+          <div class="node n4"><strong>Physical State</strong><span>几何、接触、材料、力、动作语义进入同一状态。</span></div>
+          <div class="node n5"><strong>World Model Core</strong><span>统一表示：render / simulate / plan / evaluate。</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>机会在哪里</h2>
+          <p>短期可商业化的是“工具层”和“评测层”，中期是“数据飞轮”和“行业仿真器”，长期是“世界模型操作系统”。</p>
+        </div>
+        <div class="three-col">
+          <article class="block">
+            <h3>数据与标注基础设施</h3>
+            <p>把被动视频转成可用物理经验：动作、接触、物体状态、材料、3D、失败轨迹、任务结果。</p>
+            <ul>
+              <li>视频到动作/状态的弱标注管线</li>
+              <li>长尾场景合成与过滤</li>
+              <li>触觉、力、运动学数据采集套件</li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>行业级交互仿真器</h3>
+            <p>把世界模型做成可复用测试环境，而不是一次性生成视频。最先落地在机器人、自动驾驶、仓储、医疗训练和实验室自动化。</p>
+            <ul>
+              <li>策略上线前风险评估</li>
+              <li>合成任务与 curriculum generation</li>
+              <li>真实反馈闭环校准</li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>评测、治理与安全层</h3>
+            <p>真实世界部署需要知道模型何时不知道。标准化评测、分布外检测、延迟预算、可解释不确定性会成为刚需。</p>
+            <ul>
+              <li>闭环稳定性 benchmark</li>
+              <li>世界模型红队与事故复盘</li>
+              <li>合规数据协作与联邦训练</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>战略在哪里</h2>
+          <p>不要从“我要训练一个通用世界模型”开始。战略应从可验证的闭环场景切入，用行业数据飞轮逐步逼近通用表示。</p>
+        </div>
+        <div class="two-col">
+          <article class="block">
+            <h3>推荐战略：垂直闭环优先</h3>
+            <ul>
+              <li>选择一个高价值、可重复、可量化的物理任务域。</li>
+              <li>先做“评估和规划辅助”，再进入在线控制。</li>
+              <li>把每次真实执行都变成世界模型校准数据。</li>
+              <li>用统一 schema 固化动作、状态、失败、环境和任务结果。</li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>不推荐战略：演示驱动泛化</h3>
+            <ul>
+              <li>只追求视频逼真度，无法证明可行动性。</li>
+              <li>只堆模型规模，补不了缺失的动作和物理监督。</li>
+              <li>只做单次 demo，无法形成可复用平台能力。</li>
+              <li>忽略延迟和不确定性，难进入真实控制链路。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>技术架构</h2>
+          <p>适合落地的世界模型系统不是一个大模型，而是一组围绕“物理状态”的数据、模型、评测和控制闭环。</p>
+        </div>
+        <div class="architecture">
+          <div class="lane">
+            <div class="lane-name">Data Plane</div>
+            <div class="step"><strong>Ingest</strong>视频、3D、动作、状态、触觉、力、任务结果</div>
+            <div class="step"><strong>Normalize</strong>时间同步、坐标系、动作语义、隐私脱敏</div>
+            <div class="step"><strong>Annotate</strong>接触、对象、材料、失败、约束、奖励</div>
+            <div class="step"><strong>Curate</strong>覆盖率、长尾、质量、版权、可复现切分</div>
+          </div>
+          <div class="lane">
+            <div class="lane-name">Model Plane</div>
+            <div class="step"><strong>Encoder</strong>多模态异步输入压缩为 belief state</div>
+            <div class="step"><strong>Dynamics</strong>动作条件状态转移与不确定性估计</div>
+            <div class="step"><strong>Decoders</strong>渲染、仿真、规划、价值、动作</div>
+            <div class="step"><strong>Memory</strong>工作记忆、情景检索、失败案例库</div>
+          </div>
+          <div class="lane">
+            <div class="lane-name">Evaluation Plane</div>
+            <div class="step"><strong>Open Loop</strong>预测误差、物理一致性、长期漂移</div>
+            <div class="step"><strong>Closed Loop</strong>任务成功率、约束满足、恢复能力</div>
+            <div class="step"><strong>Risk</strong>OOD、置信校准、安全阈值</div>
+            <div class="step"><strong>Cost</strong>延迟、吞吐、能耗、硬件生命周期</div>
+          </div>
+          <div class="lane">
+            <div class="lane-name">Product Plane</div>
+            <div class="step"><strong>Copilot</strong>先辅助评估，不直接控制</div>
+            <div class="step"><strong>Sandbox</strong>生成任务、测试策略、发现风险</div>
+            <div class="step"><strong>Runtime</strong>低延迟 rollout 与安全中止</div>
+            <div class="step"><strong>Feedback</strong>上线数据回流与版本治理</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>系统权衡</h2>
+          <p>架构选择的核心不是“哪个模型最先进”，而是每个能力在稳定性、成本、复杂度和迁移路径上的代价。</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>维度</th>
+              <th>关键问题</th>
+              <th>推荐判断</th>
+              <th>风险等级</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>可扩展性</td>
+              <td>数据、模型、评测是否能随场景扩张？</td>
+              <td>先扩数据 schema 和评测协议，再扩模型规模。多模态统一要用 curriculum，不要一次性混成 token 汤。</td>
+              <td><span class="score medium">中</span></td>
+            </tr>
+            <tr>
+              <td>复杂度</td>
+              <td>renderer、simulator、planner 是否耦合过深？</td>
+              <td>共享物理状态，解码器模块化。在线控制前保持 dynamics 和 policy 可诊断。</td>
+              <td><span class="score risk">高</span></td>
+            </tr>
+            <tr>
+              <td>稳定性</td>
+              <td>长时 rollout 是否漂移？planner 是否利用模型错误？</td>
+              <td>限制想象视野，加入不确定性、重规划、真实反馈校准和可执行性检查。</td>
+              <td><span class="score risk">高</span></td>
+            </tr>
+            <tr>
+              <td>成本</td>
+              <td>训练、推理、数据采集、物理评测哪个最贵？</td>
+              <td>最大成本通常不是 GPU，而是高质量交互数据和真实评测。先做离线评估产品，推理成本可控。</td>
+              <td><span class="score medium">中</span></td>
+            </tr>
+            <tr>
+              <td>迁移路径</td>
+              <td>从现有 VLM/VLA/仿真器如何过渡？</td>
+              <td>VLM 做语义，VLA 做动作接口，世界模型补状态转移与反事实评估；以旁路评估方式进入现有系统。</td>
+              <td><span class="score low">可控</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>伪需求与真实问题</h2>
+          <p>世界模型领域最容易被“看起来像理解”的演示误导。模板必须强制区分用户想要的表象和系统必须解决的约束。</p>
+        </div>
+        <div class="two-col">
+          <article class="block">
+            <h3>伪需求</h3>
+            <ul>
+              <li>生成更逼真的未来视频。</li>
+              <li>训练一个通用模型后自然迁移到所有机器人。</li>
+              <li>用仿真完全替代真实测试。</li>
+              <li>把世界模型接到 agent 上就能自动规划。</li>
+              <li>用更多数据解决全部物理一致性问题。</li>
+            </ul>
+          </article>
+          <article class="block">
+            <h3>真实问题</h3>
+            <ul>
+              <li>在部分可观测环境中估计决策相关隐藏状态。</li>
+              <li>知道动作如何改变世界，而不只是世界会怎样变化。</li>
+              <li>在长时 horizon 中控制误差累积。</li>
+              <li>识别自己何时不可靠，并触发保守策略。</li>
+              <li>把真实执行反馈转成持续学习和版本治理。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>业务规则与边界条件</h2>
+          <p>如果未来要把综述读成产品机会，每篇论文都要落到同一套业务规则：什么时候能用、谁承担风险、失败如何退出。</p>
+        </div>
+        <div class="three-col">
+          <article class="tile">
+            <h3>场景细节</h3>
+            <ul>
+              <li>动态环境：人、机器、物体同时变化。</li>
+              <li>输入异步：视频、语言、动作、传感器频率不同。</li>
+              <li>高价值失败：罕见事故比平均成功更重要。</li>
+              <li>部署约束：低延迟、可中止、可审计。</li>
+            </ul>
+          </article>
+          <article class="tile">
+            <h3>用户痛点</h3>
+            <ul>
+              <li>真实试错太贵、太慢、太危险。</li>
+              <li>仿真与现实差距导致策略上线不可信。</li>
+              <li>现有指标无法解释为什么失败。</li>
+              <li>多团队数据格式割裂，经验不能复用。</li>
+            </ul>
+          </article>
+          <article class="tile">
+            <h3>边界条件</h3>
+            <ul>
+              <li>不进入无安全阈值的实时控制。</li>
+              <li>不把视觉逼真当作物理正确。</li>
+              <li>不在缺少动作语义时承诺规划能力。</li>
+              <li>不把静态训练集当作持续变化的真实世界。</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>框架与技术债</h2>
+          <p>世界模型会积累一种新型技术债：不是代码难维护，而是表示、评测、数据和安全假设彼此不一致。</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>债务类型</th>
+              <th>表现</th>
+              <th>后果</th>
+              <th>偿还方式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>表示债</td>
+              <td>渲染、仿真、规划各自维护一套世界状态。</td>
+              <td>转换损失、调试困难、能力不可迁移。</td>
+              <td>建立统一物理状态与多解码器接口。</td>
+            </tr>
+            <tr>
+              <td>数据债</td>
+              <td>被动视频很多，动作、接触、力、失败数据稀缺。</td>
+              <td>看得懂但动不了，能生成但不可控。</td>
+              <td>设计交互数据飞轮和长尾失败采样机制。</td>
+            </tr>
+            <tr>
+              <td>评测债</td>
+              <td>视觉指标替代闭环指标。</td>
+              <td>demo 好看，上线脆弱。</td>
+              <td>任务成功率、物理约束、延迟、校准、OOD 联合评测。</td>
+            </tr>
+            <tr>
+              <td>安全债</td>
+              <td>没有不确定性暴露和可验证控制边界。</td>
+              <td>操作者过度信任，系统在未知场景冒进行动。</td>
+              <td>安全阈值、formal checks、保守退出、审计日志。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>迁移路径</h2>
+          <p>最务实的路线是从现有 AI 系统旁边切入，逐步从“评估器”进化成“仿真器”，最后才成为“控制核心”。</p>
+        </div>
+        <div class="timeline">
+          <article class="phase">
+            <time>Phase 0</time>
+            <h3>Paper-to-Map</h3>
+            <p>先用本模板统一阅读所有综述，建立术语、坐标轴、指标和机会清单。</p>
+          </article>
+          <article class="phase">
+            <time>Phase 1</time>
+            <h3>Offline Evaluator</h3>
+            <p>把世界模型用于策略候选评估、失败预测、合成任务和数据筛选。</p>
+          </article>
+          <article class="phase">
+            <time>Phase 2</time>
+            <h3>Interactive Sandbox</h3>
+            <p>支持多轮动作条件 rollout，接入不确定性和真实反馈校准。</p>
+          </article>
+          <article class="phase">
+            <time>Phase 3</time>
+            <h3>Runtime Co-Pilot</h3>
+            <p>进入低延迟控制旁路，先建议和中止，再逐步承担闭环规划。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section template-band">
+      <div class="section-inner">
+        <div class="section-title">
+          <h2>复用模板</h2>
+          <p>以后每篇综述都按这九个槽位填充，最后即可拼成“世界模型大图景”：论文位置、机会强度、架构路线、真实瓶颈和迁移优先级。</p>
+        </div>
+        <div class="template-grid">
+          <article class="template-card">
+            <h3>1. Why This Paper</h3>
+            <p>它解决定义、架构、评测、应用、数据、路线图中的哪一层？为什么值得进入总图？</p>
+          </article>
+          <article class="template-card">
+            <h3>2. Landscape Position</h3>
+            <p>放到 renderer / simulator / planner / physical state 坐标上，并说明相邻论文。</p>
+          </article>
+          <article class="template-card">
+            <h3>3. Opportunity Thesis</h3>
+            <p>CEO 视角：谁会买单，为什么现在，护城河是数据、模型、评测还是分发？</p>
+          </article>
+          <article class="template-card">
+            <h3>4. Architecture Thesis</h3>
+            <p>架构师视角：核心组件、数据流、扩展路径、失败模式、可替换边界。</p>
+          </article>
+          <article class="template-card">
+            <h3>5. Domain Reality</h3>
+            <p>领域专家视角：真实物理约束、场景细节、用户痛点、不可忽略的边界条件。</p>
+          </article>
+          <article class="template-card">
+            <h3>6. Buildability</h3>
+            <p>开发者视角：MVP、接口、测试、依赖、工程债、成本估计和迁移步骤。</p>
+          </article>
+          <article class="template-card">
+            <h3>7. Research Question</h3>
+            <p>博导视角：该领域的核心科学问题、可发表问题、范式风险和长期路线。</p>
+          </article>
+          <article class="template-card">
+            <h3>8. Experiment Plan</h3>
+            <p>博士视角：假设、变量、数据集、指标、baseline、可证伪结果。</p>
+          </article>
+          <article class="template-card">
+            <h3>9. False vs Real</h3>
+            <p>把伪需求、真实问题、业务规则、技术债放在同一页，防止被概念泡沫牵着走。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="section-inner">
+        <div class="source-note">
+          <p>Source basis: arXiv abstract page and HTML version for <a href="https://arxiv.org/abs/2607.06401">A Definition and Roadmap for World Models</a>. The analysis summarizes the paper's definition, taxonomy, architecture paradigms, open challenges, and staged roadmap; it is not a verbatim reproduction.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    WorldModel Radar review template. Built for comparing survey papers across opportunity, strategy, architecture, domain constraints, engineering debt, and research agenda.
+  </footer>
+</body>
+</html>

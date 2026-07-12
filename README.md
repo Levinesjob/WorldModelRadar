@@ -87,3 +87,18 @@ Suggested update cadence:
 
 This repository is configured for a local daily Codex automation. See
 [`docs/automation.md`](docs/automation.md) for the update workflow.
+
+## Review Templates
+
+- [`docs/reviews/world-model-big-picture.html`](docs/reviews/world-model-big-picture.html):
+  weekly synthesis page for the reviewed HTML corpus.
+- [`docs/reviews/a-definition-roadmap-world-models.html`](docs/reviews/a-definition-roadmap-world-models.html):
+  a reusable strategic and architectural reading template based on
+  *A Definition and Roadmap for World Models*.
+
+## Review Automation Helpers
+
+- `scripts/select_review_target.py`: choose the next highest-value paper for deep reading.
+- `scripts/build_review_manifest.py`: rebuild `docs/reviews/reviews.json` from HTML meta tags.
+- `scripts/build_big_picture.py`: regenerate the weekly big-picture HTML.
+- `scripts/send_feishu_file.py`: upload and send a generated HTML file to Feishu.
