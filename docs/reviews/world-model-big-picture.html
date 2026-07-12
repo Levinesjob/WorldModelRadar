@@ -1,144 +1,20 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WorldModel Radar | Big Picture</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>WorldModel Radar | 世界模型大图景</title>
+  <meta name="worldmodel-radar:review-date" content="2026-07-13">
+  <meta name="worldmodel-radar:review-type" content="weekly_big_picture">
   <style>
-    :root {
-      --ink: #15201b;
-      --muted: #5d6a63;
-      --paper: #f7f2e8;
-      --panel: #fffaf1;
-      --line: #d8cdb8;
-      --green: #1d7a61;
-      --blue: #235d86;
-      --red: #af4538;
-      --amber: #b9831e;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      color: var(--ink);
-      background: var(--paper);
-      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-      line-height: 1.55;
-    }
-    a { color: var(--blue); }
-    header, section, footer { padding: 40px clamp(20px, 5vw, 72px); border-bottom: 1px solid var(--line); }
-    .wrap { max-width: 1240px; margin: 0 auto; }
-    .kicker { font: 12px/1.2 "Trebuchet MS", Verdana, sans-serif; text-transform: uppercase; color: var(--muted); letter-spacing: 0; }
-    h1 { max-width: 980px; margin: 8px 0 18px; font-size: 72px; line-height: 0.96; letter-spacing: 0; }
-    h2 { margin: 0 0 16px; font-size: 36px; line-height: 1; letter-spacing: 0; }
-    .lead { max-width: 860px; font-size: 22px; color: #33423a; }
-    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
-    .metric { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
-    .metric strong { display: block; font-size: 34px; line-height: 1; }
-    .metric span { color: var(--muted); font: 13px/1.4 "Trebuchet MS", Verdana, sans-serif; }
-    .map { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 18px; }
-    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 22px; }
-    .axes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .axis { border-top: 5px solid var(--green); padding-top: 12px; }
-    .axis:nth-child(2) { border-color: var(--blue); }
-    .axis:nth-child(3) { border-color: var(--red); }
-    .axis:nth-child(4) { border-color: var(--amber); }
-    table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); }
-    th, td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-    th { font: 12px/1.2 "Trebuchet MS", Verdana, sans-serif; text-transform: uppercase; color: var(--muted); letter-spacing: 0; }
-    .priority { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-    .priority li { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
-    .priority span { display: block; color: var(--muted); margin-top: 4px; font-size: 14px; }
-    footer { color: var(--muted); font: 13px/1.5 "Trebuchet MS", Verdana, sans-serif; }
-    @media (max-width: 860px) {
-      h1 { font-size: 48px; }
-      .metrics, .map, .axes { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 520px) {
-      h1 { font-size: 36px; }
-      .lead { font-size: 18px; }
-      th, td { padding: 10px 8px; font-size: 14px; }
-    }
+    :root{--ink:#17211c;--muted:#5d6a63;--paper:#f7f2e8;--panel:#fffaf1;--line:#d8cdb8;--green:#1d7a61;--blue:#235d86;--red:#af4538;--amber:#b9831e}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Iowan Old Style",Georgia,serif;line-height:1.6}header,section,footer{padding:44px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1240px;margin:auto}h1{font-size:clamp(52px,8vw,92px);line-height:.95;margin:10px 0 20px}h2{font-size:38px;margin:0 0 18px}.lead{font-size:23px;max-width:900px}.small{font:13px/1.5 "Trebuchet MS",sans-serif;color:var(--muted)}.metrics,.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid{grid-template-columns:repeat(2,1fr)}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}.metric strong{font-size:36px;display:block}.axis{border-top:6px solid var(--green)}.axis:nth-child(2){border-color:var(--blue)}.axis:nth-child(3){border-color:var(--red)}.axis:nth-child(4){border-color:var(--amber)}table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:12px;border:1px solid var(--line);text-align:left;vertical-align:top}a{color:var(--blue)}@media(max-width:800px){.metrics,.grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <p class="kicker">WorldModel Radar · Weekly Big Picture · 2026-07-12</p>
-      <h1>世界模型大图景</h1>
-      <p class="lead">这份页面把已经生成的精读 HTML 汇总成一张持续更新的研究地图：哪些论文定义问题，哪些论文打开应用场景，哪些地方还缺少真实评估和可迁移架构。</p>
-      <div class="metrics">
-        <div class="metric"><strong>14</strong><span>papers in radar</span></div>
-        <div class="metric"><strong>1</strong><span>deep-read HTML reviews</span></div>
-        <div class="metric"><strong>8</strong><span>core world-model papers</span></div>
-        <div class="metric"><strong>13</strong><span>papers still to review</span></div>
-      </div>
-    </div>
-  </header>
-
-  <section>
-    <div class="wrap map">
-      <div class="panel">
-        <h2>战略坐标</h2>
-        <div class="axes">
-          <div class="axis"><strong>定义层</strong><p>统一概念、能力边界、分类法和路线图，是后续所有论文比较的坐标系。</p></div>
-          <div class="axis"><strong>交互层</strong><p>从视频生成走向可行动模拟，关键问题是动作、状态、反馈和长时序一致性。</p></div>
-          <div class="axis"><strong>领域层</strong><p>机器人、医疗、边缘智能、代码智能会先落地，因为它们有明确场景、成本约束和评价指标。</p></div>
-          <div class="axis"><strong>工程层</strong><p>真正的壁垒来自数据闭环、评估体系、推理成本、安全边界和迁移路径，而不只是单个模型。</p></div>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>下一批精读优先级</h2>
-        <ul class="priority">
-          <li><strong>Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends</strong><span>interactive video world modeling · 2026-05-31</span></li>
-<li><strong>World Action Models: The Next Frontier in Embodied AI</strong><span>embodied AI and action generation · 2026-05-12</span></li>
-<li><strong>World Model for Robot Learning: A Comprehensive Survey</strong><span>robot learning · 2026-04-30</span></li>
-<li><strong>Graph World Models: Concepts, Taxonomy, and Future Directions</strong><span>graph world models · 2026-04-30</span></li>
-<li><strong>OpenWorldLib: A Unified Codebase and Definition of Advanced World Models</strong><span>advanced world models · 2026-04-06</span></li>
-<li><strong>Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks</strong><span>world-model research framing · 2026-02-02</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>已完成精读</h2>
-      <table>
-        <thead><tr><th>Date</th><th>Review</th><th>Relevance</th><th>Area</th><th>Source</th></tr></thead>
-        <tbody>
-          <tr><td>2026-07-12</td><td><a href="a-definition-roadmap-world-models.html">A Definition and Roadmap for World Models</a></td><td>core</td><td>general definition</td><td><a href="https://arxiv.org/abs/2607.06401">source</a></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <h2>覆盖矩阵</h2>
-      <table>
-        <thead><tr><th>Area</th><th>Papers</th><th>Reviewed</th><th>Mix</th></tr></thead>
-        <tbody>
-          <tr><td>advanced world models</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>code intelligence</td><td>1</td><td>0</td><td>0 core / 1 domain / 0 adjacent</td></tr>
-<tr><td>digital twins and mobile edge intelligence</td><td>1</td><td>0</td><td>0 core / 1 domain / 0 adjacent</td></tr>
-<tr><td>embodied AI and action generation</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>general definition</td><td>1</td><td>1</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>graph world models</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>healthcare</td><td>1</td><td>0</td><td>0 core / 1 domain / 0 adjacent</td></tr>
-<tr><td>interactive video world modeling</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>physical grounding and actionable simulators</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>robot learning</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-<tr><td>robotics and video generation world models</td><td>1</td><td>0</td><td>0 core / 1 domain / 0 adjacent</td></tr>
-<tr><td>robotics, VLA, and world-model interfaces</td><td>1</td><td>0</td><td>0 core / 1 domain / 0 adjacent</td></tr>
-<tr><td>video generation foundations</td><td>1</td><td>0</td><td>0 core / 0 domain / 1 adjacent</td></tr>
-<tr><td>world-model research framing</td><td>1</td><td>0</td><td>1 core / 0 domain / 0 adjacent</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap">Generated from data/papers.json and docs/reviews/reviews.json. Weekly automation should refine this page with cross-paper synthesis when more reviews are available.</div>
-  </footer>
-</body>
-</html>
+<header><div class="wrap"><p class="small">WorldModel Radar · Weekly Big Picture · 2026-07-13</p><h1>世界模型大图景</h1><p class="lead">2026 年的主线正在从“生成一个看起来真实的未来”，转向“构造能响应行动、声明边界、解释失败并把模拟判断迁移到现实的可验证系统”。</p><div class="metrics"><div class="card metric"><strong>15</strong><span>收录论文</span></div><div class="card metric"><strong>2</strong><span>精读 HTML</span></div><div class="card metric"><strong>9</strong><span>核心论文</span></div><div class="card metric"><strong>13</strong><span>待精读</span></div></div></div></header>
+<section><div class="wrap"><h2>本周判断</h2><div class="grid"><div class="card axis"><h3>定义：从预测器到可交互模拟器</h3><p>《A Definition and Roadmap for World Models》把世界模型界定为通过多模态交互构建内部环境表征、预测状态转移并支持行动后果推演的系统。它给出了研究坐标与阶段路线。</p></div><div class="card axis"><h3>可信：从画质到判决准入</h3><p>《Validate the Dream Before You Trust Its Verdict》补上了路线图中的治理接口：视觉质量只是 L0，只有声明训练包络与可信时域后，模拟判决才首次获得有限准入。</p></div><div class="card axis"><h3>应用：垂直领域先行</h3><p>机器人、医疗、边缘智能、代码智能正在形成各自的状态、行动与评价闭环。落地速度取决于是否能把抽象“世界”压缩为可观测、可干预、可评价的任务域。</p></div><div class="card axis"><h3>工程：证据链成为新基础设施</h3><p>下一阶段的竞争不只是模型规模，而是数据溯源、动作覆盖、OOD 拒绝、失败归因、现实对照与成本可控的验证流水线。</p></div></div></div></section>
+<section><div class="wrap"><h2>跨论文综合：一条可执行的成熟度路径</h2><table><tr><th>阶段</th><th>核心问题</th><th>发布证据</th><th>主要技术债</th></tr><tr><td>表征</td><td>模型是否学习了足够的环境状态与动态？</td><td>多模态状态一致性、时序稳定性</td><td>状态不可辨识、数据偏差</td></tr><tr><td>交互</td><td>不同动作是否导致语义正确的不同未来？</td><td>反事实动作集、可控性与动作跟随</td><td>行为策略覆盖不足、外推误差</td></tr><tr><td>包络</td><td>在哪些条件和多长时域内可信？</td><td>版本化训练包络、漂移上界、OOD 拒绝</td><td>跨领域包络协议尚缺</td></tr><tr><td>归因</td><td>失败来自模型还是被测策略？</td><td>失败签名、现场事件对齐、归因协议</td><td>真实失败数据稀缺</td></tr><tr><td>迁移</td><td>模拟中的优劣是否预测现实优劣？</td><td>包络内 sim-real 策略表现相关性</td><td>现实试验昂贵且存在安全约束</td></tr></table></div></section>
+<section><div class="wrap"><h2>机会、成本与边界</h2><div class="grid"><div class="card"><h3>最值得做</h3><ul><li>把 L0–L4 变为世界模型服务的证据契约与发布门禁。</li><li>围绕机器人、自动驾驶、医疗建立窄包络、高质量现实对照。</li><li>将“不知道/拒绝”做成一等输出，而非异常补丁。</li></ul></div><div class="card"><h3>应避免</h3><ul><li>用 FVD 或主观画质替代动作条件真实性。</li><li>把更长 rollout 当作更强可靠性。</li><li>在未声明数据覆盖和可信时域时汇报闭环安全结论。</li></ul></div><div class="card"><h3>成本结构</h3><p>训练成本之外，真正持续的支出来自干预数据、包络维护、真实失败采集、sim-real 对照和审计。应按风险与预期用途分级投入，而非追求全域 L4。</p></div><div class="card"><h3>当前边界</h3><p>准入阶梯仍是初步规范性框架；L2 的通用检测、L3 的可靠归因、L4 的充分性均未完成跨实体、跨任务验证。它适合指导架构，不等于现成认证标准。</p></div></div></div></section>
+<section><div class="wrap"><h2>已完成精读</h2><table><tr><th>日期</th><th>论文</th><th>作用</th></tr><tr><td>2026-07-13</td><td><a href="validate-the-dream-before-you-trust-its-verdict-admissibility-for-world-model-simulators.html">Validate the Dream Before You Trust Its Verdict</a></td><td>可信模拟与判决准入框架</td></tr><tr><td>2026-07-12</td><td><a href="a-definition-roadmap-world-models.html">A Definition and Roadmap for World Models</a></td><td>科学定义、技术坐标与路线图</td></tr></table></div></section>
+<section><div class="wrap"><h2>下一批精读优先级</h2><ol><li><strong>Towards Interactive Video World Modeling</strong>：连接生成、行动与基准。</li><li><strong>OpenWorldLib</strong>：统一定义与推理框架的工程化。</li><li><strong>World Model for Robot Learning</strong>：最完整的机器人领域覆盖。</li><li><strong>From Generative Engines to Actionable Simulators</strong>：物理 grounding 与本周准入框架直接互补。</li></ol></div></section>
+<footer><div class="wrap small">汇总 data/papers.json 与 docs/reviews/*.html；下次周一或超过 7 天后刷新。</div></footer>
+</body></html>

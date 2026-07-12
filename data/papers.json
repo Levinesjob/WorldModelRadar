@@ -1,5 +1,25 @@
 [
   {
+    "id": "oefinger-2026-admissibility-world-model-simulators",
+    "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
+    "authors": [
+      "Christian Oefinger",
+      "Finn Rasmus Schäfer",
+      "Korbinian Moller",
+      "Mattia Piccinini",
+      "Johannes Betz"
+    ],
+    "date": "2026-07-08",
+    "venue_or_source": "arXiv; RSS 2026 Workshop on Robot World Models",
+    "arxiv_id": "2607.07196",
+    "url": "https://arxiv.org/abs/2607.07196",
+    "relevance": "core",
+    "paper_type": "position/framework",
+    "area": "world-model simulator assurance",
+    "why_included": "Defines an embodiment-agnostic L0-L4 admissibility framework for deciding when generative world-model simulator verdicts can count as assurance evidence.",
+    "status": "verified_public_source"
+  },
+  {
     "id": "chen-2026-definition-roadmap-world-models",
     "title": "A Definition and Roadmap for World Models",
     "authors": [

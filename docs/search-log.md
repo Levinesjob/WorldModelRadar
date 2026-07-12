@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-07-12
+Last checked: 2026-07-13
 
 ## Queries Used
 
@@ -36,6 +36,10 @@ These papers are useful context but fall outside the 2026+ window:
 
 ## Exclusion Notes
 
+- `WCog-VLA: A Dual-Level World-Cognitive Vision-Language-Action Model for
+  End-to-End Autonomous Driving` (`2607.08375`) was not placed in the main list
+  because it introduces a specific driving architecture and dataset rather than
+  an overview, taxonomy, position, definition, or broadly reusable framework.
 - `AI Agent Systems: Architectures, Applications, and Evaluation` was not placed in
   the main list because it treats world models as one component in a broader agent
   taxonomy.
