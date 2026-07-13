@@ -89,5 +89,8 @@ python scripts/send_feishu_file.py docs/reviews/a-definition-roadmap-world-model
 - Feishu credentials must stay outside the repository. The sender reads either
   `FEISHU_APP_ID` and `FEISHU_APP_SECRET`, or the local
   `~/.openclaw-autoclaw/openclaw.json` file.
+- The Feishu app must have file-upload and bot-message scopes enabled. At minimum
+  this workflow needs `im:resource:upload` or `im:resource`, plus
+  `im:message:send_as_bot`, and the bot must be able to access the target chat.
 - Review HTML files should include `worldmodel-radar:*` meta tags so
   `scripts/build_review_manifest.py` can track which papers have been reviewed.

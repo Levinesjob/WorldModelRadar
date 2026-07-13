@@ -28,6 +28,12 @@ def request_json(url: str, *, method: str = "POST", headers: dict | None = None,
     return json.loads(payload)
 
 
+def load_config(config_path: Path) -> dict:
+    if not config_path.exists():
+        return {}
+    return json.loads(config_path.read_text(encoding="utf-8-sig"))
+
+
 def load_credentials(config_path: Path) -> tuple[str, str]:
     app_id = os.environ.get("FEISHU_APP_ID")
     app_secret = os.environ.get("FEISHU_APP_SECRET")
@@ -40,13 +46,26 @@ def load_credentials(config_path: Path) -> tuple[str, str]:
             f"or create {config_path}."
         )
 
-    config = json.loads(config_path.read_text(encoding="utf-8"))
+    config = load_config(config_path)
     feishu = config.get("channels", {}).get("feishu", {})
     app_id = feishu.get("appId") or feishu.get("app_id")
     app_secret = feishu.get("appSecret") or feishu.get("app_secret")
     if not app_id or not app_secret:
         raise SystemExit("Feishu credentials were not found in config.")
     return app_id, app_secret
+
+
+def load_chat_id(config_path: Path, explicit_chat_id: str | None) -> str:
+    if explicit_chat_id:
+        return explicit_chat_id
+
+    env_chat_id = os.environ.get("FEISHU_CHAT_ID")
+    if env_chat_id:
+        return env_chat_id
+
+    config = load_config(config_path)
+    feishu = config.get("channels", {}).get("feishu", {})
+    return feishu.get("chatId") or feishu.get("chat_id") or DEFAULT_CHAT_ID
 
 
 def get_tenant_token(app_id: str, app_secret: str) -> str:
@@ -135,7 +154,7 @@ def send_file_message(token: str, chat_id: str, file_key: str) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Upload a file and send it to a Feishu chat.")
     parser.add_argument("file", type=Path, help="File to send.")
-    parser.add_argument("--chat-id", default=DEFAULT_CHAT_ID)
+    parser.add_argument("--chat-id", default=None)
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--file-type", default="stream")
     parser.add_argument("--dry-run", action="store_true")
@@ -145,15 +164,16 @@ def main() -> None:
     if not path.exists() or not path.is_file():
         raise SystemExit(f"File not found: {path}")
 
+    chat_id = load_chat_id(args.config, args.chat_id)
     if args.dry_run:
-        print(json.dumps({"file": str(path), "chat_id": args.chat_id, "dry_run": True}, indent=2))
+        print(json.dumps({"file": str(path), "chat_id": chat_id, "dry_run": True}, indent=2))
         return
 
     app_id, app_secret = load_credentials(args.config)
     token = get_tenant_token(app_id, app_secret)
     file_key = upload_file(token, path, args.file_type)
-    response = send_file_message(token, args.chat_id, file_key)
-    print(json.dumps({"sent": True, "chat_id": args.chat_id, "file": str(path), "response": response}, ensure_ascii=False, indent=2))
+    response = send_file_message(token, chat_id, file_key)
+    print(json.dumps({"sent": True, "chat_id": chat_id, "file": str(path), "response": response}, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
