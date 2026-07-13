@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-07-13
+Last checked: 2026-07-14
 
 ## Queries Used
 
@@ -36,6 +36,14 @@ These papers are useful context but fall outside the 2026+ window:
 
 ## Exclusion Notes
 
+- `Causally Debiased Latent Action Model for Embodied Action Conditioned World
+  Models` (`2607.09185`) was not placed in the main list because it proposes and
+  evaluates one latent-action fine-tuning method rather than an overview,
+  taxonomy, definition, roadmap, or broadly reusable field-level framework.
+- `GATS: Graph-Augmented Tree Search with Layered World Models for Efficient
+  Agent Planning` (`2607.08894`) was not placed in the main list because it is a
+  specific tree-search planning method whose layered world model is an internal
+  component, not an overview or general framework for world-model research.
 - `WCog-VLA: A Dual-Level World-Cognitive Vision-Language-Action Model for
   End-to-End Autonomous Driving` (`2607.08375`) was not placed in the main list
   because it introduces a specific driving architecture and dataset rather than

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorldModel Radar | OpenWorldLib 精读</title>
+  <meta name="worldmodel-radar:paper-id" content="zeng-2026-openworldlib">
+  <meta name="worldmodel-radar:paper-title" content="OpenWorldLib: A Unified Codebase and Definition of Advanced World Models">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2604.04707">
+  <meta name="worldmodel-radar:review-date" content="2026-07-14">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <style>
+    :root { --ink:#17211c; --muted:#5d6a63; --paper:#f4efe5; --panel:#fffaf1; --line:#d5c9b5; --green:#176b55; --blue:#235d86; --red:#a84438; --amber:#a87519; --black:#111814; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:linear-gradient(90deg,rgba(23,33,28,.04) 1px,transparent 1px),linear-gradient(rgba(23,33,28,.035) 1px,transparent 1px),var(--paper); background-size:28px 28px; font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Noto Serif SC",serif; line-height:1.65; }
+    a { color:var(--blue); text-underline-offset:3px; }
+    header, section { border-bottom:1px solid var(--line); }
+    header { padding:58px clamp(20px,5vw,72px) 42px; background:linear-gradient(135deg,rgba(23,107,85,.14),transparent 35%),linear-gradient(315deg,rgba(168,117,25,.12),transparent 36%),rgba(255,250,241,.82); }
+    .wrap { max-width:1240px; margin:auto; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr); gap:40px; align-items:end; }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:18px; font:12px "Trebuchet MS",sans-serif; text-transform:uppercase; color:var(--muted); }
+    .tag { padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:rgba(255,250,241,.85); }
+    h1 { margin:0; max-width:900px; font-size:clamp(52px,8vw,104px); line-height:.92; letter-spacing:-.055em; }
+    .subtitle { max-width:760px; margin:24px 0 0; font-size:22px; color:#34443b; }
+    .paper { padding:24px; color:#f7f2e8; background:var(--black); border-radius:10px; box-shadow:0 18px 50px rgba(23,33,28,.14); }
+    .paper h2 { margin:0 0 14px; font-size:22px; }
+    .paper dl { margin:0; font:14px "Trebuchet MS",sans-serif; }
+    .paper div { display:grid; grid-template-columns:76px 1fr; gap:10px; padding:9px 0; border-top:1px solid rgba(255,255,255,.15); }
+    .paper dt { color:#cfc3ad; } .paper dd { margin:0; } .paper a { color:#9fd2ff; }
+    section { padding:46px clamp(20px,5vw,72px); background:rgba(244,239,229,.78); }
+    section.alt { background:rgba(255,250,241,.8); }
+    .heading { display:grid; grid-template-columns:minmax(220px,.34fr) minmax(0,.66fr); gap:28px; margin-bottom:28px; }
+    .heading h2 { margin:0; font-size:clamp(34px,4.6vw,52px); line-height:1; }
+    .heading p { margin:0; color:var(--muted); font-size:18px; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .grid.two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .card { padding:20px; border:1px solid var(--line); border-radius:9px; background:var(--panel); }
+    .card h3 { margin:0 0 9px; font-size:22px; line-height:1.2; }
+    .card p { margin:0; } .card ul { margin:10px 0 0; padding-left:20px; }
+    .lens-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+    .lens { min-height:144px; display:flex; flex-direction:column; justify-content:space-between; padding:16px; border:1px solid var(--line); border-top:5px solid var(--blue); border-radius:8px; background:var(--panel); }
+    .lens:nth-child(1){border-top-color:var(--red)} .lens:nth-child(3){border-top-color:var(--green)} .lens:nth-child(4){border-top-color:var(--amber)}
+    .lens strong { font-size:32px; } .lens span { color:var(--muted); font:13px "Trebuchet MS",sans-serif; }
+    .thesis { padding:24px; border-left:7px solid var(--green); background:#edf5ef; font-size:22px; }
+    .flow { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); align-items:stretch; gap:8px; }
+    .node { grid-column:span 2; padding:16px 10px; text-align:center; border:1px solid var(--line); border-radius:8px; background:var(--panel); }
+    .node.wide { grid-column:span 9; background:#eaf2f7; border-color:#a7bed0; }
+    .arrow { align-self:center; text-align:center; font-size:25px; color:var(--green); }
+    .node strong { display:block; } .node small { display:block; margin-top:6px; color:var(--muted); }
+    table { width:100%; border-collapse:collapse; background:var(--panel); }
+    th,td { padding:14px; border:1px solid var(--line); vertical-align:top; text-align:left; }
+    th { background:#e9e1d3; }
+    .risk { border-top:5px solid var(--red); } .good { border-top:5px solid var(--green); }
+    .route { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; counter-reset:step; }
+    .step { padding:18px; border:1px solid var(--line); background:var(--panel); }
+    .step:before { counter-increment:step; content:"0" counter(step); display:block; color:var(--green); font:bold 28px "Trebuchet MS",sans-serif; }
+    footer { padding:28px; text-align:center; color:var(--muted); font:13px "Trebuchet MS",sans-serif; }
+    @media(max-width:900px){.hero,.heading{grid-template-columns:1fr}.grid,.grid.two{grid-template-columns:1fr}.lens-grid{grid-template-columns:repeat(2,1fr)}.route{grid-template-columns:1fr 1fr}.flow{grid-template-columns:1fr}.node,.node.wide{grid-column:auto}.arrow{transform:rotate(90deg)}}
+    @media(max-width:560px){.lens-grid,.route{grid-template-columns:1fr}th,td{padding:10px}h1{letter-spacing:-.035em}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read</span><span class="tag">Framework / Definition</span><span class="tag">2026-07-14</span></div>
+        <h1>统一接口，不等于统一世界</h1>
+        <p class="subtitle">OpenWorldLib 把世界模型从单个生成器提升为“感知—理解—记忆—交互”的能力系统；真正值得复用的是模块契约，真正需要警惕的是把模型目录误当成共享世界状态。</p>
+      </div>
+      <aside class="paper">
+        <h2>OpenWorldLib: A Unified Codebase and Definition of Advanced World Models</h2>
+        <dl>
+          <div><dt>来源</dt><dd><a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a>（v2）</dd></div>
+          <div><dt>代码</dt><dd><a href="https://github.com/OpenDCAI/OpenWorldLib">OpenDCAI/OpenWorldLib</a></dd></div>
+          <div><dt>定位</dt><dd>定义 + 推理框架 + 能力目录</dd></div>
+          <div><dt>雷达判断</dt><dd>高工程启发，中等实证强度</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section class="alt"><div class="wrap">
+    <div class="heading"><h2>阅读配方</h2><p>权重决定问题顺序：先判断是否形成业务闭环，再审视架构边界、领域真实性、工程可建性和研究证据。</p></div>
+    <div class="lens-grid">
+      <div class="lens"><strong>10%</strong><span>CEO：平台机会、生态位、资源下注</span></div>
+      <div class="lens"><strong>40%</strong><span>架构设计师：模块契约、状态边界、演进路线</span></div>
+      <div class="lens"><strong>20%</strong><span>领域专家：物理约束、闭环场景、失败代价</span></div>
+      <div class="lens"><strong>10%</strong><span>开发者：安装、接口、测试、可观测性</span></div>
+      <div class="lens"><strong>10%</strong><span>博导：定义是否可证伪、主张是否过界</span></div>
+      <div class="lens"><strong>10%</strong><span>博士：实验变量、基线、公平比较</span></div>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="heading"><h2>核心观点</h2><p>论文给出的定义是：世界模型以感知为中心，具备交互与长期记忆，用于理解并预测复杂世界。这个定义把“世界模型”从输出格式改写成系统能力。</p></div>
+    <div class="thesis">最重要的工程结论：世界模型产品不是一个模型端点，而是一套管理异构感知、状态、推理、生成、显式表示和动作闭环的运行时。OpenWorldLib 提供了骨架，但尚未提供统一状态语义与可信闭环。</div>
+    <div class="grid" style="margin-top:16px">
+      <article class="card"><h3>定义的进步</h3><p>文本到视频不因“能生成物理画面”自动成为世界模型；关键是能否接收复杂感知、进行动作条件交互、维护长期状态并理解物理世界。</p></article>
+      <article class="card"><h3>框架的进步</h3><p>把 Operator、Reasoning、Synthesis、Representation、Memory 与 Pipeline 作为独立契约，允许不同任务和后端协作复用。</p></article>
+      <article class="card"><h3>证据的局限</h3><p>交互视频、3D、推理与 VLA 的指标不可直接比较；案例证明“能接入并运行”，尚不足以证明统一框架带来跨任务协同或长期稳定性。</p></article>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="heading"><h2>技术架构</h2><p>论文架构的强项是解耦，弱项是共享语义：模块被统一调用，但对象、时间、因果、置信度和动作后果尚无统一世界状态协议。</p></div>
+    <div class="flow">
+      <div class="node"><strong>环境 / 用户</strong><small>文本、图像、音频、动作</small></div><div class="arrow">→</div>
+      <div class="node"><strong>Operator</strong><small>校验、预处理、标准化</small></div><div class="arrow">→</div>
+      <div class="node"><strong>Pipeline</strong><small>初始化、路由、结果封装</small></div>
+      <div class="node wide"><strong>Memory ↔ Reasoning · Synthesis · Representation</strong><small>历史检索与更新；隐式理解、可观察生成、显式 3D/仿真表示并行协作</small></div>
+    </div>
+    <div class="grid" style="margin-top:16px">
+      <article class="card"><h3>Operator</h3><p>应该进一步承担单位、坐标系、时间戳、动作空间和数据质量契约，而不只做 shape/type 校验。</p></article>
+      <article class="card"><h3>Memory</h3><p>record/select/compress/manage 是正确抽象，但需补充版本、来源、置信度、冲突合并、遗忘和回放一致性。</p></article>
+      <article class="card"><h3>Pipeline</h3><p>统一入口便于替换后端；生产环境还需要预算调度、超时、熔断、回滚、重试幂等和全链路追踪。</p></article>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="heading"><h2>机会与战略</h2><p>机会不在再造一个“模型大全”，而在把异构世界模型变成可比较、可组合、可审计的运行时与验证基础设施。</p></div>
+    <div class="grid">
+      <article class="card good"><h3>机会：世界模型控制平面</h3><p>统一模型注册、输入契约、状态版本、推理路由、成本预算与风险策略，为机器人、仿真和具身智能团队减少重复集成。</p></article>
+      <article class="card good"><h3>机会：闭环评测层</h3><p>把视觉质量、几何一致性、动作可达性、长期漂移和故障恢复映射到任务成功率，而不是各模块各报一个最好指标。</p></article>
+      <article class="card good"><h3>机会：可迁移能力目录</h3><p>围绕感知、记忆、因果、预测、规划与行动建立能力卡，让采购者按场景约束选组件，而非按论文热度选模型。</p></article>
+    </div>
+    <div class="grid two" style="margin-top:16px">
+      <article class="card"><h3>推荐战略</h3><p>从一个高价值、可回放的垂直闭环开始，先统一状态和评测，再逐步扩展后端。平台能力由真实接入摩擦反向生长。</p></article>
+      <article class="card risk"><h3>不推荐战略</h3><p>先追求覆盖最多模型和任务。目录数量会制造生态繁荣假象，却把依赖冲突、显存峰值、许可、状态一致性和失败责任留给用户。</p></article>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="heading"><h2>系统权衡</h2><p>OpenWorldLib 解决“怎么接”，尚未充分解决“是否可靠地一起工作”。平台化的主要成本会从模型实现转移到语义与运维治理。</p></div>
+    <table>
+      <thead><tr><th>维度</th><th>判断</th><th>设计动作</th></tr></thead>
+      <tbody>
+        <tr><td>可扩展性</td><td>基类与任务 Pipeline 易横向扩展，但每个后端的环境、权重和数据约束会线性累积。</td><td>插件隔离、能力注册表、按需加载、硬件调度和兼容矩阵。</td></tr>
+        <tr><td>复杂度</td><td>模块解耦降低局部复杂度，却增加编排、跨模态语义和端到端调试复杂度。</td><td>统一事件模型、trace-id、契约测试与最小可复现实例。</td></tr>
+        <tr><td>稳定性</td><td>生成后端的随机性、长期记忆污染与异构失败模式会跨模块放大。</td><td>置信度传播、状态快照、确定性回放、降级路径和人类接管。</td></tr>
+        <tr><td>成本</td><td>成本不只是 GPU；还包括模型下载、环境维护、数据搬运、跨后端重复编码和领域验收。</td><td>每任务预算、缓存、轻重模型级联、离线批处理和成本归因。</td></tr>
+        <tr><td>迁移路径</td><td>最安全的路径是旁路评测 → 只读建议 → 沙箱动作 → 受限闭环，而非一次替换现有控制栈。</td><td>双跑、影子流量、可逆切换、场景白名单和责任边界。</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="heading"><h2>伪需求与真实问题</h2><p>“统一”很容易被包装成需求。只有当它减少集成成本、改善闭环质量或提供可审计证据时，才产生真实价值。</p></div>
+    <div class="grid two">
+      <article class="card risk"><h3>伪需求</h3><ul><li>支持模型数量越多，平台价值越高。</li><li>统一 Python API 就等于统一世界模型。</li><li>生成结果更逼真，就更理解物理世界。</li><li>把全部历史放进 Memory，就获得长期智能。</li></ul></article>
+      <article class="card good"><h3>真实问题</h3><ul><li>不同模型如何共享对象、坐标、时间和因果状态。</li><li>预测何时足以支撑动作，失败如何被检测。</li><li>记忆如何校验来源、处理冲突并可逆更新。</li><li>异构指标如何汇总为场景级风险与收益。</li></ul></article>
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="heading"><h2>业务规则与场景</h2><p>世界模型一旦进入决策链，就必须把“模型能力”翻译成谁能调用、何时可行动、如何退出以及谁承担后果。</p></div>
+    <div class="grid">
+      <article class="card"><h3>场景细节</h3><p>优先选择可记录传感器、动作和结果的场景，如仓储移动机器人、仿真策略评估或受控工业巡检。每次 rollout 必须可复现。</p></article>
+      <article class="card"><h3>用户痛点</h3><p>研究员困于依赖和接口差异；平台团队难以做资源治理；业务负责人无法把 FVD、VQA、3D 指标换算成任务风险。</p></article>
+      <article class="card"><h3>边界条件</h3><p>高风险动作不得只由生成预测触发；OOD、低置信或状态冲突时必须降级；未验证的新后端只能运行在影子或沙箱模式。</p></article>
+    </div>
+    <div class="grid two" style="margin-top:16px">
+      <article class="card"><h3>最低业务规则</h3><ul><li>输入、状态、模型与输出均有版本和来源。</li><li>动作前执行场景约束与安全策略。</li><li>预算、延迟、置信度超过阈值即停止或降级。</li><li>真实反馈必须回写，但不得无审计覆盖历史。</li></ul></article>
+      <article class="card"><h3>验收口径</h3><ul><li>端到端任务成功率而非单模块榜单。</li><li>长时漂移、反事实一致性与 OOD 拒绝能力。</li><li>峰值延迟、显存、吞吐与每次有效决策成本。</li><li>故障定位时间、回放成功率和人工接管率。</li></ul></article>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="heading"><h2>框架与技术债</h2><p>论文的接口骨架适合作为起点，但不应直接被误读为生产级世界模型操作系统。</p></div>
+    <table>
+      <thead><tr><th>技术债</th><th>为什么重要</th><th>优先补偿</th></tr></thead>
+      <tbody>
+        <tr><td>统一状态模型缺失</td><td>各模块可能对同一对象、时间和坐标持有不兼容解释。</td><td>WorldState schema、实体 ID、坐标变换、事件时间与不确定度。</td></tr>
+        <tr><td>评测口径碎片化</td><td>跨任务案例无法证明系统级协同收益。</td><td>统一场景、端到端基线、消融和任务效用/风险指标。</td></tr>
+        <tr><td>接口契约偏薄</td><td>模板方法容易接入，却没有清晰错误、资源和副作用语义。</td><td>类型化输入输出、错误分类、SLA、幂等与取消协议。</td></tr>
+        <tr><td>Memory 治理不足</td><td>错误状态可被长期放大，压缩过程也会丢失关键证据。</td><td>溯源、TTL、冲突检测、快照、回滚和隐私策略。</td></tr>
+        <tr><td>供应链与许可</td><td>大量后端意味着权重来源、许可证、依赖与漏洞面持续扩大。</td><td>SBOM、签名、许可清单、隔离执行和安全扫描。</td></tr>
+      </tbody>
+    </table>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="heading"><h2>迁移路径</h2><p>迁移的顺序应由可验证性驱动：先让框架看见和比较，再让它建议，最后才允许它行动。</p></div>
+    <div class="route">
+      <article class="step"><h3>能力注册</h3><p>为既有模型建立统一元数据、输入输出和资源画像，不改变线上流程。</p></article>
+      <article class="step"><h3>影子评测</h3><p>回放历史场景，比较模型在统一状态和端到端指标上的表现。</p></article>
+      <article class="step"><h3>受控编排</h3><p>在沙箱中引入 Memory、路由、预算与故障恢复，验证多模块协同。</p></article>
+      <article class="step"><h3>有限闭环</h3><p>只在白名单场景开放动作，保留硬约束、人工接管和全量审计。</p></article>
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="heading"><h2>研究判断</h2><p>这篇论文提出了有用的工程定义，但下一步研究重点应从“兼容多少模型”转向“是否形成一致、可验证、可持续更新的世界状态”。</p></div>
+    <div class="grid">
+      <article class="card"><h3>可证伪问题</h3><p>统一模块契约能否在相同任务预算下，显著降低新后端接入时间，并提高跨任务复用率与闭环成功率？</p></article>
+      <article class="card"><h3>关键实验</h3><p>选同一长时交互场景，对比独立管线、仅统一 API、统一状态+记忆三组，测集成工时、漂移、失败恢复和成本。</p></article>
+      <article class="card"><h3>最终评级</h3><p><strong>架构启发 A-，证据 B-，生产成熟度 C+。</strong> 值得借鉴分层和能力边界，不宜把当前覆盖面视为通用世界模型已经成立。</p></article>
+    </div>
+  </div></section>
+
+  <footer>WorldModel Radar · Deep Read · 基于 arXiv v2 与官方代码仓库核验 · 2026-07-14</footer>
+</body>
+</html>

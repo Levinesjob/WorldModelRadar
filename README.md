@@ -14,7 +14,7 @@ Tracking 2026+ survey, roadmap, taxonomy, and definition papers on world models.
 
 <!-- QUICK_VIEW:START -->
 
-截至 2026-07-13，本仓库记录了 15 篇 2026 年以来的公开可检索论文，其中：
+截至 2026-07-14，本仓库记录了 15 篇 2026 年以来的公开可检索论文，其中：
 
 - 9 篇 core：直接综述、定义、路线图或 taxonomy 世界模型本体。
 - 5 篇 domain：围绕机器人、医疗、边缘智能、代码智能等领域中的世界模型。
