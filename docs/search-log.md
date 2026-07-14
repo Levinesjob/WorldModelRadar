@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-07-14
+Last checked: 2026-07-15
 
 ## Queries Used
 
@@ -36,6 +36,29 @@ These papers are useful context but fall outside the 2026+ window:
 
 ## Exclusion Notes
 
+- `Xiaomi-Robotics-U0: Unified Embodied Synthesis with World Foundation Model`
+  (`2607.11643`) was not placed in the main list because it introduces and
+  evaluates one 38B embodied-synthesis model rather than an overview,
+  taxonomy, definition, roadmap, or field-level framework.
+- `WALA Learning Executable Latent Actions from Action-Labeled Demonstrations
+  and Action-Free Videos` (`2607.11397`) was not placed in the main list
+  because its trainable latent world model is one component of a specific
+  robot-policy training method, not the subject of an overview or framing work.
+- `Cycle-World: Mitigating Error Accumulation in Long-term Video World Models
+  via Reverse-Prediction Cycle Consistency` (`2607.11836`) was not placed in
+  the main list because it proposes a single cycle-consistency method for
+  long-video generation rather than an overview-style contribution.
+- `ABot-3DWorld 0: A Universal World Model to Explore Any 3D Space`
+  (`2607.11673`) was not placed in the main list because it presents a specific
+  multimodal 3D-generation pipeline and empirical system, not a survey,
+  roadmap, taxonomy, definition, or reusable field framework.
+- `World Models as Adversaries: Multi-Agent Self-Play Fine-Tuning for Robust
+  Motion Planning` (`2607.10630`) was not placed in the main list because it
+  develops one adversarial fine-tuning method for autonomous-driving planning.
+- `Religion and Artificial Intelligence as Distributed Meaning Systems: A
+  Naturalistic Conceptual Model` (`2607.10011`) was not placed in the main list
+  because "world-model construction" is used in a distributed-cognition sense;
+  learned world models are not the paper's research subject.
 - `Causally Debiased Latent Action Model for Embodied Action Conditioned World
   Models` (`2607.09185`) was not placed in the main list because it proposes and
   evaluates one latent-action fine-tuning method rather than an overview,

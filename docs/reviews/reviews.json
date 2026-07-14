@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "liang-2026-world-action-models-embodied-brains",
+    "paper_title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+    "paper_url": "https://arxiv.org/abs/2607.11689",
+    "review_date": "2026-07-15",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/from-world-action-models-to-embodied-brains-a-roadmap-for-open-world-physical-intelligence.html"
+  },
+  {
     "paper_id": "zeng-2026-openworldlib",
     "paper_title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
     "paper_url": "https://arxiv.org/abs/2604.04707",

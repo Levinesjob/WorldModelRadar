@@ -5,7 +5,7 @@ This repository tracks overview-style papers about world models from 2026 onward
 ## Date Window
 
 - Start date: 2026-01-01
-- Current cutoff: 2026-07-14
+- Current cutoff: 2026-07-15
 - The date used is the public arXiv/public-source submission date unless a peer-reviewed
   publication date is clearly more appropriate.
 

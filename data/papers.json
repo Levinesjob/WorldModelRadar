@@ -1,5 +1,25 @@
 [
   {
+    "id": "liang-2026-world-action-models-embodied-brains",
+    "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+    "authors": [
+      "Yuanzhi Liang",
+      "Xufeng Zhan",
+      "Haibin Huang",
+      "Chi Zhang",
+      "Xuelong Li"
+    ],
+    "date": "2026-07-13",
+    "venue_or_source": "arXiv",
+    "arxiv_id": "2607.11689",
+    "url": "https://arxiv.org/abs/2607.11689",
+    "relevance": "core",
+    "paper_type": "review/roadmap/framework",
+    "area": "world action models and embodied physical intelligence",
+    "why_included": "Reviews the evolution toward World Action Models, diagnoses representation, standardization, and systems gaps, and proposes explicit prediction, intent, capability, experience, and evaluation contracts for a co-evolving embodied-intelligence stack.",
+    "status": "verified_public_source"
+  },
+  {
     "id": "oefinger-2026-admissibility-world-model-simulators",
     "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
     "authors": [

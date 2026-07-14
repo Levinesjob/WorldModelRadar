@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="liang-2026-world-action-models-embodied-brains">
+  <meta name="worldmodel-radar:paper-title" content="From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2607.11689">
+  <meta name="worldmodel-radar:review-date" content="2026-07-15">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>从 World Action Models 到具身大脑｜WorldModel Radar 精读</title>
+  <style>
+    :root {
+      --ink: #17201d; --muted: #65716b; --paper: #f4f0e6; --card: #fffdf7;
+      --line: #d7d0c0; --green: #174d3c; --mint: #d9eadf; --orange: #d9653b;
+      --gold: #b8913d; --navy: #17324b; --shadow: 0 18px 48px rgba(28,35,31,.09);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: Inter, "Noto Sans SC", "Microsoft YaHei", sans-serif; line-height: 1.72; }
+    a { color: inherit; }
+    .page { overflow: hidden; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+    .masthead { position: relative; padding: 76px 0 62px; color: #f8f5eb; background: var(--green); }
+    .masthead::after { content: ""; position: absolute; inset: auto -8% -52% 46%; height: 420px; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; transform: rotate(-12deg); }
+    .hero { position: relative; z-index: 1; display: grid; grid-template-columns: 1.4fr .75fr; gap: 54px; align-items: end; }
+    .eyebrow { margin: 0 0 18px; color: #b9d5c8; font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 840px; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(42px, 7vw, 82px); line-height: 1.02; letter-spacing: -.045em; }
+    .dek { max-width: 820px; margin: 24px 0 0; color: #d9e5df; font-size: 19px; }
+    .paper-card { padding: 24px; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08); backdrop-filter: blur(8px); }
+    .paper-card h2 { margin: 0 0 14px; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+    .paper-card p { margin: 7px 0; color: #dce9e3; font-size: 14px; }
+    .paper-card strong { color: white; }
+    .source { display: inline-block; margin-top: 10px; color: #fff; font-weight: 800; text-underline-offset: 4px; }
+    .section { padding: 78px 0; }
+    .section.alt { background: #ebe5d8; }
+    .section.dark { color: #f7f3e9; background: var(--navy); }
+    .section-head { display: grid; grid-template-columns: 210px 1fr; gap: 34px; margin-bottom: 34px; align-items: start; }
+    .chapter { color: var(--orange); font-size: 12px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+    .section h2 { margin: 0; font-family: Georgia, "Noto Serif SC", serif; font-size: clamp(30px, 4.5vw, 52px); line-height: 1.12; letter-spacing: -.025em; }
+    .lead { max-width: 920px; margin: 12px 0 0; color: var(--muted); font-size: 18px; }
+    .dark .lead { color: #c8d3da; }
+    .verdict { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .verdict article, .card, .trade, .phase { padding: 25px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
+    .verdict .n { display: block; color: var(--orange); font-family: Georgia, serif; font-size: 34px; }
+    h3 { margin: 8px 0 10px; font-size: 20px; line-height: 1.3; }
+    p { margin: 8px 0; }
+    .muted, .card p, .trade p, .phase p { color: var(--muted); }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 30px; }
+    .flow-step { position: relative; min-height: 150px; padding: 20px; color: white; background: var(--green); }
+    .flow-step:not(:last-child)::after { content: "→"; position: absolute; right: -16px; top: 50%; z-index: 2; width: 22px; color: var(--orange); font-size: 23px; font-weight: 900; transform: translateY(-50%); }
+    .flow-step small { color: #b9d5c8; font-weight: 800; letter-spacing: .1em; }
+    .flow-step strong { display: block; margin: 12px 0 8px; font-size: 18px; }
+    .flow-step span { display: block; color: #dbe7e1; font-size: 14px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .label { display: inline-block; padding: 4px 9px; color: var(--green); background: var(--mint); font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .gap-card { padding: 27px; border-top: 5px solid var(--orange); background: var(--card); box-shadow: var(--shadow); }
+    .gap-card ul, .card ul { margin: 14px 0 0; padding-left: 20px; color: var(--muted); }
+    .contract { margin-top: 24px; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
+    .contract-row { display: grid; grid-template-columns: 180px 1fr 1fr; border-bottom: 1px solid var(--line); }
+    .contract-row:last-child { border-bottom: 0; }
+    .contract-row > div { padding: 18px 20px; }
+    .contract-row > div + div { border-left: 1px solid var(--line); }
+    .contract-row.header { color: white; background: var(--green); font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .arch { display: grid; gap: 12px; margin-top: 30px; }
+    .lane { display: grid; grid-template-columns: 160px repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,.18); }
+    .lane > div { min-height: 100px; padding: 18px; background: #21405b; }
+    .lane-name { display: flex; align-items: center; color: #f2be79; font-weight: 900; }
+    .lane strong { display: block; margin-bottom: 6px; color: white; }
+    .lane span { color: #c8d3da; font-size: 13px; }
+    .trade-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 28px; }
+    .trade .meter { height: 6px; margin: 18px 0 12px; background: #ded8cb; }
+    .trade .meter i { display: block; height: 100%; background: var(--orange); }
+    .truth { border-left: 5px solid var(--green); }
+    .false { border-left: 5px solid var(--orange); }
+    .rule { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 19px 0; border-bottom: 1px solid var(--line); }
+    .rule strong { color: var(--green); }
+    .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 32px; }
+    .phase { position: relative; box-shadow: none; }
+    .phase + .phase { border-left: 0; }
+    .phase b { color: var(--orange); font-size: 12px; letter-spacing: .12em; }
+    .evidence { margin-top: 28px; padding: 24px 28px; border: 1px solid #486175; background: #203d57; }
+    .evidence strong { color: #f2be79; }
+    .debt-list { counter-reset: debt; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 0; list-style: none; }
+    .debt-list li { position: relative; padding: 20px 20px 20px 58px; background: var(--card); border: 1px solid var(--line); color: var(--muted); }
+    .debt-list li::before { counter-increment: debt; content: counter(debt); position: absolute; left: 18px; top: 18px; color: var(--orange); font: 700 27px Georgia, serif; }
+    .footer { padding: 38px 0; color: #cbd8d1; background: #102e26; font-size: 13px; }
+    .footer .wrap { display: flex; justify-content: space-between; gap: 30px; }
+    @media (max-width: 900px) {
+      .hero, .section-head, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .verdict, .trade-grid, .flow, .timeline { grid-template-columns: repeat(2, 1fr); }
+      .lane { grid-template-columns: 1fr 1fr; }
+      .lane-name { grid-column: 1 / -1; min-height: auto !important; }
+      .contract-row { grid-template-columns: 1fr; }
+      .contract-row > div + div { border-left: 0; border-top: 1px solid var(--line); }
+    }
+    @media (max-width: 580px) {
+      .wrap { width: min(100% - 24px, 1180px); }
+      .masthead { padding-top: 48px; }
+      .verdict, .trade-grid, .flow, .timeline, .debt-list { grid-template-columns: 1fr; }
+      .flow-step:not(:last-child)::after { display: none; }
+      .phase + .phase { border-left: 1px solid var(--line); border-top: 0; }
+      .footer .wrap { display: block; }
+    }
+  </style>
+</head>
+<body>
+<main class="page">
+  <header class="masthead">
+    <div class="wrap hero">
+      <div>
+        <p class="eyebrow">WorldModel Radar · Deep Read · 2026-07-15</p>
+        <h1>从 WAM 到<br>具身大脑</h1>
+        <p class="dek">这篇 roadmap 最重要的判断不是“再做一个更大的机器人模型”，而是把物理智能拆成可验证的预测、意图、能力、执行和经验契约，让模型、机器人、数据与评测真正能够累积。</p>
+      </div>
+      <aside class="paper-card" aria-label="论文信息">
+        <h2>Selected Paper</h2>
+        <p><strong>标题</strong><br>From World Action Models to Embodied Brains</p>
+        <p><strong>作者</strong><br>Yuanzhi Liang, Xufeng Zhan, Haibin Huang, Chi Zhang, Xuelong Li</p>
+        <p><strong>来源</strong><br>arXiv:2607.11689 v1 · Ongoing work</p>
+        <a class="source" href="https://arxiv.org/abs/2607.11689">查看官方论文 ↗</a>
+      </aside>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">00 · Core View</span>
+        <div><h2>核心观点：瓶颈已从模型能力转向接口可累积性</h2><p class="lead">论文把 WAM 定义为“给定物理上下文与候选干预，显式预测决策相关后果”的模型。真正的目标不是让 WAM 独占整个系统，而是让具身大脑负责通用物理推理，harness 负责把意图落到具体工具、控制器和身体。</p></div>
+      </div>
+      <div class="verdict">
+        <article><span class="n">01</span><h3>后果比动作更可复用</h3><p class="muted">动作向量绑定形态与控制器；“期望发生什么变化”更接近跨身体共享的语义。</p></article>
+        <article><span class="n">02</span><h3>模态不是定义</h3><p class="muted">视频、3D、结构状态或 latent 都可以；关键是预测是否改变干预选择、验证与恢复。</p></article>
+        <article><span class="n">03</span><h3>Harness 是主角</h3><p class="muted">能力注册、坐标转换、前置条件、安全验证、追踪与恢复决定物理智能能否上线。</p></article>
+        <article><span class="n">04</span><h3>经验必须可归因</h3><p class="muted">只有能重放、能定位失败、通过安全与回归门的 trace，才应回流训练。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">01 · Evolution</span>
+        <div><h2>论文主线：三条技术轨迹在“干预后果”上汇合</h2><p class="lead">原文明确反对把 Action Model → VLA → WAM 描述成单线替代。更准确的图景是：可执行动作、语义任务上下文与预测控制三条轨迹相互靠近。</p></div>
+      </div>
+      <div class="flow" aria-label="模型演进与系统角色">
+        <div class="flow-step"><small>TRAJECTORY A</small><strong>Action Models</strong><span>从感知与本体状态生成连续动作，但后果通常隐含。</span></div>
+        <div class="flow-step"><small>TRAJECTORY B</small><strong>VLA Policies</strong><span>扩展语言、视觉、任务与跨身体数据，仍以动作接口为主。</span></div>
+        <div class="flow-step"><small>TRAJECTORY C</small><strong>World Models</strong><span>预测未来观测或 latent dynamics，让想象参与规划与控制。</span></div>
+        <div class="flow-step"><small>PROTOTYPE</small><strong>World Action Models</strong><span>显式回答：采取候选动作、技能或工具调用，会发生什么？</span></div>
+        <div class="flow-step"><small>LONG-TERM TARGET</small><strong>Embodied Brain</strong><span>比较干预、形成意图；具体执行交给 harness 与能力端点。</span></div>
+      </div>
+      <div class="evidence"><strong>边界条件：</strong>WAM 不是通用视频生成器、VLA 替代品或完整具身大脑。它是研究干预条件预测的一类当前原型；未来可以被更一般的 brain model 吸收、重组或替换。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">02 · Barriers</span>
+        <div><h2>三类缺口不是清单，而是一个耦合系统问题</h2><p class="lead">表示要由决策目标评价，目标要结合数据与动作语义解释，执行基础设施又决定输出如何翻译、哪些动作可行、哪些失败能回流。单独扩大任何一层都不保证系统进步。</p></div>
+      </div>
+      <div class="grid-3">
+        <article class="gap-card"><span class="label">模型与表示</span><h3>谁拥有“物理状态”仍不清楚</h3><p>像素逼真不代表几何、接触、可供性、不确定性和恢复条件正确；动作输出又绑定具体身体。</p><ul><li>预测变量不一致</li><li>模型职责边界混杂</li><li>跨工具迁移依赖隐式 adapter</li></ul></article>
+        <article class="gap-card"><span class="label">目标与标准化</span><h3>成功率无法解释为什么成功</h3><p>强控制器、窄分布或无恢复需求都能掩盖预测缺陷；同一文件格式也不等于相同语义。</p><ul><li>缺少 horizon / frame / uncertainty</li><li>评测层级互相遮蔽</li><li>数据量增长不等于经验可复用</li></ul></article>
+        <article class="gap-card"><span class="label">生态与系统</span><h3>每个项目都在重接一次运行时</h3><p>模型、工具、控制器、验证器、记忆和安全往往被焊成一套系统，组件不可替换，轨迹也难重放。</p><ul><li>能力前置条件不透明</li><li>坐标与控制约定分裂</li><li>失败难归因、更新难回滚</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">03 · Architecture</span>
+        <div><h2>技术架构：模型不直接拥有执行，契约拥有边界</h2><p class="lead">论文最可工程化的贡献，是区分 WAM prediction contract 与 brain intent interface。前者回答“若干预，会发生什么”；后者回答“系统希望实现什么变化或调用什么能力”。</p></div>
+      </div>
+      <div class="arch">
+        <div class="lane"><div class="lane-name">Reasoning Plane</div><div><strong>Context</strong><span>多模态观测、任务、记忆、身体声明</span></div><div><strong>WAM Prediction</strong><span>候选干预 → 后果、范围、置信与有效条件</span></div><div><strong>Embodied Brain</strong><span>比较方案、形成 intended transition</span></div><div><strong>Intent Contract</strong><span>状态变化、能力请求、约束与完成条件</span></div></div>
+        <div class="lane"><div class="lane-name">Harness Plane</div><div><strong>Grounding</strong><span>实体、坐标、时间、几何与语义对齐</span></div><div><strong>Capability Registry</strong><span>输入、前置条件、可控变量与失败模式</span></div><div><strong>Routing & Verify</strong><span>工具链编排、安全门、批准与恢复</span></div><div><strong>Trace</strong><span>记录翻译、调用、执行状态、验证与结果</span></div></div>
+        <div class="lane"><div class="lane-name">Execution Plane</div><div><strong>Tool Models</strong><span>抓取、导航、状态估计、仿真与验证器</span></div><div><strong>Controllers</strong><span>高频稳定、轨迹、力控与局部反馈</span></div><div><strong>Tools & Body</strong><span>机械臂、底盘、相机、外部工具与数字服务</span></div><div><strong>Environment</strong><span>真实状态变化、异常、近失误和结果</span></div></div>
+        <div class="lane"><div class="lane-name">Learning Plane</div><div><strong>Embodiment Card</strong><span>传感、动作、坐标、时序与控制假设</span></div><div><strong>Task Card</strong><span>目标、约束、成功、风险与评测层</span></div><div><strong>Trace Card</strong><span>上下文、意图、翻译、执行、反馈和归因</span></div><div><strong>Update Gate</strong><span>质量、安全、回归、回滚与版本治理</span></div></div>
+      </div>
+      <div class="evidence"><strong>架构判断：</strong>模块化不自动带来迁移，端到端训练也不必被禁止。真正的硬要求是责任与转换可检查：意图、表示翻译、能力选择、执行动作和观察结果必须可归因。</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">04 · Contracts</span>
+        <div><h2>业务规则：先标准化语义，再竞争表示</h2><p class="lead">短期不应强推一种统一 token、视频或 3D 表示。先让系统声明干预、状态变化、参考系、时间范围、不确定性、前置条件和结果；编码方式可以继续竞争。</p></div>
+      </div>
+      <div class="contract">
+        <div class="contract-row header"><div>契约</div><div>必须回答</div><div>不应偷渡的职责</div></div>
+        <div class="contract-row"><div><strong>Prediction</strong></div><div>候选干预在何种 frame、horizon 与有效条件下，会造成什么决策相关后果？置信多高？</div><div>不能把动作向量或好看的 rollout 当作物理后果已经正确的证据。</div></div>
+        <div class="contract-row"><div><strong>Intent</strong></div><div>希望实现什么状态变化或调用什么能力？涉及哪些实体、约束、完成与恢复条件？</div><div>不直接绑定某一夹爪、控制频率、关节空间或执行轨迹。</div></div>
+        <div class="contract-row"><div><strong>Capability</strong></div><div>工具接受什么输入、使用何种坐标、有哪些前置条件、时延、失败模式和可观测输出？</div><div>不把执行细节隐藏在 brain model 的不可检查 latent 中。</div></div>
+        <div class="contract-row"><div><strong>Experience</strong></div><div>谁决定、如何翻译、调用了什么、验证器说了什么、世界实际如何响应？</div><div>未经归因、质量与安全门的轨迹不得直接进入训练。</div></div>
+        <div class="contract-row"><div><strong>Evaluation</strong></div><div>测的是预测、grounding、控制、编排、安全、可追踪还是自我改进？</div><div>不允许最终成功率掩盖中间层失效与偶然捷径。</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">05 · Opportunity</span>
+        <div><h2>机会与战略：控制点在兼容层，不在“万能大脑”叙事</h2><p class="lead">对产品与平台团队，最现实的机会是成为不同 brain、机器人与工具之间的可验证兼容层；对模型团队，差异化来自决策相关的物理预测，而不是渲染质量单指标。</p></div>
+      </div>
+      <div class="grid-3">
+        <article class="card"><span class="label">机会 A</span><h3>Physical Agent Harness</h3><p>能力注册、坐标/时间对齐、前置条件、安全 veto、恢复、追踪与重放。它对应数字 agent runtime 在物理世界的升级版。</p></article>
+        <article class="card"><span class="label">机会 B</span><h3>Trace & Evaluation Infrastructure</h3><p>把机器人轨迹升级为可归因经验：支持版本对比、失败定位、近失误挖掘、回归门与更新回滚。</p></article>
+        <article class="card"><span class="label">机会 C</span><h3>Embodiment Adapters</h3><p>面向高价值设备族构建受约束的能力契约与 adapter，并把替换工具后的性能损失、适配成本变成核心指标。</p></article>
+      </div>
+      <div class="grid-2" style="margin-top:18px">
+        <article class="card truth"><h3>推荐战略：先做垂直闭环</h3><p>选择动作语义稳定、结果可验证、失败可恢复的场景，用一个意图接口贯穿两种工具或身体。用 tool substitution 与 trace replay 证明复用，而不是先追求开放世界全覆盖。</p></article>
+        <article class="card false"><h3>谨慎战略：先造通用 brain</h3><p>如果能力声明、坐标约定、验证与 trace 尚未形成，模型规模会放大接口债。系统仍会在每个新身体上重做 action head、数据清洗和运行时胶水。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">06 · Trade-offs</span>
+        <div><h2>可扩展性、复杂度、稳定性与成本</h2><p class="lead">论文提供的是架构假设，不是已验证的规模化结论。下面把它转成工程决策：收益来自职责解耦，代价来自接口与追踪的显式化。</p></div>
+      </div>
+      <div class="trade-grid">
+        <article class="trade"><h3>可扩展性</h3><div class="meter"><i style="width:78%"></i></div><p>潜力高：模型、工具和身体可独立演化。但前提是 adapter 数量不随组件组合二次爆炸。</p></article>
+        <article class="trade"><h3>系统复杂度</h3><div class="meter"><i style="width:88%"></i></div><p>短期高：多层契约、注册表、验证器和 trace schema 增加大量非模型工作。</p></article>
+        <article class="trade"><h3>运行稳定性</h3><div class="meter"><i style="width:64%"></i></div><p>可提升：前置条件、veto、恢复与回滚变成一等公民；但跨模块时延与语义漂移会产生新故障。</p></article>
+        <article class="trade"><h3>总成本</h3><div class="meter"><i style="width:72%"></i></div><p>前高后低：追踪、标定和评测昂贵；若工具替换与经验复用成立，可降低每个新身体的重复训练。</p></article>
+      </div>
+      <div class="grid-3" style="margin-top:18px">
+        <article class="card"><h3>计算成本</h3><p>并非每次决策都需要解码视频。latent、结构状态、接触或风险估计可以更便宜，但必须用决策增益验证。</p></article>
+        <article class="card"><h3>组织成本</h3><p>需要模型、机器人、控制、安全、数据平台共同定义责任边界；schema owner 与兼容性治理不可缺席。</p></article>
+        <article class="card"><h3>迁移成本</h3><p>必须公开 adapter 依赖、标定工时、微调量和残余性能损失，否则“跨身体”只是一句不可审计的宣称。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">07 · Reality Check</span>
+        <div><h2>伪需求与真实问题</h2><p class="lead">这篇论文最有价值的地方，是把“通用机器人需要一个世界模型”改写为一组可证伪的问题。</p></div>
+      </div>
+      <div class="grid-2">
+        <article class="card false"><span class="label">伪需求</span><h3>输出越完整，世界理解越强</h3><ul><li>生成 4K、长时视频即可证明物理理解</li><li>一个统一 token 自动解决跨身体迁移</li><li>端到端成功率足以评价所有层</li><li>数据越多，自我改进自然发生</li></ul></article>
+        <article class="card truth"><span class="label">真实问题</span><h3>预测是否真正改变了决策</h3><ul><li>后果预测能否拒绝危险或不可行干预</li><li>意图在替换工具后能否保持语义</li><li>失败能否归因到推理、翻译、工具或环境</li><li>新轨迹能否通过安全和回归门再更新</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">08 · Domain Detail</span>
+        <div><h2>场景细节、用户痛点与边界条件</h2><p class="lead">一个适合首批验证的场景不是“任意家庭任务”，而是有可测状态变化、有限工具集、可恢复失败和明确安全区间的多步骤操作。</p></div>
+      </div>
+      <div class="rule"><strong>场景</strong><div>仓内拣放、实验室样本操作或半结构化装配：目标可以表示为状态变化，工具能力可注册，接触与结果可观测。</div></div>
+      <div class="rule"><strong>使用者</strong><div>机器人应用负责人希望复用 brain；现场工程师需要知道为何拒绝或失败；安全人员需要可审计 trace；研究团队需要可比较中间指标。</div></div>
+      <div class="rule"><strong>痛点</strong><div>换夹爪就重训、换控制器就失效；视觉预测漂亮但抓取失败；最终成功率无法定位问题；线上失败无法安全回流。</div></div>
+      <div class="rule"><strong>边界</strong><div>高频稳定与硬实时控制留在 controller；具身大脑不直接输出 actuator command。对未声明工具、未知 frame 或置信不足的请求必须拒绝或转人工。</div></div>
+      <div class="rule"><strong>业务规则</strong><div>每次能力调用都校验前置条件；frame 与 horizon 不完整则不执行；安全 verifier 可 veto；失败触发受限恢复；只有完整 Trace Card 才进入学习候选池。</div></div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">09 · Migration</span>
+        <div><h2>迁移路径：从可观察胶水层走向闭环学习</h2><p class="lead">路线不应从替换现有策略开始，而应从显式化现有系统的隐藏假设开始。先能看见，再能替换，最后才允许自动更新。</p></div>
+      </div>
+      <div class="timeline">
+        <article class="phase"><b>PHASE 1</b><h3>Declare</h3><p>给现有机器人、任务、动作和控制器补 Embodiment / Task Cards；统一 frame、时序和失败码。</p></article>
+        <article class="phase"><b>PHASE 2</b><h3>Observe</h3><p>在不改变控制链的前提下接入 Trace Card，重放现有失败并建立层级评测。</p></article>
+        <article class="phase"><b>PHASE 3</b><h3>Substitute</h3><p>通过 intent + capability contract 替换一个工具或身体，量化 adapter 成本与残余损失。</p></article>
+        <article class="phase"><b>PHASE 4</b><h3>Learn Safely</h3><p>只让通过质量、安全、回归与回滚门的 trace 进入 post-training；持续监控失败复发。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">10 · Debt & Evidence</span>
+        <div><h2>框架与技术债：路线图必须用实验还债</h2><p class="lead">论文自标为 ongoing work，许多契约、Cards 和评测是“proposed”而非已大规模验证。它的价值是提出可测结构，不是宣告结构已经成立。</p></div>
+      </div>
+      <ol class="debt-list">
+        <li><strong>表示债：</strong>语言、结构状态、learned token、3D/4D 或混合接口，尚无统一证据证明谁更适合 brain–harness grounding。</li>
+        <li><strong>Adapter 债：</strong>模块边界可能把复杂度转移到成对适配器；需要报告 adapter 数量、标定成本与性能损失。</li>
+        <li><strong>验证器债：</strong>错误 veto 会降低可用性，漏报会放大物理风险；验证器自身也需要校准、版本与回归集。</li>
+        <li><strong>追踪债：</strong>Trace Card 若过重会拖慢实时系统，过轻又无法归因；必须定义最小充分字段与采样策略。</li>
+        <li><strong>评测债：</strong>不同机器人和协议不可直接横比；需要同一语义契约下的 tool substitution、counterfactual consistency 与 uncertainty calibration。</li>
+        <li><strong>治理债：</strong>闭环学习会把错误重新注入模型；必须有数据准入、审批、隐私、版本、回滚和安全保留规则。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="chapter">11 · Research Agenda</span>
+        <div><h2>最值得推进的三个实验</h2><p class="lead">把论文的近期议程压缩为三个能够区分“架构有效”与“只是叙事合理”的实验。</p></div>
+      </div>
+      <div class="grid-3">
+        <article class="card"><span class="label">Experiment 1</span><h3>Prediction-to-Decision</h3><p>要求模型声明 horizon、frame、后果语义与置信；比较加入预测前后，危险干预拒绝率、候选排序和恢复质量是否提升。</p></article>
+        <article class="card"><span class="label">Experiment 2</span><h3>Tool Substitution</h3><p>固定 brain-level intent，替换夹爪、规划器或机器人；测 entity/frame 保真、adapter 工时、微调量和任务性能损失。</p></article>
+        <article class="card"><span class="label">Experiment 3</span><h3>Trace-Gated Update</h3><p>用完整 trace 训练恢复策略，验证更新后失败复发率下降，同时安全指标、旧任务与拒绝行为不退化且可回滚。</p></article>
+      </div>
+      <div class="evidence" style="color:#d7e1e7;background:var(--navy)"><strong>最终判断：</strong>这篇论文不是给出一个可直接部署的具身大脑，而是把领域从“哪个模型更像世界”推进到“哪个接口能让预测、执行与经验可验证地累积”。其战略价值高于当前实证强度；下一步应围绕契约最小集、工具替换和 trace 准入做原型，而不是继续扩大概念边界。</div>
+    </div>
+  </section>
+</main>
+<footer class="footer"><div class="wrap"><span>WorldModel Radar · Deep Read</span><span>Primary source: arXiv:2607.11689v1 · Review date: 2026-07-15</span></div></footer>
+</body>
+</html>
