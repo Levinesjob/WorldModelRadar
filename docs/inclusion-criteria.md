@@ -40,6 +40,28 @@ only after a maintainer verifies all of the following:
 The discovery script's `discovery_confidence` describes keyword evidence only. It
 never replaces this manual primary-source gate.
 
+### Discovery Confidence Levels
+
+| Level | Automated evidence | Meaning |
+| --- | --- | --- |
+| `high` | A world-model family phrase and an overview/framing term both appear in the title. | Strong candidate for immediate primary-source review; not automatic acceptance. |
+| `medium` | A world-model family phrase appears in the title and an overview/framing term appears in the abstract. | Likely relevant, but commonly includes single-method false positives. |
+| `low` | The broad query and text filters match, but title evidence is incomplete. | Recall-only lead; requires careful centrality and contribution checks. |
+
+Discovery recognizes `world model(s)`, `world modeling/modelling`, hyphenated forms,
+`world action model(s)`, and `world foundation model(s)`.
+
+### Formal Inclusion and Selection Confidence
+
+Formal confidence is pass/fail rather than a soft score. All six checks must pass:
+
+- `verified_public_source`
+- canonical public URL matching the arXiv id when present
+- complete title, authors, date, and source metadata
+- explicit `why_included` rationale
+- recognized `core`, `domain`, or `adjacent` relevance
+- survey/review/roadmap/taxonomy/definition/framework/position/perspective/critique type
+
 ## Relevance Labels
 
 - `core`: world models are the central subject.

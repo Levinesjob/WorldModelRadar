@@ -42,13 +42,13 @@
     .theme-card { min-height:156px; display:flex; flex-direction:column; justify-content:space-between; padding:17px; border:1px solid var(--line); border-top:6px solid var(--accent,var(--blue)); border-radius:8px; background:var(--panel); }
     .theme-card strong { font-size:20px; line-height:1.15; }
     .theme-card span { color:var(--muted); font:13px/1.5 "Trebuchet MS",sans-serif; }
-    .theme-card.definition { --accent:var(--red); } .theme-card.architecture { --accent:var(--blue); } .theme-card.strategy { --accent:var(--green); } .theme-card.governance { --accent:var(--amber); } .theme-card.research { --accent:#76528f; }
+    .theme-card.definition { --accent:var(--red); } .theme-card.framework { --accent:var(--blue); } .theme-card.discussion { --accent:var(--green); } .theme-card.evaluation { --accent:var(--amber); } .theme-card.conclusion { --accent:#76528f; }
     .eyebrow { display:block; margin-bottom:10px; color:var(--accent,var(--green)); font:700 12px "Trebuchet MS",sans-serif; letter-spacing:.12em; text-transform:uppercase; }
     section.theme-definition { --accent:var(--red); box-shadow:inset 7px 0 0 rgba(168,68,56,.76); }
-    section.theme-architecture { --accent:var(--blue); box-shadow:inset 7px 0 0 rgba(35,93,134,.76); }
-    section.theme-strategy { --accent:var(--green); box-shadow:inset 7px 0 0 rgba(23,107,85,.76); }
-    section.theme-governance { --accent:var(--amber); box-shadow:inset 7px 0 0 rgba(168,117,25,.76); }
-    section.theme-research { --accent:#76528f; box-shadow:inset 7px 0 0 rgba(118,82,143,.76); }
+    section.theme-framework { --accent:var(--blue); box-shadow:inset 7px 0 0 rgba(35,93,134,.76); }
+    section.theme-discussion { --accent:var(--green); box-shadow:inset 7px 0 0 rgba(23,107,85,.76); }
+    section.theme-evaluation { --accent:var(--amber); box-shadow:inset 7px 0 0 rgba(168,117,25,.76); }
+    section.theme-conclusion { --accent:#76528f; box-shadow:inset 7px 0 0 rgba(118,82,143,.76); }
     .thesis { padding:24px; border-left:7px solid var(--green); background:#edf5ef; font-size:22px; }
     .flow { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); align-items:stretch; gap:8px; }
     .node { grid-column:span 2; padding:16px 10px; text-align:center; border:1px solid var(--line); border-radius:8px; background:var(--panel); }
@@ -88,18 +88,18 @@
   </header>
 
   <section class="alt"><div class="wrap">
-    <div class="heading"><h2>主题导航</h2><p>页面按决策问题组织，而不是按身份展示阅读权重。每个主题使用独立色带，便于快速定位定义、架构、战略、治理与证据。</p></div>
+    <div class="heading"><h2>原文结构</h2><p>页面沿用论文自身章节组织内容；不同专业背景只影响提问方式和判断深度，不作为显性的页面分类。</p></div>
     <div class="theme-index">
-      <div class="theme-card definition"><strong>定义与边界</strong><span>什么才算世界模型；生成、推理和交互之间如何划界。</span></div>
-      <div class="theme-card architecture"><strong>系统架构</strong><span>Operator、Pipeline、Memory 与异构后端如何组成运行时。</span></div>
-      <div class="theme-card strategy"><strong>产品与战略</strong><span>平台机会、真实需求、垂直闭环和可迁移价值。</span></div>
-      <div class="theme-card governance"><strong>工程治理</strong><span>可扩展性、稳定性、成本、业务规则与技术债。</span></div>
-      <div class="theme-card research"><strong>研究证据</strong><span>主张边界、可证伪问题、关键实验与成熟度评级。</span></div>
+      <div class="theme-card definition"><strong>定义与相关任务</strong><span>论文第 2 章：世界模型能力、相关任务与排除边界。</span></div>
+      <div class="theme-card framework"><strong>框架设计</strong><span>论文第 3 章：Operator、核心模块、Memory 与 Pipeline。</span></div>
+      <div class="theme-card discussion"><strong>Discussion</strong><span>论文第 4 章：统一框架的意义、适用条件与实现缺口。</span></div>
+      <div class="theme-card evaluation"><strong>Evaluation</strong><span>论文第 5 章：四类任务实验、指标差异与证据强度。</span></div>
+      <div class="theme-card conclusion"><strong>Conclusion</strong><span>论文第 6 章：结论、开放问题与后续复用路径。</span></div>
     </div>
   </div></section>
 
   <section class="theme-definition"><div class="wrap">
-    <div class="heading"><h2><span class="eyebrow">01 · 定义与边界</span>核心观点</h2><p>论文给出的定义是：世界模型以感知为中心，具备交互与长期记忆，用于理解并预测复杂世界。这个定义把“世界模型”从输出格式改写成系统能力。</p></div>
+    <div class="heading"><h2><span class="eyebrow">第 2 章 · 定义与相关任务</span>核心观点</h2><p>论文给出的定义是：世界模型以感知为中心，具备交互与长期记忆，用于理解并预测复杂世界。这个定义把“世界模型”从输出格式改写成系统能力。</p></div>
     <div class="thesis">最重要的工程结论：世界模型产品不是一个模型端点，而是一套管理异构感知、状态、推理、生成、显式表示和动作闭环的运行时。OpenWorldLib 提供了骨架，但尚未提供统一状态语义与可信闭环。</div>
     <div class="grid" style="margin-top:16px">
       <article class="card"><h3>定义的进步</h3><p>文本到视频不因“能生成物理画面”自动成为世界模型；关键是能否接收复杂感知、进行动作条件交互、维护长期状态并理解物理世界。</p></article>
@@ -108,8 +108,8 @@
     </div>
   </div></section>
 
-  <section class="alt theme-architecture"><div class="wrap">
-    <div class="heading"><h2><span class="eyebrow">02 · 系统架构</span>技术架构</h2><p>论文架构的强项是解耦，弱项是共享语义：模块被统一调用，但对象、时间、因果、置信度和动作后果尚无统一世界状态协议。</p></div>
+  <section class="alt theme-framework"><div class="wrap">
+    <div class="heading"><h2><span class="eyebrow">第 3 章 · OpenWorldLib Framework Design</span>框架设计</h2><p>论文架构的强项是解耦，弱项是共享语义：模块被统一调用，但对象、时间、因果、置信度和动作后果尚无统一世界状态协议。</p></div>
     <div class="flow">
       <div class="node"><strong>环境 / 用户</strong><small>文本、图像、音频、动作</small></div><div class="arrow">→</div>
       <div class="node"><strong>Operator</strong><small>校验、预处理、标准化</small></div><div class="arrow">→</div>
@@ -123,21 +123,21 @@
     </div>
   </div></section>
 
-  <section class="theme-strategy"><div class="wrap">
-    <div class="heading"><h2><span class="eyebrow">03 · 产品与战略</span>机会与战略</h2><p>机会不在再造一个“模型大全”，而在把异构世界模型变成可比较、可组合、可审计的运行时与验证基础设施。</p></div>
+  <section class="theme-discussion"><div class="wrap">
+    <div class="heading"><h2><span class="eyebrow">第 4 章 · Discussion</span>统一框架的实际价值</h2><p>论文的意义不在再造一个“模型大全”，而在把异构世界模型变成可比较、可组合、可复用的推理框架。</p></div>
     <div class="grid">
-      <article class="card good"><h3>机会：世界模型控制平面</h3><p>统一模型注册、输入契约、状态版本、推理路由、成本预算与风险策略，为机器人、仿真和具身智能团队减少重复集成。</p></article>
-      <article class="card good"><h3>机会：闭环评测层</h3><p>把视觉质量、几何一致性、动作可达性、长期漂移和故障恢复映射到任务成功率，而不是各模块各报一个最好指标。</p></article>
-      <article class="card good"><h3>机会：可迁移能力目录</h3><p>围绕感知、记忆、因果、预测、规划与行动建立能力卡，让采购者按场景约束选组件，而非按论文热度选模型。</p></article>
+      <article class="card good"><h3>统一调用</h3><p>统一模型注册、输入契约、状态版本与推理路由，可以减少机器人、仿真和具身智能研究中的重复集成。</p></article>
+      <article class="card good"><h3>跨模块比较</h3><p>把视觉质量、几何一致性、动作可达性和长期漂移放进同一任务上下文，避免各模块只报告局部最好指标。</p></article>
+      <article class="card good"><h3>能力目录</h3><p>围绕感知、记忆、因果、预测、规划与行动描述组件，使模型选择基于任务约束而非论文热度。</p></article>
     </div>
     <div class="grid two" style="margin-top:16px">
-      <article class="card"><h3>推荐战略</h3><p>从一个高价值、可回放的垂直闭环开始，先统一状态和评测，再逐步扩展后端。平台能力由真实接入摩擦反向生长。</p></article>
-      <article class="card risk"><h3>不推荐战略</h3><p>先追求覆盖最多模型和任务。目录数量会制造生态繁荣假象，却把依赖冲突、显存峰值、许可、状态一致性和失败责任留给用户。</p></article>
+      <article class="card"><h3>适用条件</h3><p>从一个可回放的闭环任务开始，先统一状态和评测，再逐步扩展后端，才能验证框架是否真正减少接入摩擦。</p></article>
+      <article class="card risk"><h3>不适用条件</h3><p>若只追求覆盖模型数量，依赖冲突、显存峰值、许可与状态一致性会被转移给使用者，统一框架便只剩目录价值。</p></article>
     </div>
   </div></section>
 
-  <section class="alt theme-governance"><div class="wrap">
-    <div class="heading"><h2><span class="eyebrow">04 · 工程治理</span>系统权衡</h2><p>OpenWorldLib 解决“怎么接”，尚未充分解决“是否可靠地一起工作”。平台化的主要成本会从模型实现转移到语义与运维治理。</p></div>
+  <section class="alt theme-discussion"><div class="wrap">
+    <div class="heading"><h2>规模化约束</h2><p>OpenWorldLib 解决“怎么接”，尚未充分解决“是否可靠地一起工作”。规模化后的主要困难会从模型实现转移到状态语义、资源与运行一致性。</p></div>
     <table>
       <thead><tr><th>维度</th><th>判断</th><th>设计动作</th></tr></thead>
       <tbody>
@@ -150,7 +150,7 @@
     </table>
   </div></section>
 
-  <section class="theme-strategy"><div class="wrap">
+  <section class="theme-definition"><div class="wrap">
     <div class="heading"><h2>伪需求与真实问题</h2><p>“统一”很容易被包装成需求。只有当它减少集成成本、改善闭环质量或提供可审计证据时，才产生真实价值。</p></div>
     <div class="grid two">
       <article class="card risk"><h3>伪需求</h3><ul><li>支持模型数量越多，平台价值越高。</li><li>统一 Python API 就等于统一世界模型。</li><li>生成结果更逼真，就更理解物理世界。</li><li>把全部历史放进 Memory，就获得长期智能。</li></ul></article>
@@ -158,21 +158,21 @@
     </div>
   </div></section>
 
-  <section class="alt theme-governance"><div class="wrap">
-    <div class="heading"><h2>业务规则与场景</h2><p>世界模型一旦进入决策链，就必须把“模型能力”翻译成谁能调用、何时可行动、如何退出以及谁承担后果。</p></div>
+  <section class="alt theme-evaluation"><div class="wrap">
+    <div class="heading"><h2><span class="eyebrow">第 5 章 · Evaluation</span>评测场景与证据口径</h2><p>论文覆盖交互视频生成、多模态推理、3D 生成和 VLA 四类实验；真正需要比较的是这些异构结果能否汇总为任务级证据。</p></div>
     <div class="grid">
-      <article class="card"><h3>场景细节</h3><p>优先选择可记录传感器、动作和结果的场景，如仓储移动机器人、仿真策略评估或受控工业巡检。每次 rollout 必须可复现。</p></article>
-      <article class="card"><h3>用户痛点</h3><p>研究员困于依赖和接口差异；平台团队难以做资源治理；业务负责人无法把 FVD、VQA、3D 指标换算成任务风险。</p></article>
-      <article class="card"><h3>边界条件</h3><p>高风险动作不得只由生成预测触发；OOD、低置信或状态冲突时必须降级；未验证的新后端只能运行在影子或沙箱模式。</p></article>
+      <article class="card"><h3>实验场景</h3><p>交互视频检验可控生成，多模态推理检验世界理解，3D 生成检验显式表示，VLA 检验从理解到动作的接口。</p></article>
+      <article class="card"><h3>比较难点</h3><p>生成、问答、重建和动作使用不同指标；单项结果不能直接证明统一框架带来了跨任务协同收益。</p></article>
+      <article class="card"><h3>证据边界</h3><p>当前实验更接近“可接入、可运行”的覆盖证明，尚缺共享状态、长期记忆和闭环任务收益的系统消融。</p></article>
     </div>
     <div class="grid two" style="margin-top:16px">
-      <article class="card"><h3>最低业务规则</h3><ul><li>输入、状态、模型与输出均有版本和来源。</li><li>动作前执行场景约束与安全策略。</li><li>预算、延迟、置信度超过阈值即停止或降级。</li><li>真实反馈必须回写，但不得无审计覆盖历史。</li></ul></article>
+      <article class="card"><h3>实验控制</h3><ul><li>输入、状态、模型与输出均保留版本和来源。</li><li>相同任务预算下比较独立管线与统一框架。</li><li>记录延迟、显存、置信度和失败恢复。</li><li>长期交互必须支持状态快照与确定性回放。</li></ul></article>
       <article class="card"><h3>验收口径</h3><ul><li>端到端任务成功率而非单模块榜单。</li><li>长时漂移、反事实一致性与 OOD 拒绝能力。</li><li>峰值延迟、显存、吞吐与每次有效决策成本。</li><li>故障定位时间、回放成功率和人工接管率。</li></ul></article>
     </div>
   </div></section>
 
-  <section class="theme-governance"><div class="wrap">
-    <div class="heading"><h2>框架与技术债</h2><p>论文的接口骨架适合作为起点，但不应直接被误读为生产级世界模型操作系统。</p></div>
+  <section class="theme-discussion"><div class="wrap">
+    <div class="heading"><h2>框架局限与实现缺口</h2><p>论文的接口骨架适合作为研究起点，但不应直接被误读为已经统一了世界状态、评测语义和运行约束。</p></div>
     <table>
       <thead><tr><th>技术债</th><th>为什么重要</th><th>优先补偿</th></tr></thead>
       <tbody>
@@ -185,8 +185,8 @@
     </table>
   </div></section>
 
-  <section class="alt theme-architecture"><div class="wrap">
-    <div class="heading"><h2>迁移路径</h2><p>迁移的顺序应由可验证性驱动：先让框架看见和比较，再让它建议，最后才允许它行动。</p></div>
+  <section class="alt theme-conclusion"><div class="wrap">
+    <div class="heading"><h2><span class="eyebrow">第 6 章 · Conclusion</span>复用与延伸路径</h2><p>论文结论强调统一定义、能力分类和推理框架；进一步复用时应从可验证集成开始，再逐步进入连续交互。</p></div>
     <div class="route">
       <article class="step"><h3>能力注册</h3><p>为既有模型建立统一元数据、输入输出和资源画像，不改变线上流程。</p></article>
       <article class="step"><h3>影子评测</h3><p>回放历史场景，比较模型在统一状态和端到端指标上的表现。</p></article>
@@ -195,8 +195,8 @@
     </div>
   </div></section>
 
-  <section class="theme-research"><div class="wrap">
-    <div class="heading"><h2><span class="eyebrow">05 · 研究证据</span>研究判断</h2><p>这篇论文提出了有用的工程定义，但下一步研究重点应从“兼容多少模型”转向“是否形成一致、可验证、可持续更新的世界状态”。</p></div>
+  <section class="theme-evaluation"><div class="wrap">
+    <div class="heading"><h2>证据判断与开放问题</h2><p>这篇论文提出了有用的工程定义，但下一步研究重点应从“兼容多少模型”转向“是否形成一致、可验证、可持续更新的世界状态”。</p></div>
     <div class="grid">
       <article class="card"><h3>可证伪问题</h3><p>统一模块契约能否在相同任务预算下，显著降低新后端接入时间，并提高跨任务复用率与闭环成功率？</p></article>
       <article class="card"><h3>关键实验</h3><p>选同一长时交互场景，对比独立管线、仅统一 API、统一状态+记忆三组，测集成工时、漂移、失败恢复和成本。</p></article>

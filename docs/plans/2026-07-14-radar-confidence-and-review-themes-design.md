@@ -22,17 +22,16 @@ role-weight recipe.
 
 ## Review Page Organization
 
-The visible percentage/role recipe is replaced by five reader-facing themes:
+The visible percentage/role recipe is removed. Each deep review follows the source
+paper's own major sections and terminology first. For OpenWorldLib, the visible
+modules are definition and related tasks, framework design, discussion, evaluation,
+and conclusion.
 
-- Definition and boundaries
-- System architecture
-- Product and strategy
-- Engineering governance
-- Research evidence
-
-The underlying analysis still covers executive, architecture, domain, implementation,
-and research concerns, but the page presents them as decision topics with distinct
-color bands and detailed descriptions.
+Executive, architecture, domain, implementation, and research backgrounds still
+shape the questions, critiques, and implications inside those modules, but they do
+not appear as reader-facing themes. In particular, product/strategy and engineering
+governance are not standalone sections; relevant insights are placed under the
+paper's discussion, evaluation, limitations, or conclusion sections.
 
 ## Failure Handling
 

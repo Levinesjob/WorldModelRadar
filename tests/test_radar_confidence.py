@@ -64,5 +64,23 @@ class SelectionConfidenceTests(unittest.TestCase):
         self.assertFalse(selector.is_high_confidence_paper(self.paper))
 
 
+class ReviewStructureTests(unittest.TestCase):
+    def test_openworldlib_uses_source_paper_modules(self):
+        path = ROOT / "docs" / "reviews" / (
+            "openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html"
+        )
+        html = path.read_text(encoding="utf-8")
+        for module in [
+            "定义与相关任务",
+            "Framework Design",
+            "Discussion",
+            "Evaluation",
+            "Conclusion",
+        ]:
+            self.assertIn(module, html)
+        self.assertNotIn("产品与战略", html)
+        self.assertNotIn("工程治理", html)
+
+
 if __name__ == "__main__":
     unittest.main()
