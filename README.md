@@ -99,7 +99,13 @@ This repository is configured for a local daily Codex automation. See
 
 ## Review Automation Helpers
 
+- `scripts/find_arxiv_candidates.py`: discover new arXiv candidates since 2026-01-01.
 - `scripts/select_review_target.py`: choose the next highest-value paper for deep reading.
 - `scripts/build_review_manifest.py`: rebuild `docs/reviews/reviews.json` from HTML meta tags.
 - `scripts/build_big_picture.py`: regenerate the weekly big-picture HTML.
 - `scripts/send_feishu_file.py`: upload and send a generated HTML file to Feishu.
+
+Candidate discovery currently uses the official arXiv Export API. Search results are
+labelled with discovery confidence and always require manual primary-source review;
+only `verified_public_source` entries that pass the high-confidence inclusion gate can
+be selected automatically for deep reading.

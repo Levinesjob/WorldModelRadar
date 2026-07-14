@@ -18,6 +18,28 @@ A paper can be included when it satisfies both:
    survey, review, roadmap, taxonomy, position, critique, definition, framework, or
    systematic comparison.
 
+## High-Confidence Gate
+
+Search hits are candidates, not accepted papers. A paper enters `data/papers.json`
+only after a maintainer verifies all of the following:
+
+1. The title, authors, first-public date, abstract, and canonical URL agree with a
+   primary public source such as the official arXiv abstract page or publisher page.
+2. World models are central to the paper's stated contribution, not merely a module,
+   keyword, application detail, or benchmark target.
+3. The paper makes a genuine overview or framing contribution: survey, review,
+   roadmap, taxonomy, definition, position, critique, reusable framework, or
+   systematic comparison.
+4. The abstract and, when necessary, full text are checked to rule out a single-method
+   paper whose title or abstract happens to contain words such as `framework`,
+   `benchmark`, or `challenges`.
+5. `why_included`, `paper_type`, `relevance`, and `status` record the decision. Only
+   entries marked `verified_public_source` are eligible for automated deep-review
+   selection.
+
+The discovery script's `discovery_confidence` describes keyword evidence only. It
+never replaces this manual primary-source gate.
+
 ## Relevance Labels
 
 - `core`: world models are the central subject.

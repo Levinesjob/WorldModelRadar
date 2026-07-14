@@ -36,6 +36,13 @@ AREA_WEIGHT = {
     "physical grounding and actionable simulators": 12,
 }
 
+ALLOWED_RELEVANCE = set(RELEVANCE_WEIGHT)
+OVERVIEW_TYPE_RE = re.compile(
+    r"\b(survey|review|roadmap|taxonomy|definition|framework|position|perspective|"
+    r"critique|systematic comparison)\b",
+    re.IGNORECASE,
+)
+
 
 def slugify(value: str) -> str:
     value = value.lower()
@@ -72,6 +79,26 @@ def score_paper(paper: dict) -> int:
     return score
 
 
+def confidence_checks(paper: dict) -> dict[str, bool]:
+    url = paper.get("url", "")
+    arxiv_id = paper.get("arxiv_id", "")
+    canonical_url = f"https://arxiv.org/abs/{arxiv_id}" if arxiv_id else ""
+    return {
+        "verified_public_source": paper.get("status") == "verified_public_source",
+        "canonical_public_url": url == canonical_url if arxiv_id else url.startswith("https://"),
+        "primary_metadata_complete": all(
+            [paper.get("title"), paper.get("authors"), paper.get("date"), paper.get("venue_or_source")]
+        ),
+        "explicit_inclusion_rationale": bool(paper.get("why_included", "").strip()),
+        "recognized_relevance": paper.get("relevance") in ALLOWED_RELEVANCE,
+        "overview_or_framing_type": bool(OVERVIEW_TYPE_RE.search(paper.get("paper_type", ""))),
+    }
+
+
+def is_high_confidence_paper(paper: dict) -> bool:
+    return all(confidence_checks(paper).values())
+
+
 def suggested_html_path(paper: dict) -> str:
     slug = slugify(paper["title"])
     return f"docs/reviews/{slug}.html"
@@ -83,6 +110,10 @@ def choose_paper(
     prefer_ids: set[str],
     prefer_date: str | None,
 ) -> tuple[dict, str]:
+    papers = [paper for paper in papers if is_high_confidence_paper(paper)]
+    if not papers:
+        raise SystemExit("No high-confidence verified papers available for review")
+
     def best(candidates: list[dict]) -> dict | None:
         if not candidates:
             return None
@@ -148,6 +179,8 @@ def main() -> None:
         "selected_at": date.today().isoformat(),
         "reason": reason,
         "score": score_paper(selected),
+        "selection_confidence": "high",
+        "confidence_checks": confidence_checks(selected),
         "already_reviewed": selected["id"] in reviewed_ids,
         "suggested_html_path": suggested_html_path(selected),
         "paper": selected,

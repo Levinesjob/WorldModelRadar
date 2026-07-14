@@ -13,6 +13,7 @@ DATA_FILE = ROOT / "data" / "papers.json"
 DEFAULT_OUTPUT = ROOT / "data" / "candidates" / "latest.json"
 
 ARXIV_API = "https://export.arxiv.org/api/query"
+SOURCE_NAME = "arXiv Export API"
 START_DATE = date(2026, 1, 1)
 ATOM = {"atom": "http://www.w3.org/2005/Atom"}
 
@@ -23,12 +24,41 @@ QUERIES = [
     'all:world AND all:modelling AND (all:survey OR all:review OR all:roadmap OR all:taxonomy OR all:definition OR all:framework OR all:position)',
 ]
 
-WORLD_RE = re.compile(r"\bworld\s+model(s|ing|ling)?\b", re.IGNORECASE)
+WORLD_RE = re.compile(
+    r"\bworld(?:[-\s]+(?:action|foundation))?[-\s]+model(s|ing|ling)?\b",
+    re.IGNORECASE,
+)
 OVERVIEW_RE = re.compile(
     r"\b(survey|review|roadmap|taxonomy|definition|framework|position|critique|"
     r"future directions?|challenges?|benchmarks?|opportunit(?:y|ies))\b",
     re.IGNORECASE,
 )
+TITLE_OVERVIEW_RE = re.compile(
+    r"\b(survey|review|roadmap|taxonomy|definition|framework|position|perspective|"
+    r"critique|future directions?|challenges?|benchmark)\b",
+    re.IGNORECASE,
+)
+
+
+def assess_discovery_confidence(title: str, summary: str) -> tuple[str, list[str]]:
+    """Rate search evidence only; inclusion still requires manual primary-source review."""
+    world_in_title = bool(WORLD_RE.search(title))
+    overview_in_title = bool(TITLE_OVERVIEW_RE.search(title))
+    overview_in_summary = bool(OVERVIEW_RE.search(summary))
+
+    evidence = []
+    if world_in_title:
+        evidence.append("world-model phrase appears in title")
+    if overview_in_title:
+        evidence.append("overview/framing term appears in title")
+    if overview_in_summary:
+        evidence.append("overview/framing term appears in abstract")
+
+    if world_in_title and overview_in_title:
+        return "high", evidence
+    if world_in_title and overview_in_summary:
+        return "medium", evidence
+    return "low", evidence
 
 
 def load_known_ids() -> set[str]:
@@ -73,6 +103,7 @@ def fetch_query(query: str, max_results: int) -> list[dict]:
         if not WORLD_RE.search(text) or not OVERVIEW_RE.search(text):
             continue
 
+        confidence, confidence_basis = assess_discovery_confidence(title, summary)
         results.append(
             {
                 "arxiv_id": arxiv_id_from_url(entry_url),
@@ -82,6 +113,9 @@ def fetch_query(query: str, max_results: int) -> list[dict]:
                 "updated": entry.findtext("atom:updated", default="", namespaces=ATOM)[:10],
                 "url": entry_url,
                 "summary": summary,
+                "discovery_confidence": confidence,
+                "discovery_confidence_basis": confidence_basis,
+                "requires_manual_inclusion_review": True,
                 "matched_query": query,
             }
         )
@@ -119,6 +153,9 @@ def main() -> None:
     candidates = discover(args.max_results)
     payload = {
         "source": "arXiv",
+        "source_name": SOURCE_NAME,
+        "source_endpoint": ARXIV_API,
+        "source_role": "candidate discovery only; not automatic inclusion",
         "start_date": START_DATE.isoformat(),
         "candidate_count": len(candidates),
         "candidates": candidates,
