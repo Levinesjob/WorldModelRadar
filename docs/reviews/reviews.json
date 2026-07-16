@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "wang-2026-world-action-models",
+    "paper_title": "World Action Models: The Next Frontier in Embodied AI",
+    "paper_url": "https://arxiv.org/abs/2605.12090",
+    "review_date": "2026-07-17",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/world-action-models-the-next-frontier-in-embodied-ai.html"
+  },
+  {
     "paper_id": "liang-2026-world-action-models-embodied-brains",
     "paper_title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
     "paper_url": "https://arxiv.org/abs/2607.11689",

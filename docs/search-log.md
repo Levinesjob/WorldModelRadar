@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-07-15
+Last checked: 2026-07-17
 
 ## Queries Used
 
@@ -36,6 +36,26 @@ These papers are useful context but fall outside the 2026+ window:
 
 ## Exclusion Notes
 
+- `Towards Spatial Supersensing in the Wild` (`2607.13681`) was not placed
+  in the main list because its primary contribution is the VSI-Super-Wild
+  benchmark and a benchmark-derived failure taxonomy, rather than an overview,
+  definition, roadmap, or reusable framework for world-model research.
+- `M4World: A Multi-view Multimodal Driving World Model for Interactive Object
+  Manipulation and Minute-long Streaming` (`2607.14005`) was not placed in the
+  main list because it introduces and evaluates one driving-world generation
+  system rather than an overview-style contribution.
+- `GigaWorld-Policy-0.5: A Faster and Stronger WAM Empowered by AutoResearch`
+  (`2607.13960`) was not placed in the main list because it is an incremental
+  action-centered WAM architecture and training study, not a survey, taxonomy,
+  definition, roadmap, or field-level framework.
+- `Equilibrium Information Aggregation under Machine Learning` (`2607.13670`)
+  was not placed in the main list because “world-models” refers to agents'
+  heterogeneous beliefs in a theoretical-economics model, not learned world
+  models as the research subject.
+- `FlowWAM: Optical Flow as a Unified Action Representation for World Action
+  Models` (`2607.13017`) was not placed in the main list because it proposes
+  one optical-flow action representation and dual-stream diffusion method,
+  rather than an overview or general framing contribution.
 - `Xiaomi-Robotics-U0: Unified Embodied Synthesis with World Foundation Model`
   (`2607.11643`) was not placed in the main list because it introduces and
   evaluates one 38B embodied-synthesis model rather than an overview,
