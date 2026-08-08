@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WorldModel Radar | 经济世界模型系统蓝图精读</title>
+  <meta name="worldmodel-radar:paper-id" content="han-2026-economic-world-models">
+  <meta name="worldmodel-radar:paper-title" content="From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2608.06020">
+  <meta name="worldmodel-radar:review-date" content="2026-08-08">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <style>
+    :root { --ink:#17211c; --muted:#5d6a63; --paper:#f6f0e4; --panel:#fffaf1; --line:#d7c9b2; --green:#1d7a61; --blue:#235d86; --red:#af4538; --amber:#b9831e; --black:#0f1512; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:linear-gradient(90deg,rgba(23,33,28,.04) 1px,transparent 1px),linear-gradient(rgba(23,33,28,.03) 1px,transparent 1px),var(--paper); background-size:28px 28px; font-family:"Iowan Old Style","Palatino Linotype","Noto Serif SC",serif; line-height:1.65; }
+    a { color:var(--blue); text-underline-offset:3px; }
+    header,section,footer { padding:44px clamp(20px,5vw,72px); border-bottom:1px solid var(--line); }
+    header { padding-top:58px; background:linear-gradient(135deg,rgba(29,122,97,.14),transparent 35%),linear-gradient(315deg,rgba(175,69,56,.12),transparent 38%),rgba(255,250,241,.78); }
+    .wrap { max-width:1280px; margin:auto; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr); gap:42px; align-items:end; }
+    .kicker,.eyebrow { font-family:"Trebuchet MS","Noto Sans SC",sans-serif; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; font-size:12px; }
+    h1 { margin:14px 0 18px; font-size:clamp(48px,7vw,92px); line-height:.98; letter-spacing:-.035em; }
+    h2 { margin:0; font-size:clamp(34px,4vw,52px); line-height:1.06; }
+    h3 { margin:0 0 10px; font-size:21px; line-height:1.25; }
+    p { margin:0 0 12px; }
+    .lead { max-width:820px; font-size:22px; color:#33423a; }
+    .paper-card { padding:24px; color:#f7f2e8; background:var(--black); border-radius:10px; box-shadow:0 18px 50px rgba(23,33,28,.14); }
+    .paper-card dl { margin:0; }
+    .paper-card div { display:grid; grid-template-columns:82px 1fr; gap:12px; padding:10px 0; border-top:1px solid rgba(255,255,255,.16); }
+    .paper-card dt { color:#cfc3ad; }
+    .paper-card dd { margin:0; }
+    .paper-card a { color:#9fd2ff; }
+    .section-head { display:grid; grid-template-columns:minmax(220px,.34fr) minmax(0,.66fr); gap:28px; margin-bottom:28px; align-items:start; }
+    .section-head p { color:var(--muted); font-size:18px; }
+    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .grid.four { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .card { padding:20px; border:1px solid var(--line); border-radius:9px; background:var(--panel); }
+    .card strong.big { display:block; color:var(--green); font-size:34px; line-height:1; margin-bottom:10px; }
+    .accent-blue { border-top:5px solid var(--blue); } .accent-green { border-top:5px solid var(--green); } .accent-red { border-top:5px solid var(--red); } .accent-amber { border-top:5px solid var(--amber); }
+    .callout { margin-top:18px; padding:22px; border-left:7px solid var(--red); background:#fff4e6; font-size:19px; }
+    .architecture { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .layer { padding:18px; color:white; background:var(--black); border-radius:8px; }
+    .layer:nth-child(2) { background:#214d67; } .layer:nth-child(3) { background:#25644f; } .layer:nth-child(4) { background:#7d5a1c; }
+    .ladder { display:grid; grid-template-columns:repeat(6,minmax(120px,1fr)); gap:9px; align-items:end; }
+    .rung { padding:14px; border:1px solid var(--line); background:var(--panel); border-radius:8px 8px 0 0; }
+    .rung:nth-child(2) { min-height:140px; } .rung:nth-child(3) { min-height:170px; } .rung:nth-child(4) { min-height:200px; } .rung:nth-child(5) { min-height:230px; } .rung:nth-child(6) { min-height:260px; }
+    table { width:100%; border-collapse:collapse; background:var(--panel); }
+    th,td { padding:13px; border:1px solid var(--line); text-align:left; vertical-align:top; }
+    th { background:#e9dfcc; }
+    ul { margin:8px 0 0; padding-left:20px; }
+    .verdict { font-size:22px; font-weight:700; }
+    footer { border:0; background:var(--black); color:#efe5d2; }
+    @media (max-width:900px) { .hero,.section-head { grid-template-columns:1fr; } .grid,.grid.four,.architecture { grid-template-columns:1fr 1fr; } .ladder { grid-template-columns:1fr 1fr; align-items:stretch; } .rung:nth-child(n) { min-height:0; } }
+    @media (max-width:560px) { .grid,.grid.four,.architecture,.ladder { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <div class="kicker">WorldModel Radar · Deep Read · 2026-08-08</div>
+        <h1>经济世界模型，不是会聊天的市场沙盘</h1>
+        <p class="lead">论文把经济世界模型定义成一个可执行、可校准、可演化的经济运行时：异质主体生成行动，市场与制度把联合行动闭合成下一状态，外部数据持续纠偏。真正的门槛不是“多放几个 LLM Agent”，而是让行为、机制、账本、制度和反事实验证在同一条状态转移链上成立。</p>
+      </div>
+      <aside class="paper-card">
+        <h3>From Economic Agents to Agentic Economies</h3>
+        <dl>
+          <div><dt>作者</dt><dd>Jiale Han 等 10 人</dd></div>
+          <div><dt>来源</dt><dd>arXiv:2608.06020 · 2026-08-06</dd></div>
+          <div><dt>类型</dt><dd>系统综述 / 路线图 / 框架</dd></div>
+          <div><dt>论文</dt><dd><a href="https://arxiv.org/abs/2608.06020">摘要与全文</a></dd></div>
+          <div><dt>资源</dt><dd><a href="https://github.com/FreedomIntelligence/Awesome-Economic-World-Models">Awesome Economic World Models</a></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>核心观点</h2><p>论文最重要的贡献是把“经济模拟”从模型概念翻译成系统合同：状态里必须同时有客观变量、主体私有状态与信念、制度环境；转移则依次处理信念更新、行动生成、个体状态、聚合清算和制度演化。</p></div>
+      <div class="grid four">
+        <article class="card accent-green"><strong class="big">01</strong><h3>内生闭合</h3><p>价格、分配、风险和宏观量必须由主体互动与机制产生，而非从外部剧本注入。</p></article>
+        <article class="card accent-blue"><strong class="big">02</strong><h3>行为保真</h3><p>主体要通过真实行为数据验证异质性、有限理性与情境适应，persona 提示词不等于经济行为。</p></article>
+        <article class="card accent-amber"><strong class="big">03</strong><h3>共同演化</h3><p>不只主体策略会变，规则、合同、平台和制度也会响应聚合结果而变化。</p></article>
+        <article class="card accent-red"><strong class="big">04</strong><h3>现实对齐</h3><p>内部自洽可能与现实脱节，系统必须用外部证据测量漂移并执行有界纠正。</p></article>
+      </div>
+      <div class="callout"><strong>一句话判断：</strong>经济世界模型的产品单位不是“一个预测器”，而是“一个带制度语义、审计轨迹和校准回路的反事实运行时”。没有经济闭合与世界级验证的多智能体 Demo，只是叙事生成器。</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>定义与边界</h2><p>物理世界的转移主要受外在规律支配；经济世界的下一状态由有信念、有激励、有约束的主体内生生成，并反过来改变其未来信念。这个“反身性”是 EWM 与普通视频或动力学世界模型的分水岭。</p></div>
+      <table>
+        <thead><tr><th>对象</th><th>状态与转移</th><th>能解决什么</th><th>不能冒充什么</th></tr></thead>
+        <tbody>
+          <tr><td>传统预测模型</td><td>从历史特征直接预测指标</td><td>短期预测、相关性估计</td><td>不能证明干预后主体会如何改变策略</td></tr>
+          <tr><td>Agent-Based Model</td><td>预设主体规则与机制</td><td>机制实验、涌现分析</td><td>规则固定时不能代表学习与信念演化</td></tr>
+          <tr><td>LLM 社会模拟</td><td>语言主体互动</td><td>丰富的认知与交流表征</td><td>文本合理性不等于预算、清算和均衡成立</td></tr>
+          <tr><td>经济世界模型</td><td>主体行动 → 约束验证 → 机制清算 → 下一状态 → 现实纠偏</td><td>政策、市场、企业与 AI Agent 的训练、规划和压力测试</td><td>高能力等级仍不自动保证反事实有效性</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>技术架构</h2><p>论文建议一个模块化运行时，不做单体端到端预测。公共接口可收敛为 make / reset / run_agents / step / coevolve / align / evaluate，而复杂经济语义留在可替换模块后面。</p></div>
+      <div class="architecture">
+        <article class="layer"><h3>1. 主体层</h3><p>角色、目标、私有状态、信念、记忆、信息通道、工具、行动空间与约束。</p></article>
+        <article class="layer"><h3>2. 环境层</h3><p>世界状态、账本、可行性检查、调度、市场机制、定价分配与结算。</p></article>
+        <article class="layer"><h3>3. 共同演化层</h3><p>用成交、价格误差、回报和违规信号更新主体策略与机制参数。</p></article>
+        <article class="layer"><h3>4. 现实对齐层</h3><p>接入外部数据，计算容差，诊断漂移，对允许的组件进行有界修正。</p></article>
+      </div>
+      <div class="grid" style="margin-top:16px">
+        <article class="card"><h3>执行合同</h3><p>Action 必须强类型且先验可验证；world.step 只执行已经提交的行动，不在环境内部偷偷替主体决策。</p></article>
+        <article class="card"><h3>评估合同</h3><p>同时评估主体行为、环境机制、共同演化、现实对齐和效率，保留每次转移的归因轨迹。</p></article>
+        <article class="card"><h3>数据合同</h3><p>明确公开/私有信息、更新时间、观测延迟、校准容差与哪些参数允许被现实数据纠正。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>六级框架</h2><p>能力阶梯不是营销成熟度，也不是经济有效性的证明。它把工程复杂度分层：主体从固定规则走向认知与自我演化，制度到 L5 才开始内生变化，实时现实对齐到 L6 才出现。</p></div>
+      <div class="ladder">
+        <article class="rung"><h3>L1</h3><p>固定规则主体世界</p></article>
+        <article class="rung"><h3>L2</h3><p>自适应规则主体世界</p></article>
+        <article class="rung"><h3>L3</h3><p>LLM 自主主体世界</p></article>
+        <article class="rung"><h3>L4</h3><p>自演化主体世界</p></article>
+        <article class="rung"><h3>L5</h3><p>制度与规则演化的经济世界</p></article>
+        <article class="rung"><h3>L6</h3><p>持续校准的 Sim-to-Real 经济孪生</p></article>
+      </div>
+      <div class="callout"><strong>迁移路径：</strong>从一个可复现实验的 L1/L2 垂直场景起步，先固化账本、约束、清算、随机种子与轨迹审计；再引入 L3 认知主体；只有行为校准稳定后才开放 L4/L5 演化；最后用影子模式建设 L6，对齐回路不得直接改写生产决策。</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>机会与战略</h2><p>最短商业路径不是复制完整宏观经济，而是在损失函数清晰、数据可得、机制可编码的封闭子系统中提供决策前试验。价值来自“避免昂贵错误”，而非生成宏大故事。</p></div>
+      <div class="grid">
+        <article class="card accent-green"><h3>近期机会</h3><ul><li>金融市场流动性与连锁风险压力测试</li><li>供应链中断、库存和合同策略沙盘</li><li>平台定价、拍卖和机制设计实验</li><li>AI Agent 上线前的操纵、串谋与挤兑测试</li></ul></article>
+        <article class="card accent-blue"><h3>战略护城河</h3><ul><li>高质量主体行为与交易轨迹</li><li>可信的机制、账本和制度 DSL</li><li>反事实回测与失效模式资产库</li><li>可解释、可审计的校准治理</li></ul></article>
+        <article class="card accent-red"><h3>停止条件</h3><ul><li>无法定义干预和成功指标</li><li>主体行为只能靠提示词“看起来像”</li><li>关键清算在模型外手工修正</li><li>使用方把输出当确定性预测</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>工程现实</h2><p>可扩展性、复杂度、稳定性和成本是同一个耦合问题：主体越聪明、记忆越长、交互越密，系统越贵；同时随机性与策略反馈让复现、归因和校准更难。</p></div>
+      <div class="grid four">
+        <article class="card"><h3>可扩展性</h3><p>并行化主体推理，按角色分组批处理；事件驱动替代全量同步；低影响主体用规则或蒸馏模型，高影响节点才调用大模型。</p></article>
+        <article class="card"><h3>复杂度</h3><p>采用组件注册表、强类型状态/行动 schema、机制版本号和场景配置；严禁将业务规则散落在 prompt 与后处理脚本。</p></article>
+        <article class="card"><h3>稳定性</h3><p>固定种子只是起点，还需不变量测试、守恒检查、极端场景、分布漂移报警、回滚点与校准更新的影响半径限制。</p></article>
+        <article class="card"><h3>成本</h3><p>成本主要来自 Agent token、长时记忆、N×N 通信、长周期 rollout 与反事实重复。预算应按“每个可信决策情景”计量，而非每次 API 调用。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>业务规则与场景细节</h2><p>以外汇市场为例，世界模型必须把经济规则变成可执行协议，而不是背景文字。场景的可信度取决于约束、顺序和结算细节是否完整。</p></div>
+      <table>
+        <thead><tr><th>环节</th><th>必须显式化的业务规则</th><th>典型边界条件</th></tr></thead>
+        <tbody>
+          <tr><td>观察</td><td>公开报价、成交量、私有现金/库存、信息延迟与权限</td><td>数据缺失、泄漏未来信息、不同主体时钟不一致</td></tr>
+          <tr><td>行动</td><td>买/卖/持有、价格、数量、有效期、角色权限</td><td>预算不足、库存为负、重复订单、非法工具调用</td></tr>
+          <tr><td>清算</td><td>订单优先级、统一/连续定价、撮合、现金资产交割</td><td>无成交、流动性枯竭、价格跳空、部分成交与违约</td></tr>
+          <tr><td>演化</td><td>哪些信念、策略、机制参数可以更新，更新频率与幅度</td><td>正反馈爆炸、策略坍缩、制度震荡、校准覆盖原机制</td></tr>
+          <tr><td>评估</td><td>行为、市场、分布、稳定性、现实误差和计算效率指标</td><td>反事实无唯一真值、指标投机、整体拟合掩盖群体伤害</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>伪需求与真实问题</h2><p>论文最大的去魅价值，是让团队区分“想看一个会演戏的经济体”与“需要一个可证伪的决策工具”。</p></div>
+      <div class="grid">
+        <article class="card accent-red"><h3>伪需求</h3><ul><li>把 10,000 个 LLM Agent 当作规模能力</li><li>要求模型精确预测某次危机的唯一轨迹</li><li>用角色提示词代替行为校准</li><li>用漂亮仪表盘代替机制审计</li></ul></article>
+        <article class="card accent-green"><h3>真实问题</h3><ul><li>一个干预会通过哪些反馈链扩散？</li><li>结果对哪些行为假设与规则最敏感？</li><li>何时模型失配，能否定位到主体或机制？</li><li>哪些策略在多种可信世界下仍稳健？</li></ul></article>
+        <article class="card accent-blue"><h3>用户痛点</h3><ul><li>政策与企业决策不能安全 A/B 测试</li><li>传统模型难覆盖策略互动和制度变化</li><li>多智能体模拟难复现、难解释、难治理</li><li>现实数据到模拟参数之间缺少责任链</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>框架与技术债</h2><p>建议把技术债登记在能力阶梯旁，而不是把更高级别当作自动升级。每增加一类演化自由度，都要增加相应的验证合同。</p></div>
+      <table>
+        <thead><tr><th>技术债</th><th>早期信号</th><th>治理动作</th></tr></thead>
+        <tbody>
+          <tr><td>Prompt 业务逻辑债</td><td>同一规则在不同主体提示词里表述不一</td><td>迁移到版本化 schema、约束引擎和机制 DSL</td></tr>
+          <tr><td>行为真实性债</td><td>语言逼真但选择分布与真实人群不符</td><td>建立分群行为基准、校准集和盲测</td></tr>
+          <tr><td>反事实有效性债</td><td>改变政策后仍沿用旧数据训练出的环境</td><td>明确结构假设，执行重新居中与固定点检验</td></tr>
+          <tr><td>可观测性债</td><td>最终结果异常但无法定位哪一步造成</td><td>记录行动、约束、清算、更新和纠偏的事件溯源</td></tr>
+          <tr><td>成本债</td><td>Agent 数量或周期翻倍导致成本超线性增长</td><td>异构模型路由、事件稀疏化、代理聚合与分层仿真</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><h2>研究判断</h2><p>论文的强项是系统化与可实现性，弱项是蓝图仍多于实证。能力阶梯描述“能构建多少组件”，却不能独立回答“反事实是否可信”。</p></div>
+      <div class="grid">
+        <article class="card"><h3>最值得继承</h3><p>四层运行时、六级能力阶梯、环境式 API、分层评估栈，以及把现实对齐与内部共同演化明确分开。</p></article>
+        <article class="card"><h3>最需补证</h3><p>跨市场、跨周期的行为校准；机制学习后的经济约束；L4/L5 演化稳定性；L6 在线纠偏是否会造成新的政策反馈。</p></article>
+        <article class="card"><h3>博士课题</h3><p>反事实再居中、经济机制神经符号化、群体级行为校准、不确定性传播、制度演化的可识别性，以及世界级评估的统计功效。</p></article>
+      </div>
+      <div class="callout verdict">最终结论：这是 2026 年最具工程操作性的领域世界模型路线图之一。它不证明经济孪生已经可用，却清楚规定了一个可信 EWM 必须交付哪些系统组件、接口和验证责任。</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p><strong>分析视角权重：</strong>CEO 10% · 架构设计师 40% · 领域专家 20% · 开发者 10% · 博导 10% · 博士 10%。结构以原论文的定义、能力阶梯、架构、工程路径和开放挑战为主线，角色视角仅用于审视价值、实现与证据。</p>
+      <p>来源：<a href="https://arxiv.org/abs/2608.06020">arXiv 摘要/PDF/HTML</a> 与作者公开的 <a href="https://github.com/FreedomIntelligence/Awesome-Economic-World-Models">配套资源库</a>。本页为分析性精读，不替代原文。</p>
+    </div>
+  </footer>
+</body>
+</html>

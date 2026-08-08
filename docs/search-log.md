@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-07-17
+Last checked: 2026-08-08
 
 ## Queries Used
 
@@ -36,6 +36,40 @@ These papers are useful context but fall outside the 2026+ window:
 
 ## Exclusion Notes
 
+- `When Agentic AI Meets Integrated Sensing and Communication` (`2608.05792`)
+  was not placed in the main list because it surveys agentic ISAC; predictive
+  world models appear only as one open challenge rather than the central subject.
+- `Robust-WAM: Bridging Generative Pretraining and Semantic Foresight in
+  World-Action Models` (`2608.05903`) was not placed in the main list because it
+  proposes one semantic-foresight post-training method rather than an overview or
+  field-level framing contribution.
+- `JoyAI-RA 0.5: Scaling Robot Manipulation Learning via Dual Action Alignment`
+  (`2608.05674`) was not placed in the main list because it presents one VLWA
+  architecture and training system, not a survey, taxonomy, roadmap, or definition.
+- `HERA: Historical Evidence Routing Adapter for Physical Prediction in Latent
+  World Models` (`2608.05523`) was not placed in the main list because it evaluates
+  one memory-routing adapter for a frozen predictor rather than an overview work.
+- `From Passive Mirrors to Active Agents: Holonic Digital Twins for Physical AI
+  over Networks` (`2608.06227`) was not placed in the main list because its primary
+  contribution is a specific networked digital-twin architecture; world models
+  motivate the problem but are not the overview subject.
+- `WorldCycle: Self-Verifiable Reinforcement Learning for Long-Horizon Video World
+  Models` (`2608.04964`) was not placed in the main list because it introduces one
+  cycle-consistency RL method and benchmark rather than a reusable field taxonomy
+  or roadmap.
+- `Quantum-Structured World Models (QSWMs) for Predictive Latent Dynamics`
+  (`2608.05371`) was not placed in the main list because it proposes and tests one
+  quantum-inspired latent architecture rather than surveying or framing the field.
+- `Overcoming Statistical Bias in Action-Controllable World Models` (`2608.04653`)
+  was not placed in the main list because it introduces the CoCo method and its
+  evaluation metrics as a single-method contribution.
+- `muSync-GS: Physics-Synchronized Driving Video Synthesis for Weather and
+  Geometric Road Hazards` (`2608.04412`) was not placed in the main list because it
+  is a specific driving-video synthesis system; generative world models are only
+  application context.
+- `Faster-WAM: Efficient Inference-Time Future Conditioning for Robust World Action
+  Models` (`2608.04404`) was not placed in the main list because it is a specific
+  efficient WAM architecture and empirical study, not an overview-style paper.
 - `Towards Spatial Supersensing in the Wild` (`2607.13681`) was not placed
   in the main list because its primary contribution is the VSI-Super-Wild
   benchmark and a benchmark-derived failure taxonomy, rather than an overview,

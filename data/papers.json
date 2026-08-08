@@ -1,5 +1,31 @@
 [
   {
+    "id": "han-2026-economic-world-models",
+    "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
+    "authors": [
+      "Jiale Han",
+      "Xiang Li",
+      "Jing Qian",
+      "Wenyuan Gu",
+      "Pin Gao",
+      "Ye Luo",
+      "Hongyuan Zha",
+      "Dacheng Tao",
+      "Benyou Wang",
+      "Lin William Cong"
+    ],
+    "date": "2026-08-06",
+    "venue_or_source": "arXiv",
+    "arxiv_id": "2608.06020",
+    "url": "https://arxiv.org/abs/2608.06020",
+    "repository": "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models",
+    "relevance": "domain",
+    "paper_type": "systematic survey/roadmap/framework",
+    "area": "economic world models",
+    "why_included": "Defines Economic World Models as executable generative economic environments, systematically surveys the field through a six-level capability ladder, and provides a reusable architecture, implementation protocol, evaluation stack, and engineering roadmap.",
+    "status": "verified_public_source"
+  },
+  {
     "id": "liang-2026-world-action-models-embodied-brains",
     "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
     "authors": [
