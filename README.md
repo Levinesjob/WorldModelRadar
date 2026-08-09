@@ -2,13 +2,39 @@
 
 Tracking 2026+ survey, roadmap, taxonomy, and definition papers on world models.
 
+WorldModel Radar is a living intelligence map for world models. It tracks
+field-level papers, code artifacts, and discussion signals, then turns them into
+deep reads, opportunity maps, architecture notes, and weekly synthesis for people
+who need to understand where the field is going.
+
+**Core positioning:** content first, presentation second, promotion last. The goal
+is to help builders, researchers, architects, and strategy readers make better
+decisions about world-model directions, not just collect links.
+
 这是一个面向“世界模型（World Models）”综述论文的轻量仓库，收录范围从
-2026-01-01 到 2026-07-12。
+2026-01-01 至今。
 
 > Scope note: 本仓库优先收录标题、摘要或正文明确以 world model/world
 > modeling/world modelling 为核心对象的 survey、review、roadmap、taxonomy、
 > position 或 definition/framework 类论文。泛视频生成、AI agent 或具身智能综述
 > 只有在摘要明确把 world models 作为主要讨论对象时才列为 adjacent。
+
+## What This Radar Delivers
+
+| Depth | Output | Reader Value |
+| --- | --- | --- |
+| Scan | New papers, source signals, weekly changes | See what changed without reading everything. |
+| Map | Domain clusters and field position | Understand where a paper fits in the world-model landscape. |
+| Deep Read | HTML reviews with thesis, architecture, opportunity, risk, and limits | Extract the real argument and avoid shallow hype. |
+| Decision | Real problems, fake demand, migration path, cost and complexity | Decide what to build, research, watch, or ignore. |
+| Watchlist | Repos, labs, debates, benchmarks, and discussion heat | Track the signals that may shape the next wave. |
+
+The radar is designed for AI founders, product leaders, architects, researchers,
+PhD students, and strategy analysts who need a structured view of world-model
+evolution.
+
+See [`docs/radar-content-system.md`](docs/radar-content-system.md) for the
+editorial system behind the radar.
 
 ## Quick View
 
@@ -46,17 +72,23 @@ Tracking 2026+ survey, roadmap, taxonomy, and definition papers on world models.
 
 ```text
 .
-├── README.md
-├── data/
-│   └── papers.json
-├── docs/
-│   ├── automation.md
-│   ├── inclusion-criteria.md
-│   └── search-log.md
-└── scripts/
-    ├── find_arxiv_candidates.py
-    ├── render_readme.py
-    └── validate_papers.py
+|-- README.md
+|-- data/
+|   `-- papers.json
+|-- docs/
+|   |-- automation.md
+|   |-- inclusion-criteria.md
+|   |-- radar-content-system.md
+|   |-- search-log.md
+|   `-- reviews/
+`-- scripts/
+    |-- build_big_picture.py
+    |-- build_review_manifest.py
+    |-- find_arxiv_candidates.py
+    |-- render_readme.py
+    |-- select_review_target.py
+    |-- send_feishu_file.py
+    `-- validate_papers.py
 ```
 
 ## Data Fields
@@ -107,7 +139,9 @@ This repository is configured for a local daily Codex automation. See
 - `scripts/build_big_picture.py`: regenerate the weekly big-picture HTML.
 - `scripts/send_feishu_file.py`: upload and send a generated HTML file to Feishu.
 
-Candidate discovery currently uses the official arXiv Export API. Search results are
-labelled with discovery confidence and always require manual primary-source review;
-only `verified_public_source` entries that pass the high-confidence inclusion gate can
-be selected automatically for deep reading.
+Candidate discovery currently uses the official arXiv Export API, and the radar
+system is designed to expand toward broader signals: GitHub repositories, Hugging
+Face artifacts, Papers with Code, X/Twitter discussions, Hacker News, Reddit ML
+communities, technical newsletters, lab pages, and company research blogs. Discussion
+heat can raise priority, but primary-source verification remains required for
+inclusion and deep reading.

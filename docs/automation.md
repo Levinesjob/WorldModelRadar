@@ -7,21 +7,25 @@ per day at local midnight against this repository.
 
 1. Pull the latest `main` branch from GitHub.
 2. Search arXiv for 2026+ candidate papers related to world models.
-3. Compare candidates with `data/papers.json`.
-4. Promote only papers that satisfy `docs/inclusion-criteria.md`.
-5. Re-render the README quick-view table.
-6. Validate metadata.
-7. Select the highest-value paper for deep reading:
+3. Review broader discovery signals when available: GitHub repositories, Hugging
+   Face artifacts, Papers with Code, X/Twitter discussions, Hacker News, Reddit ML
+   communities, technical newsletters, lab/company pages, and curated awesome lists.
+4. Compare candidates with `data/papers.json`.
+5. Promote only papers that satisfy `docs/inclusion-criteria.md`; discussion heat
+   can raise priority but cannot replace primary-source verification.
+6. Re-render the README quick-view table.
+7. Validate metadata.
+8. Select the highest-value paper for deep reading:
    - if the current run adds qualified papers, choose the strongest new paper;
    - otherwise choose the strongest existing paper that does not yet have an HTML review;
    - if all papers already have reviews, refresh the highest-impact existing review.
-8. Generate or refresh one deep-read HTML in `docs/reviews/`, using
+9. Generate or refresh one deep-read HTML in `docs/reviews/`, using
    `docs/reviews/a-definition-roadmap-world-models.html` as the canonical template.
-9. Update `docs/reviews/reviews.json` and, once per week, regenerate
+10. Update `docs/reviews/reviews.json` and, once per week, regenerate
    `docs/reviews/world-model-big-picture.html`.
-10. Send the generated HTML file to Feishu chat
+11. Send the generated HTML file to Feishu chat
     `oc_ab3da5be78816bc84a94449b371fa1ca`.
-11. Commit and push changes only when the canonical paper list, review HTML,
+12. Commit and push changes only when the canonical paper list, review HTML,
     review manifest, big-picture page, or documentation changes.
 
 ## Local Commands
@@ -86,6 +90,12 @@ python scripts/send_feishu_file.py docs/reviews/a-definition-roadmap-world-model
 - The automation should not commit a daily empty update.
 - The automation should keep borderline papers in `docs/search-log.md` instead of
   adding them to the canonical list.
+- The content doctrine lives in `docs/radar-content-system.md`: content first,
+  presentation second, promotion last. The automation should optimize for better
+  field judgment before better packaging.
+- Discussion heat is a candidate-priority signal. A paper with credible discussion
+  should be considered earlier for deep reading, but inclusion still requires a
+  stable primary source and a field-level contribution.
 - Feishu credentials must stay outside the repository. The sender reads either
   `FEISHU_APP_ID` and `FEISHU_APP_SECRET`, or the local
   `~/.openclaw-autoclaw/openclaw.json` file.
