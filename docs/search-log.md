@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-10
+Last checked: 2026-08-11
 
 ## Queries Used
 
@@ -22,6 +22,23 @@ Last checked: 2026-08-10
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-11 Discovery Notes
+
+- The official arXiv Export API returned 10 candidates. Five were already
+  assessed on 2026-08-10; the five newly assessed API candidates were UniJEPA,
+  SimWAM, PILOT, WorldTrace, and TaskSense. Semantic arXiv search added
+  WorldClaw and HelloWorld as recall-only leads. None passed the overview or
+  field-framing gate, so no paper was added to the main table.
+- Implementation and institutional signals were retained only as watchlist
+  evidence. SimWAM links an author-official repository with code and weights;
+  WorldTrace is listed by an author as an ICML 2026 workshop oral and best-paper
+  winner. These signals make the methods worth tracking, but do not turn them
+  into surveys, taxonomies, roadmaps, definitions, or field-level frameworks.
+- AutoGLM Web Search could not run because the local token service at
+  `127.0.0.1:53699` refused the connection. Public web search and official arXiv
+  pages were used as fallback. No credible independent Hacker News, Reddit, or
+  X/Twitter discussion signal was found for the newly assessed candidates.
 
 ## 2026-08-10 Discovery Notes
 
@@ -50,6 +67,38 @@ These papers are useful context but fall outside the 2026+ window:
 - [Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning](https://arxiv.org/abs/2511.16333)
 
 ## Exclusion Notes
+
+- `UniJEPA: A Unified Joint-Embedding Predictive Architecture for Task-Agnostic
+  Visual World Modeling` (`2608.07409`) was not placed in the main list because
+  it proposes and evaluates one unified JEPA objective and architecture. Its
+  comparison of image- and video-level JEPA recipes motivates the method but is
+  not a field survey, taxonomy, or roadmap.
+- `SimWAM: A Simple World Action Model for End-to-End Autonomous Driving`
+  (`2608.07468`) was not placed in the main list because it is a specific
+  dual-expert driving planner whose video branch is discarded at inference. Its
+  official code and weights are useful implementation signals, not evidence of
+  an overview contribution.
+- `Decoupling Intention from Trajectory: A Representational Deduction Framework
+  for World Action Models` (`2608.06994`) was not placed in the main list because
+  the paper's “framework” is the PILOT/RD method for one representation bottleneck,
+  rather than a reusable field-level framework or taxonomy.
+- `Addressable Memory for Video World Models` (`2608.07408`) was not placed in
+  the main list because it contributes the WorldTrace cache method and LoopBench
+  for long-horizon visual persistence. The ICML 2026 workshop oral/best-paper
+  signal raises watchlist priority but does not change its single-method scope.
+- `TaskSense: Focusing on What Matters in World Models` (`2608.06544`) was not
+  placed in the main list because it introduces one task-centric attention and
+  inverse-dynamics training method evaluated against DreamerV3, not an overview
+  or general research framing.
+- `WorldClaw: Agentic 3D Open-World Generation at Scale` (`2608.05248`) was not
+  placed in the main list because it is an agentic 3D scene-generation system.
+  “World” refers primarily to editable open-world content, and the paper does not
+  survey or define learned action-conditioned world models.
+- `HelloWorld: Enabling Socially Interactive Characters in Video World Models`
+  (`2608.05070`) was not placed in the main list because it presents one
+  self-distilled interaction-control method and HelloWorldBench. Its project
+  artifact is useful for tracking social interaction, but it is not an overview
+  work.
 
 - `When Agentic AI Meets Integrated Sensing and Communication` (`2608.05792`)
   was not placed in the main list because it surveys agentic ISAC; predictive

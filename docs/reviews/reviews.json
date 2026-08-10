@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "chen-2026-generative-engines-actionable-simulators",
+    "paper_title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
+    "paper_url": "https://arxiv.org/abs/2601.15533",
+    "review_date": "2026-08-11",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/from-generative-engines-to-actionable-simulators-the-imperative-of-physical-grounding-in-world-models.html"
+  },
+  {
     "paper_id": "yu-2026-decision-centric-world-model-evaluation",
     "paper_title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
     "paper_url": "https://arxiv.org/abs/2606.15032",
