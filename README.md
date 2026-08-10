@@ -40,9 +40,9 @@ editorial system behind the radar.
 
 <!-- QUICK_VIEW:START -->
 
-截至 2026-08-08，本仓库记录了 17 篇 2026 年以来的公开可检索论文，其中：
+截至 2026-08-10，本仓库记录了 18 篇 2026 年以来的公开可检索论文，其中：
 
-- 10 篇 core：直接综述、定义、路线图或 taxonomy 世界模型本体。
+- 11 篇 core：直接综述、定义、路线图或 taxonomy 世界模型本体。
 - 6 篇 domain：围绕机器人、医疗、边缘智能、代码智能等领域中的世界模型。
 - 1 篇 adjacent：与世界模型强相关，但主对象更偏泛世界模型相邻主题。
 
@@ -53,6 +53,7 @@ editorial system behind the radar.
 | 2026-07-08 | core | world-model simulator assurance | [Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators](https://arxiv.org/abs/2607.07196) |
 | 2026-07-07 | core | general definition | [A Definition and Roadmap for World Models](https://arxiv.org/abs/2607.06401) |
 | 2026-06-15 | domain | healthcare | [Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies](https://arxiv.org/abs/2606.16721) |
+| 2026-06-13 | core | decision-centric world-model evaluation | [How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position](https://arxiv.org/abs/2606.15032) |
 | 2026-06-04 | domain | robotics, VLA, and world-model interfaces | [Robots Need More than VLA and World Models](https://arxiv.org/abs/2606.06556) |
 | 2026-05-31 | core | interactive video world modeling | [Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends](https://arxiv.org/abs/2606.01164) |
 | 2026-05-12 | core | embodied AI and action generation | [World Action Models: The Next Frontier in Embodied AI](https://arxiv.org/abs/2605.12090) |

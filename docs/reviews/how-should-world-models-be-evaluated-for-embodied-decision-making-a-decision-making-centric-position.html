@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="yu-2026-decision-centric-world-model-evaluation">
+  <meta name="worldmodel-radar:paper-title" content="How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2606.15032">
+  <meta name="worldmodel-radar:review-date" content="2026-08-10">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>别用好看的未来，替代有用的决策证据｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#17211d;--muted:#66716b;--paper:#f3f0e7;--panel:#fffdf7;--line:#d7d0c1;--green:#176b54;--blue:#245c86;--amber:#a56d12;--red:#a73f35}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.7 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    h1{font-size:clamp(42px,7vw,80px);line-height:.98;max-width:1000px;margin:12px 0 20px}h2{font-size:34px;line-height:1.15;margin:0 0 14px}h3{margin:.2em 0}.lead{max-width:900px;font-size:22px;color:#35423c}
+    .chips,.grid,.ladder{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip,.level{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px}.chip strong{display:block;font-size:28px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .ladder{grid-template-columns:repeat(4,1fr)}.level{border-top:5px solid var(--blue)}.level.decision{border-top-color:var(--green)}.level strong{font-size:26px}.level p{margin:.4em 0 0}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}
+    .callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff8e8}.risk{border-top:5px solid var(--red)}.good{border-top:5px solid var(--green)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two,.ladder{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two,.ladder{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-10</p>
+  <h1>别用好看的未来，替代有用的决策证据</h1>
+  <p class="lead">这篇论文把世界模型评测从“生成物像不像”改写成“模型是否保留了做决定所需的干预、结果与价值结构”。它最重要的产品不是一个万能分数，而是一份声明—证据合同：你声称模型支持什么决策，就必须交付相应强度的证据。</p>
+  <div class="chips">
+    <div class="chip"><strong>L0–L3</strong><span>生成物与观察诊断</span></div><div class="chip"><strong>L4</strong><span>第一道干预证据门槛</span></div><div class="chip"><strong>L5–L6</strong><span>结果、价值与策略排序</span></div><div class="chip"><strong>L7</strong><span>规划或策略优化效用</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正改变了什么</h3><p>它把分散的评测文化放进同一张证据地图：视频生成、潜变量预测、交互模拟器、策略评估、合成数据与规划都可以叫世界模型，但不能共享同一套成功标准。</p></article>
+    <article class="card"><h3>所在主线</h3><p>它连接了两条此前分离的主线：现代生成式世界模型的 benchmark 热潮，以及模型式强化学习中早已存在的 objective mismatch、value equivalence 与 model exploitation。</p></article>
+    <article class="card risk"><h3>核心警告</h3><p>FVD、VLM 物理打分或人类偏好可以证明输出更像，但不能单独证明模型能正确排序策略、支撑规划，或承受优化器主动寻找其误差。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>世界模型的“真实性”不是脱离用途的属性；它只在声明的策略集合、行动接口、时域、结果变量和部署分布上有意义。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Evidence hierarchy</p><h2>L0–L7：不是成熟度分数，而是证据强度地图</h2>
+  <div class="ladder">
+    <article class="level"><strong>L0</strong><h3>视觉可信</h3><p>输出是否像真实图像或视频。适合发现崩坏与界面问题，不回答行动后果。</p></article>
+    <article class="level"><strong>L1</strong><h3>日志未来</h3><p>对行为分布中的 held-out 轨迹是否预测准确。仍可能只学会默认未来。</p></article>
+    <article class="level"><strong>L2–L3</strong><h3>语义与物理</h3><p>指令、场景、接触、几何是否合理。VLM judge 有用，但仍主要评生成物。</p></article>
+    <article class="level decision"><strong>L4</strong><h3>行动干预</h3><p>从相同历史改变动作，是否产生正确的任务相关变化。这是决策型主张的关键分水岭。</p></article>
+    <article class="level decision"><strong>L5</strong><h3>结果与价值</h3><p>成功率、奖励、进度与价值是否准确并校准。</p></article>
+    <article class="level decision"><strong>L6</strong><h3>策略评估</h3><p>模型中的策略排序是否与真实环境或可信模拟器一致。</p></article>
+    <article class="level decision"><strong>L7</strong><h3>优化效用</h3><p>使用模型进行规划或优化，是否在现实中带来 policy lift，并控制 exploitability。</p></article>
+    <article class="level"><strong>注意</strong><h3>多轴而非单轴</h3><p>生成物/决策、观察/干预、开环/闭环、固定策略/优化后策略是不同轴；低层不能补偿高层失败。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Architecture & protocol</p><h2>技术架构：先声明决策合同，再运行七步证据管线</h2>
+  <table><thead><tr><th>组件</th><th>必须显式声明</th><th>为什么重要</th></tr></thead><tbody>
+    <tr><td>任务与策略类</td><td>环境、身体、奖励/成功定义；BC、VLA、MPC、RL 或人工策略</td><td>模型只可能对某个策略集合保持 decision equivalence。</td></tr>
+    <tr><td>行动接口</td><td>关节、末端、action chunk、轨迹、语言或 latent action；直接控制还是逆动力学恢复</td><td>若动作是推断的，干预结论属于整条 pipeline，不能只归因于世界模型。</td></tr>
+    <tr><td>决策用途</td><td>预测、策略评估、规划、策略优化、安全测试、合成数据或表征</td><td>用途决定最小证据层级，不存在通用单一分数。</td></tr>
+    <tr><td>任务特征 Φ</td><td>物体位姿、接触、安全谓词、进度、奖励或潜在任务状态</td><td>像素可以很差而决策状态足够；反之也成立。</td></tr>
+    <tr><td>时域与部署</td><td>一步/短时/完整 episode；离线/在线/模拟/真机/混合</td><td>长时闭环误差、数据成本与可重复性完全不同。</td></tr>
+    <tr><td>不确定性接口</td><td>集成方差、置信度、似然、悲观界或无</td><td>优化器会寻找过度自信的误差；拒答能力是运行时接口。</td></tr>
+  </tbody></table>
+  <div class="grid two" style="margin-top:16px">
+    <article class="card"><h3>评测执行链</h3><ol><li>声明 contract。</li><li>构造 behavior、anchor、shift、optimized 四类策略集。</li><li>把 L0–L3 当诊断项。</li><li>做 reset-matched action branches，测 L4。</li><li>闭环运行固定策略，测 L5/L6。</li><li>固定优化器与预算，测 L7。</li><li>测试 exploitability、不确定性并报告区间。</li></ol></article>
+    <article class="card"><h3>关键系统指标</h3><ul><li><strong>IPE：</strong>相同历史、不同动作的任务特征误差。</li><li><strong>Occupancy mismatch：</strong>策略闭环后状态分布的漂移。</li><li><strong>PRA / MMRV：</strong>策略两两排序与最大秩违例。</li><li><strong>Policy lift：</strong>模型优化后的策略相对基线的现实收益。</li><li><strong>XGap：</strong>优化器在模型内预测的收益减去现实收益。</li><li><strong>Risk-coverage：</strong>不确定性与拒答是否真正覆盖高误差。</li></ul></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Reality check</p><h2>伪需求、真实问题与用户痛点</h2>
+  <div class="grid">
+    <article class="card risk"><h3>伪需求</h3><ul><li>做一个“世界模型总分”就能排序所有用途。</li><li>视频更长、更清晰就能证明控制更可靠。</li><li>一个最终成功率足以归因世界模型质量。</li><li>用 VLM judge 代替真实或可信模拟器中的可执行结果。</li></ul></article>
+    <article class="card good"><h3>真实问题</h3><ul><li>不同动作是否真正改变正确的结果变量。</li><li>目标策略偏离行为数据后，模型是否仍可用。</li><li>优化器是否会系统性利用模型漏洞。</li><li>模型何时应该拒绝给出策略判断。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>工程团队不知道 benchmark 分数能支持哪种产品承诺。</li><li>安全团队无法区分生成物缺陷与策略风险。</li><li>研究者难以比较行动接口和用途不同的论文。</li><li>真机团队承担不起大规模 reset、策略集与长时 rollout。</li></ul></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scale, complexity, stability, cost</p><h2>可扩展性、复杂度、稳定性与成本</h2>
+  <div class="grid">
+    <article class="card"><h3>可扩展性</h3><p>瓶颈不是推理吞吐，而是可分支环境、策略多样性和真实结果标签。模拟器可批量 reset；真机需要少量桌面任务、低维 Φ 与三到五个强弱分明的 anchor policy。</p></article>
+    <article class="card"><h3>复杂度</h3><p>评测从模型级变成系统级：世界模型、逆动力学、retargeting、奖励模型、规划器、过滤器与 success checker 都可能改变结论，必须分层消融并记录版本。</p></article>
+    <article class="card"><h3>稳定性</h3><p>开环稳定不代表闭环稳定。应报告随 horizon 的退化曲线、任务/随机种子/策略集置信区间、校准漂移，以及 shift policy 与 optimized policy 下的单独表现。</p></article>
+    <article class="card"><h3>成本</h3><p>主要成本来自真机重复 rollout、reset、策略性能真值、长时闭环视频与优化搜索。预算应按“一个可置信策略比较”计量，而不是按生成帧数或单次模型调用计量。</p></article>
+    <article class="card"><h3>边界条件</h3><p>被动人类视频常缺少可识别的行动与控制器信息；即使能重置，也未必识别干预分布。高风险应用还需要最坏情况、约束违例与对抗压力测试，平均 lift 不够。</p></article>
+    <article class="card"><h3>成熟度</h3><p>这是 field-level protocol 与 reporting framework，不是已被跨实验室验证的标准。论文自己的统计是 survey reading，并非对每篇工作重实现后的完整审计。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & decision</p><h2>迁移路径：团队今天可以怎样采用</h2>
+  <table><thead><tr><th>阶段</th><th>动作</th><th>退出条件</th></tr></thead><tbody>
+    <tr><td>1. 声明</td><td>给现有模型补一张 evaluation card：用途、策略类、动作接口、Φ、时域、分布与不确定性。</td><td>每个营销或研究主张都能映射到一个可测证据层。</td></tr>
+    <tr><td>2. 解耦</td><td>分开报告生成物指标、世界模型指标与端到端策略指标；为逆动力学和 success checker 做消融。</td><td>失败能归因到具体组件，而非只得到一个总成功率。</td></tr>
+    <tr><td>3. 干预</td><td>在可信模拟器或小型真机场景加入 reset-matched action branches 与 action sweeps。</td><td>至少获得部分 L4，并说明哪些干预主张仍不可识别。</td></tr>
+    <tr><td>4. 闭环</td><td>选弱、中、强 anchor policy 与 shift policy，测结果校准、排序、occupancy 与 horizon 退化。</td><td>模型能在目标策略集合内保持 L5/L6 证据。</td></tr>
+    <tr><td>5. 优化</td><td>固定 planner、算力和交互预算，比较 policy lift、XGap、约束违例与拒答。</td><td>只有现实或可信环境收益成立时，才声称支持规划/优化。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>优先做评测基础设施、策略排序与安全门禁，不要卖“万能模拟世界”。购买者真正缺的是减少昂贵真机试验、发现错误策略与明确拒答边界。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>把 decision contract、intervention set、policy registry、run provenance 和 uncertainty gate 做成平台对象；所有分数必须携带用途和覆盖范围。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>研究重点应从更好的感知代理分数移向可识别的干预数据、optimizer-induced shift、latent Φ、低样本策略排序与评测协议抗投机性。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Debt, open questions, watchlist</p><h2>技术债、开放问题与 Watchlist</h2>
+  <div class="grid">
+    <article class="card risk"><h3>技术债</h3><ul><li>公开 benchmark 固定后会被过拟合。</li><li>策略集合太小会让排序指标不稳定。</li><li>高维 occupancy 距离依赖任意特征映射。</li><li>动作恢复管线掩盖世界模型本体误差。</li><li>低层代理分数易被聚合成误导性的总榜。</li></ul></article>
+    <article class="card"><h3>可证伪开放问题</h3><ul><li>L0–L3 与 L6–L7 在哪些任务上稳定相关，何时反转？</li><li>多少 reset branches 才能可靠识别 L4？</li><li>XGap 能否预测真实部署中的 planner exploitation？</li><li>无解码器 latent model 的 Φ 如何跨任务比较？</li><li>怎样设计隐藏策略与动态任务，减少 benchmark gaming？</li></ul></article>
+    <article class="card good"><h3>Watchlist</h3><ul><li>作者 Yang Yu、Nanjing University 决策学习方向。</li><li>WorldArena、RoboWM-Bench、WorldGym、dWorldEval 的后续版本。</li><li>V-JEPA 2 / 2.1、WHALE 等 latent 或 decision-oriented world models。</li><li>是否出现共享 evaluation card、XGap 实现与跨实验室复现。</li><li>真机 minimal protocol 是否进入会议 benchmark 或 reviewer checklist。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇论文不是在否定视频指标，而是在建立证据的用途边界。它为世界模型领域提供了当前最清楚的“主张强度—评测责任”映射之一；真正的缺口是协议尚未经过大规模复现，尤其是昂贵的 L4–L7 与 exploitability 测试。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary source：<a href="https://arxiv.org/abs/2606.15032">arXiv abstract v2</a> · <a href="https://arxiv.org/html/2606.15032">arXiv experimental HTML</a>。未发现作者官方代码库；第三方索引只作为发现信号，没有作为内容或收录依据。</p>
+</div></footer>
+</body>
+</html>

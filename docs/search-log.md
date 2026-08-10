@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-08
+Last checked: 2026-08-10
 
 ## Queries Used
 
@@ -19,8 +19,23 @@ Last checked: 2026-08-08
 ## Public Sources Checked
 
 - arXiv abstract pages
+- arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-10 Discovery Notes
+
+- The official arXiv Export API candidate script timed out after network access
+  was granted, so this run did not interpret an empty response as an empty paper
+  set. Web-search fallback was used for recall, followed by official arXiv
+  abstract and full-text verification.
+- `How Should World Models Be Evaluated for Embodied Decision-Making? A
+  Decision-Making-Centric Position` (`2606.15032`) was added after official v2
+  verification. It surveys recent evaluation practice, identifies
+  claim/evidence mismatch, and contributes an L0-L7 evidential hierarchy plus an
+  operational benchmark protocol and evaluation card. No author-official code
+  repository was found; third-party indexing and a curated world-model paper
+  collection were treated only as weak discovery signals, not inclusion evidence.
 
 ## Important Pre-2026 Background Not In Main List
 

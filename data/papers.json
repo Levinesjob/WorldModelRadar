@@ -413,6 +413,26 @@
     "status": "verified_public_source"
   },
   {
+    "id": "yu-2026-decision-centric-world-model-evaluation",
+    "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+    "authors": [
+      "Yang Yu",
+      "Shiyuan Zhang",
+      "Yifei Sheng",
+      "Haoxiang Ren",
+      "Haoxin Lin"
+    ],
+    "date": "2026-06-13",
+    "venue_or_source": "arXiv",
+    "arxiv_id": "2606.15032",
+    "url": "https://arxiv.org/abs/2606.15032",
+    "relevance": "core",
+    "paper_type": "survey/position/framework",
+    "area": "decision-centric world-model evaluation",
+    "why_included": "Surveys evaluation practice across generative and decision-oriented world models, diagnoses claim/evidence mismatch, and proposes an L0-L7 evidential hierarchy, decision contract, benchmark protocol, and evaluation card for embodied decision-making claims.",
+    "status": "verified_public_source"
+  },
+  {
     "id": "maharaj-2026-code-world-modelling-survey",
     "title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
     "authors": [

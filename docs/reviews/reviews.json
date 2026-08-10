@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "yu-2026-decision-centric-world-model-evaluation",
+    "paper_title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+    "paper_url": "https://arxiv.org/abs/2606.15032",
+    "review_date": "2026-08-10",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/how-should-world-models-be-evaluated-for-embodied-decision-making-a-decision-making-centric-position.html"
+  },
+  {
     "paper_id": "han-2026-economic-world-models",
     "paper_title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
     "paper_url": "https://arxiv.org/abs/2608.06020",
