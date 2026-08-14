@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "zhang-2026-driving-world-model-counterfactual-prediction",
+    "paper_title": "How Can Driving World Models Do Counterfactual Prediction?",
+    "paper_url": "https://arxiv.org/abs/2608.11601",
+    "review_date": "2026-08-14",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/how-can-driving-world-models-do-counterfactual-prediction.html"
+  },
+  {
     "paper_id": "chen-2026-generative-engines-actionable-simulators",
     "paper_title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
     "paper_url": "https://arxiv.org/abs/2601.15533",

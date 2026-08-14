@@ -1,5 +1,26 @@
 [
   {
+    "id": "zhang-2026-driving-world-model-counterfactual-prediction",
+    "title": "How Can Driving World Models Do Counterfactual Prediction?",
+    "authors": [
+      "Jiaru Zhang",
+      "Can Cui",
+      "Yi Xu",
+      "Xin Ye",
+      "Ruqi Zhang",
+      "Ziran Wang"
+    ],
+    "date": "2026-08-12",
+    "venue_or_source": "arXiv",
+    "arxiv_id": "2608.11601",
+    "url": "https://arxiv.org/abs/2608.11601",
+    "relevance": "domain",
+    "paper_type": "critique/framework",
+    "area": "driving world models and counterfactual evaluation",
+    "why_included": "Identifies a field-level mismatch between direct action-conditioned prediction and episode-specific counterfactual prediction, formalizes the missing abduction step, and provides a reusable controlled benchmark and evaluation protocol for testing counterfactual claims in driving world models.",
+    "status": "verified_public_source"
+  },
+  {
     "id": "han-2026-economic-world-models",
     "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
     "authors": [

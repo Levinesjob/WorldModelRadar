@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-11
+Last checked: 2026-08-14
 
 ## Queries Used
 
@@ -22,6 +22,24 @@ Last checked: 2026-08-11
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-14 Discovery Notes
+
+- The official arXiv Export API returned HTTP 429 after network access was
+  granted, so this run did not interpret an empty response as an empty candidate
+  set. The official arXiv search page was used as a primary-source fallback and
+  produced 13 newly assessed candidates under the repository's equivalent
+  world-model plus overview/framing keyword gate.
+- Added `How Can Driving World Models Do Counterfactual Prediction?`
+  (`2608.11601`). The paper is a field-level critique and reusable evaluation
+  framework: it distinguishes direct action-conditioned prediction from an
+  episode-specific counterfactual, formalizes the missing abduction step, and
+  tests the distinction with 186 matched CARLA cases across two frozen driving
+  world models.
+- No author-official code repository or credible independent Hacker News,
+  Reddit, or X/Twitter discussion heat was found for the included paper. Purdue
+  University and Bosch Center for Artificial Intelligence affiliations are
+  retained as an institutional watchlist signal only, not as inclusion evidence.
 
 ## 2026-08-11 Discovery Notes
 
@@ -67,6 +85,50 @@ These papers are useful context but fall outside the 2026+ window:
 - [Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning](https://arxiv.org/abs/2511.16333)
 
 ## Exclusion Notes
+
+- `H2R-Bench: Benchmarking Human-to-Robot Manipulation Video Generation in
+  World Models` (`2608.13049`) was not placed in the main list because it is a
+  domain benchmark and model comparison for one cross-embodiment generation
+  task, not a survey, taxonomy, roadmap, definition, or field-level framework.
+- `The Objective Is the Bottleneck: Latent World Models Encode What Their
+  Planners Cannot Use` (`2608.12959`) was not placed in the main list because it
+  is a focused reproduction and planner-objective diagnosis on LeWorldModel,
+  rather than an overview contribution.
+- `HounsWorld: A Multimodal World Model for Hidden Patient-State Readout,
+  Reconstruction, and Simulation` (`2608.12904`) was not placed in the main
+  list because it introduces one 3B clinical model and HounsBench, not a general
+  medical-world-model survey or field framework.
+- `BrainWAM: Action-Space Coordination of Semantic Priors and Predictive
+  Dynamics for Autonomous Driving` (`2608.12854`) was not placed in the main
+  list because it proposes one dual-path driving planner and inference strategy.
+- `Scaling Automatic Research Agents via World Models` (`2608.12564`) was not
+  placed in the main list because WMRL is a specific post-training method that
+  substitutes learned environment execution, rather than an overview of world
+  models or their research landscape.
+- `MAJEPPA: Morphing and Assessing in a Unified Piano Performance Space`
+  (`2608.11026`) was not placed in the main list because it is a piano-performance
+  method and a semantic false positive for the radar's learned-world-model scope.
+- `R4DSG: Relative 4D Scene Graph Memory for Object-Centric Question Answering
+  in Long Egocentric Video` (`2608.11017`) was not placed in the main list
+  because it contributes one scene-graph memory architecture, not an overview.
+- `ComBodied Agents: a New Paradigm of Human-Centric Agentic AI` (`2608.10915`)
+  was not placed in the main list because it frames a broader agent paradigm;
+  world models are supporting context rather than the central survey subject.
+- `Toward the Cognitive--Physical Limits of Embodied Intelligence through a
+  World-Model-Centric Autonomous Racing Agent` (`2608.10618`) was not placed in
+  the main list because it presents and evaluates one autonomous-racing system.
+- `PBD-AG: Persistent Baseline-Delta Active Graphs with Uncertainty-Aware
+  Inspection for Long-Horizon Service Robots` (`2608.10449`) was not placed in
+  the main list because it is a specific persistent mapping and inspection
+  architecture rather than a field taxonomy or roadmap.
+- `Model Discovery Agent: LLM-assisted Bayesian experiment design for
+  data-efficient discovery of mechanistic world models` (`2608.09696`) was not
+  placed in the main list because it introduces one model-discovery pipeline;
+  its mechanistic models are task outputs, not an overview of learned world
+  models as an AI field.
+- `Sekai2: From World Exploration to Interactive World Modeling` (`2608.09449`)
+  was not placed in the main list because it is a dataset release for video-world-
+  model pretraining, not a survey, position, taxonomy, or reusable field framework.
 
 - `UniJEPA: A Unified Joint-Embedding Predictive Architecture for Task-Agnostic
   Visual World Modeling` (`2608.07409`) was not placed in the main list because
