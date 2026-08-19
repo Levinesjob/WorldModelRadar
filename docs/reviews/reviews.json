@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "liu-2026-graph-world-models",
+    "paper_title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
+    "paper_url": "https://arxiv.org/abs/2604.27895",
+    "review_date": "2026-08-20",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/graph-world-models-concepts-taxonomy-and-future-directions.html"
+  },
+  {
     "paper_id": "zhang-2026-driving-world-model-counterfactual-prediction",
     "paper_title": "How Can Driving World Models Do Counterfactual Prediction?",
     "paper_url": "https://arxiv.org/abs/2608.11601",

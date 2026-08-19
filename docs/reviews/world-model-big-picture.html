@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WorldModel Radar｜Weekly Big Picture 2026-08-10</title>
+  <title>WorldModel Radar｜Weekly Big Picture 2026-08-20</title>
   <style>
     :root{--ink:#17211d;--muted:#66716b;--paper:#f3f0e7;--panel:#fffdf7;--line:#d7d0c1;--green:#176b54;--blue:#245c86;--amber:#a56d12;--red:#a73f35}
     *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.68 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1200px;margin:auto}
@@ -15,84 +15,86 @@
 </head>
 <body>
 <header><div class="wrap">
-  <p class="kicker">WorldModel Radar · Weekly Big Picture · 2026-08-10</p>
-  <h1>领域正在从“会生成”转向“可举证”</h1>
-  <p class="lead">本周的关键变化不是模型又变大了，而是世界模型的边界与证据责任同时扩展：经济世界模型把对象从物理规律推进到会因预期而改变的制度系统；决策中心评测则要求每个更强主张都承担更强的干预、闭环与策略证据。</p>
-  <div class="metrics"><div class="metric"><strong>18</strong><span>verified papers</span></div><div class="metric"><strong>7</strong><span>deep reads</span></div><div class="metric"><strong>11</strong><span>core papers</span></div><div class="metric"><strong>11</strong><span>reviews remaining</span></div></div>
+  <p class="kicker">WorldModel Radar · Weekly Big Picture · 2026-08-20</p>
+  <h1>世界模型正在被迫写清三份合同</h1>
+  <p class="lead">过去十天最重要的变化不是新架构数量，而是三个长期被混在一起的问题开始拆开：物理 grounding 规定状态必须受什么现实约束，反事实证据规定一个结论凭什么属于“这次事件”，图结构则规定模型究竟相信哪些关系。世界模型从生成器走向系统，关键资产将是状态、证据与关系的合同。</p>
+  <div class="metrics"><div class="metric"><strong>19</strong><span>verified papers</span></div><div class="metric"><strong>10</strong><span>deep reads</span></div><div class="metric"><strong>11</strong><span>core papers</span></div><div class="metric"><strong>9</strong><span>reviews remaining</span></div></div>
 </div></header>
 
 <section><div class="wrap">
   <h2>本周发生了什么</h2>
-  <div class="grid two">
-    <article class="card signal"><h3>反身性环境进入主图</h3><p><a href="from-economic-agents-to-agentic-economies-a-systems-blueprint-for-economic-world-models.html">经济世界模型蓝图</a>要求模型同时表示主体信念、制度、清算、共同演化与现实校准。它提示我们：物理世界的误差主要来自动力学近似，经济世界还会因为主体看见模型、改变预期而改变转移规律。</p></article>
-    <article class="card signal"><h3>评测从指标表升级为证据合同</h3><p><a href="how-should-world-models-be-evaluated-for-embodied-decision-making-a-decision-making-centric-position.html">决策中心评测立场</a>用 L0–L7 分开生成物、干预、结果、策略排序与优化效用。它把“指标更高”改写为“证据是否足够支持声明用途”。</p></article>
+  <div class="grid">
+    <article class="card signal"><h3>Grounding 从“更真实”变成接口约束</h3><p><a href="from-generative-engines-to-actionable-simulators-the-imperative-of-physical-grounding-in-world-models.html">Actionable Simulators</a> 把物理、领域规则、结构化状态与自我演化放进系统合同。它提醒团队：世界模型不是一个视频端点，而是受约束的状态转移、接口与校验闭环。</p></article>
+    <article class="card signal"><h3>Counterfactual 从控制信号变成证据问题</h3><p><a href="how-can-driving-world-models-do-counterfactual-prediction.html">驾驶反事实框架</a>区分“另一动作下的合理未来”与“同一个已发生世界的替代结果”。没有先用事实结果做 abduction，动作可控生成仍不能回答 episode-specific counterfactual。</p></article>
+    <article class="card signal"><h3>Graph 从组件变成关系合同</h3><p><a href="graph-world-models-concepts-taxonomy-and-future-directions.html">Graph World Models</a> 用 Connector、Simulator、Reasoner 统一空间、物理与逻辑 relational inductive bias。图的价值取决于边的真值、生命周期和可验证性，而不是是否用了 GNN。</p></article>
   </div>
-  <div class="callout"><strong>本周最重要的连接：</strong>无论环境由物理规律还是制度与主体共同产生，可信度都不能由表面拟真给出；它取决于模型在声明的干预、时域、策略集合和结果变量上是否保持有效。</div>
+  <div class="callout"><strong>本周最重要的连接：</strong>状态没有 grounding，事实没有 provenance，关系没有验证，模型即使能生成连贯未来，也无法成为可依赖的模拟、审计或决策基础设施。</div>
 </div></section>
 
 <section><div class="wrap">
   <h2>Cluster 信号变化</h2>
   <table><thead><tr><th>Cluster</th><th>本周信号</th><th>判断</th><th>下一证据</th></tr></thead><tbody>
-    <tr><td>评测、admissibility 与 assurance</td><td>增强</td><td>从 L0–L4 的“能否作为模拟证据”继续细化到 L0–L7 的用途分层、策略排序与 exploitability。</td><td>共享 evaluation card、reset-matched 数据、XGap 实现、跨实验室复现。</td></tr>
-    <tr><td>领域世界模型</td><td>增强</td><td>医疗、边缘智能之后，经济系统暴露出反身性、制度演化与 counterfactual validity 的新约束。</td><td>封闭经济子系统的可复现实验、行为校准、机制版本与现实对照。</td></tr>
-    <tr><td>World Action Models</td><td>持平</td><td>近期候选仍多是单一架构与训练方法；没有新的 field-level taxonomy 改变主线。</td><td>统一行动接口、跨身体 contract、闭环 policy ranking 与成本曲线。</td></tr>
-    <tr><td>通用视频世界模型</td><td>证据压力上升</td><td>视觉与 VLM judge 仍有诊断价值，但越来越难单独支撑规划、策略评估或安全主张。</td><td>行动分支、闭环 occupancy、结果校准、模型优化后的现实收益。</td></tr>
+    <tr><td>评测、admissibility 与反事实</td><td>继续增强</td><td>证据层级从用途匹配进一步进入事件身份：forecast、intervention 与 retrospective counterfactual 必须有不同输入和 ground truth。</td><td>反应式多智能体配对场景、事实证据 provenance、真实日志中的 falsification protocol。</td></tr>
+    <tr><td>结构化 / Graph World Models</td><td>地图增强，成熟度未变</td><td>三层 taxonomy 把拓扑记忆、物理图和因果/语义图连起来，但缺少共享 schema、统一实现和跨层 benchmark。</td><td>动态图遗忘、概率关系转移、graph fidelity 与闭环结果相关性。</td></tr>
+    <tr><td>物理 grounding 与 actionable simulator</td><td>增强</td><td>竞争重点从生成质量扩展到结构化状态、领域约束、校验器、反馈与迁移接口。</td><td>在 held-out 物理条件下的稳定性、成本曲线、校验器独立性与拒答。</td></tr>
+    <tr><td>World Action Models / 单一方法</td><td>方法密集，field signal 持平</td><td>8 月 17–18 日候选继续集中于交通 RL、6G 多模态、JEPA 安全和 Q-learning 搜索，均未改变领域定义或 taxonomy。</td><td>跨方法 action contract、独立复现、真机闭环与统一成本报告。</td></tr>
   </tbody></table>
 </div></section>
 
 <section><div class="wrap">
   <h2>哪些假设变弱了</h2>
   <div class="grid">
-    <article class="card risk"><h3>“视频越真，决策越好”</h3><p>已有同时报告感知与功能指标的 benchmark 发现排序会分离；潜变量模型也可能没有漂亮解码器却能支持规划。</p></article>
-    <article class="card risk"><h3>“一个总分可以代表世界模型”</h3><p>预测、策略评估、规划、优化、合成数据和表征学习要求不同证据。聚合低层指标会掩盖高层失败。</p></article>
-    <article class="card risk"><h3>“更多 Agent 就更像经济”</h3><p>如果主体没有行为校准、机制没有可执行清算、制度不能审计，规模只会放大叙事与成本，不会自动产生反事实有效性。</p></article>
-    <article class="card risk"><h3>“最终成功率能说明模型好坏”</h3><p>成功率纠缠世界模型、逆动力学、规划器、奖励模型与过滤器；缺少分层消融时不能把结果归因到世界模型。</p></article>
-    <article class="card risk"><h3>“固定策略评估足以覆盖优化”</h3><p>优化器会主动寻找模型的过度乐观区域。L6 策略排序通过，不代表 L7 优化后没有 exploitability gap。</p></article>
-    <article class="card risk"><h3>“被动日志天然识别干预”</h3><p>人类视频、逆动力学恢复动作与隐变量会破坏可识别性；强干预主张需要直接控制的行动分支或可信模拟器。</p></article>
+    <article class="card risk"><h3>“可控生成就是反事实”</h3><p>替换动作只能定义 intervention query；要回答特定事件，还必须用事实结果锁定同一个世界，并声明剩余不可识别性。</p></article>
+    <article class="card risk"><h3>“图结构天然可解释”</h3><p>错误边可以比连续潜变量更有迷惑性：它看起来离散、清晰，却可能来自感知漂移、LLM 幻觉或相关性误判。</p></article>
+    <article class="card risk"><h3>“物理先验自动带来泛化”</h3><p>如果对象、边界、约束与观测接口不一致，先验只会把错误写得更稳定。泛化仍需 held-out 环境与外部校验。</p></article>
+    <article class="card risk"><h3>“framework 写在标题里就有 field-level 价值”</h3><p>本轮四个候选均是具体管线或系统。方法框架解决局部任务，不等于提供可跨方法复用的定义、taxonomy 或研究路线。</p></article>
+    <article class="card risk"><h3>“最终成功率能定位模型问题”</h3><p>成功率纠缠构图、转移、生成、规划器、shield 与回退逻辑；没有组件级证据就无法归因。</p></article>
+    <article class="card risk"><h3>“更多数据能替代状态合同”</h3><p>若团队没有定义哪些状态、关系和事实必须保存，增加视频或 rollout 只会扩大不可审计的数据湖。</p></article>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <h2>机会正在变得更具体</h2>
   <div class="grid">
-    <article class="card signal"><h3>World-model evaluation OS</h3><p>把 decision contract、policy registry、intervention set、run provenance、置信区间与 uncertainty gate 做成基础设施，而不是一次性 benchmark 脚本。</p></article>
-    <article class="card signal"><h3>真机最小可行评测</h3><p>少量 reset-matched tabletop branches、三到五个 anchor policy、低维任务特征与定性 exploitability probe，能填补当前真机论文最明显的证据缺口。</p></article>
-    <article class="card signal"><h3>反身性数字孪生治理</h3><p>经济与组织模拟需要机制 DSL、账本、主体行为校准、制度版本、漂移监测与现实对齐回路；护城河更可能在验证资产而非 Agent 数量。</p></article>
-    <article class="card signal"><h3>策略评估即服务</h3><p>在昂贵或危险部署前，提供可校准的 policy ranking、failure envelope 与拒答，比承诺完整预测现实更可落地。</p></article>
-    <article class="card signal"><h3>Action-branch 数据资产</h3><p>同一历史下不同动作的匹配分支，比更多未标注视频更直接支撑 L4；这可能成为机器人评测的新稀缺数据层。</p></article>
-    <article class="card signal"><h3>Benchmark 防投机</h3><p>隐藏任务、隐藏策略、held-out embodiment 与动态 adversarial policies 将成为评测可信度的基础设施。</p></article>
+    <article class="card signal"><h3>关系 observability</h3><p>为动态图提供边 provenance、置信度、版本、冲突、遗忘和回滚，连接机器人记忆、数字孪生与 Agent runtime。</p></article>
+    <article class="card signal"><h3>Counterfactual evidence layer</h3><p>保存事实延续、动作干预、传感器标定与生成区域来源，让离线安全复盘输出可审计候选，而不是单一炫酷视频。</p></article>
+    <article class="card signal"><h3>Grounding validator</h3><p>把物理守恒、几何可达、领域规则和语义约束做成独立校验器，并对无法验证的状态提供 uncertainty gate。</p></article>
+    <article class="card signal"><h3>Graph-specific benchmark</h3><p>分别评估 graph fidelity、关系转移、长时稳定性、分布移位和构建/更新/检索成本，补足任务成功率的归因盲区。</p></article>
+    <article class="card signal"><h3>封闭场景的结构化孪生</h3><p>仓储、设备、受约束流程和小规模对象交互的边真值可获得，是验证 GWM 产品价值的优先楔子。</p></article>
+    <article class="card signal"><h3>Claim-contract tooling</h3><p>把 forecast、intervention、counterfactual、policy evaluation 与 optimization 的输入、证据和拒答条件写进 API 与评测卡。</p></article>
   </div>
 </div></section>
 
 <section><div class="wrap">
   <h2>研究空白与可证伪假设</h2>
   <table><thead><tr><th>假设</th><th>如何证伪</th><th>价值</th></tr></thead><tbody>
-    <tr><td>少量 L4 action branches 能预测更高层 policy ranking。</td><td>跨模型比较 L4 与 L6 的相关性，并在新任务、新身体上验证。</td><td>决定真机评测能否以低成本替代大量策略 rollout。</td></tr>
-    <tr><td>XGap 能提前暴露部署中的 planner exploitation。</td><td>让不同优化器对同一模型进行压力搜索，比较 XGap 与现实失效。</td><td>可能形成世界模型上线门禁。</td></tr>
-    <tr><td>行为校准比 Agent 数量更能提高经济模拟外推。</td><td>固定算力，比较更多 Agent 与更好校准在 held-out 制度冲击下的结果。</td><td>直接影响经济世界模型的成本结构与产品路线。</td></tr>
-    <tr><td>用途化 evaluation card 能减少 claim/evidence mismatch。</td><td>在双盲评审或内部技术评审中比较采用前后的主张收缩、复现率与错误上线率。</td><td>验证报告标准是否真的改变研究激励。</td></tr>
-    <tr><td>潜变量 Φ 可跨模型公平比较决策结构。</td><td>在无共同解码器条件下，用统一任务结果、规划与抽象诊断评测多类 latent model。</td><td>避免视频输出成为默认且不公平的评测接口。</td></tr>
+    <tr><td>外部验证的动态图能在固定内存下提高长期任务成功率。</td><td>固定存储与算力，对比静态图、只增图和可遗忘图在永久环境变化下的表现。</td><td>决定 graph memory 是否具备部署优势。</td></tr>
+    <tr><td>事实 provenance 能显著提升反事实审计质量。</td><td>让分析者在有/无区域级证据来源时判断同一批事故案例，比较错误结论与复核时间。</td><td>验证 evidence layer 是否值得额外日志与推理成本。</td></tr>
+    <tr><td>概率关系转移比确定性 GWM 更能预测安全尾部。</td><td>在多模态物理与分布移位场景比较校准、风险排序和闭环碰撞。</td><td>决定图世界模型是否能支撑 assurance。</td></tr>
+    <tr><td>graph fidelity 能跨任务预测闭环收益。</td><td>对多类 Connector/Simulator 模型同时测结构指标与下游结果，检查排序稳定性。</td><td>可能形成跨子领域诊断协议。</td></tr>
+    <tr><td>独立 grounding validator 能降低 planner exploitation。</td><td>让优化器主动搜索模型漏洞，比较共享模型判别器与外部规则/模拟器校验器的失效率。</td><td>决定校验层是否能成为上线门禁。</td></tr>
   </tbody></table>
 </div></section>
 
 <section><div class="wrap">
   <h2>Watchlist</h2>
   <div class="grid">
-    <article class="card watch"><h3>作者与实验室</h3><ul><li>Yang Yu / Nanjing University 的 decision-aware world model 方向</li><li>Economic World Models 作者群与 Freedom Intelligence 资源库</li><li>FAIR 的 V-JEPA 2/2.1 与无像素规划证据</li></ul></article>
-    <article class="card watch"><h3>Benchmark 与协议</h3><ul><li>WorldArena、RoboWM-Bench、WorldGym、dWorldEval</li><li>是否出现共享 L0–L7 evaluation card</li><li>是否公开 XGap、policy registry、intervention split 工具</li></ul></article>
-    <article class="card watch"><h3>代码与讨论信号</h3><ul><li>本周新增评测论文没有作者官方代码，implementation grounding 仍弱</li><li>第三方索引与论文清单只说明被发现，不代表形成可信共识</li><li>继续观察 workshop、实验室博客与工程复现，而非单条 viral post</li></ul></article>
+    <article class="card watch"><h3>作者与实验室</h3><ul><li>Graph World Models 作者群及图学习/EDA 社区的后续 benchmark</li><li>Purdue / Bosch 的驾驶反事实与可识别性工作</li><li>物理 grounding、object-centric dynamics 与 causal world model 的交叉</li></ul></article>
+    <article class="card watch"><h3>Benchmark 与协议</h3><ul><li>graph fidelity、relational transition accuracy 与 topology lifetime tests</li><li>reactive multi-agent counterfactual suites 与 evidence mask</li><li>decision contract、evaluation card、XGap 与 admissibility gate 的实现</li></ul></article>
+    <article class="card watch"><h3>代码与讨论信号</h3><ul><li>ICML 2025 Graph World Model 仓库是相关实现信号，不是新综述的官方代码</li><li>本轮四个新候选无 arXiv-linked 作者仓库，未见精确 HN 讨论命中</li><li>Reddit 与 AutoGLM 浏览器路径不可用，未把缺失数据写成“无讨论”</li></ul></article>
   </div>
-  <div class="callout"><strong>下周优先问题：</strong>有没有团队把 L0–L7 从论文表格变成可运行协议？有没有真实机器人工作开始报告 action branches、策略排序与 exploitability，而不再只给视觉分数加最终成功率？</div>
+  <div class="callout"><strong>下周优先问题：</strong>有没有工作同时报告状态/关系真值、事件级证据 provenance 与闭环决策结果？如果三份合同仍被拆成三个互不相容的 benchmark，世界模型平台化还会停留在叙事层。</div>
 </div></section>
 
 <section><div class="wrap">
   <h2>本周证据页</h2>
   <table><thead><tr><th>Date</th><th>Deep read</th><th>Field contribution</th></tr></thead><tbody>
-    <tr><td>2026-08-10</td><td><a href="how-should-world-models-be-evaluated-for-embodied-decision-making-a-decision-making-centric-position.html">How Should World Models Be Evaluated for Embodied Decision-Making?</a></td><td>L0–L7 证据层级、decision contract、benchmark protocol、evaluation card。</td></tr>
-    <tr><td>2026-08-08</td><td><a href="from-economic-agents-to-agentic-economies-a-systems-blueprint-for-economic-world-models.html">From Economic Agents to Agentic Economies</a></td><td>反身性经济环境、主体—制度共同演化、现实校准与工程运行时。</td></tr>
+    <tr><td>2026-08-20</td><td><a href="graph-world-models-concepts-taxonomy-and-future-directions.html">Graph World Models</a></td><td>Connector / Simulator / Reasoner taxonomy、关系归纳偏置、动态图与 benchmark 研究议程。</td></tr>
+    <tr><td>2026-08-14</td><td><a href="how-can-driving-world-models-do-counterfactual-prediction.html">How Can Driving World Models Do Counterfactual Prediction?</a></td><td>forecast 与 episode-specific counterfactual 的区分、abduction 缺口与配对评估。</td></tr>
+    <tr><td>2026-08-11</td><td><a href="from-generative-engines-to-actionable-simulators-the-imperative-of-physical-grounding-in-world-models.html">From Generative Engines to Actionable Simulators</a></td><td>结构化接口、物理/领域 grounding、自我演化与可行动模拟器。</td></tr>
   </tbody></table>
 </div></section>
 
-<footer><div class="wrap"><p>本页综合 <code>data/papers.json</code> 与 <code>docs/reviews/*.html</code>，于 2026-08-10 人工更新。口径：18 篇已核验论文、7 份精读、11 篇 core、11 篇尚待精读。讨论热度只用于排序，所有内容判断回到 primary source。</p></div></footer>
+<footer><div class="wrap"><p>本页综合 <code>data/papers.json</code> 与 <code>docs/reviews/*.html</code>，于 2026-08-20 人工更新。口径：19 篇已核验论文、10 份精读、11 篇 core、9 篇尚待精读。讨论热度只用于排序；所有内容判断回到 primary source，检索不可用不等于没有讨论。</p></div></footer>
 </body>
 </html>

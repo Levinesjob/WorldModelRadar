@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-14
+Last checked: 2026-08-20
 
 ## Queries Used
 
@@ -22,6 +22,21 @@ Last checked: 2026-08-14
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-20 Discovery Notes
+
+- The official arXiv Export API returned four candidates published on August
+  17-18. Official arXiv abstract pages were used to verify titles, authors,
+  dates, contribution scope, and whether the papers linked author-official
+  artifacts. None passed the overview or field-level framing gate, so no paper
+  was added to the main table.
+- No candidate linked an author-official code or project artifact from its
+  arXiv page, GitHub repository search returned no arXiv-id matches, and Hacker
+  News full-title/arXiv-id filtering returned no exact discussion hits. Reddit
+  public search returned HTTP 403, so this run records it as unavailable rather
+  than interpreting it as evidence of no discussion. The AutoGLM browser path
+  also failed to initialize its browser extension, so no X/Twitter signal was
+  treated as verified.
 
 ## 2026-08-14 Discovery Notes
 
@@ -85,6 +100,29 @@ These papers are useful context but fall outside the 2026+ window:
 - [Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning](https://arxiv.org/abs/2511.16333)
 
 ## Exclusion Notes
+
+- `Offline Multi-Agent Reinforcement Learning with a Physics-Informed World
+  Model for Cooperative Mixed Traffic Control` (`2608.17739`) was not placed in
+  the main list because it proposes one physics-informed offline multi-agent RL
+  pipeline for a SUMO on-ramp bottleneck. Its interpretable state reconstruction,
+  ensemble dynamics, and uncertainty-truncated rollouts are method components,
+  not a survey, taxonomy, roadmap, definition, or field-level framework.
+- `Electromagnetic World Model for 6G: A Unified Framework for Joint Environment
+  Reconstruction and Channel Prediction` (`2608.17769`) was not placed in the
+  main list because its “unified framework” is one CSI-plus-RGB architecture,
+  dataset, and two-head prediction system for 6G, rather than a reusable
+  taxonomy or overview of electromagnetic or general world models.
+- `Calibrated Predictive Safety for Heterogeneous Robots: An Action-Conditioned
+  JEPA Framework with Model-Based Safety Shields` (`2608.17496`) was not placed
+  in the main list because it evaluates one receding-horizon JEPA ranking and
+  deterministic shielding pipeline in simulation. The paper explicitly leaves
+  real-robot experiments for future work and does not make a field-level review
+  or framing contribution.
+- `Q-Learning With World Models` (`2608.17163`) was not placed in the main list
+  because QWM is a specific test-time imagined-trajectory search method layered
+  on standard Q-learning. Avoiding imagined-rollout training bias is a useful
+  method signal, but the paper is not an overview, taxonomy, roadmap, position,
+  or broadly reusable field framework.
 
 - `H2R-Bench: Benchmarking Human-to-Robot Manipulation Video Generation in
   World Models` (`2608.13049`) was not placed in the main list because it is a
