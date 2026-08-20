@@ -196,6 +196,7 @@
     "venue_or_source": "arXiv",
     "arxiv_id": "2605.00080",
     "url": "https://arxiv.org/abs/2605.00080",
+    "repository": "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy",
     "relevance": "core",
     "paper_type": "survey",
     "area": "robot learning",

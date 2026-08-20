@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="hou-2026-world-model-robot-learning">
+  <meta name="worldmodel-radar:paper-title" content="World Model for Robot Learning: A Comprehensive Survey">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2605.00080">
+  <meta name="worldmodel-radar:review-date" content="2026-08-21">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>机器人世界模型的价值，不在于把未来画出来｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#17201f;--muted:#65716e;--paper:#edf0ec;--panel:#fffefa;--line:#cbd3ce;--green:#176451;--blue:#245d79;--amber:#a66a16;--red:#9f443d}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(42px,7vw,78px);line-height:1.02;max-width:1050px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:980px;font-size:22px;color:#35423f}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--blue)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff8e8}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-21</p>
+  <h1>机器人世界模型的价值，不在于把未来画出来</h1>
+  <p class="lead">这篇 43 页综述给机器人世界模型一个严格的功能合同：模型必须预测动作如何改变环境，并让预测真正进入策略、规划、仿真、评估或数据生成。它最重要的地图不是“哪种生成器最好”，而是预测与控制的耦合方式，以及从开放环画面质量到闭环任务效用的证据梯度。</p>
+  <div class="chips">
+    <div class="chip"><strong>5 类</strong><span>策略耦合架构范式</span></div>
+    <div class="chip"><strong>3 层</strong><span>开放环、闭环、能力诊断评估</span></div>
+    <div class="chip"><strong>6 个</strong><span>作者归纳的核心挑战方向</span></div>
+    <div class="chip"><strong>33 commits</strong><span>作者维护的资源库检索快照</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>机器人世界模型不是泛化的未来视频生成器，而是动作条件转移模型：给定当前状态、低层动作序列与高层意图，预测对下游控制有用的未来。统一标准不是像素、latent 或符号表示，而是 foresight、imagination-driven planning 与 data amplification 是否改善可执行决策。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把分散的“视频模型做策略”“世界模型做仿真器”“VLA 内部预测”放进同一控制闭环，显示研究正在从冻结生成器加逆动力学，走向共享 backbone、MoE/MoT、统一 VLA 与 latent predictive model；同时把评估中心从视觉真实感移到动作敏感性、闭环效用与可执行性。</p></article>
+    <article class="card risk"><h3>不要过度外推</h3><p>这是文献地图，不是同协议复现实验。表格汇总的 LIBERO、RoboTwin、CALVIN 与 SIMPLER 结果跨模型、版本和设置，不能直接当排行榜；作者也没有证明某一种耦合范式普遍优于其他范式，更没有给部署安全保证。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>真正有价值的机器人世界模型，应当缩短“语义意图 → 物理后果 → 可执行动作”的证据链；若预测没有改变动作选择、风险判断或数据效率，它更像昂贵的辅助任务。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Paper-led taxonomy</p><h2>论文的架构地图：预测与动作怎样连接</h2>
+  <table><thead><tr><th>范式</th><th>接口与价值</th><th>主要风险</th></tr></thead><tbody>
+    <tr><td>解耦 IDM</td><td>先生成未来图像/latent/3D 轨迹，再由逆动力学或目标条件策略恢复动作。模块可替换、预测可检查，适合复用冻结视频先验。</td><td>视觉上合理的未来可能不具动作一致性；世界模型误差与动作恢复误差串联，长时累积明显。</td></tr>
+    <tr><td>单一共享 backbone</td><td>观察、视频与动作 token 在同一生成骨干内联合建模，让时间预测先验直接服务控制。</td><td>训练目标互相干扰；高维视频重建挤占控制容量，推理延迟与显存成本进入实时路径。</td></tr>
+    <tr><td>MoE / MoT</td><td>视频与动作专家保留专门化能力，通过共享注意力交换信息，试图兼顾生成能力与控制精度。</td><td>路由、同步和专家负载形成新复杂度；跨专家一致性难诊断，部署栈更重。</td></tr>
+    <tr><td>统一 VLA</td><td>把理解、未来预测和动作生成内化到一个多模态模型，使世界建模成为策略训练目标。</td><td>“内部有预测目标”不等于形成可查询的动作条件世界模型；错误来源与因果贡献更难审计。</td></tr>
+    <tr><td>latent-space WM</td><td>不渲染完整像素，只预测控制相关表征，减少计算并避免为视觉细节付费。</td><td>latent 可能学习到预测上方便、规划器却不可用的特征；可解释性与外部物理校验更弱。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>领域地图：</strong>这些不是成熟度阶梯。最佳接口取决于错误成本、实时预算、能否获得动作条件数据，以及团队是否需要人类审计预测；多种范式在标准 benchmark 上都能达到强结果，说明“耦合合同”比某个统一架构口号更重要。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Architecture & operations</p><h2>从论文地图抽出的系统合同</h2>
+  <table><thead><tr><th>层</th><th>最低合同</th><th>失败与治理</th></tr></thead><tbody>
+    <tr><td>数据</td><td>时间同步的观察、动作、语言目标、proprioception、接触/力觉与任务结果；标注 embodiment、控制频率、失败恢复和数据来源。</td><td>现有语料偏成功演示，失败恢复、决策边界与致密物理监督稀缺；跨机器人动作空间混合会伪造可迁移性。</td></tr>
+    <tr><td>状态与动作</td><td>明确预测变量是像素、latent、对象/关系还是符号状态；区分低层电机动作 a 与高层语言意图 l，并声明 horizon。</td><td>模型可能更多复制历史与任务意图，而非响应待执行动作，产生“语义合理、因果错误”的未来。</td></tr>
+    <tr><td>转移与策略</td><td>定义预测如何进入逆动力学、候选排序、MPC、联合策略训练、RL 后训练或数据增强；保留无世界模型基线。</td><td>规划器会利用模型漏洞；联合训练难以归因；开放环预测提升不一定传到闭环任务。</td></tr>
+    <tr><td>运行时</td><td>为每次 rollout 规定延迟、采样数、显存、控制频率、拒答与 fallback；安全约束不能只由生成模型自证。</td><td>扩散视频的迭代去噪与 MPC 多候选 rollout 可能超过实时预算；高容量模型故障会阻塞整条控制链。</td></tr>
+    <tr><td>评估</td><td>同时测开放环动作条件质量、闭环任务/策略排序、物理一致性、可控性与可执行性，并按长时、跨 embodiment、接触任务切片。</td><td>单个视觉指标无法判断控制价值；跨 benchmark 报告不标准，平均成功率会掩盖 Goal/Long 子集退化。</td></tr>
+    <tr><td>现实反馈</td><td>用真实执行日志校准转移误差、不确定性和回退阈值；保存模型、数据、控制器与 benchmark 版本。</td><td>sim-to-real 与策略变化会让世界模型迅速过期；缺少 provenance 时无法定位是预测、规划还是执行失败。</td></tr>
+  </tbody></table>
+  <div class="grid two" style="margin-top:16px">
+    <article class="card"><h3>可扩展性与复杂度</h3><p>规模瓶颈有三层：数据要覆盖动作条件、跨 embodiment 与接触物理；模型要在高维视频和控制相关抽象之间分配容量；推理要在候选数 × rollout horizon × 采样步数下满足控制周期。最可扩展的路径可能不是最大视频模型，而是分层状态、短视高频控制与低频长时规划。</p></article>
+    <article class="card"><h3>稳定性</h3><p>长时任务仍是主要区分项。误差不仅逐帧累积，还会经策略反馈改变后续数据分布。稳定性测试应包含扰动恢复、动作反事实敏感性、模型—策略共同漂移与 cross-benchmark transfer，而非只看固定数据上的平均视频分数。</p></article>
+    <article class="card"><h3>成本</h3><p>成本包括机器人真实采集与故障风险、视频模型预训练、联合微调、在线多候选 rollout、真实闭环评估和安全复核。partial denoising、latent prediction、冻结 backbone + adapter、仅训练期使用世界模型，都是把价值从像素重建转向控制信号的降本路线。</p></article>
+    <article class="card"><h3>技术债</h3><p>最难迁移的不是权重，而是动作 schema、控制频率、传感器同步、benchmark 方言和世界模型—策略接口。一旦团队把生成分辨率或某套机器人动作 token 当作平台合同，换 embodiment 或转向符号/latent 表示的成本会高于换 backbone。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Reality check</p><h2>真实问题、伪需求、用户痛点与业务边界</h2>
+  <div class="grid">
+    <article class="card good"><h3>真实问题</h3><ul><li>真实机器人数据昂贵且危险，需要在 learned simulator 中做策略筛选、后训练和故障探索。</li><li>反应式 VLA 在长时任务中缺少“先看后果再行动”的预测结构。</li><li>策略评估需要比真机 A/B 更便宜、又比视觉 demo 更接近闭环效用的证据层。</li><li>接触任务需要视觉之外的力觉、触觉和物理约束。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>把高保真机器人视频生成自动包装成可用于控制的世界模型。</li><li>把一个 benchmark 的高成功率写成跨机器人、跨动作空间泛化。</li><li>为了“统一”而强制视频、语言和动作共享全部参数。</li><li>没有延迟、fallback 和真实闭环测试，却声称可部署实时规划。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>工程负责人不知道世界模型的收益来自表征、数据增强、规划还是额外算力。</li><li>机器人团队缺少跨数据集统一的动作、触觉、失败与时间同步合同。</li><li>评估人员难以把视频质量、策略排序和真机安全关联起来。</li><li>产品负责人无法估算每次 imagined rollout 相比一次真实试验的边际价值。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最现实的早期业务：</strong>先做离线策略回放、候选动作排序、回归测试与受限任务的数据增强；这些场景允许较高延迟、能保留真实系统 fallback，也容易度量减少了多少真机试验。直接把大视频世界模型放入高频安全控制环，证据与成本都还不成熟。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & decision</p><h2>迁移路径：从影子预测到闭环控制</h2>
+  <table><thead><tr><th>阶段</th><th>团队动作</th><th>退出条件</th></tr></thead><tbody>
+    <tr><td>1. 写清决策合同</td><td>选一个具体任务，定义世界模型输出影响哪个决策、允许多少延迟、错误代价与现有基线。</td><td>团队能说清不用世界模型时的失败，以及要改善的业务/研究指标。</td></tr>
+    <tr><td>2. 建影子模型</td><td>用历史日志预测未来或评估候选，不改变机器人动作；比较 pixel、latent 与结构化状态的增量价值。</td><td>动作敏感性、校准和失败切片优于无预测基线，且成本可测。</td></tr>
+    <tr><td>3. 离线决策辅助</td><td>用于策略排序、数据选择、回归测试或训练期 imagined rollouts，记录预测与真实后果差异。</td><td>减少真机试验或提高数据效率，同时不会系统性偏爱模型漏洞。</td></tr>
+    <tr><td>4. 受限闭环</td><td>在低速、可恢复、强约束场景中接入候选重排或短 horizon MPC，保留经典控制器和硬安全盾。</td><td>端到端延迟满足控制周期，OOD 与空候选有可靠 fallback。</td></tr>
+    <tr><td>5. 跨任务/embodiment</td><td>冻结稳定接口，单独迁移动作适配器、传感器编码器与校准层；以真实 held-out 平台验收。</td><td>收益跨平台保留，且没有用更大算力或更多真机数据掩盖迁移失败。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>机会更接近“机器人策略测试与数据基础设施”，而不是通用梦境生成 API。优先找真机试验昂贵、任务边界清晰、失败可重放的垂直场景，用减少现场试验与缩短验证周期证明价值。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>把 observation/action/state schema、延迟预算、版本 provenance、校准与 fallback 设为平台接口。保留替换 pixel、latent、symbolic 模型的能力，不要让单一生成 backbone 锁死系统。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>研究应从“更清晰的未来”转向动作因果性、长时误差、触觉/力觉、规划器可用表征与 function-aware evaluation。战略上持续关注 benchmark、资源库和真实部署报告能否形成公共基础设施。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Boundaries & open questions</p><h2>边界条件、可证伪问题与 watchlist</h2>
+  <div class="grid">
+    <article class="card risk"><h3>边界条件</h3><ul><li>论文覆盖以视觉世界模型和机器人策略为主，symbolic 与非视觉动力学不是主体。</li><li>文献快速变化，43 页 v1 与资源库会持续更新，分类与结果快照可能过期。</li><li>汇总结果协议异质，不能据表格判断架构因果优势。</li><li>多数证据仍来自模拟器或标准 manipulation benchmark。</li><li>安全、形式稳定性与真实部署经济性缺少统一验证。</li></ul></article>
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>动作条件敏感性是否比视频质量更稳定地预测闭环成功？</li><li>在相同算力与数据下，latent 预测何时优于完整视频 rollout？</li><li>世界模型做训练期正则、推理期规划或独立评估，哪一种边际收益最高？</li><li>加入触觉和力觉后，接触任务的真实失败率是否显著下降？</li><li>混合感知—符号模型能否降低长时误差而不丢失局部安全细节？</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Bohan Hou、Jianfei Yang 与 NTU MARS 团队后续版本。</li><li><a href="https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy">作者资源库</a>的 benchmark、dataset 与真实部署新增项。</li><li>WorldArena、WoW-World-Eval、RoboWM-Bench 与 decision-centric evaluation 是否收敛到共享指标。</li><li>VLAW、World-VLA-Loop 等模型—策略共同演化是否出现稳定外部复现。</li><li>latent JEPA、partial denoising、训练期-only world modeling 的成本—效用曲线。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇综述把机器人世界模型从“生成技术类别”改写成“预测如何参与决策的系统设计空间”。下一阶段的胜负不会只由 backbone 规模决定，而由动作条件数据、可执行评估、延迟预算、真实反馈与跨 embodiment 接口共同决定。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2605.00080">arXiv abstract v1</a> · <a href="https://arxiv.org/html/2605.00080">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2605.00080">PDF</a> · <a href="https://ntumars.github.io/wm-robot-survey/">作者项目页</a>。实现/生态信号：<a href="https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy">作者维护资源库</a>在 2026-08-21 检索时显示 33 次提交、16 forks，并持续整理论文、代码、模型、benchmark 与数据集；这是维护动量，不等于所综述方法已有统一实现或生产成熟度。</p>
+</div></footer>
+</body>
+</html>

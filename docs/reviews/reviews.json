@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "hou-2026-world-model-robot-learning",
+    "paper_title": "World Model for Robot Learning: A Comprehensive Survey",
+    "paper_url": "https://arxiv.org/abs/2605.00080",
+    "review_date": "2026-08-21",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/world-model-for-robot-learning-a-comprehensive-survey.html"
+  },
+  {
     "paper_id": "liu-2026-graph-world-models",
     "paper_title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
     "paper_url": "https://arxiv.org/abs/2604.27895",

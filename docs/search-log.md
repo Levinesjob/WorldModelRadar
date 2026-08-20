@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-20
+Last checked: 2026-08-21
 
 ## Queries Used
 
@@ -22,6 +22,24 @@ Last checked: 2026-08-20
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-21 Discovery Notes
+
+- The official arXiv Export API returned five candidates. Four had already been
+  assessed on 2026-08-20; the only newly assessed candidate was DA-WAM
+  (`2608.19085`). Its official arXiv abstract describes one decision-aligned
+  driving architecture that jointly trains predictive future latents and
+  trajectory scoring on NAVSIM, rather than a survey, taxonomy, roadmap,
+  definition, position, or field-level framework. No paper was added.
+- Exact-title and arXiv-id searches found no author-official DA-WAM code or
+  project page and no credible independent Hacker News, Reddit, or X/Twitter
+  discussion signal. This absence is recorded only as a priority signal, not as
+  evidence against the method.
+- Primary-source review of the selected existing survey `2605.00080` confirmed
+  its author-maintained repository and project page. The repository organizes
+  papers, code, models, benchmarks, and datasets by the survey's policy,
+  simulator, video-generation, evaluation, and data taxonomy; its URL was added
+  to the paper metadata as an implementation/ecosystem signal.
 
 ## 2026-08-20 Discovery Notes
 
@@ -100,6 +118,13 @@ These papers are useful context but fall outside the 2026+ window:
 - [Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning](https://arxiv.org/abs/2511.16333)
 
 ## Exclusion Notes
+
+- `DA-WAM: Decision-Aligned Future Latents for Driving World Models`
+  (`2608.19085`) was not placed in the main list because it proposes and
+  evaluates one action-conditioned latent predictor and factorized trajectory
+  scorer for NAVSIM. The paper exposes a useful causal-conditioning problem,
+  but its contribution remains a single driving method rather than an overview
+  or reusable field-level framing contribution.
 
 - `Offline Multi-Agent Reinforcement Learning with a Physics-Informed World
   Model for Cooperative Mixed Traffic Control` (`2608.17739`) was not placed in
