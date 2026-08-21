@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-21
+Last checked: 2026-08-22
 
 ## Queries Used
 
@@ -22,6 +22,26 @@ Last checked: 2026-08-21
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-22 Discovery Notes
+
+- The official arXiv Export API returned four candidates. DA-WAM
+  (`2608.19085`) had already been assessed on 2026-08-21; the three newly
+  assessed candidates were RMWorld (`2608.20126`), the planning-oriented
+  end-to-end driving survey (`2608.20111`), and Orthogonal JEPA
+  (`2608.20065`). Official arXiv metadata and full abstracts were used for the
+  inclusion decisions. None passed the radar's overview or field-level framing
+  gate, so no paper was added.
+- Exact arXiv-id searches returned no GitHub repositories for the three new
+  candidates. Hacker News results were numeric near-matches rather than exact
+  paper discussions. Reddit public search returned HTTP 403, so that channel is
+  recorded as unavailable rather than as evidence of no discussion. No
+  implementation or discussion signal changed the inclusion decisions.
+- The selected existing survey `2606.01164` was verified against its official
+  arXiv HTML. Its author-maintained repository had 213 stars and 14 forks in the
+  2026-08-22 retrieval snapshot and was pushed on 2026-08-20. This is a useful
+  curation and ecosystem-maintenance signal, not proof that the surveyed systems
+  share an implementation or production maturity level.
 
 ## 2026-08-21 Discovery Notes
 
@@ -118,6 +138,24 @@ These papers are useful context but fall outside the 2026+ window:
 - [Beyond Generative AI: World Models for Clinical Prediction, Counterfactuals, and Planning](https://arxiv.org/abs/2511.16333)
 
 ## Exclusion Notes
+
+- `RMWorld: Task-Aware Radio World Models with Value-of-Information Guided
+  Multi-Trial Learning for Multi-UAV Communication Control` (`2608.20126`) was
+  not placed in the main list because it proposes one Bayesian residual radio
+  world model, acquisition rule, and counterfactual-trial selection pipeline for
+  multi-UAV communications. Its risk-reduction framing is useful, but it is a
+  single domain method rather than a survey, taxonomy, roadmap, definition, or
+  reusable field-level framework.
+- `Planning-Oriented End-to-End Autonomous Driving: Architectures, Evaluation,
+  and Emerging Paradigms` (`2608.20111`) was not placed in the main list because
+  it surveys the broader end-to-end driving field. World-model-based planners
+  are one architecture family and world-model validation is one open challenge;
+  world models are not the central subject of the survey.
+- `Orthogonal JEPA: Factorized Predictive States for Latent World Models`
+  (`2608.20065`) was not placed in the main list because it introduces and tests
+  one orthogonal predictive-factorization architecture across several domains.
+  Cross-domain experiments broaden the method's evidence, but do not make it an
+  overview, taxonomy, roadmap, position, or field-level framework.
 
 - `DA-WAM: Decision-Aligned Future Latents for Driving World Models`
   (`2608.19085`) was not placed in the main list because it proposes and

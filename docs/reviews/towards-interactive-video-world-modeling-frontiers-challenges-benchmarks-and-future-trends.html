@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="liu-2026-interactive-video-world-modeling">
+  <meta name="worldmodel-radar:paper-title" content="Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2606.01164">
+  <meta name="worldmodel-radar:review-date" content="2026-08-22">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>互动世界模型的难点，不是继续生成，而是持续服从｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#172124;--muted:#627078;--paper:#edf1f0;--panel:#fffdf8;--line:#cad4d2;--cyan:#146b75;--blue:#315d8a;--amber:#a36818;--red:#9b403c;--green:#236b4e}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(42px,7vw,76px);line-height:1.03;max-width:1050px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:980px;font-size:22px;color:#354349}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--cyan)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-22</p>
+  <h1>互动世界模型的难点，不是继续生成，而是持续服从</h1>
+  <p class="lead">这篇综述把“可交互视频”从炫酷 demo 改写成一个闭环系统合同：模型必须在多轮操作中同时保持动作可控、长时记忆和实时响应。三者彼此牵制——更多历史有利于一致性，却会削弱新动作影响并抬高延迟；更快的蒸馏与缓存又可能牺牲画质、物理性或状态完整性。</p>
+  <div class="chips">
+    <div class="chip"><strong>3 个</strong><span>核心工程瓶颈</span></div>
+    <div class="chip"><strong>4 类</strong><span>应用 benchmark 地图</span></div>
+    <div class="chip"><strong>5 条</strong><span>未来研究方向</span></div>
+    <div class="chip"><strong>213 stars</strong><span>作者资源库检索快照</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>互动视频世界模型不是一次性 prompt-to-video，而是反复计算下一观察：输入既包括完整交互历史，也包括当前动作和附加条件。作者据此提出三个最低属性——动作可控、长时一致与记忆、实时响应——并用它们组织技术、数据和评估地图。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把开放世界探索、游戏、机器人和自动驾驶放在同一“连续干预”轴上。重要区分不再是扩散还是自回归，而是动作怎样注入、状态怎样跨视野保存、生成怎样在控制周期内返回，以及 benchmark 是否测到真实交互。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>这是快速变化文献的综述与横向表格，不是统一协议下的复现实验。不同数据集、分辨率、时长、硬件和动作空间的 FPS 或质量分数不能直接排行；作者提出的方向也尚未证明存在一套兼得可控性、一致性和效率的通用架构。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>互动世界模型的产品价值不是“用户能按键看视频变化”，而是系统能否在长时间、多轮、可逆操作中维持可查询状态，并让每次动作以足够低的延迟产生可验证后果。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Paper-led architecture</p><h2>论文的架构：动作、记忆与响应的三角约束</h2>
+  <table><thead><tr><th>模块</th><th>论文归纳的主要路线</th><th>系统代价与失败方式</th></tr></thead><tbody>
+    <tr><td>动作注入</td><td>把离散键盘、连续鼠标/相机轨迹与视觉 token 拼接；用 scale/shift 调制视觉特征；借助渲染器或物理模拟器生成新视角；或用矩阵变换控制全景视图。文本通常经编码器与视觉 token 做 cross-attention。</td><td>粗粒度文本容易只改变语义外观；逐帧动作虽更细，却增加标注、同步和在线推理压力。相机重建能保持几何，但不等于环境状态真实演化。</td></tr>
+    <tr><td>短期上下文</td><td>自回归扩散用最近帧或重叠 chunk 作为条件，并以 VAE/encoder 压缩历史。</td><td>固定窗口会忘记早期状态；扩大窗口带来注意力、显存和延迟增长，也会让模型过度依赖历史而忽视新动作。</td></tr>
+    <tr><td>隐式记忆</td><td>保存视频 latent、动作、位置、时间戳和 KV cache，通过状态感知检索取回相关历史；短期未压缩、长期压缩是常见分层。</td><td>朴素存储随帧数线性增长，检索错误会把不相关观察注入生成；latent 记忆擅长动态，却较难保证几何一致。</td></tr>
+    <tr><td>显式状态</td><td>保存 point cloud、3DGS、surfel、mesh 或静态地图，按相机姿态与空间重叠检索；混合方案再保留动态主体的稀疏帧。</td><td>几何可检查、重访一致性更强，但更新动态对象成本高，错误几何会长期固化；物理模拟质量仍受重建与材质估计限制。</td></tr>
+    <tr><td>训练稳定</td><td>Diffusion、Self、Geometry、Context Forcing 等路线让模型在训练中接触受损上下文或自生成 rollout，缓解 teacher-forced 训练与推理分布不一致。</td><td>降低 exposure bias 不等于消除因果错误；模型仍可能稳定地滚动一个视觉合理但动作错误的世界。</td></tr>
+    <tr><td>实时执行</td><td>少步蒸馏、因果 student、KV/残差缓存、多 GPU、并行解码、关键帧重建、量化与剪枝共同压缩延迟。</td><td>论文列举的 40–50 FPS 依赖具体模型、分辨率和硬件；蒸馏可能损失画质与长时一致性，缓存还会带来失效和状态版本问题。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>领域 Map：</strong>互动视频世界模型位于视频生成、可学习模拟器、空间记忆和策略系统的交叉点。它不是单一模型层，而是一条从动作 schema、世界状态、转移生成、记忆检索到交互运行时的完整链路。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scaling & operations</p><h2>可扩展性、复杂度、稳定性、成本与技术债</h2>
+  <div class="grid two">
+    <article class="card"><h3>可扩展性</h3><p>数据规模受制于动作标签而非普通视频量。键鼠、相机、机器人关节、车辆轨迹和语言命令的语义并不等价；弱监督 latent action 能扩大预训练，却可能把相机运动、外观和真实控制语义纠缠在一起。真正扩展需要可转换的 action ontology、时间同步和跨 embodiment 校准。</p></article>
+    <article class="card"><h3>复杂度</h3><p>计算量近似随生成分辨率、帧率、去噪步数、历史窗口、记忆检索量与并行候选共同增长。显式 3D 状态增加重建和更新管线，隐式记忆增加索引与缓存治理；两者混合通常更稳，但运维面也最大。</p></article>
+    <article class="card"><h3>稳定性</h3><p>长时稳定不只是对象不消失。系统还要在出视野后继续演化状态、重访时保持身份与几何、持续响应新动作，并避免策略或用户利用模型漏洞。稳定性测试应包含小时级漂移、动作冲突、回环重访、动态遮挡与模型更新后的记忆兼容。</p></article>
+    <article class="card"><h3>成本</h3><p>成本包括动作配对采集、3D/物理标注、视频 backbone 训练、在线去噪、长期存储、检索、闭环 benchmark 与真人交互研究。缓存和蒸馏能降推理成本，但会把成本转移到 teacher 训练、质量回归、硬件特化和版本验证。</p></article>
+    <article class="card"><h3>技术债</h3><p>最危险的债是把某个游戏键位、相机坐标系、机器人 action token 或帧率写死为世界模型接口。其次是缓存和记忆无 provenance，导致换模型后旧 latent 无法解释；再其次是只保存视频、不保存状态变更与动作日志，事后无法重放因果链。</p></article>
+    <article class="card"><h3>迁移约束</h3><p>从视频 demo 迁往游戏、机器人或驾驶时，必须替换动作合同、实时预算、物理规则和安全回退，而不能只微调视觉风格。显式状态层与审计日志应优先稳定，生成 backbone 和动作适配器则保持可替换。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Reality check</p><h2>真实问题、伪需求、用户痛点与业务/场景细节</h2>
+  <div class="grid">
+    <article class="card good"><h3>真实问题</h3><ul><li>游戏与开放世界需要低延迟、长时间、可重访的生成运行时。</li><li>机器人和驾驶缺少便宜的动作条件数据与闭环测试环境。</li><li>传统视频指标无法判断模型是否服从动作、保留记忆或支持规划。</li><li>用户需要可见、快速、可逆且立即反馈的直接操作，而不只是 prompt。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>把一次性相机轨迹生成叫作“持续交互”。</li><li>以高 FPS 宣称实时，却不披露分辨率、硬件、输入延迟和动作到画面的延迟。</li><li>用视觉真实感替代因果、物理与闭环有效性。</li><li>把自动发现的 latent action 当作跨设备可解释控制接口。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>创作者难以精确选中对象、撤销动作并预测修改范围。</li><li>开发者无法定位漂移来自生成器、记忆、动作编码还是缓存。</li><li>机器人/驾驶团队担心合成数据强化错误动力学。</li><li>产品负责人缺少每分钟交互成本、失败恢复率和留存收益的共同仪表盘。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最具体的机会：</strong>短期更适合有边界的互动内容原型、游戏关卡预演、机器人数据增强和驾驶场景生成；这些场景允许离线复核或确定性引擎兜底。把生成世界直接当作安全关键决策证据，仍缺因果校准、可接受性门槛与真实闭环验证。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Benchmarks & decision</p><h2>评估地图：不同场景不能共用一个总分</h2>
+  <table><thead><tr><th>场景</th><th>论文指出的评估进展</th><th>仍缺的决策证据</th></tr></thead><tbody>
+    <tr><td>开放世界探索</td><td>从传统视频质量扩展到 WorldScore、OmniWorldBench、MIND 与 iWorldBench 所覆盖的可控性、4D 交互、记忆和轨迹跟随。</td><td>长时状态真值、反事实动作配对、重访一致性，以及交互成本与用户完成任务的关系。</td></tr>
+    <tr><td>游戏引擎</td><td>开始比较动作空间、分辨率、FPS、交互时长、记忆和模型大小。</td><td>端到端输入延迟、确定性/可复现性、可逆编辑、关卡规则保持与每小时运行成本。</td></tr>
+    <tr><td>具身 AI</td><td>数据引擎、操作成功评估与 policy learning 并行发展，并出现真实环境 benchmark。</td><td>合成数据对真机失败率的净效应、接触物理、跨 embodiment 迁移和安全回退。</td></tr>
+    <tr><td>自动驾驶</td><td>NAVSIM、Bench2Drive、ACT-Bench 与 DrivingGen 分别覆盖 pseudo-simulation、闭环行为、动作可控与轨迹条件视频。</td><td>episode-specific 反事实、交通参与者响应、长尾事件、校准误差与 assurance admissibility。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>先选择“操作有明确语义、错误可撤销、交互时长有限”的垂直场景。卖点应落到内容制作周期、模拟覆盖率或真实试验减少量，不要只卖无限世界和视觉沉浸。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>将 action schema、world-state ID、memory provenance、延迟预算、缓存失效与 fallback 写成接口合同。用确定性回放保存每次动作、检索结果、模型版本和状态差异。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>重点研究可证伪的动作因果性、跨模态物理、小时级状态、直接操作界面和 benchmark 互操作。基础设施机会更可能出现在动作数据、状态/记忆层和评估栈，而非又一个封闭生成器。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & boundaries</p><h2>迁移路径与边界条件</h2>
+  <table><thead><tr><th>阶段</th><th>团队动作</th><th>验收门槛</th></tr></thead><tbody>
+    <tr><td>1. 定义动作合同</td><td>选一个对象或角色、有限动作集、明确状态变量与最大反馈延迟；建立真实或确定性引擎基线。</td><td>每个动作都有预期状态差异、无效动作和可恢复失败定义。</td></tr>
+    <tr><td>2. 短时影子生成</td><td>在不影响用户或策略的情况下预测 5–20 秒 rollout，记录动作敏感性和视觉/状态偏差。</td><td>相同历史下的反事实动作能产生方向正确、可重复区分的结果。</td></tr>
+    <tr><td>3. 加入分层记忆</td><td>短期用帧/KV，长期用可审计的对象、地图或几何状态；为记忆设置容量、淘汰和版本策略。</td><td>回环重访与出视野动态通过测试，延迟和存储增长受控。</td></tr>
+    <tr><td>4. 有限交互上线</td><td>只开放可撤销动作，在超时、低置信度、规则冲突时回退到确定性逻辑或人工确认。</td><td>动作到反馈延迟、恢复率、每分钟成本和用户任务完成率达到阈值。</td></tr>
+    <tr><td>5. 跨场景迁移</td><td>保持状态与审计接口稳定，分别迁移动作适配器、视觉生成器和物理约束。</td><td>收益在 held-out 场景保留，且没有用更大算力掩盖动作语义漂移。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>边界条件：</strong>论文以视频式互动为中心，latent-only 规划器、纯符号模拟、传统确定性游戏引擎和非视觉动力学不是主体；其横向结果跨协议，不能推断某个模型因果领先。作者的五个未来方向——动作数据、反事实与现实对齐、极长时一致、物理感知、直接操作界面——是研究议程，不是已解决能力。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Open questions & watchlist</p><h2>开放问题与 Watchlist</h2>
+  <div class="grid">
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>扩大历史窗口后，动作遵循是否在一致性提高前先恶化？</li><li>同等算力下，显式几何、latent 记忆和混合记忆谁的小时级状态误差最低？</li><li>自动 latent action 加入运动学先验后，能否跨设备保持语义？</li><li>交互 benchmark 得分能否预测真实机器人或驾驶闭环收益？</li><li>直接操作界面是否显著提高控制精度、可解释感和用户留存？</li></ul></article>
+    <article class="card risk"><h3>主要风险</h3><ul><li>视觉一致掩盖动作因果错误。</li><li>记忆系统把一次错误固化为长期世界状态。</li><li>规划器或用户发现并利用生成器漏洞。</li><li>缓存、蒸馏与量化让训练时验证失效。</li><li>合成数据反馈回训练集，形成不可追踪的模型污染。</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Jiuming Liu、Cambridge 团队及<a href="https://github.com/liujiuming123/Awesome-Interactive-World-Model">作者维护资源库</a>的后续分类更新。</li><li>WorldScore、OmniWorldBench、MIND、iWorldBench 是否收敛到共享动作与记忆协议。</li><li>ACT-Bench、DrivingGen、NAVSIM、Bench2Drive 对闭环和反事实的覆盖变化。</li><li>混合记忆、Context Forcing 与显式 4D 状态是否出现外部复现。</li><li>游戏和机器人团队公开的真实延迟、成本、回退与失败恢复数据。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇综述最有价值的不是罗列模型，而是揭示互动世界模型的系统矛盾：历史、动作和实时性竞争同一份容量与延迟预算。下一阶段的突破，应以可审计状态和可证伪交互为核心，而不是继续延长一段看似连续的视频。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2606.01164">arXiv abstract v1</a> · <a href="https://arxiv.org/html/2606.01164">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2606.01164">PDF</a>。实现/生态信号：<a href="https://github.com/liujiuming123/Awesome-Interactive-World-Model">作者维护资源库</a>在 2026-08-22 检索时显示 213 stars、14 forks，最近一次 push 为 2026-08-20；这说明资源整理仍有维护动量，不等于综述内方法共享代码、统一评测或已达到生产成熟度。</p>
+</div></footer>
+</body>
+</html>

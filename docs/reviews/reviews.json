@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "liu-2026-interactive-video-world-modeling",
+    "paper_title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
+    "paper_url": "https://arxiv.org/abs/2606.01164",
+    "review_date": "2026-08-22",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/towards-interactive-video-world-modeling-frontiers-challenges-benchmarks-and-future-trends.html"
+  },
+  {
     "paper_id": "hou-2026-world-model-robot-learning",
     "paper_title": "World Model for Robot Learning: A Comprehensive Survey",
     "paper_url": "https://arxiv.org/abs/2605.00080",
