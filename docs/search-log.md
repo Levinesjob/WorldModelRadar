@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-22
+Last checked: 2026-08-23
 
 ## Queries Used
 
@@ -22,6 +22,27 @@ Last checked: 2026-08-22
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-23 Discovery Notes
+
+- The official arXiv Export API returned four candidates, all previously
+  assessed on 2026-08-21 or 2026-08-22: RMWorld (`2608.20126`), the
+  planning-oriented end-to-end driving survey (`2608.20111`), Orthogonal JEPA
+  (`2608.20065`), and DA-WAM (`2608.19085`). No new candidate required an
+  inclusion decision, so no paper was added and no empty paper-library update
+  was recorded.
+- Exact arXiv-id GitHub searches again returned zero repositories. Hacker News
+  search counts were inspected hit by hit and were numeric near-matches rather
+  than exact paper discussions. Reddit public search returned HTTP 403, so it
+  remains an unavailable channel rather than evidence of no discussion. A
+  third-party summary and a bulk discussion-board paper list for Orthogonal
+  JEPA were not treated as credible independent heat.
+- The selected existing position paper `2602.01630` was verified against its
+  official arXiv abstract and full HTML. The same lead-author community's
+  follow-on OpenWorldLib repository had 860 stars and 52 forks in the
+  2026-08-23 retrieval snapshot and was pushed on 2026-08-23. This is a useful
+  implementation/ecosystem continuation of the modular thesis, but it is not
+  presented as the position paper's own validated implementation.
 
 ## 2026-08-22 Discovery Notes
 

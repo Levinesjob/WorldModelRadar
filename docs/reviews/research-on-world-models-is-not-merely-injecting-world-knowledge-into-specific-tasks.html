@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="zeng-2026-world-models-not-merely-injecting-world-knowledge">
+  <meta name="worldmodel-radar:paper-title" content="Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2602.01630">
+  <meta name="worldmodel-radar:review-date" content="2026-08-23">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>世界模型不是能力拼盘，而是一份闭环系统合同｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#18201f;--muted:#63706e;--paper:#eef1ec;--panel:#fffdf7;--line:#cdd5cf;--green:#24664f;--blue:#315f88;--amber:#a66c19;--red:#9e4540;--teal:#176c70}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(42px,7vw,76px);line-height:1.03;max-width:1080px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:980px;font-size:22px;color:#354442}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--teal)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-23</p>
+  <h1>世界模型不是能力拼盘，而是一份闭环系统合同</h1>
+  <p class="lead">这篇 position paper 反对把“世界知识”注入图像编辑、视频生成、3D 重建或机器人任务后，就把局部增益命名为世界模型。它提出的替代方向是模块化但一体协作的系统：交互接入真实变化，推理解释动力学与因果，记忆维持跨时间状态，环境承载可控反馈，多模态生成把内部预测变成可观察结果。</p>
+  <div class="chips">
+    <div class="chip"><strong>3 类</strong><span>碎片化研究主线</span></div>
+    <div class="chip"><strong>5 个</strong><span>统一框架功能模块</span></div>
+    <div class="chip"><strong>3 条</strong><span>未来突破方向</span></div>
+    <div class="chip"><strong>低</strong><span>实证与协议成熟度</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>世界模型的单位不应是一个下游任务，而应是一个能主动感知、干预、保留状态、预测后果并用反馈修正自身的系统。论文用这一规范重新审视“推理中的世界知识”“世界驱动的内容生成”和“交互环境中的智能体”。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把争论从“哪种生成 backbone 更强”推向“哪些功能合同缺失”。统一不等于一个巨大单体网络，而是为交互、推理、记忆、环境和生成规定协作边界，使不同模块能够被替换、组合与共同评估。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>论文给出的是规范性框架，不是经过系统实验验证的参考架构。它没有正式状态/动作类型、接口协议、统一 benchmark、消融、成本曲线或失败率；若把五个模块的存在本身当成“通用世界理解”，就会重复论文所批评的能力清单思维。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>论文最有价值的不是证明了一种通用世界模型，而是提供了一个反宣传测试：如果系统无法用持续交互更新可查询状态、比较行动后果并从预测误差中改进，那么“世界模型”多半只是任务模型的新标签。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Paper-led background</p><h2>论文先画出的碎片化地图</h2>
+  <table><thead><tr><th>研究簇</th><th>已有价值</th><th>论文指出的缺口</th><th>Radar 的边界判断</th></tr></thead><tbody>
+    <tr><td>Reasoning with World Knowledge</td><td>LLM/VLM、空间推理、科学问题和长视频理解把更多物理与上下文知识带入显式或潜在推理。</td><td>模型仍可能以训练分布中的统计常识覆盖当前观察；跨模态感知、真实物理接入和持续互动不足。</td><td>知道事实或输出推理链，不等于拥有可干预、可更新的动力学状态。</td></tr>
+    <tr><td>World-Driven Content Generation</td><td>图像、视频和 3D 生成借助微调、强化学习与几何先验提升视觉真实感和可控性。</td><td>2D 渲染模式会掩盖光照、物体恒存、接触与高速运动错误；高画质不能证明物理一致。</td><td>内容生产是有效产品，但除非输出连接到动作和持久状态，否则不应自动升级为模拟器。</td></tr>
+    <tr><td>Agents in Interactive Environments</td><td>VLA、自动驾驶和虚拟智能体把感知—决策闭环带到操作、规划与开放任务。</td><td>长时记忆、多模态上下文、复杂控制、异常恢复和真实环境稳定性仍弱。</td><td>在有限 benchmark 上成功执行预定义动作，不能证明系统会主动发现世界规律。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Unified framework</p><h2>五模块架构：真正重要的是接口与反馈</h2>
+  <table><thead><tr><th>模块</th><th>论文的功能主张</th><th>工程上必须补齐的合同</th><th>主要失败方式</th></tr></thead><tbody>
+    <tr><td>Interaction</td><td>统一接收文本、图像、视频、音频、点云、mesh 与低层控制，并向环境执行自然语言或物理动作。</td><td>时间戳、坐标系、动作语义、传感器置信度、执行确认、超时和权限边界。</td><td>多模态只是拼接；意图、控制量和真实执行结果无法对齐。</td></tr>
+    <tr><td>Reasoning</td><td>显式语言推理负责可解释的高层分析，潜在推理保留连续、亚符号的物理细节。</td><td>显式/潜在状态之间的可追踪映射、因果假设、校准、规划目标和约束检查。</td><td>语言解释漂亮但不忠于 latent；latent 预测准确却不能审计或约束。</td></tr>
+    <tr><td>Memory</td><td>从顺序缓存升级到多模态、结构化、可查询、可压缩并能更新和清除的长期状态。</td><td>实体身份、状态版本、来源、压缩损失、遗忘策略、冲突合并和隐私生命周期。</td><td>错误写入后长期放大；上下文变长却没有状态一致性；换模块后旧记忆失去语义。</td></tr>
+    <tr><td>Environment</td><td>物理世界与模拟环境既提供训练/验证载体，也接收模型输出并产生新观察；生成式场景扩大覆盖。</td><td>真实与模拟动力学版本、随机种子、干预日志、domain gap、可接受性门槛和安全隔离。</td><td>渲染器被误当为物理世界；生成环境的漏洞被策略利用；合成偏差闭环污染训练。</td></tr>
+    <tr><td>Multimodal Generation</td><td>从内部状态生成文本、图像、视频、音频和 3D，既向人反馈，也为规划提供 foresight 和自增强数据。</td><td>输出与世界状态的一致性检查、候选分布、反事实标签、可逆性和人类可理解的差异。</td><td>生成结果视觉可信却因果错误；自增强把自身幻觉固化成“世界知识”。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>关键缺件：</strong>论文写出了模块名和职责，却没有定义一个共同的 state/action schema。对架构师而言，真正的研究机会正位于这层：状态身份、动作后果、记忆 provenance、环境回执和评估证据如何跨模型保持兼容。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scaling & operations</p><h2>可扩展性、复杂度、稳定性、成本与技术债</h2>
+  <div class="grid two">
+    <article class="card"><h3>可扩展性</h3><p>统一接口能让专用模块共享数据和能力，但模态、设备、动作空间和时间尺度增加后，组合测试面会爆炸。规模化的关键不是把所有数据放进一个模型，而是把公共状态合同与领域适配器分离，并明确哪些知识可迁移。</p></article>
+    <article class="card"><h3>复杂度</h3><p>端到端延迟由感知编码、记忆检索、推理/规划、候选 rollout、生成反馈与环境执行累加；并发传感流还引入乱序和缺失。模块独立升级降低训练耦合，却增加协议、版本和回归矩阵。</p></article>
+    <article class="card"><h3>稳定性</h3><p>稳定不只是连续帧好看，而是观察—状态—动作—结果的闭环在分布外事件、传感器冲突、长时任务和模块升级后仍保持一致。必须显式测试回环、反事实、异常恢复、校准漂移与策略利用模型漏洞。</p></article>
+    <article class="card"><h3>成本</h3><p>论文承认统一框架比单任务优化有更高训练与系统复杂度，但没有量化。真实成本还包括多模态同步、交互数据、仿真维护、真机验证、长期记忆存储、闭环评估和安全回退；这些通常比一次模型训练更持久。</p></article>
+    <article class="card"><h3>技术债</h3><p>最危险的债是把模块列表当架构完成度，用自然语言 prompt 代替动作协议，用长上下文代替结构化状态，用生成画面代替环境真值。其次是接口无版本和 provenance，导致模块可替换的承诺在第一次升级时破产。</p></article>
+    <article class="card"><h3>安全边界</h3><p>论文的 impact statement 提到误导内容和具身安全，但没有控制方案。生产系统需要把低置信预测、不可逆动作、硬件限制、人工接管和确定性保护层放在生成模型之外，并保存完整决策证据。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Reality check</p><h2>真实问题、伪需求、用户痛点与机会</h2>
+  <div class="grid">
+    <article class="card good"><h3>真实问题</h3><ul><li>团队无法比较彼此完全不同的“世界模型”能力与证据。</li><li>感知、记忆、规划、生成和模拟器之间缺少稳定系统接口。</li><li>开放环境要求跨任务迁移、持续更新和异常恢复，单任务数据会形成能力天花板。</li><li>视觉质量与任务成功率无法揭示因果、物理和长时状态错误。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>为了“通用”一次性重写全部专用系统。</li><li>采购一个全模态大模型就宣称统一世界模型已具备。</li><li>用五模块勾选表替代接口、闭环实验和 failure budget。</li><li>把能生成 3D/视频或能控制机器人，当成理解物理规律的证明。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>产品负责人难以把 demo 指标翻译成用户可靠性与单位经济性。</li><li>工程团队无法定位错误来自感知、记忆、推理、环境还是生成。</li><li>研究者缺少跨模块消融和可证伪的统一任务。</li><li>安全与运维团队面对不可重放、不可解释、持续自更新的系统。</li></ul></article>
+  </div>
+  <div class="callout"><strong>机会判断：</strong>近端机会不是训练“全能世界模型”，而是构建模块间基础设施：可版本化的 world-state/action schema、长时记忆与 provenance、模拟—真实差异测量、闭环回放、跨模块评估卡和安全网关。模型平台要等这些合同稳定后才可能形成。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & decision</p><h2>迁移路径：从单任务栈走向可替换的闭环</h2>
+  <table><thead><tr><th>阶段</th><th>团队动作</th><th>验收门槛</th></tr></thead><tbody>
+    <tr><td>1. 画出现有闭环</td><td>选择一个真实痛点，记录观察、内部状态、动作、环境回执、指标和人工回退；不要先追求全模态。</td><td>每次失败都能归因到链路节点，离线重放结果一致。</td></tr>
+    <tr><td>2. 稳定状态与动作合同</td><td>为实体、时间、坐标、置信度、动作约束和版本定义 schema；把业务规则从模型权重中外置。</td><td>替换感知或规划模块后，历史状态和评估样本仍可解释。</td></tr>
+    <tr><td>3. 增加影子预测</td><td>让世界模型只生成候选后果，不直接执行；与真实结果和确定性模拟器做 episode-level 对照。</td><td>反事实排序、校准、长时漂移和成本达到预设阈值。</td></tr>
+    <tr><td>4. 有限闭环执行</td><td>只开放可撤销、低风险动作；在超时、低置信、约束冲突时回退到专用控制器或人工。</td><td>端到端收益超过额外延迟、事故风险和运维复杂度。</td></tr>
+    <tr><td>5. 模块化扩展</td><td>逐一增加新模态、环境或 embodiment，并保留跨版本回归集；只有共享状态产生净迁移收益时才扩大统一范围。</td><td>新领域收益不是更大算力或数据泄漏造成，旧领域性能和安全不退化。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>从可量化痛点切入，例如减少真机试验、提升异常恢复、降低内容制作返工。把“统一”当内部架构约束，不当外部卖点；客户最终购买的是可靠后果，不是模块数量。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>优先投资状态、动作、回执、记忆来源和回放协议。统一功能规范可以指导模块边界，但必须用 latency budget、failure budget、数据生命周期和兼容性测试落地。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>研究重点应从静态能力分数移向跨模块干预：替换记忆、推理或环境后，行动后果是否稳定改善？平台价值更可能沉淀在接口、评估与交互数据，而非单个生成模型。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Future work & watchlist</p><h2>开放问题、边界条件与 Watchlist</h2>
+  <div class="grid">
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>共享状态合同能否在不共同训练的模块间保留因果可用信息？</li><li>统一栈在 held-out 任务上的迁移收益，何时超过专用模型的成本优势？</li><li>显式语言推理与潜在动力学冲突时，哪种校准机制能预测真实行动后果？</li><li>在线反思与局部更新能否修复知识缺口而不破坏旧能力？</li><li>加入质量、摩擦、弹性和碰撞体的表示，能否在低开销下改善闭环控制？</li></ul></article>
+    <article class="card risk"><h3>边界条件</h3><ul><li>论文没有证明五模块集合是必要且充分条件。</li><li>模块关系多为功能描述，缺少形式化状态转移与训练目标。</li><li>示例主要来自视觉、生成和具身 AI，社会、经济与非视觉系统覆盖有限。</li><li>“主动探索”和“控制自然涌现”是研究主张，不是已经观测到的规律。</li><li>互联网失败案例只具说明性，不能替代受控实验。</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Bohan Zeng、Wentao Zhang、OpenDCAI/DataFlow 社区的后续规范与评估工作。</li><li><a href="https://github.com/OpenDCAI/OpenWorldLib">OpenWorldLib</a>能否把模块目录进一步变成稳定接口、端到端 benchmark 和可复现基线。</li><li>物理属性驱动的 3D/4D 表示是否同时改善交互精度与成本。</li><li>具身长时任务中的 sim-to-real、硬件约束和异常恢复协议。</li><li>模块独立升级后的 memory compatibility、回归测试与安全审计。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇论文应被当作一份“系统完整性检查表”，而不是通用架构的胜利宣言。它把领域从任务命名争议推进到模块协作问题；下一步真正能改变地图的证据，将来自正式接口、跨任务闭环 benchmark、成本曲线和能被外部复现的模块替换实验。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2602.01630">arXiv abstract v1</a> · <a href="https://arxiv.org/html/2602.01630">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2602.01630">PDF</a>。后续实现/生态信号：同一 lead-author 社区的 <a href="https://github.com/OpenDCAI/OpenWorldLib">OpenWorldLib</a> 在 2026-08-23 检索时显示 860 stars、52 forks，并于当天 push；它说明统一代码库方向存在持续维护和外部关注，但不是本 position paper 五模块规范已经得到端到端验证的证据。</p>
+</div></footer>
+</body>
+</html>

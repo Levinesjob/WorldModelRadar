@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "zeng-2026-world-models-not-merely-injecting-world-knowledge",
+    "paper_title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
+    "paper_url": "https://arxiv.org/abs/2602.01630",
+    "review_date": "2026-08-23",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/research-on-world-models-is-not-merely-injecting-world-knowledge-into-specific-tasks.html"
+  },
+  {
     "paper_id": "liu-2026-interactive-video-world-modeling",
     "paper_title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
     "paper_url": "https://arxiv.org/abs/2606.01164",
