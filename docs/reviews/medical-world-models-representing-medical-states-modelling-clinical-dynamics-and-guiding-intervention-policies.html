@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="liu-2026-medical-world-models">
+  <meta name="worldmodel-radar:paper-title" content="Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2606.16721">
+  <meta name="worldmodel-radar:review-date" content="2026-08-26">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>医疗世界模型：从风险分数走向可检验的临床模拟器｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#172126;--muted:#647178;--paper:#eef2f1;--panel:#fffef9;--line:#ced8d6;--green:#247055;--blue:#356b91;--amber:#a06b1d;--red:#a04a45;--teal:#19777b}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(40px,7vw,74px);line-height:1.04;max-width:1080px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:990px;font-size:22px;color:#35464a}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--teal)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-26</p>
+  <h1>医疗世界模型：从风险分数走向可检验的临床模拟器</h1>
+  <p class="lead">这篇 review/roadmap 把分散在医疗基础模型、纵向病程建模、生成影像、因果推断、强化学习、数字孪生与手术机器人中的工作，重排为三项耦合能力：构造可转移的患者状态、模拟临床动力学、用干预条件未来支持决策。它最重要的判断是：逼真的未来不等于可信的治疗证据。</p>
+  <div class="chips">
+    <div class="chip"><strong>3 项</strong><span>患者状态 · 动力学 · 干预支持</span></div>
+    <div class="chip"><strong>4 类</strong><span>事件 · 影像 · 生物机制 · 操作轨迹</span></div>
+    <div class="chip"><strong>3 种</strong><span>系统组合模式</span></div>
+    <div class="chip"><strong>早期</strong><span>临床闭环成熟度</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>医疗世界模型是患者及其照护过程的内部模拟器。观察并不等于状态；系统要从影像、EHR、波形、报告、分子数据和治疗历史中推断状态，再学习带时间间隔与行动条件的转移，最后比较候选未来。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>论文把“医疗生成模型”从模态或任务列表，转成 perception–dynamics–planning 闭环地图。它区分只会表示、只会预测、只会推荐的组件，并用接口组合程度判断系统成熟度。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>这是跨领域叙事综述与路线图，不是系统综述、统一 benchmark 或临床试验。被纳入的代表工作使用不同数据、终点和验证强度；论文没有证明它们能拼成一个安全的患者级闭环。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>医疗世界模型的分水岭不是能否生成下一次检查，而是能否说明“当前状态缺了什么、某项干预如何改变未来分布、误差随时间怎样增长、何时必须拒绝给出决策证据”。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Three coupled capabilities</p><h2>三项能力不是流水线阶段，而是可独立缺失的系统合同</h2>
+  <table><thead><tr><th>能力</th><th>论文定义</th><th>工程合同</th><th>典型误判</th></tr></thead><tbody>
+    <tr><td>患者状态构造</td><td>从不完整、异构、噪声和不规则采样的观察中，得到对未来转移有用的显式或潜在状态。</td><td>时间、患者身份、治疗历史、缺失机制、来源、置信度、解剖/生理约束和跨模态对齐。</td><td>静态分类 embedding 在一个终点上有效，就被称为“患者状态”。</td></tr>
+    <tr><td>临床动力学</td><td>预测状态如何随时间变化，以及候选治疗、程序动作或暴露如何改变状态分布。</td><td><code>(s_t, a_t, Δt) → p(s_{t+1})</code>，同时暴露可约不确定性、固有异质性和 rollout 误差。</td><td>把常见病程、照护流程或视觉连续性误认成干预敏感的疾病机制。</td></tr>
+    <tr><td>干预决策支持</td><td>比较治疗条件未来、优化序列策略，或在超声、手术和导管导航中控制物理动作。</td><td>候选行动集、禁忌与剂量、目标函数、因果假设、约束、人工复核和真实结果反馈。</td><td>风险预测或观察性 treatment conditioning 被包装成反事实治疗建议。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Future spaces</p><h2>四类“未来”不能共享一个真实性指标</h2>
+  <table><thead><tr><th>未来空间</th><th>可用输出</th><th>主要价值</th><th>最低验证要求</th></tr></thead><tbody>
+    <tr><td>事件轨迹</td><td>诊断、药物、检查、住院、结局与不规则时间间隔</td><td>早期预警、资源规划、长期病程假设</td><td>事件分布、时序、缺失与照护流程偏差；跨机构和跨时间泛化。</td></tr>
+    <tr><td>影像轨迹</td><td>肿瘤、病灶、器官或解剖结构的未来扫描</td><td>进展解释、治疗反应比较、随访计划</td><td>解剖一致、病灶连续、时间校准、治疗敏感；不能只看视觉逼真度。</td></tr>
+    <tr><td>生物/机制轨迹</td><td>细胞状态、转录组、药物响应、生理变量、器官功能</td><td>虚拟细胞、机制假设、in-silico trial</td><td>扰动响应、机制约束、个体基线与连续测量；实验验证成本最高。</td></tr>
+    <tr><td>程序轨迹</td><td>探头、器械、导管动作后的局部场景或位姿</td><td>短时闭环导航、训练和操作辅助</td><td>安全裕度、可控性、设备物理、OOD 鲁棒性和临床终点，而非仅局部视图变化。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Architecture & composition</p><h2>架构：从串行拼接到真正闭环</h2>
+  <table><thead><tr><th>组合模式</th><th>论文中的形态</th><th>优势</th><th>关键缺口</th></tr></thead><tbody>
+    <tr><td>串行管线</td><td>状态/上下文 → 生成治疗条件未来 → 生存或策略模块评分；MeWM、CLARITY、MedDreamer、WME-ORL 属于此类。</td><td>模块可检查，容易定位状态、模拟和评分接口。</td><td>模块分开优化，状态误差和 rollout 偏差会被无损地传给决策端。</td></tr>
+    <tr><td>共享状态空间</td><td>Brain-WM、AlphaCell、SurgWorld 让表示、动力学和预测分支读取同一肿瘤、细胞或操作 latent。</td><td>减少跨模块语义漂移，便于多任务训练。</td><td>治疗常是观测标签或监督目标，而非可枚举、可比较、可优化的候选决策。</td></tr>
+    <tr><td>闭环模拟器</td><td>新观察更新状态，候选行动查询转移模型，planner 比较未来，再由真实反馈重置；当前主要见于超声与导管等局部操作。</td><td>行动和结果密集、局部、可观测，更接近可证伪控制。</td><td>疾病级干预延迟长、结果缺失、照护行为混杂，尚无成熟患者级临床闭环。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>架构判断：</strong>近端可落地形态应是“影子模拟 + 人工比较 + 确定性安全层”，而不是自主处方。状态、行动、时间间隔、未来分布、评分依据和新证据更新都必须成为可审计对象。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scale, complexity, stability & cost</p><h2>可扩展性、复杂度、稳定性、成本与技术债</h2>
+  <div class="grid two">
+    <article class="card"><h3>可扩展性</h3><p>新的疾病、医院、模态和干预会同时改变状态定义、行动编码、时间尺度与终点。横向扩展应依赖版本化临床 schema、领域适配器和站点级校准，而非一个 latent 自动通吃。</p></article>
+    <article class="card"><h3>复杂度</h3><p>完整系统包括数据协调、状态估计、转移分布、因果层、planner、规则引擎、人工界面和监测。诊疗路径中的延迟、复查、联合用药和“未治疗”都必须是明确事件。</p></article>
+    <article class="card"><h3>稳定性</h3><p>必须绘制随 horizon 的校准与失效曲线，区分信息不足、随机生物变化和模型错误。平均未来会抹掉罕见但致命分支；单点 plausibility 无法证明长期稳定。</p></article>
+    <article class="card"><h3>成本</h3><p>真正成本来自纵向多模态对齐、干预与剂量标注、跨机构治理、临床专家复核、外部/前瞻验证和失败调查，而不只是训练算力。单位应是“一个可信干预比较”的全成本。</p></article>
+    <article class="card"><h3>技术债</h3><p>最危险的债包括把医院流程学成病理机制、把缺失当正常、把治疗选择偏差固化为策略、行动语义无版本、模型更新后历史 rollout 不可复现，以及生成影像掩盖状态错误。</p></article>
+    <article class="card"><h3>安全与治理</h3><p>高风险输出需要适用范围、证据来源、替代未来、置信区间、拒答原因和人工责任链。隐私保护不能只靠本地部署，还要覆盖训练许可、跨站点验证、删除与审计。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Reality check</p><h2>真实问题、伪需求、业务/场景细节与用户痛点</h2>
+  <div class="grid">
+    <article class="card good"><h3>真实问题</h3><ul><li>静态风险分数不能比较不同治疗路径。</li><li>危险、昂贵或不可逆的干预无法在线探索。</li><li>多模态病程数据缺少统一状态与行动合同。</li><li>现有模型难表达误差如何随时间和干预累积。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>生成逼真未来扫描就能自动推荐治疗。</li><li>把一个医疗 LLM 称为隐式世界模型即可获得因果能力。</li><li>用大规模回顾性 EHR 替代目标试验和前瞻验证。</li><li>把数字孪生当成患者未来的唯一高保真副本。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>临床人员无法审计模型为何偏好某项干预。</li><li>数据团队难对齐剂量、时间、依从性和真实执行。</li><li>产品负责人缺少从离线指标到临床收益的证据阶梯。</li><li>安全团队无法判断失败来自状态遗漏、混杂还是 rollout 漂移。</li></ul></article>
+  </div>
+  <div class="callout"><strong>场景细节：</strong>最可信的早期业务楔子，是时间短、动作可观测、失败可回退且已有临床规则的任务，例如影像随访质控、超声探头导航、治疗方案影子比较和动态 AI 评测。直接做跨疾病自主诊疗，数据与责任边界都不成熟。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & decisions</p><h2>迁移路径：从纵向预测到受限决策证据</h2>
+  <table><thead><tr><th>阶段</th><th>团队动作</th><th>验收门槛</th></tr></thead><tbody>
+    <tr><td>1. 定义临床合同</td><td>选择一个疾病、一个时域和一个决策；明确状态变量、候选行动、剂量、时间间隔、禁忌、终点和责任人。</td><td>所有训练样本可追溯为近似 <code>(s_t,a_t,Δt,s_{t+1})</code>，缺失和未执行行动有独立语义。</td></tr>
+    <tr><td>2. 先做轨迹预测</td><td>在不输出治疗建议的情况下评测状态充分性、多未来校准、长时漂移和跨站点泛化。</td><td>模型在信息缺失时不确定性上升，关键历史消融产生符合临床常识的变化。</td></tr>
+    <tr><td>3. 加入影子反事实</td><td>使用目标试验模拟、敏感性分析和临床规则，把候选未来展示给专家但不影响照护。</td><td>干预差异不是治疗选择偏差；外部队列和专家复核支持相同方向。</td></tr>
+    <tr><td>4. 受限工作流试验</td><td>仅对低风险、可撤销任务提供排序或提醒；记录采纳、拒绝、覆盖、漂移和伤害。</td><td>前瞻或准前瞻证据证明净收益，且人工接管和拒答机制可靠。</td></tr>
+    <tr><td>5. 闭环更新</td><td>新观察进入状态后重新规划；模型更新、规则更新与临床协议更新分开版本化。</td><td>全链路可回放，更新不破坏既有亚组的校准、公平性和安全边界。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>优先卖动态评测、轨迹质控、临床数据合同和影子决策证据，不卖“AI 医生模拟患者”。采购方真正需要的是减少无效检查、发现恶化和解释方案差异。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>把 patient-state schema、intervention registry、时间语义、因果假设、uncertainty gate、规则版本和 lineage 做成平台对象；不要把业务规则藏进 prompt。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>最有价值的基础设施可能是跨站点 longitudinal-action 数据合同、trajectory-level benchmark、动态 AI 评测环境和临床 admissibility 标准，而非单一更大的生成模型。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Boundaries, open questions & watchlist</p><h2>边界条件、开放问题与 Watchlist</h2>
+  <div class="grid">
+    <article class="card risk"><h3>边界条件</h3><ul><li>综述没有统一检索与质量分级协议。</li><li>多数代表系统仅覆盖三项能力的一部分。</li><li>回顾性关联不能识别治疗反事实。</li><li>程序控制的短时证据不能外推到长期疾病管理。</li><li>跨机构编码、测量和治疗实践变化会重定义状态转移。</li></ul></article>
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>哪些状态变量对干预条件预测是最小充分的？</li><li>不确定性增长能否预测真实临床失效？</li><li>治疗条件生成在 target-trial 设计下是否仍优于风险模型？</li><li>轨迹质量指标能否稳定预测临床决策收益？</li><li>患者级闭环何时比串行影子管线产生净价值？</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Ke Liu、Haishuai Wang 团队与 <a href="https://github.com/1999kevin/awesome_medical_world_models">awesome_medical_world_models</a> 的更新。</li><li>EHRWorld、Brain-WM、MedDreamer、CLARITY、MeWM 的外部与前瞻验证。</li><li>动态 clinical environment simulator、trajectory benchmark 与跨机构 FAIR 数据合同。</li><li>目标试验模拟、因果表示与世界模型 rollout 的交叉。</li><li>医疗器械监管是否形成针对模拟器证据、更新和人工监督的新框架。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇论文把医疗世界模型从“模型名”推进成一张有用的系统地图，尤其明确了状态、动力学和干预接口。但领域仍处于组件聚合期；下一次真正改变地图的证据，不会是更逼真的患者未来，而是跨机构、干预敏感、校准、可拒答并经前瞻验证的闭环。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2606.16721">arXiv abstract</a> · <a href="https://arxiv.org/html/2606.16721">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2606.16721">PDF</a>。生态信号：论文维护的 <a href="https://github.com/1999kevin/awesome_medical_world_models">医疗世界模型相关工作仓库</a>用于追踪文献，不应被解读为综述所描述闭环架构已有统一实现。本次 Scout 未发现该论文的 credible/strong 讨论热度。</p>
+</div></footer>
+</body>
+</html>

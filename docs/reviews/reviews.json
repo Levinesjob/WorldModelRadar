@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "liu-2026-medical-world-models",
+    "paper_title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
+    "paper_url": "https://arxiv.org/abs/2606.16721",
+    "review_date": "2026-08-26",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/medical-world-models-representing-medical-states-modelling-clinical-dynamics-and-guiding-intervention-policies.html"
+  },
+  {
     "paper_id": "zeng-2026-world-models-not-merely-injecting-world-knowledge",
     "paper_title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
     "paper_url": "https://arxiv.org/abs/2602.01630",

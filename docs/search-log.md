@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-23
+Last checked: 2026-08-26
 
 ## Queries Used
 
@@ -22,6 +22,38 @@ Last checked: 2026-08-23
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-26 Discovery Notes
+
+- Canonical Scout produced 17 merged candidates and an eight-item shortlist. The
+  arXiv overview queries contributed seven candidates; discussion discovery
+  contributed ten arXiv ids. Only the shortlist and any `credible` or `strong`
+  heat were passed to inclusion review. No paper reached credible discussion
+  heat, and no new paper passed the field-level inclusion gate.
+- Four shortlist papers were genuine world-model candidates but remained
+  single-method or single-system contributions: MOSH-WM (`2608.22750`) proposes
+  one object-centric soft-Hamiltonian architecture; GeoWAM (`2608.23486`)
+  proposes one geometry-prediction driving WAM; Future Querying (`2608.23248`)
+  introduces and evaluates one endpoint-agnostic clinical-query framework; and
+  DreamMimic (`2608.22278`) uses one RSSM-assisted humanoid-policy distillation
+  pipeline. Their official arXiv abstracts do not provide a survey, taxonomy,
+  roadmap, position, or reusable field-level framework.
+- The other four shortlist entries (`2608.20186`, `2608.16884`, `2608.15089`,
+  and `2608.02859`) came from exact arXiv links in Hacker News results but concern
+  EEG decoding, matrix-multiplication optimization, agent harness scaling, and
+  AI-generated mathematics. They are not world-model papers. This is useful
+  evidence that discussion-discovered ids still require subject-centrality
+  screening before curation.
+- Channel status: arXiv `ok`; Hacker News `ok` (17 exact arXiv-link hits, none
+  constituting credible world-model-paper heat); GitHub `empty` (channel ran,
+  zero exact implementation hits); Reddit `unauthorized` (HTTP 403); X/Twitter
+  `unauthorized` (HTTP 402 for recent search). Unavailable channels were not
+  interpreted as no discussion.
+- With no new inclusion, the selector chose the existing medical-world-model
+  review (`2606.16721`) for deep reading. Official arXiv HTML confirmed its
+  patient-state / clinical-dynamics / intervention-support roadmap, its serial /
+  shared-state / closed-loop composition taxonomy, and its warning that
+  plausible rollouts are not causal or clinical decision evidence.
 
 ## 2026-08-23 Discovery Notes
 
