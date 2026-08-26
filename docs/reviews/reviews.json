@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "zheng-2026-digital-twins-world-models-edge",
+    "paper_title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
+    "paper_url": "https://arxiv.org/abs/2603.17420",
+    "review_date": "2026-08-27",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/from-digital-twins-to-world-models-opportunities-challenges-and-applications-for-mobile-edge-general-intelligence.html"
+  },
+  {
     "paper_id": "liu-2026-medical-world-models",
     "paper_title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
     "paper_url": "https://arxiv.org/abs/2606.16721",

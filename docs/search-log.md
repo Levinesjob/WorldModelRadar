@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-26
+Last checked: 2026-08-27
 
 ## Queries Used
 
@@ -22,6 +22,33 @@ Last checked: 2026-08-26
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-27 Discovery Notes
+
+- Canonical Scout produced 18 merged candidates and an eight-item shortlist. The
+  arXiv overview queries contributed eight candidates; ten additional candidates
+  came from discussion-discovered arXiv ids after known-paper filtering. Only the
+  shortlist and any `credible` or `strong` heat were passed to inclusion review.
+  No paper reached credible discussion heat, and no new paper passed the
+  field-level inclusion gate.
+- Official arXiv abstracts confirmed that the two newly assessed shortlist papers
+  are useful but narrow systems. GaussianWAM (`2608.24714`) distills geometry and
+  semantics from a 3D Gaussian field into existing WAM representations during
+  training, then removes the teachers and auxiliary path at deployment.
+  Game2World Engine (`2608.24680`) contributes a gameplay-UI taxonomy, a paired
+  UI-removal dataset and data engine, and the GameCleaner model. Neither paper is
+  a survey, review, roadmap, position, or reusable field-level framework, so they
+  were not placed in the main list.
+- GeoWAM (`2608.23486`) and Future Querying (`2608.23248`) reappeared in the
+  shortlist and retain the 2026-08-26 single-method decisions. The other four
+  shortlist entries (`2608.21590`, `2608.20186`, `2608.15089`, and `2608.02859`)
+  were Hacker News-discovered papers on black-hole singularities, EEG decoding,
+  agent harness scaling, and AI-generated mathematics rather than world models.
+- Channel status: arXiv `ok`; Hacker News `ok` (18 exact arXiv-link hits, with no
+  credible or strong world-model-paper heat); Reddit `unauthorized` (HTTP 403);
+  X/Twitter `unauthorized` (HTTP 402); GitHub `unauthorized` (HTTP 403). The three
+  unavailable channels were not interpreted as evidence of no discussion or no
+  implementation.
 
 ## 2026-08-26 Discovery Notes
 
