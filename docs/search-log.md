@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-27
+Last checked: 2026-08-28
 
 ## Queries Used
 
@@ -22,6 +22,39 @@ Last checked: 2026-08-27
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-28 Discovery Notes
+
+- Canonical Scout produced 16 merged candidates and an eight-item shortlist. The
+  arXiv overview queries contributed six candidates; ten additional candidates
+  came from discussion-discovered arXiv ids after known-paper filtering. Only the
+  shortlist and any `credible` or `strong` heat were passed to inclusion review.
+  No paper reached credible discussion heat, and no new paper passed the
+  field-level inclusion gate.
+- Official arXiv abstracts confirmed that the two newly assessed world-model
+  shortlist papers are single systems. ConfAL-WM (`2608.25572`) adds a dense
+  confidence probe and task/frame/patch active-learning pipeline to EVAC for
+  post-training on RoboTwin2.0. Code World Model (`2608.25927`) combines a coding
+  agent, executable persistent state, a proxy video representation, and a
+  fine-tuned video renderer. Both expose useful implementation hypotheses, but
+  neither is a survey, taxonomy, roadmap, position, critique, or reusable
+  field-level framework, so neither was placed in the main list.
+- GaussianWAM (`2608.24714`) and Game2World Engine (`2608.24680`) reappeared and
+  retain the 2026-08-27 single-method/system decisions. The remaining four
+  shortlist entries (`2608.23228`, `2608.21560`, `2608.20186`, and `2608.15089`)
+  were Hacker News-discovered papers on a linker, TESS planet validation, EEG
+  decoding, and an agent harness rather than world models. Two low-confidence
+  arXiv-query hits (`2608.25666`, `2608.24534`) were also subject false positives.
+- Channel status: arXiv `ok`; Hacker News `ok` (20 exact arXiv-link hits, with no
+  credible or strong world-model-paper heat); GitHub `empty` (channel ran, zero
+  exact implementation hits); Reddit `unauthorized` (HTTP 403); X/Twitter
+  `unauthorized` (HTTP 402). Unavailable channels were not interpreted as no
+  discussion.
+- With no new inclusion, the selector chose `2606.06556`, *Robots Need More than
+  VLA and World Models*, for deep reading. Official arXiv abstract and full HTML
+  verification confirmed its grounding-centric robotics thesis and four missing
+  components: physical data engines, task-preserving retargeting, physics-grounded
+  consequence models, and task-conditioned reward/deployment loops.
 
 ## 2026-08-27 Discovery Notes
 

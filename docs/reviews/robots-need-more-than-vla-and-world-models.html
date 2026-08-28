@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="karcini-2026-robots-need-more-than-vla-world-models">
+  <meta name="worldmodel-radar:paper-title" content="Robots Need More than VLA and World Models">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2606.06556">
+  <meta name="worldmodel-radar:review-date" content="2026-08-28">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>机器人缺的不是更大的策略，而是把物理经验变成监督的接口｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#182320;--muted:#66736e;--paper:#edf1ed;--panel:#fffef8;--line:#cbd6cf;--green:#2d7250;--blue:#386d8b;--amber:#9a681d;--red:#a24b45;--teal:#247978}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}code{font-size:.9em}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(40px,7vw,74px);line-height:1.04;max-width:1100px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:1000px;font-size:22px;color:#35463f}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--teal)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-08-28</p>
+  <h1>机器人缺的不是更大的策略，而是把物理经验变成监督的接口</h1>
+  <p class="lead">这篇 position/survey 的关键判断是：机器人领域已经拥有大量视频、人类行为、仿真轨迹与真实部署日志，却缺少把这些弱标注经验转换成机器人可用状态、动作、接触、任务阶段、奖励和失败解释的“grounding layer”。VLA 是策略接口，世界模型是后果预测接口；两者必须嵌入数据、具身映射、奖励和部署反馈组成的系统闭环。</p>
+  <div class="chips">
+    <div class="chip"><strong>4 个</strong><span>缺失的系统组件</span></div>
+    <div class="chip"><strong>5 类</strong><span>异构物理输入</span></div>
+    <div class="chip"><strong>4 级</strong><span>跨具身保持目标</span></div>
+    <div class="chip"><strong>早期</strong><span>端到端闭环成熟度</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>“再收更多机器人示范、再放大 VLA”只能扩张已经被动作和任务标签整理好的 robot-native regime。真正的规模瓶颈是把人类视频、可穿戴传感、仿真、失败轨迹与语言变成机器人学习可消费的结构化监督。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把 world model 从“生成逼真未来”重新定位为系统中的 consequence-prediction 接口：输入对象中心状态、目标、潜在物理动作或具体机器人动作，输出对控制有用的物理后果与不确定性。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>论文综合大量相关工作并给出形式化接口，但没有实现四组件系统、统一数据 schema 或端到端 benchmark。它证明的是问题分解有解释力，不是该架构已经优于大规模 VLA、sim-to-real 或现有 world-model pipeline。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>机器人数据并不只是“少”，更是“没有进入机器人坐标系”；潜在动作、漂亮视频和进度分数只有经过具身、物理与任务条件校准，才算可执行监督。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Robot-native regime</p><h2>现有路线的真实进步，以及它为什么仍受限</h2>
+  <table><thead><tr><th>路线</th><th>已解决</th><th>仍缺的 grounding</th><th>不能据此宣称</th></tr></thead><tbody>
+    <tr><td>大规模 robot-native 数据与 VLA</td><td>跨任务、场景和具身共享已标注轨迹；语义预训练可迁移到动作预测。</td><td>每条轨迹仍依赖特定身体、传感器、动作空间和任务定义，采集昂贵且硬件失败有代价。</td><td>参数与示范数量继续增长就会自然吸收互联网中的物理经验。</td></tr>
+    <tr><td>无动作视频表征</td><td>可学习对象、时间距离、affordance 与行为先验，提高下游数据效率。</td><td>表征没有说明特定机器人要执行什么，也通常缺少接触、力和材料约束。</td><td>“看懂视频”已经等于获得可执行技能。</td></tr>
+    <tr><td>latent-action 方法</td><td>用相邻观察压缩出 transition code，并可借少量机器人数据适配。</td><td>在 embodiment-conditioned decoder 闭环验证前，它只是物理变化描述，不是动作。</td><td>离散 latent 的可预测性证明了跨具身可执行性。</td></tr>
+    <tr><td>视频奖励与进度模型</td><td>可从时间顺序、语言和少量机器人视频推断阶段与进度。</td><td>进度必须相对任务、对象状态和可恢复失败来定义，跨身体迁移也会改变可达性。</td><td>通用相似度或偏好分数就是安全可靠的机器人奖励。</td></tr>
+    <tr><td>仿真、数字孪生与 world model</td><td>低成本产生反事实、失败和稀有初始状态，扩大可达经验分布。</td><td>生成经验必须保留决定控制的几何、接触、力、摩擦、稳定性和不确定性。</td><td>视觉逼真度提升等于真实策略收益或安全证据。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Architecture</p><h2>四组件闭环：从物理经验到可复用监督</h2>
+  <table><thead><tr><th>组件</th><th>合同</th><th>输出给谁</th><th>主要失败方式</th></tr></thead><tbody>
+    <tr><td>1. 物理数据引擎</td><td>接收异步视频、姿态/可穿戴、触觉/力、机器人日志与语言；联合推断时间对齐、对象状态、接触、任务阶段、潜在动作、目标、奖励和结果。</td><td>表征、奖励、重定向、world model 与策略训练。</td><td>时间错位、伪接触、任务阶段混淆、语言先验盖过物理证据；弱标签误差被下游重复放大。</td></tr>
+    <tr><td>2. 任务保持的跨具身重定向</td><td>不是复制人类关节轨迹，而是让目标机器人产生相同的任务相关世界变化。</td><td>候选可执行动作/技能与约束。</td><td>只保持 pose，却丢失接触、对象状态、稳定性或意图；不可达动作被当成正监督。</td></tr>
+    <tr><td>3. 物理落地的 world model</td><td>以对象中心状态、目标、潜在动作或具体机器人动作为条件，预测会改变成功/失败的物理后果和置信度。</td><td>规划器、动作筛选、失败诊断、反事实数据生成。</td><td>像素未来合理但物理不可执行；长时 rollout 漂移；planner 利用模型漏洞；OOD 时置信度仍高。</td></tr>
+    <tr><td>4. 任务条件奖励与部署环</td><td>把真实结果解释为阶段进度、成功、可恢复/不可恢复失败和安全违规，并把监督路由到出错组件。</td><td>策略、world model、重定向与奖励模型的定向更新。</td><td>只记录 pass/fail；不知道是动作、预测、映射还是奖励错；在线更新造成灾难性遗忘或安全回归。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>最重要的系统接口：</strong>一次失败必须能回答“世界模型预测错了、重定向没有保持物理效果、策略执行错了，还是奖励误判了”。否则部署数据只会扩大一个无法归因的日志湖。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Retargeting & consequence prediction</p><h2>两个容易被混淆的合同</h2>
+  <div class="grid two">
+    <article class="card"><h3>跨具身保持层级</h3><ol><li><strong>Pose：</strong>末端或身体轨迹相似。</li><li><strong>Contact：</strong>在正确时间接触正确表面。</li><li><strong>Object state：</strong>产生相同对象状态变化。</li><li><strong>Intent / skill：</strong>即使动作不同，也在约束下完成相同目标。</li></ol><p>产品价值从第三层才开始稳固；只展示“机器人模仿人手轨迹”很容易制造伪需求。</p></article>
+    <article class="card"><h3>世界模型的验收目标</h3><p>任务不是预测每个像素，而是回答候选动作是否会建立接触、造成碰撞、保持抓取、改变对象状态或进入失败区。抽屉任务重视把手接触与位移，倒液体重视容器姿态与流体状态，布料任务重视形变与接触点。</p><p>因而评测必须同时包含任务相关状态误差、后果排序、长时校准、OOD 拒答与真实闭环收益。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Real problems, fake demand & user pain</p><h2>真实问题、伪需求、业务细节与用户痛点</h2>
+  <div class="grid">
+    <article class="card good"><h3>真实问题</h3><ul><li>机器人动作标注和安全试错无法像文本语料一样扩张。</li><li>人类视频含任务与物理结构，却缺少机器人体特定动作。</li><li>仿真和生成 rollouts 很难覆盖真实接触、材料与失败尾部。</li><li>部署数据缺少组件级 credit assignment，难以形成复利。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>把更多公开视频直接称为“机器人训练数据”。</li><li>把 latent action token 当成跨机器人通用动作标准。</li><li>用漂亮的预测视频证明可用于规划。</li><li>把 reward model 的高相关性当成任务成功定义。</li><li>声称单一 VLA 或 world model 能替代整套数据闭环。</li></ul></article>
+    <article class="card"><h3>用户痛点</h3><ul><li>数据团队不知道应标注语义、接触、状态还是奖励。</li><li>机器人团队无法复用人类和其他具身的行为数据。</li><li>安全团队看不到 imagined action 的不确定性边界。</li><li>运维团队知道任务失败，却不知道该更新哪一模块。</li><li>采购方难以比较“更多数据”是否降低每项可靠技能成本。</li></ul></article>
+  </div>
+  <div class="callout"><strong>更可信的商业切口：</strong>先出售能进入现有机器人栈的窄接口——接触/阶段自动标注、任务效果重定向、world-model runtime assurance、失败归因与数据路由——而不是承诺一套端到端“物理通用智能平台”。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scale, complexity, stability & cost</p><h2>可扩展性、复杂度、稳定性、成本与技术债</h2>
+  <div class="grid two">
+    <article class="card"><h3>可扩展性</h3><p>规模单位不应是小时数或参数量，而是每小时异构经验能产生多少经过闭环验证的对象状态、接触、任务阶段、可执行动作和奖励标签。跨具身扩张还必须报告新身体所需的校准量与失败率。</p></article>
+    <article class="card"><h3>复杂度</h3><p>系统跨越不同采样频率、坐标系和责任边界：视频、动作、触觉、语言和环境状态要对齐；对象 schema、目标、约束与模型版本必须可追溯。四个 learned component 还形成耦合误差环。</p></article>
+    <article class="card"><h3>稳定性</h3><p>主要风险是 covariate shift 与正反馈：错误预测诱导坏动作，坏动作把系统带到更 OOD 的状态。需要 calibrated uncertainty、短 horizon、约束规划、异常检测、影子模式和真实回放。</p></article>
+    <article class="card"><h3>成本</h3><p>公开视频降低采集成本，却增加同步、3D/接触恢复、人工复核和许可治理成本；world-model imagination 降低硬件试错，却增加训练、rollout 筛选、真实校准和安全验证成本。应报告每个可靠技能的总成本。</p></article>
+    <article class="card"><h3>技术债</h3><p>latent action 无语义版本、不同机器人动作 schema 漂移、奖励定义悄然变化、仿真资产与真实物体不一致、失败日志无数据 lineage，以及 world model/策略同步升级，都会让闭环无法审计。</p></article>
+    <article class="card"><h3>数据与治理</h3><p>互联网和穿戴数据涉及授权、隐私与偏差；人类可执行不代表机器人安全可执行。自动标签应保留来源、置信度和复核状态，安全关键经验不能因规模目标跳过人工或物理约束。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Migration & decisions</p><h2>迁移路径：不要一次构建四个新模型</h2>
+  <table><thead><tr><th>阶段</th><th>团队动作</th><th>验收门槛</th></tr></thead><tbody>
+    <tr><td>1. 固定一个任务效果</td><td>选择接触明确、对象状态可测、失败可恢复的任务；定义 goal、phase、success、unsafe 与 task-relevant state。</td><td>独立标注者和传感器能稳定复核，且与现行 KPI 对齐。</td></tr>
+    <tr><td>2. 建立物理事件表</td><td>对齐视频、动作、触觉和日志，先自动标注接触、状态变化和阶段，再由人复核低置信度样本。</td><td>时间错位、漏检与误检在真实失败段落单独报告。</td></tr>
+    <tr><td>3. 做任务效果重定向</td><td>从同体或相近具身开始，用对象状态与接触而非姿态相似度选择动作。</td><td>新具身在真实环境复现目标效果，且不提高安全尾部。</td></tr>
+    <tr><td>4. 影子 world model</td><td>不控制硬件，只预测候选动作的对象状态、接触、风险与不确定性。</td><td>后果排序优于反应式/仿真基线，OOD 与 horizon 失效可检测。</td></tr>
+    <tr><td>5. 受限部署反馈</td><td>只对可撤销动作闭环；每次结果按组件归因并进入版本化数据队列。</td><td>更新目标正确率、每次改进成本和安全回归均可审计。</td></tr>
+  </tbody></table>
+  <div class="grid" style="margin-top:16px">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>优先找已有机器人日志、传感器和重复任务的客户。价值指标应是少采多少示范、少多少硬件试错、快多少失败定位，而不是视频量或模型规模。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>先统一 physical-event schema、时间对齐、置信度、版本与回放合同；把每个 learned component 放在可替换接口后，并保留规则、仿真和人工回退。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>最有基础设施潜力的是跨具身效果 benchmark、物理事件自动标注、calibrated consequence model、组件级失败归因和部署数据 flywheel，而非又一个封闭 VLA。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Boundaries, open questions & watchlist</p><h2>边界条件、可证伪问题与 Watchlist</h2>
+  <div class="grid">
+    <article class="card risk"><h3>边界条件</h3><ul><li>论文是研究议程，不含四组件统一实现。</li><li>引用工作跨平台、任务和评测，不能直接比较成熟度。</li><li>对象中心状态对柔性体、流体与长时人机交互仍不充分。</li><li>物理约束能减少幻觉，但不能自动修复错误感知或 reward hacking。</li><li>部署 flywheel 依赖数据权利、可复现环境和安全审查。</li></ul></article>
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>弱标注视频能否减少达到同等真实成功率所需的 robot-native 轨迹？</li><li>保持对象状态/接触是否比 pose matching 更能跨具身迁移？</li><li>物理变量预测是否比像素质量更能预测真实策略收益？</li><li>置信度能否在 planner exploitation 前识别危险 OOD？</li><li>组件级 credit assignment 是否比统一端到端微调更快修复失败？</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Elis Karcini、Haitham Bou-Ammar 及论文作者群的 grounding agenda。</li><li>LAPA、UniVLA 等 latent-action 路线的跨具身真实验证。</li><li>PROGRESSOR、ReWiND、TimeRewarder、SARM 的任务条件校准。</li><li>V-JEPA 2、Gaussian world models、ContactGaussian-WM 与 uncertainty calibration。</li><li>RoboNet、Open X-Embodiment、DROID、RH20T、RoboCasa365 的可复用物理事件 schema。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇论文最值得保留的不是“四个模块”本身，而是评估问题的转向：系统能否把更弱、更杂、更便宜的物理经验，稳定转换为经过具身和任务闭环验证的监督？如果不能，VLA 和 world model 的扩张仍会被已标注机器人轨迹的成本上限制住。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2606.06556">arXiv abstract</a> · <a href="https://arxiv.org/html/2606.06556v1">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2606.06556">PDF</a>。本文对架构、成本与迁移的判断基于论文提出的接口和证据边界；这些是可检验的系统推论，不是论文已经完成的端到端部署结果。本次 Scout 未发现该论文的 credible/strong 讨论或确切 GitHub 实现信号。</p>
+</div></footer>
+</body>
+</html>
