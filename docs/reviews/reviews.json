@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "maharaj-2026-code-world-modelling-survey",
+    "paper_title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
+    "paper_url": "https://arxiv.org/abs/2606.23690",
+    "review_date": "2026-08-29",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/beyond-the-autoregressive-horizon-a-comprehensive-survey-of-diffusion-models-world-modelling-and-state-space-models-for-code.html"
+  },
+  {
     "paper_id": "karcini-2026-robots-need-more-than-vla-world-models",
     "paper_title": "Robots Need More than VLA and World Models",
     "paper_url": "https://arxiv.org/abs/2606.06556",

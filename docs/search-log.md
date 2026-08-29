@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-28
+Last checked: 2026-08-29
 
 ## Queries Used
 
@@ -22,6 +22,25 @@ Last checked: 2026-08-28
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-08-29 Discovery Notes
+
+- Canonical Scout could not complete because the first configured primary-paper
+  request to the arXiv Export API returned HTTP 429. It produced no new
+  `latest.json`, so this run does not report an empty candidate set and does not
+  advance the inclusion cutoff. The 2026-08-28 candidate file remains a prior-run
+  artifact rather than evidence about 2026-08-29.
+- Channel status: arXiv `unavailable` (HTTP 429); Hacker News, Reddit, X/Twitter,
+  and GitHub `unavailable` because Scout stopped before those configured channels
+  ran. These states are not evidence of no papers, discussion, or implementation.
+- With no valid new-candidate input, the selector chose existing unreviewed paper
+  `2606.23690`, *Beyond the Autoregressive Horizon: A Comprehensive Survey of
+  Diffusion Models, World Modelling, and State Space Models for Code*. Official
+  arXiv abstract and full HTML verification confirmed its three-paradigm map,
+  execution-trace and agent-interaction account of Code World Models, fragmented
+  cross-paradigm benchmark landscape, hybrid-architecture thesis, and stated
+  limitation that the paradigms cannot yet be compared on one standardized
+  benchmark.
 
 ## 2026-08-28 Discovery Notes
 
