@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-08-29
+Last checked: 2026-09-01
 
 ## Queries Used
 
@@ -22,6 +22,24 @@ Last checked: 2026-08-29
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-09-01 Discovery Notes
+
+- Canonical Scout could not complete because the second configured primary-paper
+  request to the arXiv Export API returned HTTP 429. It produced no new
+  `latest.json`, so this run does not report an empty candidate set and does not
+  advance the inclusion cutoff. The 2026-08-28 candidate file remains a stale
+  prior-run artifact rather than evidence about 2026-09-01.
+- Channel status: arXiv `unavailable` (HTTP 429); Hacker News, Reddit, X/Twitter,
+  and GitHub `unavailable` because Scout stopped before those configured channels
+  ran. These states are not evidence of no papers, discussion, or implementation.
+- With no valid current-run candidate input, the selector chose existing
+  unreviewed paper `2601.07823`, *Video Generation Models in Robotics --
+  Applications, Research Challenges, Future Directions*. Official arXiv abstract
+  and full HTML verification confirmed its implicit/explicit video-world-model
+  distinction, four-part robotics application map, evaluation mismatch between
+  perceptual quality and task utility, and ten deployment challenges spanning
+  physics, uncertainty, control, safety, horizon, data, and compute.
 
 ## 2026-08-29 Discovery Notes
 

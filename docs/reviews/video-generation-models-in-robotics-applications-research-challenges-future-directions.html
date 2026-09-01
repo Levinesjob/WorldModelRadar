@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="mei-2026-video-generation-models-robotics">
+  <meta name="worldmodel-radar:paper-title" content="Video Generation Models in Robotics -- Applications, Research Challenges, Future Directions">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2601.07823">
+  <meta name="worldmodel-radar:review-date" content="2026-09-01">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>机器人需要的不是更逼真的视频，而是可校准的行动后果｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#142025;--muted:#66747a;--paper:#eef2f1;--panel:#fffdf8;--line:#c9d5d5;--green:#28735a;--blue:#326f91;--amber:#98651b;--red:#a54945;--teal:#1f7b7b}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}code{font-size:.9em}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(40px,7vw,72px);line-height:1.04;max-width:1120px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:1020px;font-size:22px;color:#35474d}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--teal)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-09-01</p>
+  <h1>机器人需要的不是更逼真的视频，而是可校准的行动后果</h1>
+  <p class="lead">这篇综述把生成视频放进机器人闭环：它既可制造训练数据，也可充当动力学/奖励模型、策略评估器和视觉规划器。但论文最重要的信号并非“视频模型将替代物理仿真”，而是现有视觉质量指标、物理一致性与真实任务成功率之间仍缺少可靠桥梁。只有动作可控、风险可校准、长程稳定且能由真实执行纠错，视频才可能成为决策基础设施。</p>
+  <div class="chips">
+    <div class="chip"><strong>4 类</strong><span>机器人应用合同</span></div>
+    <div class="chip"><strong>2 种</strong><span>场景表示路线</span></div>
+    <div class="chip"><strong>10 项</strong><span>开放挑战</span></div>
+    <div class="chip"><strong>研究期</strong><span>安全闭环成熟度</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>生成视频把互联网规模的视觉先验转成机器人可用的时空模型，尤其适合传统物理仿真难处理的外观变化、柔性物体和复杂接触；其价值要通过策略学习、评估或规划结果来兑现，而不是通过画面观感兑现。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把视频世界模型从“生成器”移到机器人系统图中，连接数据、动作、动力学、奖励、评估和 MPC。领域主线因此从像素预测转向“预测是否足以支持行动”。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>这是一篇应用综述，不是统一实验。不同论文使用不同机器人、视频模型、指标和真实环境；“不损失可靠性地替代真实评估”等表述更像路线愿景，不能视为已经跨任务成立的结论。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>视频世界模型的最小可用合同不是生成逼真的下一帧，而是给定可执行动作，预测与任务相关的未来状态和失败概率，并在不确定时拒绝替代真实世界。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">2 · Model map</p><h2>架构地图：表示方式决定它能被怎样验证</h2>
+  <table><thead><tr><th>路线</th><th>状态与转移</th><th>优势</th><th>结构性风险</th></tr></thead><tbody>
+    <tr><td>Markovian state model</td><td>编码观察为状态 <code>s_t</code>，学习 <code>p(s_{t+1}|s_t,a_t)</code>，并可预测奖励。</td><td>接口清晰、适合规划和 RL；latent state 可忽略不相关像素。</td><td>状态压缩可能漏掉接触、材质与长历史；重建好不代表控制充分。</td></tr>
+    <tr><td>隐式视频世界模型</td><td>场景完全藏在视频模型内部，只能通过生成帧观察其演化。</td><td>可复用大规模预训练先验，视觉保真和开放场景覆盖较强。</td><td>难查询几何、碰撞和置信度；规划器可能优化视觉漏洞。</td></tr>
+    <tr><td>显式视频世界模型</td><td>视频预测与点云、3D Gaussian 或其他可渲染场景表示耦合。</td><td>更利于多视角一致性、几何检查、交互和真实传感器对齐。</td><td>多模块误差、重建成本与动态物体表示形成新技术债。</td></tr>
+    <tr><td>JEPA/latent prediction</td><td>在表示空间预测被遮挡或未来特征，避免复原全部像素。</td><td>潜在计算更低，更聚焦高层运动与控制相关信息。</td><td>表示坍塌、正则难调；latent 相似不等于任务安全。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>系统合同：</strong>无论选择哪条路线，都应显式版本化 observation、action、horizon、scene/robot embodiment、reward/constraint、uncertainty 和 real-world oracle；否则模型升级后无法判断是生成变好，还是控制接口漂移。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">3 · Applications</p><h2>四类应用，共用一个“视频到动作”的瓶颈</h2>
+  <table><thead><tr><th>应用</th><th>论文中的工作流</th><th>真实用户痛点</th><th>验收信号</th></tr></thead><tbody>
+    <tr><td>数据生成与动作预测</td><td>视频模型合成成功/失败轨迹，再用 latent action、逆动力学、位姿跟踪或 retargeting 恢复机器人动作。</td><td>专家示范昂贵，跨 embodiment 数据稀缺。</td><td>生成数据加入后，新场景策略成功率提升；动作恢复误差在精细操作容差内。</td></tr>
+    <tr><td>RL 动力学与奖励</td><td>动作条件视频预测未来，生成似然、熵或 VLM 判断提供奖励，用 imagined experience 微调策略。</td><td>真实交互低效且危险，奖励工程难。</td><td>真实环境 sample efficiency、回报与安全性提升，而非只在 learned simulator 中提升。</td></tr>
+    <tr><td>策略评估</td><td>给定策略动作生成 rollout，预测成功率，降低多环境实体测试的硬件和人工成本。</td><td>通用机器人策略的环境组合爆炸。</td><td>预测与真实成功率校准，并覆盖失败排序、置信区间和分布外拒绝。</td></tr>
+    <tr><td>视觉规划</td><td>动作引导方法生成候选动作并滚动预测；action-free 方法先生成视频子目标，再由逆动力学或 goal-conditioned policy 执行。</td><td>显式动力学难建，长任务示范不足。</td><td>闭环执行成功率、重规划次数、真实碰撞率和每次决策延迟。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">4 · Evaluation</p><h2>视觉好看不是世界模型合格</h2>
+  <div class="grid two">
+    <article class="card"><h3>生成指标</h3><p>PSNR、SSIM、CLIP、FID/LPIPS、FVD/KVD/FVMD 衡量帧质量、语义相似或时序运动。它们适合发现渲染退化，却不能证明动作因果、接触动力学或策略排序正确。</p></article>
+    <article class="card risk"><h3>物理与任务指标</h3><p>Physics-IQ、PhyGenBench、VideoPhy、VP²、WorldModelBench 尝试衡量物理规律、指令遵循和 commonsense；但综述指出细粒度机器人操作覆盖仍不足，且感知指标与物理一致性并不等价。</p></article>
+    <article class="card good"><h3>应补的决策指标</h3><p>报告 action sensitivity、真实/预测成功率相关与校准、长 horizon 误差曲线、OOD 拒绝、危险漏报、planner exploit rate，以及影子模式下节省的真实 rollout。</p></article>
+    <article class="card signal"><h3>评估架构</h3><p>把视频模型放在固定 policy、动作接口和真实执行 oracle 中；按任务、材质、视角、机器人和时间切分，分别测 in-distribution 与 OOD。VLM judge 只能是辅助评委，不能成为唯一真值。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">5 · Challenges</p><h2>十个挑战可以压缩成四条失效链</h2>
+  <table><thead><tr><th>失效链</th><th>论文覆盖的问题</th><th>为什么会破坏闭环</th><th>可证伪测试</th></tr></thead><tbody>
+    <tr><td>世界不守恒</td><td>幻觉、物理违规、物体消失、固体穿透、流体与质量不守恒。</td><td>画面仍可逼真，但策略会基于不可能的后果作决策。</td><td>受控干预下测动量、体积、接触与对象持久性，并与真实轨迹比较。</td></tr>
+    <tr><td>控制不可识别</td><td>指令遵循差、动作估计不准、相机与执行器动作混淆。</td><td>生成轨迹无法可靠反解成 embodiment 可执行控制。</td><td>相邻动作对照、逆动力学误差、闭环 tracking error 与 task completion。</td></tr>
+    <tr><td>风险不可见</td><td>不确定性不足、内容安全、物理与语义交互安全。</td><td>模型不知道自己不知道，最危险的 OOD 场景反而给出确定预测。</td><td>校准误差、选择性风险、危险漏报率、OOD abstention 与覆盖率。</td></tr>
+    <tr><td>时间与经济性崩溃</td><td>长视频漂移、数据清洗成本、训练和推理成本。</td><td>真实机器人需要长程、低延迟、多分支 rollout；扩散采样和长注意力难满足。</td><td>随 horizon 的任务一致性/成本曲线，以及单位真实成功提升的总成本。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scale, complexity, stability & cost</p><h2>可扩展性、复杂度、稳定性与成本</h2>
+  <div class="grid two">
+    <article class="card"><h3>可扩展性</h3><p>模型和数据规模提升会改善表现，但论文引用的 VP² 结果提醒：物理一致性收益会较快平台化。真正的扩展单位应是每 GPU 秒能生成多少条“对动作敏感且校准”的有效轨迹，而非像素数或参数量。</p></article>
+    <article class="card"><h3>复杂度</h3><p>完整系统通常包含视频 backbone、动作条件器、inverse dynamics/latent action、reward 或 VLM judge、planner/MPC、safety filter 和真实控制器。模块数越多，错误来源越难识别。</p></article>
+    <article class="card"><h3>稳定性</h3><p>自回归视频会累积漂移；扩大上下文受二次注意力约束，压缩历史会遗忘关键状态，test-time training 又引入在线状态变化。必须测多随机种子、多 rollout 和长程最坏情况。</p></article>
+    <article class="card"><h3>成本</h3><p>互联网视频需要切片、过滤、标注；机器人适配还需要动作、相机、控制频率和 embodiment 对齐。训练成本叠加多步扩散推理与候选规划成本，只有减少真机占用、事故和人工标注时才有商业意义。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Real demand, fake demand & migration</p><h2>真实需求、伪需求与迁移路径</h2>
+  <div class="grid two">
+    <article class="card good"><h3>真实需求</h3><ul><li>昂贵真机评测前的失败筛选与 regression triage。</li><li>柔性物体、长尾外观等传统仿真建模成本高的窄域。</li><li>跨 embodiment 数据转换，但保留动作误差与可追溯性。</li><li>视觉规划的候选生成，最终由安全控制器和真实反馈闭环。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>把 photorealism 当作 physics 或因果正确。</li><li>声称零真机数据即可替代安全验证。</li><li>用通用文本到视频模型直接输出精密控制。</li><li>展示少量成功 demo，却不报告动作敏感性、失败率和算力。</li></ul></article>
+  </div>
+  <table style="margin-top:16px"><thead><tr><th>阶段</th><th>迁移动作</th><th>门槛</th></tr></thead><tbody>
+    <tr><td>1. 选窄任务</td><td>从真机成本高、失败可观测、动作空间受限的任务开始。</td><td>有冻结的真实评估集和总成本基线。</td></tr>
+    <tr><td>2. 先做离线生成</td><td>用于数据增广或候选可视化，不让模型直接控制。</td><td>真实策略增益超过筛选与训练成本。</td></tr>
+    <tr><td>3. 影子评估</td><td>并行预测真实 rollout 结果，积累校准和分布漂移数据。</td><td>危险漏报与置信区间达到任务阈值。</td></tr>
+    <tr><td>4. 受限规划</td><td>只在短 horizon、可撤销动作与安全 envelope 内排序候选。</td><td>不降低安全指标且减少真机 rollout/延迟。</td></tr>
+    <tr><td>5. 持续闭环</td><td>真实失败回流，版本化模型、数据和 robot stack，保留物理仿真/真机回退。</td><td>漂移可检测、决策可审计、收益持续。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Decision</p><h2>业务场景、用户痛点与今天该做什么</h2>
+  <div class="grid">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>优先卖“降低真机测试与数据运营成本”的窄工具：评测影子层、失败回放、动作标注/retargeting、任务相关视频过滤。客户要的是更少停机和事故，不是电影级 demo。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>把视频模型放在可替换的 prediction service 后面，明确动作频率、延迟预算、校准、回退和数据 lineage。物理仿真、几何约束与安全控制器仍是独立防线。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>最值得投入的是 robotics-centric benchmark、动作因果敏感性、时空 UQ、长程状态记忆、视频到动作误差传播，以及 learned simulator 对真实评估的替代边界。</p></article>
+  </div>
+  <div class="callout"><strong>技术债提醒：</strong>相机标定、控制频率、动作单位、延迟、机器人形态、场景版本、数据授权、生成 provenance、模型/过滤器版本和真实结果必须共同追踪；否则“模型失败”与接口漂移无法分离。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Open questions & watchlist</p><h2>开放问题与 Watchlist</h2>
+  <div class="grid two">
+    <article class="card signal"><h3>可证伪开放问题</h3><ul><li>控制成功率是否能在视觉质量继续提升前显著平台化？</li><li>动作条件视频对相邻动作的可分辨性，能否预测规划收益？</li><li>latent/像素级 UQ 在 OOD 材质与接触上能否保持校准？</li><li>生成数据在哪个比例后开始放大模型自身偏差？</li><li>视频评估能替代多少真机 rollout，且不增加危险漏报？</li><li>显式 3D 表示的几何约束是否值得其重建和运行成本？</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Zhiting Mei、Ola Shorinwa、Anirudha Majumdar 团队的视频 UQ 与安全工作。</li><li>WorldGym、Ctrl-World、Gemini Robotics/Veo、1X World Model 的真实策略评估证据。</li><li>WorldModelBench、VP² 与细粒度 manipulation benchmark 的扩展。</li><li>action-conditioned video、latent action、inverse dynamics 与跨 embodiment retargeting。</li><li>Diffusion Forcing、长上下文/检索式记忆和实时少步采样。</li><li>物理一致性、selective prediction、planner exploitation 与安全过滤器的联合指标。</li></ul></article>
+  </div>
+  <div class="callout"><strong>最终判断：</strong>这篇综述的价值是把视频模型能力按机器人生命周期重新排布，并清楚暴露视觉指标与决策证据之间的断层。它支持“把视频模型作为受限、可校准的预测组件”这条路线，不支持“用漂亮生成直接替代仿真、控制或安全验证”。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2601.07823">arXiv abstract</a> · <a href="https://arxiv.org/html/2601.07823">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2601.07823">PDF</a>。本文关于产品机会、系统迁移、成本与验收门槛的判断，是基于论文结构和限制形成的可检验推论。今日 canonical Scout 因 arXiv HTTP 429 未生成新输入；后续讨论与实现渠道未运行，不能据此判断热度为空。</p>
+</div></footer>
+</body>
+</html>

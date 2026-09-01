@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "mei-2026-video-generation-models-robotics",
+    "paper_title": "Video Generation Models in Robotics -- Applications, Research Challenges, Future Directions",
+    "paper_url": "https://arxiv.org/abs/2601.07823",
+    "review_date": "2026-09-01",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/video-generation-models-in-robotics-applications-research-challenges-future-directions.html"
+  },
+  {
     "paper_id": "maharaj-2026-code-world-modelling-survey",
     "paper_title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
     "paper_url": "https://arxiv.org/abs/2606.23690",
