@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-09-01
+Last checked: 2026-09-02
 
 ## Queries Used
 
@@ -22,6 +22,25 @@ Last checked: 2026-09-01
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-09-02 Discovery Notes
+
+- Canonical Scout could not complete because the first configured primary-paper
+  request to the arXiv Export API returned HTTP 429. It produced no new
+  `latest.json`, so this run does not report an empty candidate set and does not
+  advance the inclusion cutoff. The 2026-08-28 candidate file remains a stale
+  prior-run artifact rather than evidence about 2026-09-02.
+- Channel status: arXiv `unavailable` (HTTP 429); Hacker News, Reddit, X/Twitter,
+  and GitHub `unavailable` because Scout stopped before those configured channels
+  ran. These states are not evidence of no papers, discussion, or implementation.
+- With no valid current-run candidate input, the selector chose existing
+  unreviewed paper `2604.06339`, *Evolution of Video Generative Foundations*.
+  Official arXiv abstract and full HTML verification confirmed its GAN-to-
+  diffusion-to-AR evolution map, three video-world-model memory/physics routes,
+  three training-cost pathways, evaluation gap between perceptual consistency
+  and hard physical scenarios, and six next-generation research directions. The
+  author-maintained `Awesome-Video-Foundations` repository is an implementation-
+  ecosystem map, not evidence that a decision-capable world model already exists.
 
 ## 2026-09-01 Discovery Notes
 

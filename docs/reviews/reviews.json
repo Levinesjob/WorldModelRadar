@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "hu-2026-evolution-video-generative-foundations",
+    "paper_title": "Evolution of Video Generative Foundations",
+    "paper_url": "https://arxiv.org/abs/2604.06339",
+    "review_date": "2026-09-02",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/evolution-of-video-generative-foundations.html"
+  },
+  {
     "paper_id": "mei-2026-video-generation-models-robotics",
     "paper_title": "Video Generation Models in Robotics -- Applications, Research Challenges, Future Directions",
     "paper_url": "https://arxiv.org/abs/2601.07823",

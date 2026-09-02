@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="worldmodel-radar:paper-id" content="hu-2026-evolution-video-generative-foundations">
+  <meta name="worldmodel-radar:paper-title" content="Evolution of Video Generative Foundations">
+  <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2604.06339">
+  <meta name="worldmodel-radar:review-date" content="2026-09-02">
+  <meta name="worldmodel-radar:review-type" content="deep_read">
+  <title>视频生成不是世界模型，除非它能记住、守恒并响应行动｜WorldModel Radar</title>
+  <style>
+    :root{--ink:#142025;--muted:#66747a;--paper:#eef2f1;--panel:#fffdf8;--line:#c9d5d5;--green:#28735a;--blue:#326f91;--amber:#98651b;--red:#a54945;--teal:#1f7b7b}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.72 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}code{font-size:.9em}
+    header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1180px;margin:auto}.kicker,.tag{font:12px/1.3 Arial,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    h1{font-size:clamp(40px,7vw,72px);line-height:1.04;max-width:1120px;margin:12px 0 20px}h2{font-size:34px;line-height:1.18;margin:0 0 16px}h3{margin:.2em 0}.lead{max-width:1020px;font-size:22px;color:#35474d}
+    .chips,.grid{display:grid;gap:14px}.chips{grid-template-columns:repeat(4,1fr);margin-top:28px}.grid{grid-template-columns:repeat(3,1fr)}.grid.two{grid-template-columns:repeat(2,1fr)}
+    .card,.chip{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:20px}.chip strong{display:block;font-size:27px}.chip span{color:var(--muted);font:13px/1.4 Arial,sans-serif}
+    .good{border-top:5px solid var(--green)}.risk{border-top:5px solid var(--red)}.signal{border-top:5px solid var(--teal)}.callout{margin-top:16px;padding:18px 20px;border-left:6px solid var(--amber);background:#fff7e6}
+    table{width:100%;border-collapse:collapse;background:var(--panel)}th,td{padding:13px;border:1px solid var(--line);text-align:left;vertical-align:top}th{font:12px Arial,sans-serif;text-transform:uppercase;color:var(--muted)}ul,ol{padding-left:1.25em}footer{color:var(--muted);font-size:14px}
+    @media(max-width:860px){.chips,.grid,.grid.two{grid-template-columns:1fr 1fr}}@media(max-width:560px){.chips,.grid,.grid.two{grid-template-columns:1fr}h2{font-size:28px}}
+  </style>
+</head>
+<body>
+<header><div class="wrap">
+  <p class="kicker">WorldModel Radar · Deep Read · 2026-09-02</p>
+  <h1>视频生成不是世界模型，除非它能记住、守恒并响应行动</h1>
+  <p class="lead">这篇综述用 GAN、Diffusion、Auto-Regressive 与多模态路线重画视频生成史，并把世界模型放在下游终点。它真正提供的判断不是“画质越高越接近世界模型”，而是三项独立合同：长程状态记忆、可检查的空间与物理约束、实时动作响应。现有系统大多仍是短片生成器；视觉一致性接近饱和时，复杂物理成功率仍然很低。</p>
+  <div class="chips">
+    <div class="chip"><strong>3 代</strong><span>GAN → Diffusion → AR</span></div>
+    <div class="chip"><strong>3 路</strong><span>隐式记忆 / 3D / 物理</span></div>
+    <div class="chip"><strong>6 项</strong><span>下一代研究方向</span></div>
+    <div class="chip"><strong>邻接层</strong><span>对世界模型的证据强度</span></div>
+  </div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="tag">Core thesis & field position</p><h2>核心观点与领域位置</h2>
+  <div class="grid">
+    <article class="card good"><h3>论文真正说了什么</h3><p>视频基础模型从隐式对抗学习转向扩散的稳定得分匹配，再转向可与语言推理统一的序列建模。世界模型不是第四种 backbone，而是当视频模型获得记忆、交互、几何和物理合同后出现的系统形态。</p></article>
+    <article class="card signal"><h3>改变哪条主线</h3><p>它把“视频世界模型”拆成隐式长程记忆、显式/隐式 3D 记忆和物理驱动三簇。这让讨论从模型品牌转向状态如何保存、空间如何守恒、动力学如何被约束。</p></article>
+    <article class="card risk"><h3>证据边界</h3><p>论文主体是视频生成综述，世界模型只占一个下游章节；成本表来自异构技术报告，基准也主要测生成质量。它能证明技术依赖关系，却不能证明这些系统已有规划效用或部署安全性。</p></article>
+  </div>
+  <div class="callout"><strong>一句话判断：</strong>视频生成是感知与渲染基础设施；只有当状态、行动、转移、约束和决策评估都可查询、可校准时，它才升级为可用世界模型。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Map · Generative evolution</p><h2>三代生成范式，各自只解决世界模型的一部分</h2>
+  <table><thead><tr><th>范式</th><th>训练与表示</th><th>带来的能力</th><th>世界模型边界</th></tr></thead><tbody>
+    <tr><td>GAN</td><td>生成器与判别器做隐式分布匹配，视频侧加入时空联合或运动/内容分解。</td><td>单步采样快，奠定运动与时序生成。</td><td>训练不稳定、模式覆盖不足；判别器的“像真”信号不等于因果或物理正确。</td></tr>
+    <tr><td>Diffusion / DiT</td><td>在连续 latent 中迭代去噪，以更稳定的监督回归近似数据分布。</td><td>视觉保真、可控性和开放场景覆盖最强。</td><td>多步采样延迟高；局部视觉连续不保证对象持久、动作敏感或长程守恒。</td></tr>
+    <tr><td>Auto-Regressive</td><td>把视频压缩成离散 token，按链式概率逐 token 生成。</td><td>可复用 LLM 的长上下文、规划和多模态接口。</td><td>离散 token 形成信息瓶颈，自回归误差累积，生成成本随序列长度增长。</td></tr>
+    <tr><td>Hybrid</td><td>AR 负责高层计划与状态推进，Diffusion 负责连续细节渲染。</td><td>有机会分离“想什么”与“画什么”。</td><td>两套表示与时间尺度需对齐，误差归因、训练稳定性和端到端延迟更复杂。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Deep Read · World-model architecture</p><h2>从短片生成器到模拟器：三条架构补丁</h2>
+  <table><thead><tr><th>路线</th><th>状态 / 转移机制</th><th>真实问题</th><th>边界条件与技术债</th></tr></thead><tbody>
+    <tr><td>隐式记忆</td><td>滑动窗口、稀疏上下文、检索历史帧、RNN/TTT 隐状态。</td><td>降低流式延迟，延长对象与场景连续性。</td><td>压缩历史会遗忘；生成误差回流导致结构崩溃；缺少显式 3D 约束。</td></tr>
+    <tr><td>3D 记忆</td><td>点云、TSDF、3D Gaussian 等显式地图，或相机感知 token/KV cache。</td><td>相机移动和重访场景时维持几何与对象持久性。</td><td>重建与更新有延迟；显式表示会带来伪影，隐式表示又难审计。</td></tr>
+    <tr><td>物理驱动</td><td>物理引擎中间态、物理奖励微调，或推理时用 LLM 规划运动。</td><td>减少穿透、碰撞错误和不守恒等“看似合理”的幻觉。</td><td>显式引擎覆盖有限，奖励可能被投机，LLM 物理推理也没有守恒保证。</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>参考架构：</strong><code>multimodal observations → causal tokenizer/state store → action-conditioned transition → geometry/physics constraint → renderer → task evaluator & uncertainty → planner/safety gate → real-world feedback</code>。论文只覆盖其中大半；行动接口、校准和真实反馈仍需工程团队补齐。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Evaluation & falsifiability</p><h2>视觉分数接近满分，困难物理仍是低成功率</h2>
+  <div class="grid two">
+    <article class="card"><h3>论文给出的信号</h3><p>多款领先模型在基础时序一致性指标上超过 97%，差异转向语义长尾；但论文汇总的 VideoPhy-2 “Hard”物理场景中，最好模型成功率也只有约 22%。这说明感知稳定与物理可用之间存在断层。</p></article>
+    <article class="card risk"><h3>缺失的决策证据</h3><p>VBench、物理、常识与安全基准仍多在生成输出上评分，没有固定 policy、动作扰动、真实环境 oracle、OOD 拒绝或 planner exploitation 测试，不能直接回答“预测能否支持行动”。</p></article>
+    <article class="card good"><h3>应补的验证</h3><p>对相邻动作做反事实敏感性测试；测对象/质量/接触守恒；报告随 horizon 的状态漂移；让固定规划器在模型内外运行，比较真实回报、危险漏报、校准与回退率。</p></article>
+    <article class="card signal"><h3>可证伪假设</h3><p>若加入显式 3D 或物理模块后，真实任务成功率、OOD 校准或长程一致性没有超过同算力的视频 baseline，就说明额外结构只是昂贵渲染约束，而非决策所需状态。</p></article>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Scale, complexity, stability & cost</p><h2>扩展性、复杂度、稳定性与成本</h2>
+  <table><thead><tr><th>问题</th><th>论文证据</th><th>Radar 判断</th></tr></thead><tbody>
+    <tr><td>可扩展性</td><td>视频增加时间维度，全球注意力可达 <code>O((HWT)^2)</code>；路线转向因子化/线性注意力、多尺度、序列并行和高压缩 causal VAE。</td><td>应以单位 GPU 秒的有效、动作敏感 rollout 衡量扩展，而非只看分辨率和时长。</td></tr>
+    <tr><td>数据</td><td>高质量密集视频描述稀缺，静态 caption 缺少加速、转向、接触等动态信息；论文建议严格清洗和合成/具身数据。</td><td>世界模型还需要动作、相机、时间戳、失败与物理属性；普通视频库不能自然补齐这些合同。</td></tr>
+    <tr><td>成本</td><td>论文估算三档路径：世界基础模型约 6000–8000 万美元，实验室约 200–300 万美元，精筛商业短视频模型约 20–40 万美元。</td><td>数字来自不同报告，不能当统一报价；初创团队更适合适配开源 backbone、窄域数据与外部物理/评估层。</td></tr>
+    <tr><td>稳定性</td><td>扩散稳定训练但采样慢；AR 易长程误差累积；显式 3D 稳定几何却引入重建伪影和在线更新延迟。</td><td>必须分别测训练稳定、生成稳定、状态稳定与闭环策略稳定，不能用一个“temporal consistency”代替。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Real problem, fake demand & migration</p><h2>真实需求、伪需求与迁移路径</h2>
+  <div class="grid two">
+    <article class="card good"><h3>真实问题与用户痛点</h3><ul><li>游戏、机器人、驾驶和 AR/VR 需要低延迟、可交互的场景推进。</li><li>长视频需要对象持久、镜头重访和叙事状态，而非逐帧美观。</li><li>危险/稀有物理事件数据昂贵，真实测试成本和安全风险高。</li><li>团队缺少跨视觉、物理与任务效用的统一评估栈。</li></ul></article>
+    <article class="card risk"><h3>伪需求</h3><ul><li>把 4K、长视频或 prompt adherence 包装成世界理解。</li><li>用单次炫酷 demo 声称实时、长期稳定或可规划。</li><li>训练通用世界基础模型，却没有独占动作数据和明确任务 oracle。</li><li>把生成安全、水印或审美基准误当作部署安全。</li></ul></article>
+  </div>
+  <table style="margin-top:16px"><thead><tr><th>阶段</th><th>迁移动作</th><th>通过门槛</th></tr></thead><tbody>
+    <tr><td>1. 冻结任务合同</td><td>定义 observation、action、horizon、latency、约束和真实成功指标。</td><td>能够区分渲染、状态、动力学和控制失败。</td></tr>
+    <tr><td>2. 复用基础模型</td><td>选开源 DiT/AR backbone，只做窄域数据清洗、causal tokenizer 与动作条件。</td><td>相较无动作视频 baseline 有反事实敏感性。</td></tr>
+    <tr><td>3. 外挂结构</td><td>按失效模式加入检索记忆、3D 地图或物理约束，不一次堆齐。</td><td>同算力下改善真实任务指标，而非只改善画面。</td></tr>
+    <tr><td>4. 影子规划</td><td>模型只排序候选；真实/传统模拟器继续给 oracle，记录校准与 planner exploit。</td><td>危险漏报和 OOD 拒绝达到场景阈值。</td></tr>
+    <tr><td>5. 受限闭环</td><td>仅在可撤销动作和安全 envelope 内启用，真实失败持续回流。</td><td>总成本、延迟和事故率均优于原系统。</td></tr>
+  </tbody></table>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Decision</p><h2>不同读者今天应该做什么</h2>
+  <div class="grid">
+    <article class="card"><h3>创业者 / 产品负责人</h3><p>不要正面训练通用视频基础模型。更实际的切口是长程记忆层、3D/物理一致性验证、窄域动作数据运营、模型路由与任务相关评测；价值由减少真机/人工/渲染成本证明。</p></article>
+    <article class="card"><h3>架构师 / 工程负责人</h3><p>把 state、transition、renderer、constraint 和 evaluator 拆成可替换服务，版本化时钟、坐标系与动作语义。先测短 horizon 的闭环收益，再扩展分辨率和长度。</p></article>
+    <article class="card"><h3>研究者 / 战略分析者</h3><p>关注“高视觉分数为何不转成物理与决策效用”、混合 AR-Diffusion 的状态接口、显式/隐式 3D 成本边界，以及独占时序行动数据是否形成平台护城河。</p></article>
+  </div>
+  <div class="callout"><strong>业务边界：</strong>娱乐内容、预可视化和教育视频可接受感知级正确；机器人、驾驶和安全模拟必须达到行动级正确。两者共用 backbone，但验收、责任和成本模型完全不同。</div>
+</div></section>
+
+<section><div class="wrap">
+  <p class="tag">Open questions & Watchlist</p><h2>开放问题、技术债与 Watchlist</h2>
+  <div class="grid two">
+    <article class="card signal"><h3>开放问题</h3><ul><li>何种 state token 能同时支持长程记忆、物理约束与低延迟渲染？</li><li>动作敏感性是否比视觉一致性更能预测 planner 收益？</li><li>显式 3D 记忆何时胜过检索式帧记忆，其延迟拐点在哪里？</li><li>物理奖励会修复动力学，还是只让视频更像 benchmark 偏好？</li><li>混合 AR-Diffusion 的误差如何跨高层计划与低层渲染传播？</li><li>多少真实行动数据是从“视频模型”跨到“世界模型”的最低门槛？</li></ul></article>
+    <article class="card"><h3>Watchlist</h3><ul><li>Teng Hu、Jiangning Zhang 团队与 Awesome-Video-Foundations 的分类更新。</li><li>Genie、Cosmos、Wan/Hunyuan 等系统的动作控制、实时延迟与开放评测。</li><li>Context-as-Memory、WORLDMEM、TTT-layer 等长程状态方案。</li><li>3DGS/TSDF/KV-cache 路线在动态场景中的更新成本和漂移。</li><li>Physics-IQ、VideoPhy-2 以及加入真实决策 oracle 的后续 benchmark。</li><li>内容真实性、水印、数据授权与生成 provenance 标准。</li></ul></article>
+  </div>
+  <div class="callout"><strong>技术债清单：</strong>数据许可、去重与 caption 质量；视频/动作时钟；相机内外参；tokenizer 版本；状态缓存失效；3D 坐标系；物理引擎与渲染器差距；随机种子；评估 judge 漂移；安全回退与生成 provenance。</div>
+  <div class="callout"><strong>最终判断：</strong>这篇论文适合作为视频生成基础设施地图和世界模型候选组件目录，不适合作为“视频生成已经获得世界理解”的证据。最值得追踪的变化，是研究竞争从画质转向记忆、实时交互、3D/物理守恒与任务效用。</div>
+</div></section>
+
+<footer><div class="wrap">
+  <p>Primary sources：<a href="https://arxiv.org/abs/2604.06339">arXiv abstract</a> · <a href="https://arxiv.org/html/2604.06339">arXiv experimental HTML</a> · <a href="https://arxiv.org/pdf/2604.06339">PDF</a> · <a href="https://github.com/sjtuplayer/Awesome-Video-Foundations">author-maintained repository</a>。本文关于产品机会、架构边界、迁移与验收门槛的判断，是基于论文证据形成的可检验推论。今日 canonical Scout 因 arXiv HTTP 429 未生成新输入；后续讨论与实现渠道未运行，不能据此判断热度为空。</p>
+</div></footer>
+</body>
+</html>
