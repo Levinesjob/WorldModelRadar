@@ -1,5 +1,13 @@
 [
   {
+    "paper_id": "zeng-2026-openworldlib",
+    "paper_title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+    "paper_url": "https://arxiv.org/abs/2604.04707",
+    "review_date": "2026-09-03",
+    "review_type": "deep_read",
+    "html_path": "docs/reviews/openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html"
+  },
+  {
     "paper_id": "hu-2026-evolution-video-generative-foundations",
     "paper_title": "Evolution of Video Generative Foundations",
     "paper_url": "https://arxiv.org/abs/2604.06339",
@@ -126,14 +134,6 @@
     "review_date": "2026-07-15",
     "review_type": "deep_read",
     "html_path": "docs/reviews/from-world-action-models-to-embodied-brains-a-roadmap-for-open-world-physical-intelligence.html"
-  },
-  {
-    "paper_id": "zeng-2026-openworldlib",
-    "paper_title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
-    "paper_url": "https://arxiv.org/abs/2604.04707",
-    "review_date": "2026-07-14",
-    "review_type": "deep_read",
-    "html_path": "docs/reviews/openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html"
   },
   {
     "paper_id": "oefinger-2026-admissibility-world-model-simulators",

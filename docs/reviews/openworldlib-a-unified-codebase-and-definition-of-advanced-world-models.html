@@ -7,7 +7,7 @@
   <meta name="worldmodel-radar:paper-id" content="zeng-2026-openworldlib">
   <meta name="worldmodel-radar:paper-title" content="OpenWorldLib: A Unified Codebase and Definition of Advanced World Models">
   <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2604.04707">
-  <meta name="worldmodel-radar:review-date" content="2026-07-14">
+  <meta name="worldmodel-radar:review-date" content="2026-09-03">
   <meta name="worldmodel-radar:review-type" content="deep_read">
   <style>
     :root { --ink:#17211c; --muted:#5d6a63; --paper:#f4efe5; --panel:#fffaf1; --line:#d5c9b5; --green:#176b55; --blue:#235d86; --red:#a84438; --amber:#a87519; --black:#111814; }
@@ -71,7 +71,7 @@
   <header>
     <div class="wrap hero">
       <div>
-        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read</span><span class="tag">Framework / Definition</span><span class="tag">2026-07-14</span></div>
+        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read Refresh</span><span class="tag">Framework / Definition</span><span class="tag">2026-09-03</span></div>
         <h1>统一接口，不等于统一世界</h1>
         <p class="subtitle">OpenWorldLib 把世界模型从单个生成器提升为“感知—理解—记忆—交互”的能力系统；真正值得复用的是模块契约，真正需要警惕的是把模型目录误当成共享世界状态。</p>
       </div>
@@ -81,7 +81,8 @@
           <div><dt>来源</dt><dd><a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a>（v2）</dd></div>
           <div><dt>代码</dt><dd><a href="https://github.com/OpenDCAI/OpenWorldLib">OpenDCAI/OpenWorldLib</a></dd></div>
           <div><dt>定位</dt><dd>定义 + 推理框架 + 能力目录</dd></div>
-          <div><dt>雷达判断</dt><dd>高工程启发，中等实证强度</dd></div>
+          <div><dt>实现信号</dt><dd>865 stars / 52 forks；3D、VLA、simulator 扩展仓库</dd></div>
+          <div><dt>雷达判断</dt><dd>高工程启发，中低系统实证强度</dd></div>
         </dl>
       </aside>
     </div>
@@ -104,7 +105,7 @@
     <div class="grid" style="margin-top:16px">
       <article class="card"><h3>定义的进步</h3><p>文本到视频不因“能生成物理画面”自动成为世界模型；关键是能否接收复杂感知、进行动作条件交互、维护长期状态并理解物理世界。</p></article>
       <article class="card"><h3>框架的进步</h3><p>把 Operator、Reasoning、Synthesis、Representation、Memory 与 Pipeline 作为独立契约，允许不同任务和后端协作复用。</p></article>
-      <article class="card"><h3>证据的局限</h3><p>交互视频、3D、推理与 VLA 的指标不可直接比较；案例证明“能接入并运行”，尚不足以证明统一框架带来跨任务协同或长期稳定性。</p></article>
+      <article class="card"><h3>证据的局限</h3><p>交互视频、3D、推理与 VLA 的指标不可直接比较；A800 80GB 与 H200 141GB 上的案例证明“能接入并运行”，尚不足以证明统一框架带来跨任务协同、长期稳定性或更低总成本。</p></article>
     </div>
   </div></section>
 
@@ -128,7 +129,7 @@
     <div class="grid">
       <article class="card good"><h3>统一调用</h3><p>统一模型注册、输入契约、状态版本与推理路由，可以减少机器人、仿真和具身智能研究中的重复集成。</p></article>
       <article class="card good"><h3>跨模块比较</h3><p>把视觉质量、几何一致性、动作可达性和长期漂移放进同一任务上下文，避免各模块只报告局部最好指标。</p></article>
-      <article class="card good"><h3>能力目录</h3><p>围绕感知、记忆、因果、预测、规划与行动描述组件，使模型选择基于任务约束而非论文热度。</p></article>
+      <article class="card good"><h3>能力目录与生态</h3><p>围绕感知、记忆、推理、预测、表示与行动描述组件；官方仓库约 865 stars、52 forks，并拆出 3D、VLA、simulator 扩展仓库，说明集成需求真实，但不证明统一状态已经成立。</p></article>
     </div>
     <div class="grid two" style="margin-top:16px">
       <article class="card"><h3>适用条件</h3><p>从一个可回放的闭环任务开始，先统一状态和评测，再逐步扩展后端，才能验证框架是否真正减少接入摩擦。</p></article>
@@ -144,7 +145,7 @@
         <tr><td>可扩展性</td><td>基类与任务 Pipeline 易横向扩展，但每个后端的环境、权重和数据约束会线性累积。</td><td>插件隔离、能力注册表、按需加载、硬件调度和兼容矩阵。</td></tr>
         <tr><td>复杂度</td><td>模块解耦降低局部复杂度，却增加编排、跨模态语义和端到端调试复杂度。</td><td>统一事件模型、trace-id、契约测试与最小可复现实例。</td></tr>
         <tr><td>稳定性</td><td>生成后端的随机性、长期记忆污染与异构失败模式会跨模块放大。</td><td>置信度传播、状态快照、确定性回放、降级路径和人类接管。</td></tr>
-        <tr><td>成本</td><td>成本不只是 GPU；还包括模型下载、环境维护、数据搬运、跨后端重复编码和领域验收。</td><td>每任务预算、缓存、轻重模型级联、离线批处理和成本归因。</td></tr>
+        <tr><td>成本</td><td>论文主要用 A800 80GB 与 H200 141GB；成本还包括模型下载、环境维护、数据搬运、跨后端重复编码和领域验收。</td><td>补充消费级/边缘硬件矩阵、每任务预算、缓存、轻重模型级联和成本归因。</td></tr>
         <tr><td>迁移路径</td><td>最安全的路径是旁路评测 → 只读建议 → 沙箱动作 → 受限闭环，而非一次替换现有控制栈。</td><td>双跑、影子流量、可逆切换、场景白名单和责任边界。</td></tr>
       </tbody>
     </table>
@@ -199,11 +200,11 @@
     <div class="heading"><h2>证据判断与开放问题</h2><p>这篇论文提出了有用的工程定义，但下一步研究重点应从“兼容多少模型”转向“是否形成一致、可验证、可持续更新的世界状态”。</p></div>
     <div class="grid">
       <article class="card"><h3>可证伪问题</h3><p>统一模块契约能否在相同任务预算下，显著降低新后端接入时间，并提高跨任务复用率与闭环成功率？</p></article>
-      <article class="card"><h3>关键实验</h3><p>选同一长时交互场景，对比独立管线、仅统一 API、统一状态+记忆三组，测集成工时、漂移、失败恢复和成本。</p></article>
-      <article class="card"><h3>最终评级</h3><p><strong>架构启发 A-，证据 B-，生产成熟度 C+。</strong> 值得借鉴分层和能力边界，不宜把当前覆盖面视为通用世界模型已经成立。</p></article>
+      <article class="card"><h3>关键实验</h3><p>选同一长时交互场景，对比独立管线、仅统一 API、统一状态+记忆三组，测集成工时、动作敏感度、漂移、失败恢复、显存峰值和单位有效决策成本。</p></article>
+      <article class="card"><h3>最终评级</h3><p><strong>架构启发 A-，生态信号 B+，系统证据 C+，生产成熟度 C。</strong> 值得借鉴分层和能力边界；仓库扩展与关注度证明需求存在，不等于通用世界状态或闭环收益已成立。</p></article>
     </div>
   </div></section>
 
-  <footer>WorldModel Radar · Deep Read · 基于 arXiv v2 与官方代码仓库核验 · 2026-07-14</footer>
+  <footer>WorldModel Radar · Deep Read Refresh · 基于 arXiv v2 与官方代码仓库核验 · 2026-09-03</footer>
 </body>
 </html>

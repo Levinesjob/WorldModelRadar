@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-09-02
+Last checked: 2026-09-03
 
 ## Queries Used
 
@@ -22,6 +22,26 @@ Last checked: 2026-09-02
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-09-03 Discovery Notes
+
+- Canonical Scout stopped at the first configured arXiv Export API request with
+  HTTP 429. It did not produce a current-run `latest.json`, so the stale
+  2026-08-28 file is not interpreted as a zero-candidate result and the
+  inclusion cutoff remains unchanged.
+- Channel status: arXiv `unavailable` (HTTP 429); Hacker News, Reddit, X/Twitter,
+  and GitHub `unavailable` because Scout terminated before those configured
+  channels ran. These states are not evidence that papers, discussions, or
+  implementations were absent.
+- All 19 included papers already had deep reads, so the selector chose the
+  highest-value refresh target, OpenWorldLib (`2604.04707`). Official arXiv v2
+  HTML reconfirmed the perception/interaction/long-term-memory definition and
+  the Operator, Synthesis, Reasoning, Representation, Memory, and Pipeline
+  runtime. Its evaluation shows heterogeneous methods running on A800/H200
+  hardware, but does not isolate a shared-state, reuse, or closed-loop benefit.
+  The author repository had 865 stars and 52 forks, plus separate 3D, VLA, and
+  simulator extension repositories, at verification time; this is ecosystem
+  momentum, not validation of a unified world state.
 
 ## 2026-09-02 Discovery Notes
 
