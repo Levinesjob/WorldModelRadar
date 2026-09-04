@@ -7,7 +7,7 @@
   <meta name="worldmodel-radar:paper-id" content="zeng-2026-openworldlib">
   <meta name="worldmodel-radar:paper-title" content="OpenWorldLib: A Unified Codebase and Definition of Advanced World Models">
   <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2604.04707">
-  <meta name="worldmodel-radar:review-date" content="2026-09-03">
+  <meta name="worldmodel-radar:review-date" content="2026-09-04">
   <meta name="worldmodel-radar:review-type" content="deep_read">
   <style>
     :root { --ink:#17211c; --muted:#5d6a63; --paper:#f4efe5; --panel:#fffaf1; --line:#d5c9b5; --green:#176b55; --blue:#235d86; --red:#a84438; --amber:#a87519; --black:#111814; }
@@ -71,7 +71,7 @@
   <header>
     <div class="wrap hero">
       <div>
-        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read Refresh</span><span class="tag">Framework / Definition</span><span class="tag">2026-09-03</span></div>
+        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read Refresh</span><span class="tag">Framework / Definition</span><span class="tag">2026-09-04</span></div>
         <h1>统一接口，不等于统一世界</h1>
         <p class="subtitle">OpenWorldLib 把世界模型从单个生成器提升为“感知—理解—记忆—交互”的能力系统；真正值得复用的是模块契约，真正需要警惕的是把模型目录误当成共享世界状态。</p>
       </div>
@@ -164,7 +164,7 @@
     <div class="grid">
       <article class="card"><h3>实验场景</h3><p>交互视频检验可控生成，多模态推理检验世界理解，3D 生成检验显式表示，VLA 检验从理解到动作的接口。</p></article>
       <article class="card"><h3>比较难点</h3><p>生成、问答、重建和动作使用不同指标；单项结果不能直接证明统一框架带来了跨任务协同收益。</p></article>
-      <article class="card"><h3>证据边界</h3><p>当前实验更接近“可接入、可运行”的覆盖证明，尚缺共享状态、长期记忆和闭环任务收益的系统消融。</p></article>
+      <article class="card"><h3>主张—证据缺口</h3><p>论文主张高效复用与协同推理；当前实验更接近“可接入、可运行”的覆盖证明，尚未用独立管线基线或系统消融量化复用、共享状态、长期记忆和闭环任务收益。</p></article>
     </div>
     <div class="grid two" style="margin-top:16px">
       <article class="card"><h3>实验控制</h3><ul><li>输入、状态、模型与输出均保留版本和来源。</li><li>相同任务预算下比较独立管线与统一框架。</li><li>记录延迟、显存、置信度和失败恢复。</li><li>长期交互必须支持状态快照与确定性回放。</li></ul></article>
@@ -196,6 +196,15 @@
     </div>
   </div></section>
 
+  <section class="alt theme-conclusion"><div class="wrap">
+    <div class="heading"><h2>Watchlist</h2><p>后续信号应围绕“统一框架是否升级为统一运行时”收集，而不是继续累计支持模型数量。</p></div>
+    <div class="grid">
+      <article class="card"><h3>作者与仓库</h3><ul><li>DataFlow Team 与 OpenDCAI/OpenWorldLib 的版本发布、issue 和外部贡献。</li><li>3D、VLA、simulator 扩展是否回流成稳定公共契约，而非各自分叉。</li></ul></article>
+      <article class="card"><h3>评测与实现</h3><ul><li>是否出现独立管线对照、接入工时、复用率、端到端闭环成功率和单位有效决策成本。</li><li>是否发布消费级/边缘硬件矩阵、长期记忆回放、故障恢复与 OOD 拒绝测试。</li></ul></article>
+      <article class="card"><h3>生态与争议</h3><ul><li>GitHub 外部复用、插件兼容性、许可证与供应链问题。</li><li>研究社区是否接受“感知 + 动作条件交互 + 长期记忆”的边界，或提出更可操作的定义。</li></ul></article>
+    </div>
+  </div></section>
+
   <section class="theme-evaluation"><div class="wrap">
     <div class="heading"><h2>证据判断与开放问题</h2><p>这篇论文提出了有用的工程定义，但下一步研究重点应从“兼容多少模型”转向“是否形成一致、可验证、可持续更新的世界状态”。</p></div>
     <div class="grid">
@@ -205,6 +214,6 @@
     </div>
   </div></section>
 
-  <footer>WorldModel Radar · Deep Read Refresh · 基于 arXiv v2 与官方代码仓库核验 · 2026-09-03</footer>
+  <footer>WorldModel Radar · Deep Read Refresh · 基于 arXiv v2 与官方代码仓库核验 · 2026-09-04</footer>
 </body>
 </html>

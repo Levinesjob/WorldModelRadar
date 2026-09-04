@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-09-03
+Last checked: 2026-09-04
 
 ## Queries Used
 
@@ -22,6 +22,26 @@ Last checked: 2026-09-03
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-09-04 Discovery Notes
+
+- Canonical Scout stopped at the first configured arXiv Export API request with
+  HTTP 429. It did not produce a current-run `latest.json`; the 2026-08-28 file
+  remains stale and is not interpreted as a zero-candidate result. The inclusion
+  cutoff therefore remains unchanged.
+- Channel status: arXiv `unavailable` (HTTP 429); Hacker News, Reddit, X/Twitter,
+  and GitHub `unavailable` because Scout terminated before those configured
+  channels ran. These states are not evidence that papers, discussions, or
+  implementations were absent.
+- All 19 included papers already had deep reads, so the selector again chose the
+  highest-value refresh target, OpenWorldLib (`2604.04707`). Official arXiv v2
+  abstract and full HTML reconfirmed its action-conditioned, long-term-memory
+  definition and Operator/Synthesis/Reasoning/Representation/Memory/Pipeline
+  design. The paper claims efficient reuse and collaborative inference, while
+  its evaluation demonstrates heterogeneous task integration on A800/H200
+  hardware rather than an isolated reuse, shared-state, or closed-loop benefit.
+  The official repository remains an implementation/ecosystem signal, not proof
+  of those system-level claims.
 
 ## 2026-09-03 Discovery Notes
 
