@@ -1,6 +1,6 @@
 # Search Log
 
-Last checked: 2026-09-04
+Last checked: 2026-09-07
 
 ## Queries Used
 
@@ -22,6 +22,28 @@ Last checked: 2026-09-04
 - arXiv experimental HTML full text
 - Web search snippets for public paper metadata
 - Paper-linked GitHub repositories when present in abstracts
+
+## 2026-09-07 Discovery Notes
+
+- Canonical Scout stopped at the first configured arXiv Export API request
+  because the response timed out. It did not produce a current-run
+  `latest.json`; the 2026-08-28 file remains stale and is not interpreted as a
+  zero-candidate result. The inclusion cutoff therefore remains unchanged.
+- Channel status: arXiv `unavailable` (read timeout); Hacker News, Reddit,
+  X/Twitter, and GitHub `unavailable` because Scout terminated before those
+  configured channels ran. These states are not evidence that papers,
+  discussions, or implementations were absent.
+- Added 0 papers. All 19 included papers already had deep reads, so the selector
+  refreshed OpenWorldLib (`2604.04707`). Official arXiv v2 reconfirmed its
+  perception-centered, action-conditioned, long-term-memory definition and the
+  Operator/Synthesis/Reasoning/Representation/Memory/Pipeline architecture. The
+  evaluation still demonstrates heterogeneous task integration on A800/H200
+  hardware rather than an isolated reuse, shared-state, or closed-loop benefit.
+- The official repository showed about 848 stars and 46 forks. WorldOlympiad's
+  team also reported in an OpenWorldLib issue that its interactive long-video
+  benchmark generation stack used and adapted OpenWorldLib pipelines, with PRs
+  planned. This is an early external-reuse signal, but remains self-reported and
+  unmerged rather than independent production or benchmark evidence.
 
 ## 2026-09-04 Discovery Notes
 

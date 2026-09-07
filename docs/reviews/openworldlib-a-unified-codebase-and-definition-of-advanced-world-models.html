@@ -7,7 +7,7 @@
   <meta name="worldmodel-radar:paper-id" content="zeng-2026-openworldlib">
   <meta name="worldmodel-radar:paper-title" content="OpenWorldLib: A Unified Codebase and Definition of Advanced World Models">
   <meta name="worldmodel-radar:paper-url" content="https://arxiv.org/abs/2604.04707">
-  <meta name="worldmodel-radar:review-date" content="2026-09-04">
+  <meta name="worldmodel-radar:review-date" content="2026-09-07">
   <meta name="worldmodel-radar:review-type" content="deep_read">
   <style>
     :root { --ink:#17211c; --muted:#5d6a63; --paper:#f4efe5; --panel:#fffaf1; --line:#d5c9b5; --green:#176b55; --blue:#235d86; --red:#a84438; --amber:#a87519; --black:#111814; }
@@ -71,7 +71,7 @@
   <header>
     <div class="wrap hero">
       <div>
-        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read Refresh</span><span class="tag">Framework / Definition</span><span class="tag">2026-09-04</span></div>
+        <div class="tags"><span class="tag">WorldModel Radar</span><span class="tag">Deep Read Refresh</span><span class="tag">Framework / Definition</span><span class="tag">2026-09-07</span></div>
         <h1>统一接口，不等于统一世界</h1>
         <p class="subtitle">OpenWorldLib 把世界模型从单个生成器提升为“感知—理解—记忆—交互”的能力系统；真正值得复用的是模块契约，真正需要警惕的是把模型目录误当成共享世界状态。</p>
       </div>
@@ -81,7 +81,7 @@
           <div><dt>来源</dt><dd><a href="https://arxiv.org/abs/2604.04707">arXiv:2604.04707</a>（v2）</dd></div>
           <div><dt>代码</dt><dd><a href="https://github.com/OpenDCAI/OpenWorldLib">OpenDCAI/OpenWorldLib</a></dd></div>
           <div><dt>定位</dt><dd>定义 + 推理框架 + 能力目录</dd></div>
-          <div><dt>实现信号</dt><dd>865 stars / 52 forks；3D、VLA、simulator 扩展仓库</dd></div>
+          <div><dt>实现信号</dt><dd>约 848 stars / 46 forks；出现一项待合并的外部 benchmark 复用报告</dd></div>
           <div><dt>雷达判断</dt><dd>高工程启发，中低系统实证强度</dd></div>
         </dl>
       </aside>
@@ -129,7 +129,7 @@
     <div class="grid">
       <article class="card good"><h3>统一调用</h3><p>统一模型注册、输入契约、状态版本与推理路由，可以减少机器人、仿真和具身智能研究中的重复集成。</p></article>
       <article class="card good"><h3>跨模块比较</h3><p>把视觉质量、几何一致性、动作可达性和长期漂移放进同一任务上下文，避免各模块只报告局部最好指标。</p></article>
-      <article class="card good"><h3>能力目录与生态</h3><p>围绕感知、记忆、推理、预测、表示与行动描述组件；官方仓库约 865 stars、52 forks，并拆出 3D、VLA、simulator 扩展仓库，说明集成需求真实，但不证明统一状态已经成立。</p></article>
+      <article class="card good"><h3>能力目录与生态</h3><p>围绕感知、记忆、推理、预测、表示与行动描述组件；官方仓库约 848 stars、46 forks，并拆出 3D、VLA、simulator 扩展仓库。WorldOlympiad 团队在 issue 中自报基于该框架适配 LongLive 与 Rolling Forcing 管线，说明外部复用开始出现，但 PR 尚未合并，也不证明统一状态已经成立。</p></article>
     </div>
     <div class="grid two" style="margin-top:16px">
       <article class="card"><h3>适用条件</h3><p>从一个可回放的闭环任务开始，先统一状态和评测，再逐步扩展后端，才能验证框架是否真正减少接入摩擦。</p></article>
@@ -199,7 +199,7 @@
   <section class="alt theme-conclusion"><div class="wrap">
     <div class="heading"><h2>Watchlist</h2><p>后续信号应围绕“统一框架是否升级为统一运行时”收集，而不是继续累计支持模型数量。</p></div>
     <div class="grid">
-      <article class="card"><h3>作者与仓库</h3><ul><li>DataFlow Team 与 OpenDCAI/OpenWorldLib 的版本发布、issue 和外部贡献。</li><li>3D、VLA、simulator 扩展是否回流成稳定公共契约，而非各自分叉。</li></ul></article>
+      <article class="card"><h3>作者与仓库</h3><ul><li>DataFlow Team 与 OpenDCAI/OpenWorldLib 的版本发布、issue 和外部贡献。</li><li>WorldOlympiad 所称 LongLive / Rolling Forcing 适配是否形成可审查 PR、可复现实验与长期维护。</li><li>3D、VLA、simulator 扩展是否回流成稳定公共契约，而非各自分叉。</li></ul></article>
       <article class="card"><h3>评测与实现</h3><ul><li>是否出现独立管线对照、接入工时、复用率、端到端闭环成功率和单位有效决策成本。</li><li>是否发布消费级/边缘硬件矩阵、长期记忆回放、故障恢复与 OOD 拒绝测试。</li></ul></article>
       <article class="card"><h3>生态与争议</h3><ul><li>GitHub 外部复用、插件兼容性、许可证与供应链问题。</li><li>研究社区是否接受“感知 + 动作条件交互 + 长期记忆”的边界，或提出更可操作的定义。</li></ul></article>
     </div>
@@ -214,6 +214,6 @@
     </div>
   </div></section>
 
-  <footer>WorldModel Radar · Deep Read Refresh · 基于 arXiv v2 与官方代码仓库核验 · 2026-09-04</footer>
+  <footer>WorldModel Radar · Deep Read Refresh · 基于 arXiv v2 与官方代码仓库核验 · 2026-09-07</footer>
 </body>
 </html>

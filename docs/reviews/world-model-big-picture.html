@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WorldModel Radar｜Weekly Big Picture 2026-09-03</title>
+  <title>WorldModel Radar｜Weekly Big Picture 2026-09-07</title>
   <style>
     :root{--ink:#17211d;--muted:#66716b;--paper:#f3f0e7;--panel:#fffdf7;--line:#d7d0c1;--green:#176b54;--blue:#245c86;--amber:#a56d12;--red:#a73f35}
     *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.68 Georgia,"Noto Serif SC",serif}a{color:var(--blue)}header,section,footer{padding:42px clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.wrap{max-width:1200px;margin:auto}
@@ -15,20 +15,20 @@
 </head>
 <body>
 <header><div class="wrap">
-  <p class="kicker">WorldModel Radar · Weekly Big Picture · 2026-09-03</p>
+  <p class="kicker">WorldModel Radar · Weekly Big Picture · 2026-09-07</p>
   <h1>“能生成世界”与“能承担决策”之间，缺的是运行时证据</h1>
-  <p class="lead">本周没有可验证的新收录输入，但五次精读把一个判断推得更清楚：视频生成、代码环境、机器人预测与统一框架都在扩张能力边界，真正稀缺的却不是又一个生成后端，而是把状态、动作、记忆、预算、失败和任务结果连成可审计闭环的运行时。下一阶段的基础设施机会更接近 world-model runtime 与 evidence layer，而不是模型目录。</p>
+  <p class="lead">本周没有可验证的新收录输入，但两次 OpenWorldLib 复核把一个判断推得更清楚：外部团队开始尝试复用统一推理框架，说明集成痛点真实；尚未出现的仍是共享状态、跨模块收益、长期稳定性和总成本证据。下一阶段的基础设施机会更接近 world-model runtime 与 evidence layer，而不是模型目录。</p>
   <div class="metrics"><div class="metric"><strong>19</strong><span>verified papers</span></div><div class="metric"><strong>19</strong><span>deep reads</span></div><div class="metric"><strong>11</strong><span>core papers</span></div><div class="metric"><strong>0</strong><span>reviews remaining</span></div></div>
 </div></header>
 
 <section><div class="wrap">
   <h2>本周发生了什么</h2>
   <div class="grid">
-    <article class="card signal"><h3>OpenWorldLib：集成需求被验证</h3><p><a href="openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html">刷新精读</a>核验了 Operator、Synthesis、Reasoning、Representation、Memory 与 Pipeline 骨架。官方仓库约 865 stars、52 forks，并拆出 3D、VLA、simulator 扩展；生态动量真实，但共享 world state 与闭环收益仍未被实验证明。</p></article>
-    <article class="card signal"><h3>机器人视频：应用地图完整，证据仍断裂</h3><p><a href="video-generation-models-in-robotics-applications-research-challenges-future-directions.html">机器人视频综述</a>覆盖数据生成、动作预测、动力学/奖励、视觉规划和策略评估，却再次暴露视觉指标与真实控制效用之间没有稳定桥梁。</p></article>
-    <article class="card signal"><h3>视频基础模型：成本路线分化</h3><p><a href="evolution-of-video-generative-foundations.html">视频生成基础综述</a>把隐式记忆、显式 3D 记忆和物理驱动三条 world-model 路线并列。感知一致性接近饱和并不代表 hard-physics 场景已解决。</p></article>
-    <article class="card signal"><h3>代码世界模型：环境必须可执行</h3><p><a href="beyond-the-autoregressive-horizon-a-comprehensive-survey-of-diffusion-models-world-modelling-and-state-space-models-for-code.html">代码综述</a>将 execution trace、持久状态与 agent interaction 纳入 CWM；但 diffusion、SSM、CWM 缺少统一 benchmark，混合架构主张仍难横向证伪。</p></article>
-    <article class="card watch"><h3>Scan：输入失败，不等于领域静默</h3><p>9 月 1–3 日 canonical Scout 均因 arXiv Export API HTTP 429 中止，其他渠道未运行。这里能得出的结论只是“渠道不可用”，不能声称没有论文、讨论或实现信号。</p></article>
+    <article class="card signal"><h3>OpenWorldLib：出现早期外部复用</h3><p><a href="openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html">刷新精读</a>核验了 Operator、Synthesis、Reasoning、Representation、Memory 与 Pipeline 骨架。WorldOlympiad 团队在官方 issue 中自报基于框架适配两条视频管线；这是需求证据，但 PR、复现实验和系统收益尚未落地。</p></article>
+    <article class="card signal"><h3>论文定义没有收缩</h3><p>arXiv v2 仍把感知、动作条件交互和长期记忆作为世界模型能力边界。它拒绝把文本到视频、代码生成或娱乐型 avatar 自动纳入，提醒 taxonomy 必须以任务合同而非“world”标签为准。</p></article>
+    <article class="card signal"><h3>生态规模不是成熟度</h3><p>官方仓库约 848 stars、46 forks，并拆出 3D、VLA、simulator 扩展。关注和分叉能证明集成兴趣，不能证明共享 world state、跨任务协同或生产稳定性。</p></article>
+    <article class="card signal"><h3>系统证据仍停在可运行</h3><p>论文在 A800 80GB 与 H200 141GB 上展示四类异构任务；没有独立管线基线，也未隔离统一 API、Memory 与共享状态各自带来的收益和成本。</p></article>
+    <article class="card watch"><h3>Scan：输入失败，不等于领域静默</h3><p>9 月 7 日 canonical Scout 在首个 arXiv Export API 请求读取超时，其他渠道未运行。这里能得出的结论只是“渠道不可用”，不能声称没有论文、讨论或实现信号。</p></article>
     <article class="card watch"><h3>库存状态：从补课转向复核</h3><p>19 篇已核验论文现已全部完成精读。每日任务的边际价值将从清空未读队列转向：发现 field-level 新增、复核最高影响条目、比较跨论文假设是否被新证据推翻。</p></article>
   </div>
   <div class="callout"><strong>本周最重要的连接：</strong>机器人需要动作效用，视频模型需要物理与长时一致性，代码模型需要可执行状态，OpenWorldLib 需要共享语义。四条线指向同一个缺口：不是把更多模型接到一个 API，而是证明不同模块围绕同一世界状态做出了更好、更便宜、更可恢复的决策。</div>
@@ -37,11 +37,11 @@
 <section><div class="wrap">
   <h2>Cluster 信号变化</h2>
   <table><thead><tr><th>Cluster</th><th>信号</th><th>本周判断</th><th>下一证据</th></tr></thead><tbody>
-    <tr><td>World-model runtime / 模块化平台</td><td>实现信号增强</td><td>OpenWorldLib 的关注度与扩展仓库说明异构模型接入是实际痛点；论文实验仍主要证明可运行，而非复用收益、共享状态或长期稳定性。</td><td>独立管线 vs 统一 API vs 统一状态三组消融；接入工时、显存、漂移、恢复和单位决策成本。</td></tr>
+    <tr><td>World-model runtime / 模块化平台</td><td>外部复用信号小幅增强</td><td>WorldOlympiad 的自报适配让“有人尝试复用”比单纯 star 更具体；但尚无合并 PR、独立复现、复用收益、共享状态或长期稳定性证据。</td><td>适配 PR 与可复现实验；独立管线 vs 统一 API vs 统一状态三组消融。</td></tr>
     <tr><td>视频生成 → actionable simulator</td><td>地图增强，决策证据持平</td><td>隐式记忆、3D 记忆、物理驱动路线更清楚，但 hard-physics、动作敏感性与真实任务成功仍没有统一评测。</td><td>固定延迟/算力预算下，同时报告 action fidelity、物理违例、长期漂移与闭环成功率。</td></tr>
     <tr><td>机器人 world models</td><td>应用面增强，成熟度中低</td><td>视频生成能支撑数据、预测、规划和评测，但每个用途要求不同的 state/action contract；通用生成分数无法替代用途匹配。</td><td>真机反事实、策略排序保持性、故障归因、人类接管和总拥有成本。</td></tr>
     <tr><td>Code World Models</td><td>新邻接 cluster</td><td>可执行环境与持久状态让“世界模型”超越物理视频，但也测试了仓库的定义边界：关键是 action consequence，而非输出模态。</td><td>统一任务集比较 AR、diffusion、SSM、CWM 及混合系统的正确性、吞吐和交互成本。</td></tr>
-    <tr><td>讨论与实现热度</td><td>当前不可判定</td><td>Scout 在 arXiv 阶段中止，HN、Reddit、X、GitHub 未运行；只有 OpenWorldLib 官方仓库快照可作为实现信号。</td><td>恢复 canonical Scout 后再判断 credible/strong heat，绝不以 unavailable 代替 empty。</td></tr>
+    <tr><td>讨论与实现热度</td><td>当前不可判定</td><td>Scout 在 arXiv 阶段读取超时，HN、Reddit、X、GitHub 未运行；只有 primary-source 复核时发现的官方仓库与 issue 可作为实现信号。</td><td>恢复 canonical Scout 后再判断 credible/strong heat，绝不以 unavailable 代替 empty。</td></tr>
   </tbody></table>
 </div></section>
 
@@ -85,7 +85,7 @@
   <div class="grid">
     <article class="card watch"><h3>作者、实验室与仓库</h3><ul><li>OpenDCAI/OpenWorldLib 及 3D、VLA、simulator 扩展仓库</li><li>Awesome-Video-Foundations 与机器人视频生成作者群</li><li>Code World Model 后续可执行环境与 hybrid architecture 工作</li></ul></article>
     <article class="card watch"><h3>Benchmark 与协议</h3><ul><li>action fidelity + hard physics + latency + closed-loop success 联合评测</li><li>WorldState schema、Memory provenance、确定性回放与接口版本迁移</li><li>24GB–141GB GPU 和边缘设备的质量/成本前沿</li></ul></article>
-    <article class="card watch"><h3>讨论与生态信号</h3><ul><li>OpenWorldLib 是否出现独立生产使用、跨团队插件与真实 issue 修复</li><li>视频 world model 是否出现跨 benchmark 的机器人任务相关性证据</li><li>canonical Scout 恢复后的 HN、Reddit、X、GitHub credible/strong heat</li></ul></article>
+    <article class="card watch"><h3>讨论与生态信号</h3><ul><li>WorldOlympiad 的适配报告是否形成合并 PR、复现说明和可量化接入收益</li><li>OpenWorldLib 是否出现独立生产使用、跨团队插件与真实 issue 修复</li><li>canonical Scout 恢复后的 HN、Reddit、X、GitHub credible/strong heat</li></ul></article>
   </div>
   <div class="callout"><strong>下周优先问题：</strong>有没有平台能证明“接入更多模型”同时降低了接入工时、运行成本和故障恢复时间，并提高同一闭环任务结果？如果没有，world-model runtime 仍是高价值研究问题，而不是成熟平台品类。</div>
 </div></section>
@@ -93,7 +93,8 @@
 <section><div class="wrap">
   <h2>本周证据页</h2>
   <table><thead><tr><th>Date</th><th>Deep read</th><th>改变了什么判断</th></tr></thead><tbody>
-    <tr><td>2026-09-03</td><td><a href="openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html">OpenWorldLib（刷新）</a></td><td>确认异构集成需求和生态动量；共享状态、跨模块协同与 TCO 仍是核心证据缺口。</td></tr>
+    <tr><td>2026-09-07</td><td><a href="openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html">OpenWorldLib（刷新）</a></td><td>发现早期外部 benchmark 复用报告；PR、独立复现、共享状态、跨模块协同与 TCO 仍是证据缺口。</td></tr>
+    <tr><td>2026-09-04</td><td><a href="openworldlib-a-unified-codebase-and-definition-of-advanced-world-models.html">OpenWorldLib（刷新）</a></td><td>把高关注度与系统证据分离，补充复用、共享状态和闭环收益的主张—证据缺口。</td></tr>
     <tr><td>2026-09-02</td><td><a href="evolution-of-video-generative-foundations.html">Evolution of Video Generative Foundations</a></td><td>三条 video-world-model 路线与三类成本路径；hard physics 仍落后于感知一致性。</td></tr>
     <tr><td>2026-09-01</td><td><a href="video-generation-models-in-robotics-applications-research-challenges-future-directions.html">Video Generation Models in Robotics</a></td><td>视频模型的四类机器人用途与十项部署障碍；生成质量不能替代决策效用。</td></tr>
     <tr><td>2026-08-29</td><td><a href="beyond-the-autoregressive-horizon-a-comprehensive-survey-of-diffusion-models-world-modelling-and-state-space-models-for-code.html">Beyond the Autoregressive Horizon</a></td><td>执行状态与交互让 CWM 成为邻接 cluster；跨范式 benchmark 仍碎片化。</td></tr>
@@ -101,6 +102,6 @@
   </tbody></table>
 </div></section>
 
-<footer><div class="wrap"><p>本页综合 <code>data/papers.json</code>、本周 primary-source 精读与 canonical Scout 状态，于 2026-09-03 人工更新。口径：19 篇已核验论文、19 份精读、11 篇 core、0 篇尚待精读。本周未获得有效 current-run candidate input；arXiv HTTP 429 以及未执行的 HN、Reddit、X、GitHub 均记录为 unavailable，不能解释为无新增、无讨论或无实现。</p></div></footer>
+<footer><div class="wrap"><p>本页综合 <code>data/papers.json</code>、本周 primary-source 精读与 canonical Scout 状态，于 2026-09-07 人工更新。口径：19 篇已核验论文、19 份精读、11 篇 core、0 篇尚待精读。本周未获得有效 current-run candidate input；arXiv 读取超时以及未执行的 HN、Reddit、X、GitHub 均记录为 unavailable，不能解释为无新增、无讨论或无实现。</p></div></footer>
 </body>
 </html>
