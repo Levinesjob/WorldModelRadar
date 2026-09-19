@@ -1,40 +1,39 @@
 # WorldModel Radar
 
-Tracking 2026+ survey, roadmap, taxonomy, and definition papers on world models.
+Intelligence map for world models — **not** an awesome list. Content first;
+verified ledger stays strict; discussion heat raises priority only and never
+decides inclusion alone.
 
-WorldModel Radar is a living intelligence map for world models. It tracks
-field-level papers, code artifacts, and discussion signals, then turns them into
-deep reads, opportunity maps, architecture notes, and weekly synthesis for people
-who need to understand where the field is going.
+**Reader entry:** start from the [Weekly Digest](docs/digests/) (one-line judgment,
+map changes, new Briefs, pipeline health, watchlist ≤5). Each verified item has a
+short Chinese [Brief](data/briefs/) (`claim` / `map_position` / `do` /
+`fake_demand` / `evidence_links`). Optional HTML deep reads remain under
+`docs/reviews/`.
 
-**Core positioning:** content first, presentation second, promotion last. The goal
-is to help builders, researchers, architects, and strategy readers make better
-decisions about world-model directions, not just collect links.
+**Maintainer entry:** [`docs/radar-runtime.md`](docs/radar-runtime.md) — run
+discovery → triage → brief → digest in a clean environment in ~30 minutes.
 
-这是一个面向“世界模型（World Models）”综述论文的轻量仓库，收录范围从
-2026-01-01 至今。
+```bash
+# Offline (fixtures, no network)
+python3 -m radar run --fixtures
+python3 -m unittest discover -s tests -v
 
-> Scope note: 本仓库优先收录标题、摘要或正文明确以 world model/world
-> modeling/world modelling 为核心对象的 survey、review、roadmap、taxonomy、
-> position 或 definition/framework 类论文。泛视频生成、AI agent 或具身智能综述
-> 只有在摘要明确把 world models 作为主要讨论对象时才列为 adjacent。
+# Live (needs network; set GITHUB_TOKEN for better GitHub quota)
+python3 -m radar run
+```
 
-## What This Radar Delivers
+WorldModel Radar tracks 2026+ survey, roadmap, taxonomy, and definition papers,
+plus artifact and discussion signals, then turns them into Briefs and weekly
+synthesis for builders, researchers, architects, and strategy readers.
 
-| Depth | Output | Reader Value |
-| --- | --- | --- |
-| Scan | New papers, source signals, weekly changes | See what changed without reading everything. |
-| Map | Domain clusters and field position | Understand where a paper fits in the world-model landscape. |
-| Deep Read | HTML reviews with thesis, architecture, opportunity, risk, and limits | Extract the real argument and avoid shallow hype. |
-| Decision | Real problems, fake demand, migration path, cost and complexity | Decide what to build, research, watch, or ignore. |
-| Watchlist | Repos, labs, debates, benchmarks, and discussion heat | Track the signals that may shape the next wave. |
-
-The radar is designed for AI founders, product leaders, architects, researchers,
-PhD students, and strategy analysts who need a structured view of world-model
-evolution.
+> Scope note: 优先收录标题、摘要或正文明确以 world model / world modeling /
+> world modelling 为核心对象的 overview 类工作。泛视频生成、AI agent 或具身智能
+> 综述只有在摘要把 world models 作为主要讨论对象时才列为 adjacent。热度信号可进
+> 分诊队列，但不能单独进入已核验清单。
 
 See [`docs/radar-content-system.md`](docs/radar-content-system.md) for the
-editorial system behind the radar.
+editorial system and [`docs/inclusion-criteria.md`](docs/inclusion-criteria.md)
+for the verified-ledger gate.
 
 ## Quick View
 
@@ -75,22 +74,21 @@ editorial system behind the radar.
 ```text
 .
 |-- README.md
+|-- radar/                 # Radar Runtime (default path)
 |-- data/
-|   `-- papers.json
+|   |-- papers.json        # verified ledger seed
+|   |-- clusters.json
+|   |-- briefs/
+|   |-- fixtures/          # offline adapter fixtures
+|   `-- triage/
 |-- docs/
-|   |-- automation.md
-|   |-- inclusion-criteria.md
-|   |-- radar-content-system.md
-|   |-- search-log.md
-|   `-- reviews/
-`-- scripts/
-    |-- build_big_picture.py
-    |-- build_review_manifest.py
-    |-- find_arxiv_candidates.py
-    |-- render_readme.py
-    |-- select_review_target.py
-    |-- send_feishu_file.py
-    `-- validate_papers.py
+|   |-- radar-runtime.md   # how to run the MVP pipeline
+|   |-- digests/           # Weekly Digest (primary reader entry)
+|   |-- reviews/           # optional Deep Read HTML
+|   `-- ...
+|-- runs/                  # machine-readable run status
+|-- scripts/               # legacy helpers (optional)
+`-- tests/
 ```
 
 ## Data Fields
@@ -105,45 +103,27 @@ The canonical paper list lives in [`data/papers.json`](data/papers.json).
 
 ## Maintenance
 
-Run the validator after editing metadata:
+Default pipeline (multi-channel, isolated adapters):
 
 ```bash
-python scripts/render_readme.py
-python scripts/validate_papers.py
+python3 -m radar run --fixtures   # or: python3 -m radar run
+python3 -m radar seed-briefs
+python3 scripts/render_readme.py
+python3 scripts/validate_papers.py
 ```
 
-Suggested update cadence:
+- Discovery channels (parallel, failure-isolated): arXiv, OpenReview, GitHub.
+- Optional signal channels (degradable): Hacker News, Hugging Face Papers.
+- Channel `unavailable` ≠ empty field; never narrate outages as “zero candidates”.
+- Move weak hits to triage / `docs/search-log.md`; only primary-source-verified
+  overview items enter `data/papers.json`.
 
-- Search daily or weekly for new arXiv papers containing `world model`, `world models`,
-  `world modeling`, and `world modelling`.
-- Add newly found 2026+ papers only if they satisfy the inclusion criteria.
-- Move broad-but-weak hits into `docs/search-log.md` instead of forcing them into
-  the canonical list.
+See [`docs/radar-runtime.md`](docs/radar-runtime.md) and legacy notes in
+[`docs/automation.md`](docs/automation.md).
 
-## Local Automation
+## Deep Read (optional)
 
-This repository is configured for a local daily Codex automation. See
-[`docs/automation.md`](docs/automation.md) for the update workflow.
-
-## Review Templates
-
+- [`docs/reviews/`](docs/reviews/): long HTML reviews — second layer, not required
+  for every paper.
 - [`docs/reviews/world-model-big-picture.html`](docs/reviews/world-model-big-picture.html):
-  weekly synthesis page for the reviewed HTML corpus.
-- [`docs/reviews/a-definition-roadmap-world-models.html`](docs/reviews/a-definition-roadmap-world-models.html):
-  a reusable strategic and architectural reading template based on
-  *A Definition and Roadmap for World Models*.
-
-## Review Automation Helpers
-
-- `scripts/find_arxiv_candidates.py`: discover new arXiv candidates since 2026-01-01.
-- `scripts/select_review_target.py`: choose the next highest-value paper for deep reading.
-- `scripts/build_review_manifest.py`: rebuild `docs/reviews/reviews.json` from HTML meta tags.
-- `scripts/build_big_picture.py`: regenerate the weekly big-picture HTML.
-- `scripts/send_feishu_file.py`: upload and send a generated HTML file to Feishu.
-
-Candidate discovery currently uses the official arXiv Export API, and the radar
-system is designed to expand toward broader signals: GitHub repositories, Hugging
-Face artifacts, Papers with Code, X/Twitter discussions, Hacker News, Reddit ML
-communities, technical newsletters, lab pages, and company research blogs. Discussion
-heat can raise priority, but primary-source verification remains required for
-inclusion and deep reading.
+  legacy weekly synthesis over the HTML corpus.

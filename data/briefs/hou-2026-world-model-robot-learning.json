@@ -1,0 +1,14 @@
+{
+  "id": "brief-hou-2026-world-model-robot-learning",
+  "paper_id": "hou-2026-world-model-robot-learning",
+  "claim": "Comprehensive review of world models from a robot-learning perspective, including policies, learned simulators, robotic video world models, dataset…",
+  "map_position": "robot · core · robot learning",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2605.00080",
+    "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "World Model for Robot Learning: A Comprehensive Survey",
+  "cluster_id": "robot"
+}

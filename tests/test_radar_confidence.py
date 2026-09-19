@@ -1,7 +1,12 @@
+"""Legacy confidence tests — now import from radar package."""
+
+from __future__ import annotations
+
 import importlib.util
 import unittest
 from pathlib import Path
 
+from radar.confidence import assess_discovery_confidence
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,13 +20,12 @@ def load_script(name: str):
     return module
 
 
-finder = load_script("find_arxiv_candidates")
 selector = load_script("select_review_target")
 
 
 class DiscoveryConfidenceTests(unittest.TestCase):
     def test_world_action_model_roadmap_is_high_confidence_discovery(self):
-        confidence, evidence = finder.assess_discovery_confidence(
+        confidence, evidence = assess_discovery_confidence(
             "From World Action Models to Embodied Brains: A Roadmap",
             "We review the evolution and propose a roadmap.",
         )
@@ -29,7 +33,7 @@ class DiscoveryConfidenceTests(unittest.TestCase):
         self.assertIn("world-model phrase appears in title", evidence)
 
     def test_single_method_world_model_paper_is_not_high_confidence_discovery(self):
-        confidence, _ = finder.assess_discovery_confidence(
+        confidence, _ = assess_discovery_confidence(
             "Causally Debiased Latent Action Model for World Models",
             "We propose a framework for fine-tuning.",
         )

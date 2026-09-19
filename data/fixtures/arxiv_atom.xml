@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <id>http://arxiv.org/abs/2609.99999v1</id>
+    <published>2026-09-01T00:00:00Z</published>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <title>A Survey of Interactive World Models for Embodied Agents</title>
+    <summary>
+      We present a survey and roadmap of interactive world models, covering
+      taxonomy, evaluation challenges, and future directions for embodied AI.
+    </summary>
+    <author><name>A. Researcher</name></author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2608.11601v1</id>
+    <published>2026-08-12T00:00:00Z</published>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <title>How Can Driving World Models Do Counterfactual Prediction?</title>
+    <summary>
+      Already verified paper — should be filtered by known ids in live pipeline.
+      Survey framing for driving world models.
+    </summary>
+    <author><name>Jiaru Zhang</name></author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.11111v1</id>
+    <published>2026-09-10T00:00:00Z</published>
+    <updated>2026-09-10T00:00:00Z</updated>
+    <title>Latent Dynamics Tuning for World Models</title>
+    <summary>
+      We propose a method for fine-tuning latent dynamics. Not an overview.
+    </summary>
+    <author><name>B. Method</name></author>
+  </entry>
+</feed>

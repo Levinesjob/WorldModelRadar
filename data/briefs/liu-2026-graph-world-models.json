@@ -1,0 +1,13 @@
+{
+  "id": "brief-liu-2026-graph-world-models",
+  "paper_id": "liu-2026-graph-world-models",
+  "claim": "Formalizes graph world models as a unified research paradigm and surveys graph-based world-model work with a relational-inductive-bias taxonomy.",
+  "map_position": "definition · core · graph world models",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2604.27895"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
+  "cluster_id": "definition"
+}

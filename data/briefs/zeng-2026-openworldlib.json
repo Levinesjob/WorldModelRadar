@@ -1,0 +1,14 @@
+{
+  "id": "brief-zeng-2026-openworldlib",
+  "paper_id": "zeng-2026-openworldlib",
+  "claim": "Proposes a unified definition and capability categorization for advanced world models while presenting a standardized inference framework.",
+  "map_position": "definition · core · advanced world models",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2604.04707",
+    "https://github.com/OpenDCAI/OpenWorldLib"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+  "cluster_id": "definition"
+}

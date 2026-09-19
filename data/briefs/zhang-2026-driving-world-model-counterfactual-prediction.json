@@ -1,0 +1,13 @@
+{
+  "id": "brief-zhang-2026-driving-world-model-counterfactual-prediction",
+  "paper_id": "zhang-2026-driving-world-model-counterfactual-prediction",
+  "claim": "Identifies a field-level mismatch between direct action-conditioned prediction and episode-specific counterfactual prediction, formalizes the missi…",
+  "map_position": "robot · domain · driving world models and counterfactual evaluation",
+  "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+  "evidence_links": [
+    "https://arxiv.org/abs/2608.11601"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "How Can Driving World Models Do Counterfactual Prediction?",
+  "cluster_id": "robot"
+}

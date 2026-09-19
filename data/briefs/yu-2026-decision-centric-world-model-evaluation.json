@@ -1,0 +1,13 @@
+{
+  "id": "brief-yu-2026-decision-centric-world-model-evaluation",
+  "paper_id": "yu-2026-decision-centric-world-model-evaluation",
+  "claim": "Surveys evaluation practice across generative and decision-oriented world models, diagnoses claim/evidence mismatch, and proposes an L0-L7 evidenti…",
+  "map_position": "robot · core · decision-centric world-model evaluation",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2606.15032"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+  "cluster_id": "robot"
+}

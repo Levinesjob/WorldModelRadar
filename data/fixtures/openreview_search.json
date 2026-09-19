@@ -1,0 +1,20 @@
+{
+  "notes": [
+    {
+      "id": "ORForumAAA",
+      "forum": "ORForumAAA",
+      "content": {
+        "title": {"value": "World Models for Open-World Robotics: A Position Paper"},
+        "abstract": {"value": "We review definitions and propose a taxonomy and roadmap for world models in open-world robotics."}
+      }
+    },
+    {
+      "id": "ORForumBBB",
+      "forum": "ORForumBBB",
+      "content": {
+        "title": {"value": "Unrelated Transformer Scaling Laws"},
+        "abstract": {"value": "No mention of the target field."}
+      }
+    }
+  ]
+}

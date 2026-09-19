@@ -1,0 +1,13 @@
+{
+  "id": "brief-karcini-2026-robots-need-more-than-vla-world-models",
+  "paper_id": "karcini-2026-robots-need-more-than-vla-world-models",
+  "claim": "Position paper that surveys world models alongside robot foundation models, cross-embodiment datasets, learning from video, and reward modeling.",
+  "map_position": "robot · domain · robotics, VLA, and world-model interfaces",
+  "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+  "evidence_links": [
+    "https://arxiv.org/abs/2606.06556"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "Robots Need More than VLA and World Models",
+  "cluster_id": "robot"
+}

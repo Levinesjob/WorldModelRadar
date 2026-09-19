@@ -1,0 +1,14 @@
+{
+  "id": "brief-hu-2026-evolution-video-generative-foundations",
+  "paper_id": "hu-2026-evolution-video-generative-foundations",
+  "claim": "Broad video-generation survey that explicitly frames advanced video generation as a path toward advanced world models.",
+  "map_position": "video_sim · adjacent · video generation foundations",
+  "do": "忽略 — adjacent；仅作边界对照，不进主清单决策",
+  "evidence_links": [
+    "https://arxiv.org/abs/2604.06339",
+    "https://github.com/sjtuplayer/Awesome-Video-Foundations"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "Evolution of Video Generative Foundations",
+  "cluster_id": "video_sim"
+}

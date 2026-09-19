@@ -1,0 +1,338 @@
+{
+  "week": "2026-09-19",
+  "run_status": "success",
+  "blocks": {
+    "one_line_judgment": "本周发现正常：分诊队列 6 条（含新信号约 6）；以 Brief 与地图变化为准，热度只提权。",
+    "map_changes": [
+      {
+        "cluster_id": "runtime",
+        "label": "Runtime / 可执行模拟器",
+        "brief_count": 5,
+        "note": "代表 Brief ×5"
+      },
+      {
+        "cluster_id": "video_sim",
+        "label": "Video → Sim",
+        "brief_count": 2,
+        "note": "代表 Brief ×2"
+      },
+      {
+        "cluster_id": "robot",
+        "label": "Robot / Embodied",
+        "brief_count": 7,
+        "note": "代表 Brief ×7"
+      },
+      {
+        "cluster_id": "eval",
+        "label": "Evaluation / Admissibility",
+        "brief_count": 0,
+        "note": "缺：统一的 decision-centric 评价协议落地案例"
+      },
+      {
+        "cluster_id": "definition",
+        "label": "Definition / Taxonomy / Roadmap",
+        "brief_count": 4,
+        "note": "代表 Brief ×4"
+      },
+      {
+        "cluster_id": "code",
+        "label": "Code / Artifacts",
+        "brief_count": 1,
+        "note": "代表 Brief ×1"
+      }
+    ],
+    "new_briefs": [
+      {
+        "id": "brief-chen-2026-definition-roadmap-world-models",
+        "title": "A Definition and Roadmap for World Models",
+        "claim": "Provides a scientific definition, key technical aspects, and staged roadmap for world models.",
+        "map_position": "definition · core · general definition",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.06401"
+        ]
+      },
+      {
+        "id": "brief-chen-2026-generative-engines-actionable-simulators",
+        "title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
+        "claim": "Survey-style argument reframing world models from visually realistic generators to physically grounded actionable simulators.",
+        "map_position": "runtime · core · physical grounding and actionable simulators",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2601.15533"
+        ]
+      },
+      {
+        "id": "brief-han-2026-economic-world-models",
+        "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
+        "claim": "Defines Economic World Models as executable generative economic environments, systematically surveys the field through a six-level capability ladde…",
+        "map_position": "runtime · domain · economic world models",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2608.06020",
+          "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models"
+        ]
+      },
+      {
+        "id": "brief-hou-2026-world-model-robot-learning",
+        "title": "World Model for Robot Learning: A Comprehensive Survey",
+        "claim": "Comprehensive review of world models from a robot-learning perspective, including policies, learned simulators, robotic video world models, dataset…",
+        "map_position": "robot · core · robot learning",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2605.00080",
+          "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy"
+        ]
+      },
+      {
+        "id": "brief-hu-2026-evolution-video-generative-foundations",
+        "title": "Evolution of Video Generative Foundations",
+        "claim": "Broad video-generation survey that explicitly frames advanced video generation as a path toward advanced world models.",
+        "map_position": "video_sim · adjacent · video generation foundations",
+        "do": "忽略 — adjacent；仅作边界对照，不进主清单决策",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.06339",
+          "https://github.com/sjtuplayer/Awesome-Video-Foundations"
+        ]
+      },
+      {
+        "id": "brief-karcini-2026-robots-need-more-than-vla-world-models",
+        "title": "Robots Need More than VLA and World Models",
+        "claim": "Position paper that surveys world models alongside robot foundation models, cross-embodiment datasets, learning from video, and reward modeling.",
+        "map_position": "robot · domain · robotics, VLA, and world-model interfaces",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.06556"
+        ]
+      },
+      {
+        "id": "brief-liang-2026-world-action-models-embodied-brains",
+        "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+        "claim": "Reviews the evolution toward World Action Models, diagnoses representation, standardization, and systems gaps, and proposes explicit prediction, in…",
+        "map_position": "robot · core · world action models and embodied physical intelligence",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.11689"
+        ]
+      },
+      {
+        "id": "brief-liu-2026-graph-world-models",
+        "title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
+        "claim": "Formalizes graph world models as a unified research paradigm and surveys graph-based world-model work with a relational-inductive-bias taxonomy.",
+        "map_position": "definition · core · graph world models",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.27895"
+        ]
+      },
+      {
+        "id": "brief-liu-2026-interactive-video-world-modeling",
+        "title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
+        "claim": "Systematically reviews recent research trends, technical developments, benchmarks, and future directions in interactive world modeling.",
+        "map_position": "video_sim · core · interactive video world modeling",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.01164",
+          "https://github.com/liujiuming123/Awesome-Interactive-World-Model"
+        ]
+      },
+      {
+        "id": "brief-liu-2026-medical-world-models",
+        "title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
+        "claim": "Reviews scattered work toward medical world models and organizes a roadmap around patient-state construction, clinical dynamics modeling, and inter…",
+        "map_position": "runtime · domain · healthcare",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.16721",
+          "https://github.com/1999kevin/awesome_medical_world_models"
+        ]
+      },
+      {
+        "id": "brief-maharaj-2026-code-world-modelling-survey",
+        "title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
+        "claim": "Includes Code World Models as one of three surveyed non-autoregressive paradigms for code intelligence.",
+        "map_position": "code · domain · code intelligence",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.23690"
+        ]
+      },
+      {
+        "id": "brief-mei-2026-video-generation-models-robotics",
+        "title": "Video Generation Models in Robotics - Applications, Research Challenges, Future Directions",
+        "claim": "Reviews video models and their applications as embodied world models in robotics, including data generation, action prediction, dynamics/reward mod…",
+        "map_position": "robot · domain · robotics and video generation world models",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2601.07823"
+        ]
+      },
+      {
+        "id": "brief-oefinger-2026-admissibility-world-model-simulators",
+        "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
+        "claim": "Defines an embodiment-agnostic L0-L4 admissibility framework for deciding when generative world-model simulator verdicts can count as assurance evi…",
+        "map_position": "runtime · core · world-model simulator assurance",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.07196"
+        ]
+      },
+      {
+        "id": "brief-wang-2026-world-action-models",
+        "title": "World Action Models: The Next Frontier in Embodied AI",
+        "claim": "Defines World Action Models as a world-model-integrated embodied AI paradigm and surveys architectures, data, evaluation, challenges, and opportuni…",
+        "map_position": "robot · core · embodied AI and action generation",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2605.12090"
+        ]
+      },
+      {
+        "id": "brief-yu-2026-decision-centric-world-model-evaluation",
+        "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+        "claim": "Surveys evaluation practice across generative and decision-oriented world models, diagnoses claim/evidence mismatch, and proposes an L0-L7 evidenti…",
+        "map_position": "robot · core · decision-centric world-model evaluation",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.15032"
+        ]
+      },
+      {
+        "id": "brief-zeng-2026-openworldlib",
+        "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+        "claim": "Proposes a unified definition and capability categorization for advanced world models while presenting a standardized inference framework.",
+        "map_position": "definition · core · advanced world models",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.04707",
+          "https://github.com/OpenDCAI/OpenWorldLib"
+        ]
+      },
+      {
+        "id": "brief-zeng-2026-world-models-not-merely-injecting-world-knowledge",
+        "title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
+        "claim": "Analyzes fragmentation in world-model research and proposes a unified design specification for more general world models.",
+        "map_position": "definition · core · world-model research framing",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "evidence_links": [
+          "https://arxiv.org/abs/2602.01630"
+        ]
+      },
+      {
+        "id": "brief-zhang-2026-driving-world-model-counterfactual-prediction",
+        "title": "How Can Driving World Models Do Counterfactual Prediction?",
+        "claim": "Identifies a field-level mismatch between direct action-conditioned prediction and episode-specific counterfactual prediction, formalizes the missi…",
+        "map_position": "robot · domain · driving world models and counterfactual evaluation",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2608.11601"
+        ]
+      },
+      {
+        "id": "brief-zheng-2026-digital-twins-world-models-edge",
+        "title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
+        "claim": "Systematically surveys the transition from digital twins to world models and their role in edge general intelligence.",
+        "map_position": "runtime · domain · digital twins and mobile edge intelligence",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "evidence_links": [
+          "https://arxiv.org/abs/2603.17420"
+        ]
+      }
+    ],
+    "pipeline_health": [
+      {
+        "channel": "arxiv",
+        "role": "discovery",
+        "status": "success",
+        "item_count": 1,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok"
+      },
+      {
+        "channel": "openreview",
+        "role": "discovery",
+        "status": "success",
+        "item_count": 1,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok"
+      },
+      {
+        "channel": "github",
+        "role": "discovery",
+        "status": "success",
+        "item_count": 2,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok"
+      },
+      {
+        "channel": "hackernews",
+        "role": "signal",
+        "status": "success",
+        "item_count": 2,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok"
+      },
+      {
+        "channel": "huggingface",
+        "role": "signal",
+        "status": "success",
+        "item_count": 1,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok"
+      }
+    ],
+    "watchlist": [
+      {
+        "title": "A Survey of Interactive World Models for Embodied Agents",
+        "url": "https://arxiv.org/abs/2609.99999",
+        "channels": [
+          "arxiv",
+          "huggingface"
+        ],
+        "confidence": "high",
+        "priority_boost": 1.8399999999999999
+      },
+      {
+        "title": "Open-source world model simulator released",
+        "url": "https://example.com/world-model-sim",
+        "channels": [
+          "hackernews"
+        ],
+        "confidence": "medium",
+        "priority_boost": 2.42
+      },
+      {
+        "title": "World Models for Open-World Robotics: A Position Paper",
+        "url": "https://openreview.net/forum?id=ORForumAAA",
+        "channels": [
+          "openreview"
+        ],
+        "confidence": "high",
+        "priority_boost": 0.0
+      },
+      {
+        "title": "Ask HN: best laptop for ML?",
+        "url": "https://news.ycombinator.com/item?id=40000002",
+        "channels": [
+          "hackernews"
+        ],
+        "confidence": "low",
+        "priority_boost": 1.03
+      },
+      {
+        "title": "example/world-models-toolkit",
+        "url": "https://github.com/example/world-models-toolkit",
+        "channels": [
+          "github"
+        ],
+        "confidence": "medium",
+        "priority_boost": 0.0
+      }
+    ]
+  }
+}

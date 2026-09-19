@@ -1,5 +1,9 @@
 # Local Automation
 
+> **MVP default path:** use Radar Runtime — `python3 -m radar run`
+> (see [`radar-runtime.md`](./radar-runtime.md)). The Codex cron flow below remains
+> optional/legacy; deep-read HTML is no longer required every day.
+
 WorldModel Radar is maintained by a local Codex cron automation that runs once
 per day at local midnight against this repository.
 

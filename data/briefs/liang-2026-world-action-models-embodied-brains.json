@@ -1,0 +1,13 @@
+{
+  "id": "brief-liang-2026-world-action-models-embodied-brains",
+  "paper_id": "liang-2026-world-action-models-embodied-brains",
+  "claim": "Reviews the evolution toward World Action Models, diagnoses representation, standardization, and systems gaps, and proposes explicit prediction, in…",
+  "map_position": "robot · core · world action models and embodied physical intelligence",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2607.11689"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+  "cluster_id": "robot"
+}

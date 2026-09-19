@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 venv/
 data/candidates/*.json
+# triage/run outputs may be committed for audit; ignore local scratch only:
+data/triage/.scratch/

@@ -1,0 +1,13 @@
+{
+  "id": "brief-oefinger-2026-admissibility-world-model-simulators",
+  "paper_id": "oefinger-2026-admissibility-world-model-simulators",
+  "claim": "Defines an embodiment-agnostic L0-L4 admissibility framework for deciding when generative world-model simulator verdicts can count as assurance evi…",
+  "map_position": "runtime · core · world-model simulator assurance",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2607.07196"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
+  "cluster_id": "runtime"
+}

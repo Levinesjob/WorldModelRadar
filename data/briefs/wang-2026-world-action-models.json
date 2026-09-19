@@ -1,0 +1,13 @@
+{
+  "id": "brief-wang-2026-world-action-models",
+  "paper_id": "wang-2026-world-action-models",
+  "claim": "Defines World Action Models as a world-model-integrated embodied AI paradigm and surveys architectures, data, evaluation, challenges, and opportuni…",
+  "map_position": "robot · core · embodied AI and action generation",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2605.12090"
+  ],
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "title": "World Action Models: The Next Frontier in Embodied AI",
+  "cluster_id": "robot"
+}
