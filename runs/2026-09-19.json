@@ -1,0 +1,65 @@
+{
+  "run_id": "2026-09-19T15:46:35+00:00",
+  "started_at": "2026-09-19T15:46:35+00:00",
+  "finished_at": "2026-09-19T15:46:35+00:00",
+  "status": "success",
+  "mode": "fixtures",
+  "candidate_count": 6,
+  "brief_count": 19,
+  "channels": [
+    {
+      "channel": "arxiv",
+      "role": "discovery",
+      "status": "success",
+      "item_count": 1,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://export.arxiv.org/api/query"
+    },
+    {
+      "channel": "openreview",
+      "role": "discovery",
+      "status": "success",
+      "item_count": 1,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 1,
+      "endpoint": "https://api2.openreview.net/notes/search"
+    },
+    {
+      "channel": "github",
+      "role": "discovery",
+      "status": "success",
+      "item_count": 2,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 1,
+      "endpoint": "https://api.github.com/search/repositories"
+    },
+    {
+      "channel": "hackernews",
+      "role": "signal",
+      "status": "success",
+      "item_count": 2,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://hn.algolia.com/api/v1/search"
+    },
+    {
+      "channel": "huggingface",
+      "role": "signal",
+      "status": "success",
+      "item_count": 1,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://huggingface.co/api/daily_papers"
+    }
+  ],
+  "notes": {
+    "unavailable_means": "channel outage — not an empty field / not zero candidates",
+    "heat_policy": "signal heat boosts triage priority only; never sole verified inclusion"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "brief-zhang-2026-driving-world-model-counterfactual-prediction",
+  "paper_id": "zhang-2026-driving-world-model-counterfactual-prediction",
+  "claim": "指出驾驶世界模型在反事实预测上的协议缺口，并给出可控评测基准。",
+  "map_position": "robot · domain · driving world models and counterfactual evaluation",
+  "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+  "evidence_links": [
+    "https://arxiv.org/abs/2608.11601"
+  ],
+  "horizon": "near_term",
+  "mainline_note": "驾驶反事实协议补丁，强化局部评测，未改全局评价主线。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "How Can Driving World Models Do Counterfactual Prediction?",
+  "cluster_id": "robot"
+}

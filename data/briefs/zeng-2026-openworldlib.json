@@ -1,0 +1,16 @@
+{
+  "id": "brief-zeng-2026-openworldlib",
+  "paper_id": "zeng-2026-openworldlib",
+  "claim": "提出高级世界模型统一定义与能力分类，并给出标准化推理代码基座。",
+  "map_position": "definition · core · advanced world models",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2604.04707",
+    "https://github.com/OpenDCAI/OpenWorldLib"
+  ],
+  "horizon": "mainline",
+  "mainline_note": "统一高级世界模型定义与代码基座，推动规格与实现收敛。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+  "cluster_id": "definition"
+}

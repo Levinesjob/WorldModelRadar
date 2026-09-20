@@ -1,0 +1,29 @@
+[
+  {
+    "paper": {
+      "id": "2609.99999",
+      "title": "A Survey of Interactive World Models for Embodied Agents",
+      "summary": "A survey and roadmap of interactive world models. Shared arXiv id with discovery fixture so heat can merge onto triage — still not a papers.json ledger entry."
+    },
+    "upvotes": 42,
+    "publishedAt": "2026-09-18T08:00:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2609.77777",
+      "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+      "summary": "Hugging Face–only heat fixture about latent world models for robot rollouts. Not copied from the verified ledger."
+    },
+    "upvotes": 27,
+    "publishedAt": "2026-09-17T11:00:00.000Z"
+  },
+  {
+    "paper": {
+      "id": "2601.00001",
+      "title": "Diffusion Cats",
+      "summary": "Generating cats with diffusion."
+    },
+    "upvotes": 99,
+    "publishedAt": "2026-09-16T10:00:00.000Z"
+  }
+]

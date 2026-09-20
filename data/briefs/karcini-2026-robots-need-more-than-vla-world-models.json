@@ -1,0 +1,15 @@
+{
+  "id": "brief-karcini-2026-robots-need-more-than-vla-world-models",
+  "paper_id": "karcini-2026-robots-need-more-than-vla-world-models",
+  "claim": "立场文：机器人不能只靠 VLA（Vision-Language-Action，视觉-语言-动作）与世界模型。",
+  "map_position": "robot · domain · robotics, VLA, and world-model interfaces",
+  "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+  "evidence_links": [
+    "https://arxiv.org/abs/2606.06556"
+  ],
+  "horizon": "mainline",
+  "mainline_note": "警示勿把 VLA/世界模型当成充分条件，校正主线假需求。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "Robots Need More than VLA and World Models",
+  "cluster_id": "robot"
+}

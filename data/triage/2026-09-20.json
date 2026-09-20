@@ -1,0 +1,199 @@
+{
+  "run_id": "2026-09-20T03:19:43+00:00",
+  "run_status": "success",
+  "mode": "fixtures",
+  "verified_seed_count": 19,
+  "note": "Heat signals boost priority only; verified inclusion still requires primary-source gate.",
+  "candidate_count": 8,
+  "candidates": [
+    {
+      "id": "cand-8ea9447e50dc",
+      "title": "A Survey of Interactive World Models for Embodied Agents",
+      "url": "https://arxiv.org/abs/2609.99999",
+      "channels": [
+        "arxiv",
+        "huggingface"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "world-model phrase appears in title",
+        "overview/framing term appears in title",
+        "overview/framing term appears in abstract",
+        "huggingface daily papers hit",
+        "upvotes=42"
+      ],
+      "signal_ids": [
+        "arxiv:2609.99999",
+        "hf:2609.99999"
+      ],
+      "anchors": {
+        "arxiv_id": "2609.99999",
+        "published": "2026-09-01"
+      },
+      "summary": "We present a survey and roadmap of interactive world models, covering taxonomy, evaluation challenges, and future directions for embodied AI.",
+      "priority_boost": 1.8399999999999999,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-1453197e4120",
+      "title": "Open-source world model simulator released",
+      "url": "https://example.com/world-model-sim",
+      "channels": [
+        "hackernews"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        "hacker news story match",
+        "points=142",
+        "comments=37"
+      ],
+      "signal_ids": [
+        "hn:40000001"
+      ],
+      "anchors": {},
+      "summary": "Fixture-only HN heat hit — not from papers.json ledger.",
+      "priority_boost": 2.42,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-11ee260d686c",
+      "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+      "url": "https://example.com/worldmodelbench",
+      "channels": [
+        "hackernews"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        "hacker news story match",
+        "points=88",
+        "comments=21"
+      ],
+      "signal_ids": [
+        "hn:40000003"
+      ],
+      "anchors": {},
+      "summary": "Distinct HN signal item for offline demo; not a verified ledger paper.",
+      "priority_boost": 1.88,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-b4aae94c1cfa",
+      "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+      "url": "https://arxiv.org/abs/2609.77777",
+      "channels": [
+        "huggingface"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        "huggingface daily papers hit",
+        "upvotes=27"
+      ],
+      "signal_ids": [
+        "hf:2609.77777"
+      ],
+      "anchors": {
+        "arxiv_id": "2609.77777"
+      },
+      "summary": "Hugging Face–only heat fixture about latent world models for robot rollouts. Not copied from the verified ledger.",
+      "priority_boost": 1.54,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-abaf53bf5dea",
+      "title": "World Models for Open-World Robotics: A Position Paper",
+      "url": "https://openreview.net/forum?id=ORForumAAA",
+      "channels": [
+        "openreview"
+      ],
+      "confidence": "high",
+      "evidence": [
+        "world-model phrase appears in title",
+        "overview/framing term appears in title",
+        "overview/framing term appears in abstract",
+        "openreview forum hit"
+      ],
+      "signal_ids": [
+        "openreview:ORForumAAA"
+      ],
+      "anchors": {
+        "openreview_forum": "ORForumAAA"
+      },
+      "summary": "We review definitions and propose a taxonomy and roadmap for world models in open-world robotics.",
+      "priority_boost": 0.0,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-152f6710b882",
+      "title": "Ask HN: best laptop for ML?",
+      "url": "https://news.ycombinator.com/item?id=40000002",
+      "channels": [
+        "hackernews"
+      ],
+      "confidence": "low",
+      "evidence": [
+        "hacker news story match",
+        "points=3",
+        "comments=1"
+      ],
+      "signal_ids": [
+        "hn:40000002"
+      ],
+      "anchors": {},
+      "summary": "Noise control sample — low-confidence heat, not world-model relevant.",
+      "priority_boost": 1.03,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-bfe218c1ef3e",
+      "title": "example/world-models-toolkit",
+      "url": "https://github.com/example/world-models-toolkit",
+      "channels": [
+        "github"
+      ],
+      "confidence": "medium",
+      "evidence": [
+        "github repository search hit",
+        "world-models topic present",
+        "world-model phrase in name/description"
+      ],
+      "signal_ids": [
+        "github:example/world-models-toolkit"
+      ],
+      "anchors": {
+        "repo": "example/world-models-toolkit"
+      },
+      "summary": "Toolkit and benchmarks for world models research",
+      "priority_boost": 0.0,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    },
+    {
+      "id": "cand-fdf08b17b271",
+      "title": "example/awesome-agents",
+      "url": "https://github.com/example/awesome-agents",
+      "channels": [
+        "github"
+      ],
+      "confidence": "low",
+      "evidence": [
+        "github repository search hit"
+      ],
+      "signal_ids": [
+        "github:example/awesome-agents"
+      ],
+      "anchors": {
+        "repo": "example/awesome-agents"
+      },
+      "summary": "Awesome list of agents",
+      "priority_boost": 0.0,
+      "requires_manual_inclusion_review": true,
+      "seeded_from_verified": false
+    }
+  ]
+}

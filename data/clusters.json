@@ -1,0 +1,34 @@
+{
+  "clusters": [
+    {
+      "id": "runtime",
+      "label": "Runtime / 可执行模拟器",
+      "gap_note": "缺：跨域 runtime 契约与可审计 rollout 的代表条目"
+    },
+    {
+      "id": "video_sim",
+      "label": "Video → Sim",
+      "gap_note": "缺：从视频生成到可行动模拟的评价桥梁"
+    },
+    {
+      "id": "robot",
+      "label": "Robot / Embodied",
+      "gap_note": "缺：开源可复现的 embodied world-model 基准对照"
+    },
+    {
+      "id": "eval",
+      "label": "Evaluation / Admissibility",
+      "gap_note": "缺：统一的 decision-centric 评价协议落地案例"
+    },
+    {
+      "id": "definition",
+      "label": "Definition / Taxonomy / Roadmap",
+      "gap_note": "缺：社区共识定义与争议点对照表"
+    },
+    {
+      "id": "code",
+      "label": "Code / Artifacts",
+      "gap_note": "缺：官方仓库与可运行 stack 的成熟度追踪"
+    }
+  ]
+}

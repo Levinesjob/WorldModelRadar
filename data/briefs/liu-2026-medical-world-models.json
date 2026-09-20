@@ -1,0 +1,16 @@
+{
+  "id": "brief-liu-2026-medical-world-models",
+  "paper_id": "liu-2026-medical-world-models",
+  "claim": "整理医疗世界模型散点工作，围绕患者状态、临床动力学与干预策略建路线图。",
+  "map_position": "runtime · domain · healthcare",
+  "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+  "evidence_links": [
+    "https://arxiv.org/abs/2606.16721",
+    "https://github.com/1999kevin/awesome_medical_world_models"
+  ],
+  "horizon": "near_term",
+  "mainline_note": "医疗切片路线图属局部迁移，对通用主线仅作域适配参考。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
+  "cluster_id": "runtime"
+}

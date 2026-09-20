@@ -1,0 +1,15 @@
+{
+  "id": "brief-chen-2026-definition-roadmap-world-models",
+  "paper_id": "chen-2026-definition-roadmap-world-models",
+  "claim": "给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+  "map_position": "definition · core · general definition",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2607.06401"
+  ],
+  "horizon": "mainline",
+  "mainline_note": "直接改写世界模型的定义与多阶段能力阶梯，是主线总览锚点。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "A Definition and Roadmap for World Models",
+  "cluster_id": "definition"
+}

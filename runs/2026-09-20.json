@@ -1,0 +1,145 @@
+{
+  "run_id": "2026-09-20T03:19:43+00:00",
+  "started_at": "2026-09-20T03:19:43+00:00",
+  "finished_at": "2026-09-20T03:19:43+00:00",
+  "status": "success",
+  "mode": "fixtures",
+  "candidate_count": 8,
+  "brief_count": 19,
+  "channels": [
+    {
+      "channel": "arxiv",
+      "role": "discovery",
+      "status": "success",
+      "health": "ok",
+      "item_count": 1,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 1,
+      "endpoint": "https://export.arxiv.org/api/query",
+      "samples": [
+        {
+          "id": "arxiv:2609.99999",
+          "title": "A Survey of Interactive World Models for Embodied Agents",
+          "discovered_at": "2026-09-20T03:19:43+00:00",
+          "url": "https://arxiv.org/abs/2609.99999"
+        }
+      ],
+      "latest_discovered_at": "2026-09-20T03:19:43+00:00"
+    },
+    {
+      "channel": "openreview",
+      "role": "discovery",
+      "status": "success",
+      "health": "ok",
+      "item_count": 1,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://api2.openreview.net/notes/search",
+      "samples": [
+        {
+          "id": "openreview:ORForumAAA",
+          "title": "World Models for Open-World Robotics: A Position Paper",
+          "discovered_at": "2026-09-20T03:19:43+00:00",
+          "url": "https://openreview.net/forum?id=ORForumAAA"
+        }
+      ],
+      "latest_discovered_at": "2026-09-20T03:19:43+00:00"
+    },
+    {
+      "channel": "github",
+      "role": "discovery",
+      "status": "success",
+      "health": "ok",
+      "item_count": 2,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 1,
+      "endpoint": "https://api.github.com/search/repositories",
+      "samples": [
+        {
+          "id": "github:example/world-models-toolkit",
+          "title": "example/world-models-toolkit",
+          "discovered_at": "2026-09-20T03:19:43+00:00",
+          "url": "https://github.com/example/world-models-toolkit"
+        },
+        {
+          "id": "github:example/awesome-agents",
+          "title": "example/awesome-agents",
+          "discovered_at": "2026-09-20T03:19:43+00:00",
+          "url": "https://github.com/example/awesome-agents"
+        }
+      ],
+      "latest_discovered_at": "2026-09-20T03:19:43+00:00"
+    },
+    {
+      "channel": "hackernews",
+      "role": "signal",
+      "status": "success",
+      "health": "ok",
+      "item_count": 3,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://hn.algolia.com/api/v1/search",
+      "samples": [
+        {
+          "id": "hn:40000001",
+          "title": "Open-source world model simulator released",
+          "discovered_at": "2026-09-15T12:00:00.000Z",
+          "url": "https://example.com/world-model-sim"
+        },
+        {
+          "id": "hn:40000003",
+          "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+          "discovered_at": "2026-09-16T09:30:00.000Z",
+          "url": "https://example.com/worldmodelbench"
+        },
+        {
+          "id": "hn:40000002",
+          "title": "Ask HN: best laptop for ML?",
+          "discovered_at": "2026-09-14T12:00:00.000Z",
+          "url": "https://news.ycombinator.com/item?id=40000002"
+        }
+      ],
+      "latest_discovered_at": "2026-09-16T09:30:00.000Z"
+    },
+    {
+      "channel": "huggingface",
+      "role": "signal",
+      "status": "success",
+      "health": "ok",
+      "item_count": 2,
+      "error_code": null,
+      "message": "ok",
+      "duration_ms": 0,
+      "endpoint": "https://huggingface.co/api/daily_papers",
+      "samples": [
+        {
+          "id": "hf:2609.99999",
+          "title": "A Survey of Interactive World Models for Embodied Agents",
+          "discovered_at": "2026-09-18T08:00:00.000Z",
+          "url": "https://arxiv.org/abs/2609.99999"
+        },
+        {
+          "id": "hf:2609.77777",
+          "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+          "discovered_at": "2026-09-17T11:00:00.000Z",
+          "url": "https://arxiv.org/abs/2609.77777"
+        }
+      ],
+      "latest_discovered_at": "2026-09-18T08:00:00.000Z"
+    }
+  ],
+  "notes": {
+    "unavailable_means": "channel outage — not an empty field / not zero candidates",
+    "heat_policy": "signal heat boosts triage priority only; never sole verified inclusion",
+    "verified_vs_signals": "Verified Briefs come from data/papers.json ledger; new signals this run come from discovery/heat adapters (HN Algolia, HF Papers, etc.)",
+    "live_heat_endpoints": {
+      "hackernews": "https://hn.algolia.com/api/v1/search (query=world model, tags=story)",
+      "huggingface": "https://huggingface.co/api/daily_papers"
+    },
+    "fixtures_heat": "With --fixtures, HN/HF read data/fixtures/hn_algolia.json and hf_daily_papers.json — distinct synthetic heat items, not ledger copies"
+  }
+}

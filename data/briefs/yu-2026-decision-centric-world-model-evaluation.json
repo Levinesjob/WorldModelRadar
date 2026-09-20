@@ -1,0 +1,15 @@
+{
+  "id": "brief-yu-2026-decision-centric-world-model-evaluation",
+  "paper_id": "yu-2026-decision-centric-world-model-evaluation",
+  "claim": "主张以决策为中心评价世界模型，提出 L0–L7 证据阶梯并诊断主张/证据错配。",
+  "map_position": "robot · core · decision-centric world-model evaluation",
+  "do": "研 — 领域级 framing，值得跟定义与评价争论",
+  "evidence_links": [
+    "https://arxiv.org/abs/2606.15032"
+  ],
+  "horizon": "mainline",
+  "mainline_note": "把评价主线从生成质量扭向决策可采纳性，改评价合同。",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+  "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+  "cluster_id": "robot"
+}
