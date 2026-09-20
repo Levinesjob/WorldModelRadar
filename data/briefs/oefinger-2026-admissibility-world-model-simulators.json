@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2607.07196"
   ],
+  "horizon": "mainline",
+  "mainline_note": "引入可采信等级，影响何时可把模拟器判决当作保证证据。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
   "cluster_id": "runtime"

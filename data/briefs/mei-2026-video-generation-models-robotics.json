@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2601.07823"
   ],
+  "horizon": "near_term",
+  "mainline_note": "视频→机器人应用清单，局部工程优化多于主线契约变更。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Video Generation Models in Robotics - Applications, Research Challenges, Future Directions",
   "cluster_id": "robot"

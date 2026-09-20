@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2603.17420"
   ],
+  "horizon": "near_term",
+  "mainline_note": "边缘/孪生迁移机会，属部署局部，不移动定义或 runtime 主线。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
   "cluster_id": "runtime"

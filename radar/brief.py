@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from radar.schemas import Brief, validate_brief
+from radar.schemas import Brief, Horizon, validate_brief
 
 # Map paper area keywords → cluster ids (see data/clusters.json).
 AREA_CLUSTER_RULES: list[tuple[re.Pattern[str], str]] = [
@@ -44,6 +44,54 @@ CLAIM_ZH_BY_ID: dict[str, str] = {
     "zheng-2026-digital-twins-world-models-edge": "综述数字孪生走向世界模型，及其在移动边缘通用智能中的机会与挑战。",
 }
 
+# Explicit horizon overrides (主线/长期 vs 短期/局部).
+HORIZON_BY_ID: dict[str, str] = {
+    # 主线：改定义、评价、runtime 契约或多年度能力阶梯
+    "chen-2026-definition-roadmap-world-models": Horizon.MAINLINE.value,
+    "chen-2026-generative-engines-actionable-simulators": Horizon.MAINLINE.value,
+    "oefinger-2026-admissibility-world-model-simulators": Horizon.MAINLINE.value,
+    "yu-2026-decision-centric-world-model-evaluation": Horizon.MAINLINE.value,
+    "zeng-2026-openworldlib": Horizon.MAINLINE.value,
+    "zeng-2026-world-models-not-merely-injecting-world-knowledge": Horizon.MAINLINE.value,
+    "liu-2026-graph-world-models": Horizon.MAINLINE.value,
+    "liang-2026-world-action-models-embodied-brains": Horizon.MAINLINE.value,
+    "wang-2026-world-action-models": Horizon.MAINLINE.value,
+    "hou-2026-world-model-robot-learning": Horizon.MAINLINE.value,
+    "liu-2026-interactive-video-world-modeling": Horizon.MAINLINE.value,
+    "karcini-2026-robots-need-more-than-vla-world-models": Horizon.MAINLINE.value,
+    # 短期/局部：场景切片、相邻边界、局部协议补丁
+    "han-2026-economic-world-models": Horizon.NEAR_TERM.value,
+    "liu-2026-medical-world-models": Horizon.NEAR_TERM.value,
+    "maharaj-2026-code-world-modelling-survey": Horizon.NEAR_TERM.value,
+    "mei-2026-video-generation-models-robotics": Horizon.NEAR_TERM.value,
+    "zhang-2026-driving-world-model-counterfactual-prediction": Horizon.NEAR_TERM.value,
+    "zheng-2026-digital-twins-world-models-edge": Horizon.NEAR_TERM.value,
+    "hu-2026-evolution-video-generative-foundations": Horizon.NEAR_TERM.value,
+}
+
+# One Chinese sentence: how this affects (or does not affect) the long-term main line.
+MAINLINE_NOTE_BY_ID: dict[str, str] = {
+    "chen-2026-definition-roadmap-world-models": "直接改写世界模型的定义与多阶段能力阶梯，是主线总览锚点。",
+    "chen-2026-generative-engines-actionable-simulators": "把 runtime 契约从「好看」推到「可行动」，改变主线工程目标。",
+    "oefinger-2026-admissibility-world-model-simulators": "引入可采信等级，影响何时可把模拟器判决当作保证证据。",
+    "yu-2026-decision-centric-world-model-evaluation": "把评价主线从生成质量扭向决策可采纳性，改评价合同。",
+    "zeng-2026-openworldlib": "统一高级世界模型定义与代码基座，推动规格与实现收敛。",
+    "zeng-2026-world-models-not-merely-injecting-world-knowledge": "否定碎片化灌知识路径，推动通用世界模型规格主线。",
+    "liu-2026-graph-world-models": "用图归纳偏置形式化一类主线范式，影响表征选择。",
+    "liang-2026-world-action-models-embodied-brains": "提出具身栈契约，连接世界模型与开放世界行动能力阶梯。",
+    "wang-2026-world-action-models": "定义「世界模型+行动」范式边界，巩固具身主线叙事。",
+    "hou-2026-world-model-robot-learning": "系统化机器人侧世界模型能力地图，支撑具身主线对照。",
+    "liu-2026-interactive-video-world-modeling": "标定 video→sim 交互建模前沿，影响仿真主线桥梁。",
+    "karcini-2026-robots-need-more-than-vla-world-models": "警示勿把 VLA/世界模型当成充分条件，校正主线假需求。",
+    "han-2026-economic-world-models": "经济场景能力阶梯有用，但不改通用世界模型定义主线。",
+    "liu-2026-medical-world-models": "医疗切片路线图属局部迁移，对通用主线仅作域适配参考。",
+    "maharaj-2026-code-world-modelling-survey": "代码智能旁证路径，短期跟踪，不改世界模型本体定义。",
+    "mei-2026-video-generation-models-robotics": "视频→机器人应用清单，局部工程优化多于主线契约变更。",
+    "zhang-2026-driving-world-model-counterfactual-prediction": "驾驶反事实协议补丁，强化局部评测，未改全局评价主线。",
+    "zheng-2026-digital-twins-world-models-edge": "边缘/孪生迁移机会，属部署局部，不移动定义或 runtime 主线。",
+    "hu-2026-evolution-video-generative-foundations": "泛视频生成边界对照，adjacent 噪声需过滤，不进主线决策。",
+}
+
 
 def infer_cluster(area: str, title: str = "") -> str:
     text = f"{area} {title}"
@@ -72,6 +120,26 @@ def claim_zh_from_paper(paper: dict[str, Any]) -> str:
     return src if len(src) <= 150 else src[:147] + "…"
 
 
+def horizon_from_paper(paper: dict[str, Any], cluster: str) -> str:
+    """主线/长期 vs 短期/局部 — curated first, then relevance/cluster heuristic."""
+    paper_id = paper.get("id") or ""
+    if paper_id in HORIZON_BY_ID:
+        return HORIZON_BY_ID[paper_id]
+    relevance = paper.get("relevance") or "adjacent"
+    if relevance == "core" and cluster in ("definition", "eval", "runtime", "robot", "video_sim"):
+        return Horizon.MAINLINE.value
+    return Horizon.NEAR_TERM.value
+
+
+def mainline_note_from_paper(paper: dict[str, Any], horizon: str) -> str:
+    paper_id = paper.get("id") or ""
+    if paper_id in MAINLINE_NOTE_BY_ID:
+        return MAINLINE_NOTE_BY_ID[paper_id]
+    if horizon == Horizon.MAINLINE.value:
+        return "触及定义、评价或 runtime 契约，需对照主线能力阶梯阅读。"
+    return "属短期/局部优化或场景切片，默认不改长期主线判断。"
+
+
 def brief_from_paper(paper: dict[str, Any]) -> Brief:
     """Derive a scannable Chinese brief from a verified paper record."""
     paper_id = paper.get("id") or ""
@@ -80,6 +148,8 @@ def brief_from_paper(paper: dict[str, Any]) -> Brief:
     relevance = paper.get("relevance") or "adjacent"
     cluster = infer_cluster(area, title)
     claim = claim_zh_from_paper(paper)
+    horizon = horizon_from_paper(paper, cluster)
+    mainline_note = mainline_note_from_paper(paper, horizon)
 
     evidence = []
     if paper.get("url"):
@@ -99,6 +169,8 @@ def brief_from_paper(paper: dict[str, Any]) -> Brief:
         fake_demand="把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
         evidence_links=evidence,
         cluster_id=cluster,
+        horizon=horizon,
+        mainline_note=mainline_note,
     )
 
 

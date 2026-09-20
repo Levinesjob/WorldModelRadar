@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2601.15533"
   ],
+  "horizon": "mainline",
+  "mainline_note": "把 runtime 契约从「好看」推到「可行动」，改变主线工程目标。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
   "cluster_id": "runtime"

@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2606.15032"
   ],
+  "horizon": "mainline",
+  "mainline_note": "把评价主线从生成质量扭向决策可采纳性，改评价合同。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
   "cluster_id": "robot"

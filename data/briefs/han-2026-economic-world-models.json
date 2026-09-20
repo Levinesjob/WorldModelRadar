@@ -8,6 +8,8 @@
     "https://arxiv.org/abs/2608.06020",
     "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models"
   ],
+  "horizon": "near_term",
+  "mainline_note": "经济场景能力阶梯有用，但不改通用世界模型定义主线。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
   "cluster_id": "runtime"

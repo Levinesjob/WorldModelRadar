@@ -8,6 +8,8 @@
     "https://arxiv.org/abs/2605.00080",
     "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy"
   ],
+  "horizon": "mainline",
+  "mainline_note": "系统化机器人侧世界模型能力地图，支撑具身主线对照。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "World Model for Robot Learning: A Comprehensive Survey",
   "cluster_id": "robot"

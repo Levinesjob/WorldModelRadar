@@ -1,4 +1,4 @@
-"""Weekly Digest generator — structured Chinese extraction for decisions."""
+"""秘书日报/周报（Secretary Briefing）生成器 — 主线优先、限时吸收。"""
 
 from __future__ import annotations
 
@@ -11,19 +11,22 @@ from radar.schemas import (
     SIGNAL_CHANNELS,
     ChannelResult,
     ChannelStatus,
+    Horizon,
+    HORIZON_ZH,
     RunStatus,
     channel_health_label,
     channel_samples,
     status_reader_copy,
 )
 
-# Fixed Digest blocks (reader navigation order).
+# Fixed briefing blocks — strict reader order for limited daily time.
 DIGEST_BLOCKS = (
-    "takeaways",
-    "map_and_gaps",
-    "new_signals",
-    "verified_briefs",
-    "pipeline_health",
+    "judgment",  # 今日/本周判断 — ≤3 sentences
+    "mainline",  # 主线动态 — ≤5
+    "near_term",  # 短期局部 — ≤5
+    "heat_radar",  # 热源雷达 — prioritized + coverage
+    "gaps_and_watch",  # 缺口与下周盯梢 — ≤5
+    "pipeline_health",  # 管道健康 — compact
 )
 
 CLUSTER_ORDER = ("runtime", "video_sim", "robot", "eval", "definition", "code")
@@ -41,6 +44,12 @@ CHANNEL_ZH = {
     "huggingface": "Hugging Face Papers（HF Papers，每日论文）",
 }
 
+MAINLINE_LIMIT = 5
+NEAR_TERM_LIMIT = 5
+HEAT_LIMIT = 5
+GAPS_WATCH_LIMIT = 5
+JUDGMENT_SENTENCE_LIMIT = 3
+
 
 def _action_prefix(do_value: str) -> str:
     text = (do_value or "").strip()
@@ -50,7 +59,21 @@ def _action_prefix(do_value: str) -> str:
     return "观望"
 
 
+def _horizon_of(brief: dict[str, Any]) -> str:
+    h = (brief.get("horizon") or "").strip()
+    if h in (Horizon.MAINLINE.value, Horizon.NEAR_TERM.value):
+        return h
+    # Legacy briefs without field: treat core-ish map_position as mainline heuristic.
+    pos = (brief.get("map_position") or "").lower()
+    if " · core ·" in f" {pos} " or pos.startswith("definition") or "eval" in pos:
+        if "adjacent" in pos or "domain" in pos:
+            return Horizon.NEAR_TERM.value
+        return Horizon.MAINLINE.value
+    return Horizon.NEAR_TERM.value
+
+
 def _brief_card(brief: dict[str, Any]) -> dict[str, Any]:
+    horizon = _horizon_of(brief)
     return {
         "id": brief.get("id"),
         "title": brief.get("title") or brief.get("paper_id"),
@@ -61,23 +84,58 @@ def _brief_card(brief: dict[str, Any]) -> dict[str, Any]:
         "fake_demand": brief.get("fake_demand") or "",
         "evidence_links": brief.get("evidence_links") or [],
         "cluster_id": brief.get("cluster_id") or "unknown",
+        "horizon": horizon,
+        "horizon_label": HORIZON_ZH.get(horizon, horizon),
+        "mainline_note": (brief.get("mainline_note") or "").strip(),
         "source": "verified_ledger",
     }
 
 
-def _build_takeaways(
+def _action_rank(card: dict[str, Any]) -> int:
+    return {"建": 0, "研": 1, "观望": 2, "忽略": 3}.get(card.get("action") or "", 9)
+
+
+def _select_horizon_items(
+    briefs: list[dict[str, Any]],
+    horizon: str,
+    *,
+    limit: int,
+) -> list[dict[str, Any]]:
+    cards = [_brief_card(b) for b in briefs if _horizon_of(b) == horizon]
+    cards.sort(key=lambda c: (_action_rank(c), (c.get("title") or "").lower()))
+    # Drop 忽略 from primary lists unless we lack items.
+    primary = [c for c in cards if c.get("action") != "忽略"]
+    chosen = primary[:limit] if primary else cards[:limit]
+    return chosen
+
+
+def _build_judgment(
     *,
     run_status: RunStatus,
-    briefs: list[dict[str, Any]],
-    candidates: list[dict[str, Any]],
-    map_and_gaps: list[dict[str, Any]],
+    mainline: list[dict[str, Any]],
+    near_term: list[dict[str, Any]],
+    heat_radar: dict[str, Any],
     channel_results: list[ChannelResult],
+    judgment: str | None,
 ) -> list[str]:
-    """3–7 decision bullets — not a paper dump."""
-    takeaways: list[str] = []
+    """1–3 sentences max — conclusions first for accurate absorption."""
+    if judgment:
+        # Split on Chinese/English sentence boundaries; clamp.
+        parts = [p.strip() for p in judgment.replace("。", "。\n").split("\n") if p.strip()]
+        sentences = []
+        for part in parts:
+            if part.endswith("。") or part.endswith(".") or part.endswith("！"):
+                sentences.append(part)
+            else:
+                sentences.append(part if part.endswith("。") else part + "。")
+            if len(sentences) >= JUDGMENT_SENTENCE_LIMIT:
+                break
+        return sentences[:JUDGMENT_SENTENCE_LIMIT]
+
+    sentences: list[str] = []
 
     if run_status == RunStatus.CHANNEL_DOWN:
-        takeaways.append(
+        sentences.append(
             "管道故障：全部发现通道不可用——这是运维问题，不是「领域无新闻」；本周勿据空结果下收录结论。"
         )
     elif run_status == RunStatus.PARTIAL:
@@ -86,65 +144,42 @@ def _build_takeaways(
             for r in channel_results
             if r.status in (ChannelStatus.UNAVAILABLE, ChannelStatus.ERROR)
         ]
-        takeaways.append(
+        sentences.append(
             f"管道部分降级（{', '.join(down) or '部分通道'}不可用）；已有通道结果可分诊，不可用 ≠ 零候选。"
         )
 
-    # Prioritize actionable verified briefs (建/研 first, then 观望).
-    ranked = sorted(
-        briefs,
-        key=lambda b: {"建": 0, "研": 1, "观望": 2, "忽略": 3}.get(_action_prefix(str(b.get("do") or "")), 9),
-    )
-    for brief in ranked:
-        action = _action_prefix(str(brief.get("do") or ""))
-        if action == "忽略":
-            continue
-        claim = (brief.get("claim") or "").strip()
-        if not claim:
-            continue
-        cluster = brief.get("cluster_id") or "?"
-        takeaways.append(f"【{action}·{cluster}】{claim}")
-        if len(takeaways) >= 5:
-            break
+    if mainline:
+        top = mainline[0]
+        sentences.append(
+            f"主线焦点：【{top.get('action')}】{(top.get('claim') or '').strip()}"
+            f"（{top.get('mainline_note') or '触及长期能力阶梯'}）"
+        )
+    elif near_term:
+        sentences.append(
+            "本周核验面以短期/局部条目为主，尚无新的主线契约级变更；先观望场景切片，勿升格为领域转向。"
+        )
+    else:
+        sentences.append("本周无新的核验 Brief 更新；以热源分诊与管道健康为准，勿把静默当成领域停摆。")
 
-    # Surface gaps that still have zero briefs.
-    for gap in map_and_gaps:
-        if gap.get("brief_count", 0) == 0 and gap.get("gap_note"):
-            takeaways.append(f"【缺口·{gap.get('cluster_id')}】{gap['gap_note']}")
-            if len(takeaways) >= 6:
-                break
-
-    # Heat/discovery signals this run (explicitly not ledger).
-    heat = [
-        c
-        for c in candidates
-        if not c.get("seeded_from_verified")
-        and any(ch in SIGNAL_CHANNELS for ch in (c.get("channels") or []))
-    ]
-    if heat:
-        top = heat[0]
-        chans = ", ".join(top.get("channels") or [])
-        takeaways.append(
-            f"【信号·热源】本周热源命中「{top.get('title')}」（通道：{chans}）——只提权分诊，不自动进核验清单。"
+    hits = heat_radar.get("hits") or []
+    if hits and len(sentences) < JUDGMENT_SENTENCE_LIMIT:
+        top_hit = hits[0]
+        why = top_hit.get("why_matters") or "热度只提权"
+        sentences.append(
+            f"热源优先关注「{top_hit.get('title')}」（{', '.join(top_hit.get('channels') or [])}）：{why}"
         )
 
-    # Deduplicate while preserving order; clamp 3–7.
+    # Deduplicate / clamp
     seen: set[str] = set()
-    unique: list[str] = []
-    for line in takeaways:
-        if line in seen:
+    out: list[str] = []
+    for s in sentences:
+        if s in seen:
             continue
-        seen.add(line)
-        unique.append(line)
-    if len(unique) < 3 and briefs:
-        for brief in ranked:
-            line = f"【{_action_prefix(str(brief.get('do') or ''))}】{(brief.get('claim') or '').strip()}"
-            if line not in seen and (brief.get("claim") or "").strip():
-                unique.append(line)
-                seen.add(line)
-            if len(unique) >= 3:
-                break
-    return unique[:7]
+        seen.add(s)
+        out.append(s)
+        if len(out) >= JUDGMENT_SENTENCE_LIMIT:
+            break
+    return out
 
 
 def _build_map_and_gaps(
@@ -159,7 +194,6 @@ def _build_map_and_gaps(
     map_and_gaps: list[dict[str, Any]] = []
     known_ids = {c.get("id") for c in clusters}
     ordered = list(clusters)
-    # Stable fallback order for known cluster ids missing from file.
     present = {c.get("id") for c in clusters}
     for cid in CLUSTER_ORDER:
         if cid not in present:
@@ -195,19 +229,70 @@ def _build_map_and_gaps(
 
 
 class _SignalMeta:
-    __slots__ = ("discovered_at", "channel", "role")
+    __slots__ = ("discovered_at", "channel", "role", "metrics")
 
-    def __init__(self, discovered_at: str, channel: str, role: str) -> None:
+    def __init__(
+        self,
+        discovered_at: str,
+        channel: str,
+        role: str,
+        metrics: dict[str, Any] | None = None,
+    ) -> None:
         self.discovered_at = discovered_at
         self.channel = channel
         self.role = role
+        self.metrics = metrics or {}
 
 
-def _build_new_signals(
+def _heat_score(cand: dict[str, Any], signal_meta: dict[str, _SignalMeta]) -> float:
+    """Prioritize heat for limited daily time — never dump into mainline."""
+    boost = float(cand.get("priority_boost") or 0.0)
+    conf = {"high": 3.0, "medium": 1.5, "low": 0.5}.get(str(cand.get("confidence") or ""), 0.5)
+    metric_bonus = 0.0
+    for sid in cand.get("signal_ids") or []:
+        meta = signal_meta.get(sid)
+        if not meta:
+            continue
+        m = meta.metrics or {}
+        # HN points / HF upvotes if present in fixture metrics
+        for key in ("points", "num_comments", "upvotes", "reactions"):
+            try:
+                metric_bonus += float(m.get(key) or 0) * 0.01
+            except (TypeError, ValueError):
+                pass
+    heat_channels = [ch for ch in (cand.get("channels") or []) if ch in SIGNAL_CHANNELS]
+    channel_bonus = 2.0 if heat_channels else 0.5
+    return boost * 10 + conf + metric_bonus + channel_bonus
+
+
+def _why_heat_matters(cand: dict[str, Any]) -> str:
+    channels = cand.get("channels") or []
+    conf = cand.get("confidence") or "low"
+    title = (cand.get("title") or "").lower()
+    # Explicit noise: low confidence or off-topic HN chatter.
+    wmish = any(
+        k in title
+        for k in ("world model", "worldmodel", "simulator", "embodied", "arxiv")
+    )
+    if conf == "low" and not wmish:
+        return "噪声可忽略——低置信且未锚定世界模型主线。"
+    if conf == "low" and not any(ch in SIGNAL_CHANNELS for ch in channels):
+        return "噪声可忽略——低置信发现，未与热源交叉。"
+    if "hackernews" in channels and "huggingface" in channels:
+        return "HN+HF 双热源交叉，值得提权分诊（仍非核验门票）。"
+    if "hackernews" in channels:
+        return "HN 工程圈在讨论；核对是否触及 runtime/评价主线，否则作短期观察。"
+    if "huggingface" in channels:
+        return "HF Papers 圈内注意力；对齐 arXiv 后决定是否进入周审。"
+    if "github" in channels:
+        return "GitHub 采纳线索；看增速与 README 是否锚定论文，勿凭星标收录。"
+    return "发现通道命中；热度只提权，需一手源核验。"
+
+def _build_heat_radar(
     candidates: list[dict[str, Any]],
     channel_results: list[ChannelResult],
-) -> list[dict[str, Any]]:
-    """Channel-attributed discovery + heat hits from this run (not ledger)."""
+) -> dict[str, Any]:
+    """Wide net, prioritized list — top heat hits + coverage health."""
     signal_meta: dict[str, _SignalMeta] = {}
     for result in channel_results:
         for signal in result.signals:
@@ -215,6 +300,7 @@ def _build_new_signals(
                 discovered_at=signal.discovered_at,
                 channel=signal.channel,
                 role=result.role,
+                metrics=signal.metrics if isinstance(signal.metrics, dict) else {},
             )
 
     items: list[dict[str, Any]] = []
@@ -228,12 +314,12 @@ def _build_new_signals(
                 for ch in channels
             }
         )
-        # Prefer earliest discovered_at among linked signals.
         discovered_ats = []
         for sid in cand.get("signal_ids") or []:
             meta = signal_meta.get(sid)
             if meta and meta.discovered_at:
                 discovered_ats.append(meta.discovered_at)
+        score = _heat_score(cand, signal_meta)
         items.append(
             {
                 "id": cand.get("id"),
@@ -243,65 +329,80 @@ def _build_new_signals(
                 "roles": roles,
                 "confidence": cand.get("confidence"),
                 "priority_boost": cand.get("priority_boost"),
+                "score": round(score, 2),
                 "signal_ids": cand.get("signal_ids") or [],
                 "discovered_at": min(discovered_ats) if discovered_ats else None,
                 "source": "heat_or_discovery",
-                "note": "本周热源/发现信号——非核验清单条目；热度只提权。",
+                "why_matters": _why_heat_matters(cand),
+                "note": "热源/发现信号——非核验清单；不进主线栏。",
             }
         )
-    return items
+
+    items.sort(key=lambda x: (-float(x.get("score") or 0), str(x.get("title") or "")))
+    top = items[:HEAT_LIMIT]
+
+    coverage: list[dict[str, Any]] = []
+    for result in channel_results:
+        coverage.append(
+            {
+                "channel": result.channel,
+                "channel_label": CHANNEL_ZH.get(result.channel, result.channel),
+                "role": result.role,
+                "health": channel_health_label(result.status),
+                "status": result.status.value,
+                "item_count": result.item_count,
+            }
+        )
+
+    return {
+        "hits": top,
+        "total_candidates": len(items),
+        "coverage": coverage,
+        "note": "广撒网后按分数优先；热度 ≠ 真理，永不单独收录。",
+    }
 
 
-def _build_verified_by_cluster(
-    briefs: list[dict[str, Any]],
-    clusters: list[dict[str, Any]],
+def _build_gaps_and_watch(
+    map_and_gaps: list[dict[str, Any]],
+    heat_radar: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    label_by_id = {c.get("id"): c.get("label") or c.get("id") for c in clusters}
-    buckets: dict[str, list[dict[str, Any]]] = {cid: [] for cid in CLUSTER_ORDER}
-    extras: dict[str, list[dict[str, Any]]] = {}
+    """≤5 gap / next-week watch items."""
+    items: list[dict[str, Any]] = []
+    for gap in map_and_gaps:
+        if gap.get("gap_note"):
+            kind = "缺口" if gap.get("has_gap") else "持续关注"
+            items.append(
+                {
+                    "kind": kind,
+                    "cluster_id": gap.get("cluster_id"),
+                    "label": gap.get("label"),
+                    "text": gap.get("gap_note"),
+                }
+            )
+        if len(items) >= GAPS_WATCH_LIMIT:
+            break
 
-    for brief in briefs:
-        card = _brief_card(brief)
-        cid = card["cluster_id"]
-        if cid in buckets:
-            buckets[cid].append(card)
-        else:
-            extras.setdefault(cid, []).append(card)
-
-    # Within cluster: 建/研/观望/忽略, then title.
-    action_rank = {"建": 0, "研": 1, "观望": 2, "忽略": 3}
-
-    def sort_key(card: dict[str, Any]) -> tuple:
-        return (action_rank.get(card.get("action") or "", 9), (card.get("title") or "").lower())
-
-    groups: list[dict[str, Any]] = []
-    for cid in CLUSTER_ORDER:
-        cards = sorted(buckets.get(cid, []), key=sort_key)
-        groups.append(
-            {
-                "cluster_id": cid,
-                "label": label_by_id.get(cid, cid),
-                "brief_count": len(cards),
-                "briefs": cards,
-            }
-        )
-    for cid, cards in extras.items():
-        groups.append(
-            {
-                "cluster_id": cid,
-                "label": label_by_id.get(cid, cid),
-                "brief_count": len(cards),
-                "briefs": sorted(cards, key=sort_key),
-            }
-        )
-    return groups
+    # If room, add top heat as watch (not mainline).
+    if len(items) < GAPS_WATCH_LIMIT:
+        for hit in heat_radar.get("hits") or []:
+            items.append(
+                {
+                    "kind": "盯梢",
+                    "cluster_id": None,
+                    "label": "热源",
+                    "text": f"跟进「{hit.get('title')}」——{hit.get('why_matters')}",
+                }
+            )
+            if len(items) >= GAPS_WATCH_LIMIT:
+                break
+    return items[:GAPS_WATCH_LIMIT]
 
 
 def _build_pipeline_health(channel_results: list[ChannelResult]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for result in channel_results:
         health = channel_health_label(result.status)
-        samples = channel_samples(result, limit=3)
+        samples = channel_samples(result, limit=2)
         latest = max((s["discovered_at"] for s in samples if s.get("discovered_at")), default=None)
         rows.append(
             {
@@ -336,163 +437,196 @@ def build_digest(
     clusters = clusters or []
 
     map_and_gaps = _build_map_and_gaps(briefs, clusters)
-    new_signals = _build_new_signals(candidates, channel_results)
-    verified_briefs = _build_verified_by_cluster(briefs, clusters)
+    mainline = _select_horizon_items(briefs, Horizon.MAINLINE.value, limit=MAINLINE_LIMIT)
+    near_term = _select_horizon_items(briefs, Horizon.NEAR_TERM.value, limit=NEAR_TERM_LIMIT)
+    heat_radar = _build_heat_radar(candidates, channel_results)
+    gaps_and_watch = _build_gaps_and_watch(map_and_gaps, heat_radar)
     pipeline_health = _build_pipeline_health(channel_results)
+    judgment_lines = _build_judgment(
+        run_status=run_status,
+        mainline=mainline,
+        near_term=near_term,
+        heat_radar=heat_radar,
+        channel_results=channel_results,
+        judgment=judgment,
+    )
 
-    if judgment:
-        takeaways = [judgment]
-        # Still fill to at least a few decision bullets when possible.
-        extra = _build_takeaways(
-            run_status=run_status,
-            briefs=briefs,
-            candidates=candidates,
-            map_and_gaps=map_and_gaps,
-            channel_results=channel_results,
-        )
-        for line in extra:
-            if line not in takeaways and len(takeaways) < 7:
-                takeaways.append(line)
-    else:
-        takeaways = _build_takeaways(
-            run_status=run_status,
-            briefs=briefs,
-            candidates=candidates,
-            map_and_gaps=map_and_gaps,
-            channel_results=channel_results,
-        )
+    # Legacy-compatible surfaces for older tooling.
+    new_signals = heat_radar.get("hits") or []
+    verified_flat = mainline + near_term
 
     return {
         "week": week,
         "run_status": run_status.value,
+        "product": "secretary_briefing",
+        "title_zh": "秘书周报",
         "labels": {
-            "verified_briefs": "核验 Brief（来自已核验清单 / ledger）",
-            "new_signals": "本周信号（来自热源/发现通道，非清单副本）",
+            "judgment": "今日/本周判断",
+            "mainline": "主线动态（主线/长期）",
+            "near_term": "短期局部（短期/局部优化）",
+            "heat_radar": "热源雷达（广覆盖·强优先）",
+            "gaps_and_watch": "缺口与下周盯梢",
+            "pipeline_health": "管道健康",
+            # legacy aliases
+            "verified_briefs": "核验 Brief（已按主线/短期拆分）",
+            "new_signals": "热源雷达命中（非清单副本）",
         },
         "blocks": {
-            "takeaways": takeaways,
+            "judgment": judgment_lines,
+            "mainline": mainline,
+            "near_term": near_term,
+            "heat_radar": heat_radar,
+            "gaps_and_watch": gaps_and_watch,
+            "pipeline_health": pipeline_health,
+            # Backward-compatible aliases
+            "takeaways": judgment_lines,
             "map_and_gaps": map_and_gaps,
             "new_signals": new_signals,
-            "verified_briefs": verified_briefs,
-            "pipeline_health": pipeline_health,
-            # Backward-compatible aliases used by older tests / tooling.
-            "one_line_judgment": takeaways[0] if takeaways else "",
+            "verified_briefs": [
+                {
+                    "cluster_id": "mainline",
+                    "label": "主线/长期",
+                    "brief_count": len(mainline),
+                    "briefs": mainline,
+                },
+                {
+                    "cluster_id": "near_term",
+                    "label": "短期/局部",
+                    "brief_count": len(near_term),
+                    "briefs": near_term,
+                },
+            ],
+            "one_line_judgment": judgment_lines[0] if judgment_lines else "",
             "map_changes": map_and_gaps,
-            "new_briefs": [card for g in verified_briefs for card in g["briefs"]],
-            "watchlist": new_signals[:5],
+            "new_briefs": verified_flat,
+            "watchlist": gaps_and_watch,
         },
     }
 
 
+def _render_brief_item(card: dict[str, Any], *, compact: bool = False) -> list[str]:
+    lines: list[str] = []
+    horizon_label = card.get("horizon_label") or HORIZON_ZH.get(card.get("horizon") or "", "")
+    lines.append(f"- **【{horizon_label}·{card.get('action')}】** {card.get('claim')}")
+    if card.get("mainline_note"):
+        lines.append(f"  - 主线影响: {card.get('mainline_note')}")
+    if not compact:
+        title = card.get("title") or ""
+        if title:
+            lines.append(f"  - 标题: {title}")
+        lines.append(f"  - 行动: {card.get('do')}")
+        fake = (card.get("fake_demand") or "").strip()
+        if fake:
+            lines.append(f"  - 假需求: {fake}")
+        links = ", ".join(card.get("evidence_links") or []) or "—"
+        lines.append(f"  - 证据: {links}")
+    else:
+        lines.append(f"  - 行动: {card.get('do')}")
+    return lines
+
+
 def render_digest_markdown(digest: dict[str, Any]) -> str:
     blocks = digest["blocks"]
+    title_zh = digest.get("title_zh") or "秘书周报"
     lines = [
-        f"# WorldModel Radar Weekly Digest — {digest['week']}",
+        f"# WorldModel Radar · {title_zh} — {digest['week']}",
         "",
-        f"_run_status: `{digest['run_status']}`_",
+        f"_run_status: `{digest['run_status']}` · 秘书简报（非信息倾销）_",
         "",
-        "## 本周可带走的结论",
+        "## 1. 今日/本周判断",
         "",
     ]
-    takeaways = blocks.get("takeaways") or []
-    if takeaways:
-        for item in takeaways:
-            lines.append(f"- {item}")
+    judgment = blocks.get("judgment") or blocks.get("takeaways") or []
+    if judgment:
+        for item in judgment:
+            text = item if str(item).endswith(("。", "！", "？", ".", "!", "?")) else f"{item}"
+            lines.append(f"- {text}")
     else:
-        lines.append("- （暂无结论）")
+        lines.append("- （暂无判断）")
 
-    lines += ["", "## 地图与缺口", ""]
-    for item in blocks.get("map_and_gaps") or []:
-        extra = ""
-        # When coverage > 0, still surface the standing gap as a secondary note.
-        if not item.get("has_gap") and item.get("gap_note"):
-            extra = f" · 持续关注：{item['gap_note']}"
-        lines.append(
-            f"- **{item['label']}** (`{item['cluster_id']}`): {item['note']}{extra}"
-        )
-    if not blocks.get("map_and_gaps"):
-        lines.append("- （暂无 cluster 数据）")
+    lines += ["", "## 2. 主线动态", "", "_仅主线/长期条目（≤5）；改定义·评价·runtime 契约或多年度能力阶梯_", ""]
+    mainline = blocks.get("mainline") or []
+    if mainline:
+        for card in mainline:
+            lines.extend(_render_brief_item(card, compact=False))
+    else:
+        lines.append("- （本周无主线级核验更新）")
 
+    lines += ["", "## 3. 短期局部", "", "_短期/局部优化（≤5）；次要阅读，勿升格为主线_", ""]
+    near_term = blocks.get("near_term") or []
+    if near_term:
+        for card in near_term:
+            lines.extend(_render_brief_item(card, compact=True))
+    else:
+        lines.append("- （本周无短期/局部条目）")
+
+    heat = blocks.get("heat_radar") or {}
     lines += [
         "",
-        "## 本周信号（热源/发现）",
+        "## 4. 热源雷达",
         "",
-        f"_{digest.get('labels', {}).get('new_signals', '本周信号（热源/发现）')}_",
+        f"_{digest.get('labels', {}).get('heat_radar', '热源雷达')}：{heat.get('note', '')}_",
+        "",
+        "### 优先命中",
         "",
     ]
-    signals = blocks.get("new_signals") or []
-    if signals:
-        for sig in signals:
+    hits = heat.get("hits") or blocks.get("new_signals") or []
+    if hits:
+        for sig in hits:
             chans = ", ".join(sig.get("channels") or []) or "—"
-            roles = ", ".join(sig.get("roles") or []) or "—"
-            ts = sig.get("discovered_at") or "—"
             url = sig.get("url") or "#"
+            score = sig.get("score")
+            score_bit = f" · score={score}" if score is not None else ""
             lines.append(f"- [{sig.get('title')}]({url})")
             lines.append(
-                f"  - 通道: `{chans}` · 角色: {roles} · confidence={sig.get('confidence')} · 时间: `{ts}`"
+                f"  - 通道: `{chans}` · confidence={sig.get('confidence')}{score_bit}"
             )
             if sig.get("signal_ids"):
                 lines.append(f"  - 信号 id: {', '.join(sig['signal_ids'])}")
-            lines.append(f"  - 说明: {sig.get('note')}")
+            lines.append(f"  - 为何看: {sig.get('why_matters') or sig.get('note')}")
     else:
-        lines.append("- （本周无新的热源/发现信号；若管道健康为 unavailable，勿解读为领域静默）")
+        lines.append("- （本周无优先热源命中；若覆盖为 unavailable，勿解读为领域静默）")
 
-    lines += [
-        "",
-        "## 核验 Brief（按 cluster）",
-        "",
-        f"_{digest.get('labels', {}).get('verified_briefs', '核验 Brief（来自已核验清单）')}_",
-        "",
-    ]
-    groups = blocks.get("verified_briefs") or []
-    any_brief = False
-    for group in groups:
-        cards = group.get("briefs") or []
-        if not cards:
-            continue
-        any_brief = True
-        lines.append(f"### {group.get('label')} (`{group.get('cluster_id')}`)")
-        lines.append("")
-        for card in cards:
-            links = ", ".join(card.get("evidence_links") or []) or "—"
-            lines.append(f"- **结论/行动**: {card.get('do')}")
-            lines.append(f"  - 主张: {card.get('claim')}")
-            title = card.get("title") or ""
-            lines.append(f"  - 标题: {title}")
-            lines.append(f"  - 位置: {card.get('map_position')}")
-            fake = (card.get("fake_demand") or "").strip()
-            if fake:
-                lines.append(f"  - 易误读/假需求: {fake}")
-            lines.append(f"  - 证据: {links}")
-        lines.append("")
-    if not any_brief:
-        lines.append("- （本周无核验 Brief）")
-        lines.append("")
+    lines += ["", "### 覆盖健康", ""]
+    coverage = heat.get("coverage") or []
+    if coverage:
+        ok = [c for c in coverage if c.get("health") == "ok"]
+        down = [c for c in coverage if c.get("health") != "ok"]
+        ok_names = ", ".join(c.get("channel_label") or c.get("channel") for c in ok) or "无"
+        down_names = ", ".join(
+            f"{c.get('channel_label') or c.get('channel')}(`{c.get('health')}`)" for c in down
+        ) or "无"
+        lines.append(f"- 正常: {ok_names}")
+        lines.append(f"- 异常/降级: {down_names}")
+        lines.append(f"- 分诊候选总数: {heat.get('total_candidates', len(hits))}（上表仅优先 ≤{HEAT_LIMIT}）")
+    else:
+        lines.append("- （无覆盖数据）")
 
-    lines += ["## 管道健康", ""]
-    lines.append("| 通道 | 角色 | 健康 | 机器状态 | 条数 | 样例（标题 / id / 时间） | 说明 |")
-    lines.append("| --- | --- | --- | --- | ---: | --- | --- |")
+    lines += ["", "## 5. 缺口与下周盯梢", ""]
+    gaps = blocks.get("gaps_and_watch") or []
+    if gaps:
+        for item in gaps:
+            kind = item.get("kind") or "盯梢"
+            label = item.get("label") or item.get("cluster_id") or ""
+            lines.append(f"- 【{kind}·{label}】{item.get('text')}")
+    else:
+        lines.append("- （暂无缺口/盯梢）")
+
+    lines += ["", "## 6. 管道健康", ""]
+    lines.append("| 通道 | 角色 | 健康 | 条数 | 说明 |")
+    lines.append("| --- | --- | --- | ---: | --- |")
     for row in blocks.get("pipeline_health") or []:
-        samples = row.get("samples") or []
-        if samples:
-            sample_bits = []
-            for s in samples:
-                title = (s.get("title") or "")[:40]
-                sample_bits.append(f"{title} (`{s.get('id')}`, {s.get('discovered_at') or '—'})")
-            sample_txt = "<br>".join(sample_bits)
-        else:
-            sample_txt = "—"
         label = row.get("channel_label") or row.get("channel")
         role = row.get("role_label") or row.get("role")
         lines.append(
-            f"| {label} | {role} | `{row.get('health')}` | `{row.get('status')}` | "
-            f"{row.get('item_count')} | {sample_txt} | {row.get('reader_copy')} |"
+            f"| {label} | {role} | `{row.get('health')}` | "
+            f"{row.get('item_count')} | {row.get('reader_copy')} |"
         )
     lines.append("")
     lines.append(
-        "> 健康取值：`ok` / `unavailable` / `partial`。"
-        "不可用 ≠ 零候选；勿把通道故障叙述成「本周无新闻」。"
-        "热源（HN / HF Papers）与核验清单必须分开阅读。"
+        "> 健康：`ok` / `unavailable` / `partial`。"
+        "不可用 ≠ 零候选。热源（HN / HF Papers）只提权，不进主线栏。"
+        "每条核验 Brief 必标 **主线/长期** 或 **短期/局部**。"
     )
     lines.append("")
     return "\n".join(lines)

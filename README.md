@@ -1,40 +1,46 @@
 # WorldModel Radar
 
-Intelligence map for world models — **not** an awesome list. Content first;
-verified ledger stays strict; discussion heat raises priority only and never
-decides inclusion alone.
+**秘书简报运行时** — 代你监督科技主线，不是 awesome list。  
+Verified ledger（已核验清单）保持严格；讨论热度只提权分诊，永不单独决定收录。
 
-**Reader entry:** start from the [Weekly Digest](docs/digests/)（本周可带走的结论 →
-地图与缺口 → 本周信号 → 核验 Brief → 管道健康）. Each verified item has a
-short Chinese [Brief](data/briefs/) (`claim` / `map_position` / `do` /
-`fake_demand` / `evidence_links`). Optional HTML deep reads remain under
-`docs/reviews/`.
+**读者主入口：秘书日报/周报（Secretary Briefing）** → [`docs/digests/`](docs/digests/)
 
-**Maintainer entry:** [`docs/radar-runtime.md`](docs/radar-runtime.md) — run
-discovery → triage → brief → digest in a clean environment in ~30 minutes.
+固定吸收顺序（限时可读）：
+
+1. **今日/本周判断**（≤3 句）
+2. **主线动态**（主线/长期，≤5）
+3. **短期局部**（短期/局部优化，≤5，次要）
+4. **热源雷达**（广覆盖·按分数优先 + 通道覆盖健康）
+5. **缺口与下周盯梢**（≤5）
+6. **管道健康**（紧凑）
+
+每条核验 [Brief](data/briefs/) 必含：`claim` / `map_position` / `do` / `horizon`（`mainline`|`near_term`）/
+`mainline_note` / `evidence_links`（`fake_demand` 可选）。主张中文优先。
+
+**维护者入口：** [`docs/radar-runtime.md`](docs/radar-runtime.md) — 发现 → 分诊 → brief → 秘书周报。
 
 ```bash
-# Offline (fixtures, no network) — heat fixtures are distinct from papers.json
+# 离线（fixtures，无网络）— 热源 fixtures 独立于 papers.json
 python3 -m radar run --fixtures
 python3 -m unittest discover -s tests -v
 
-# Live (needs network; actually calls HN Algolia + HF Daily Papers)
-# set GITHUB_TOKEN for better GitHub quota
+# 在线（需网络；真实调用 HN Algolia + HF Daily Papers）
+# 建议设置 GITHUB_TOKEN 以提高 GitHub 配额
 python3 -m radar run
 ```
 
-WorldModel Radar tracks 2026+ survey, roadmap, taxonomy, and definition papers,
-plus artifact and discussion signals, then turns them into Briefs and weekly
-synthesis for builders, researchers, architects, and strategy readers.
+> **缩写首次展开：** HN = Hacker News（黑客新闻）；HF = Hugging Face Papers（每日论文）；
+> VLA = Vision-Language-Action（视觉-语言-动作）。CLI 仍为 `radar`。
 
-> Scope note: 优先收录标题、摘要或正文明确以 world model / world modeling /
-> world modelling 为核心对象的 overview 类工作。泛视频生成、AI agent 或具身智能
-> 综述只有在摘要把 world models 作为主要讨论对象时才列为 adjacent。热度信号可进
-> 分诊队列，但不能单独进入已核验清单。
+WorldModel Radar 跟踪 2026+ survey / roadmap / taxonomy / definition，以及 artifact 与
+讨论信号，再压成 Brief 与秘书周报，服务建设者、研究者、架构与策略读者。
 
-See [`docs/radar-content-system.md`](docs/radar-content-system.md) for the
-editorial system and [`docs/inclusion-criteria.md`](docs/inclusion-criteria.md)
-for the verified-ledger gate.
+> Scope：优先收录以 world model / world modeling 为核心对象的 overview。
+> 泛视频生成、AI agent 或具身综述仅在摘要把 world models 作为主对象时列为 adjacent。
+> 热度可进分诊，不能单独进已核验清单。每条贡献必标 **主线/长期** vs **短期/局部**。
+
+教义见 [`docs/radar-content-system.md`](docs/radar-content-system.md)；
+核验门见 [`docs/inclusion-criteria.md`](docs/inclusion-criteria.md)。
 
 ## Quick View
 
@@ -75,7 +81,7 @@ for the verified-ledger gate.
 ```text
 .
 |-- README.md
-|-- radar/                 # Radar Runtime (default path)
+|-- radar/                 # Radar Runtime / 秘书简报管道
 |-- data/
 |   |-- papers.json        # verified ledger seed
 |   |-- clusters.json
@@ -83,8 +89,8 @@ for the verified-ledger gate.
 |   |-- fixtures/          # offline adapter fixtures
 |   `-- triage/
 |-- docs/
-|   |-- radar-runtime.md   # how to run the MVP pipeline
-|   |-- digests/           # Weekly Digest (primary reader entry)
+|   |-- radar-runtime.md   # 如何跑 MVP
+|   |-- digests/           # 秘书日报/周报（读者主入口）
 |   |-- reviews/           # optional Deep Read HTML
 |   `-- ...
 |-- runs/                  # machine-readable run status
@@ -94,17 +100,18 @@ for the verified-ledger gate.
 
 ## Data Fields
 
-The canonical paper list lives in [`data/papers.json`](data/papers.json).
+Canonical paper list: [`data/papers.json`](data/papers.json).
 
 - `relevance`: `core`, `domain`, or `adjacent`
 - `paper_type`: survey, review, roadmap, taxonomy, position, framework, etc.
-- `area`: the application or conceptual area
+- `area`: application or conceptual area
 - `why_included`: short inclusion rationale
 - `status`: `verified_public_source` when checked against public search/arXiv metadata
 
-## Maintenance
+Brief 额外字段：`horizon` = `mainline`（主线/长期）| `near_term`（短期/局部）；
+`mainline_note` = 一句中文说明对长期主线的影响（或明确「不改主线」）。
 
-Default pipeline (multi-channel, isolated adapters):
+## Maintenance
 
 ```bash
 python3 -m radar run --fixtures   # or: python3 -m radar run
@@ -113,18 +120,14 @@ python3 scripts/render_readme.py
 python3 scripts/validate_papers.py
 ```
 
-- Discovery channels (parallel, failure-isolated): arXiv, OpenReview, GitHub.
-- Optional signal channels (degradable): Hacker News, Hugging Face Papers.
-- Channel `unavailable` ≠ empty field; never narrate outages as “zero candidates”.
-- Move weak hits to triage / `docs/search-log.md`; only primary-source-verified
-  overview items enter `data/papers.json`.
+- Discovery（并行、失败隔离）：arXiv、OpenReview、GitHub。
+- Optional heat（可降级）：Hacker News（HN）、Hugging Face Papers（HF）。
+- 通道 `unavailable` ≠ 领域静默；热源不进「主线动态」栏。
+- MVP **不**接 X / YouTube 自动热源。
 
-See [`docs/radar-runtime.md`](docs/radar-runtime.md) and legacy notes in
-[`docs/automation.md`](docs/automation.md).
+详见 [`docs/radar-runtime.md`](docs/radar-runtime.md)、[`docs/automation.md`](docs/automation.md)。
 
 ## Deep Read (optional)
 
-- [`docs/reviews/`](docs/reviews/): long HTML reviews — second layer, not required
-  for every paper.
-- [`docs/reviews/world-model-big-picture.html`](docs/reviews/world-model-big-picture.html):
-  legacy weekly synthesis over the HTML corpus.
+- [`docs/reviews/`](docs/reviews/)：长 HTML — 第二层，非每篇必写。
+- [`docs/reviews/world-model-big-picture.html`](docs/reviews/world-model-big-picture.html)：遗留周合成。

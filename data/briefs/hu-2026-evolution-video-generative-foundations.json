@@ -8,6 +8,8 @@
     "https://arxiv.org/abs/2604.06339",
     "https://github.com/sjtuplayer/Awesome-Video-Foundations"
   ],
+  "horizon": "near_term",
+  "mainline_note": "泛视频生成边界对照，adjacent 噪声需过滤，不进主线决策。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Evolution of Video Generative Foundations",
   "cluster_id": "video_sim"

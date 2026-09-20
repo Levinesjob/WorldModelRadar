@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2605.12090"
   ],
+  "horizon": "mainline",
+  "mainline_note": "定义「世界模型+行动」范式边界，巩固具身主线叙事。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "World Action Models: The Next Frontier in Embodied AI",
   "cluster_id": "robot"

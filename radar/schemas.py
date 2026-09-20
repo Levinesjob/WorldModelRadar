@@ -30,15 +30,35 @@ class RunStatus(str, Enum):
     ERROR = "error"
 
 
+class Horizon(str, Enum):
+    """主线/长期 vs 短期/局部 — required on every Brief."""
+
+    MAINLINE = "mainline"  # 主线 / 长期贡献
+    NEAR_TERM = "near_term"  # 短期 / 局部优化
+
+
 # Discovery adapters must succeed (or empty) for a clean run.
 DISCOVERY_CHANNELS = ("arxiv", "openreview", "github")
 # Optional signal adapters: degradable; failure is never "zero candidates".
 SIGNAL_CHANNELS = ("hackernews", "huggingface")
 
+HORIZON_ALLOWED = (Horizon.MAINLINE.value, Horizon.NEAR_TERM.value)
 
-BRIEF_REQUIRED_FIELDS = ("claim", "map_position", "do", "evidence_links")
+BRIEF_REQUIRED_FIELDS = (
+    "claim",
+    "map_position",
+    "do",
+    "evidence_links",
+    "horizon",
+    "mainline_note",
+)
 BRIEF_OPTIONAL_FIELDS = ("fake_demand",)
 DO_ALLOWED = ("建", "研", "观望", "忽略")
+
+HORIZON_ZH = {
+    Horizon.MAINLINE.value: "主线/长期",
+    Horizon.NEAR_TERM.value: "短期/局部",
+}
 
 
 @dataclass
@@ -84,7 +104,7 @@ class Candidate:
 
 @dataclass
 class Brief:
-    """Chinese publish-gate brief (schema-first)."""
+    """Chinese publish-gate brief (schema-first) for secretary briefings."""
 
     id: str
     paper_id: str
@@ -92,6 +112,8 @@ class Brief:
     map_position: str
     do: str
     evidence_links: list[str]
+    horizon: str  # mainline | near_term
+    mainline_note: str  # one Chinese sentence on long-term main-line impact
     fake_demand: str = ""
     title: str = ""
     cluster_id: str = ""
@@ -174,13 +196,15 @@ def validate_brief(payload: dict[str, Any]) -> list[str]:
                 errors.append("evidence_links must be a non-empty list")
             elif not all(isinstance(x, str) and x.strip() for x in value):
                 errors.append("evidence_links entries must be non-empty strings")
+        elif key == "horizon":
+            if not isinstance(value, str) or value not in HORIZON_ALLOWED:
+                errors.append(f"horizon must be one of {list(HORIZON_ALLOWED)}")
         else:
             if not isinstance(value, str) or not value.strip():
                 errors.append(f"{key} must be a non-empty string")
 
     do_value = payload.get("do", "")
     if isinstance(do_value, str) and do_value.strip():
-        action = do_value.strip().split(None, 1)[0] if do_value.strip() else ""
         # Allow "观望：理由" or "观望 — 理由" or "观望 理由"
         prefix = None
         for allowed in DO_ALLOWED:
@@ -193,6 +217,10 @@ def validate_brief(payload: dict[str, Any]) -> list[str]:
     claim = payload.get("claim", "")
     if isinstance(claim, str) and len(claim) > 150:
         errors.append("claim must be ≤150 Chinese/Latin characters for scannability")
+
+    note = payload.get("mainline_note", "")
+    if isinstance(note, str) and note.strip() and len(note) > 120:
+        errors.append("mainline_note must be ≤120 characters (one Chinese sentence)")
 
     fake = payload.get("fake_demand", "")
     if fake is not None and not isinstance(fake, str):

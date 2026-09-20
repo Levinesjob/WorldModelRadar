@@ -8,6 +8,8 @@
     "https://arxiv.org/abs/2606.01164",
     "https://github.com/liujiuming123/Awesome-Interactive-World-Model"
   ],
+  "horizon": "mainline",
+  "mainline_note": "标定 video→sim 交互建模前沿，影响仿真主线桥梁。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
   "cluster_id": "video_sim"

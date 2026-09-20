@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2607.11689"
   ],
+  "horizon": "mainline",
+  "mainline_note": "提出具身栈契约，连接世界模型与开放世界行动能力阶梯。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
   "cluster_id": "robot"

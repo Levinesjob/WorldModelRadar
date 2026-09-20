@@ -7,6 +7,8 @@
   "evidence_links": [
     "https://arxiv.org/abs/2602.01630"
   ],
+  "horizon": "mainline",
+  "mainline_note": "否定碎片化灌知识路径，推动通用世界模型规格主线。",
   "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
   "cluster_id": "definition"
