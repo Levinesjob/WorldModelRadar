@@ -6,7 +6,17 @@
       "url": "https://example.com/world-model-sim",
       "points": 142,
       "num_comments": 37,
-      "created_at": "2026-09-15T12:00:00.000Z"
+      "created_at": "2026-09-15T12:00:00.000Z",
+      "story_text": "Fixture-only HN heat hit — not from papers.json ledger."
+    },
+    {
+      "objectID": "40000003",
+      "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+      "url": "https://example.com/worldmodelbench",
+      "points": 88,
+      "num_comments": 21,
+      "created_at": "2026-09-16T09:30:00.000Z",
+      "story_text": "Distinct HN signal item for offline demo; not a verified ledger paper."
     },
     {
       "objectID": "40000002",
@@ -14,7 +24,8 @@
       "url": null,
       "points": 3,
       "num_comments": 1,
-      "created_at": "2026-09-14T12:00:00.000Z"
+      "created_at": "2026-09-14T12:00:00.000Z",
+      "story_text": "Noise control sample — low-confidence heat, not world-model relevant."
     }
   ]
 }

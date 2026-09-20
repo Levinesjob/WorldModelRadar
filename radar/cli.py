@@ -10,7 +10,7 @@ from pathlib import Path
 from radar.brief import seed_briefs_from_papers
 from radar.paths import BRIEFS_DIR, PAPERS_FILE
 from radar.runtime import load_papers, run_pipeline
-from radar.schemas import validate_brief
+from radar.schemas import channel_health_label, validate_brief
 
 
 def cmd_run(args: argparse.Namespace) -> int:
@@ -35,8 +35,10 @@ def cmd_run(args: argparse.Namespace) -> int:
                 "channel": r.channel,
                 "role": r.role,
                 "status": r.status.value,
+                "health": channel_health_label(r.status),
                 "item_count": r.item_count,
                 "error_code": r.error_code,
+                "sample_titles": [s.title for s in r.signals[:3]],
             }
             for r in artifacts.channel_results
         ],

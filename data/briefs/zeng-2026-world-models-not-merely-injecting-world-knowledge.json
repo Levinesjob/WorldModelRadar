@@ -1,13 +1,13 @@
 {
   "id": "brief-zeng-2026-world-models-not-merely-injecting-world-knowledge",
   "paper_id": "zeng-2026-world-models-not-merely-injecting-world-knowledge",
-  "claim": "Analyzes fragmentation in world-model research and proposes a unified design specification for more general world models.",
+  "claim": "批评「往任务里灌世界知识」的碎片化做法，主张更统一的通用世界模型规格。",
   "map_position": "definition · core · world-model research framing",
   "do": "研 — 领域级 framing，值得跟定义与评价争论",
   "evidence_links": [
     "https://arxiv.org/abs/2602.01630"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
   "cluster_id": "definition"
 }

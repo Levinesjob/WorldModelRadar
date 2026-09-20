@@ -26,7 +26,14 @@ from radar.paths import (
     RUNS_DIR,
     TRIAGE_DIR,
 )
-from radar.schemas import ChannelResult, RunStatus, aggregate_run_status, utc_now_iso
+from radar.schemas import (
+    ChannelResult,
+    RunStatus,
+    aggregate_run_status,
+    channel_health_label,
+    channel_samples,
+    utc_now_iso,
+)
 from radar.triage import build_triage_queue, candidates_from_papers, write_triage_queue
 
 
@@ -85,17 +92,35 @@ def write_run_manifest(
                 "channel": r.channel,
                 "role": r.role,
                 "status": r.status.value,
+                "health": channel_health_label(r.status),
                 "item_count": r.item_count,
                 "error_code": r.error_code,
                 "message": r.message,
                 "duration_ms": r.duration_ms,
                 "endpoint": r.endpoint,
+                "samples": channel_samples(r, limit=3),
+                "latest_discovered_at": max(
+                    (s.discovered_at for s in r.signals if s.discovered_at),
+                    default=None,
+                ),
             }
             for r in channel_results
         ],
         "notes": {
             "unavailable_means": "channel outage — not an empty field / not zero candidates",
             "heat_policy": "signal heat boosts triage priority only; never sole verified inclusion",
+            "verified_vs_signals": (
+                "Verified Briefs come from data/papers.json ledger; "
+                "new signals this run come from discovery/heat adapters (HN Algolia, HF Papers, etc.)"
+            ),
+            "live_heat_endpoints": {
+                "hackernews": "https://hn.algolia.com/api/v1/search (query=world model, tags=story)",
+                "huggingface": "https://huggingface.co/api/daily_papers",
+            },
+            "fixtures_heat": (
+                "With --fixtures, HN/HF read data/fixtures/hn_algolia.json and "
+                "hf_daily_papers.json — distinct synthetic heat items, not ledger copies"
+            ),
         },
     }
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -1,13 +1,13 @@
 {
   "id": "brief-maharaj-2026-code-world-modelling-survey",
   "paper_id": "maharaj-2026-code-world-modelling-survey",
-  "claim": "Includes Code World Models as one of three surveyed non-autoregressive paradigms for code intelligence.",
+  "claim": "在代码智能非自回归范式综述中，把 Code World Models 作为一类关键路径。",
   "map_position": "code · domain · code intelligence",
   "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
   "evidence_links": [
     "https://arxiv.org/abs/2606.23690"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
   "cluster_id": "code"
 }

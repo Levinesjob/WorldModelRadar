@@ -201,6 +201,34 @@ def validate_brief(payload: dict[str, Any]) -> list[str]:
     return errors
 
 
+def channel_health_label(status: ChannelStatus) -> str:
+    """Reader-facing channel health: ``ok`` / ``unavailable`` / ``partial``.
+
+    Machine status stays ``success|empty|unavailable|error``; this label is for
+    Digest / run-status surfaces so heat channels are never silent.
+    """
+    if status in (ChannelStatus.SUCCESS, ChannelStatus.EMPTY):
+        return "ok"
+    if status == ChannelStatus.UNAVAILABLE:
+        return "unavailable"
+    return "partial"
+
+
+def channel_samples(result: ChannelResult, *, limit: int = 3) -> list[dict[str, Any]]:
+    """Compact per-channel samples (id / title / timestamp) for attribution."""
+    samples: list[dict[str, Any]] = []
+    for signal in result.signals[:limit]:
+        samples.append(
+            {
+                "id": signal.id,
+                "title": signal.title,
+                "discovered_at": signal.discovered_at,
+                "url": signal.url,
+            }
+        )
+    return samples
+
+
 def status_reader_copy(status: ChannelStatus) -> str:
     """Human copy for Digest pipeline-health block — never confuse down with empty."""
     if status == ChannelStatus.SUCCESS:
@@ -209,4 +237,4 @@ def status_reader_copy(status: ChannelStatus) -> str:
         return "正常，本通道无新命中（≠领域静默）"
     if status == ChannelStatus.UNAVAILABLE:
         return "不可用（≠零候选；勿写成「本周无新闻」）"
-    return "错误（≠零候选）"
+    return "错误/降级（≠零候选）"

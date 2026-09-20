@@ -31,13 +31,14 @@ def parse_hn_payload(payload: dict) -> list[Signal]:
         if comments:
             evidence.append(f"comments={comments}")
         confidence = "medium" if (points or 0) >= 20 else "low"
+        created = hit.get("created_at") or now
         signals.append(
             Signal(
                 id=f"hn:{object_id or title[:40]}",
                 channel="hackernews",
                 title=title,
                 url=url,
-                discovered_at=now,
+                discovered_at=created,
                 summary=(hit.get("story_text") or "")[:1000],
                 evidence=evidence,
                 confidence=confidence,

@@ -1,14 +1,14 @@
 {
   "id": "brief-han-2026-economic-world-models",
   "paper_id": "han-2026-economic-world-models",
-  "claim": "Defines Economic World Models as executable generative economic environments, systematically surveys the field through a six-level capability ladde…",
+  "claim": "把经济世界模型定义为可执行生成环境，并给出六级能力阶梯与工程蓝图。",
   "map_position": "runtime · domain · economic world models",
   "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
   "evidence_links": [
     "https://arxiv.org/abs/2608.06020",
     "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
   "cluster_id": "runtime"
 }

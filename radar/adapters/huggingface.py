@@ -53,19 +53,25 @@ def parse_hf_payload(payload) -> list[Signal]:
         if arxiv_id:
             anchors["arxiv_id"] = arxiv_id
 
+        published = (
+            item.get("publishedAt")
+            or item.get("published_at")
+            or paper.get("publishedAt")
+            or now
+        )
         signals.append(
             Signal(
                 id=f"hf:{arxiv_id or title[:40]}",
                 channel="huggingface",
                 title=title,
                 url=url or f"https://huggingface.co/papers/{arxiv_id}",
-                discovered_at=now,
+                discovered_at=str(published),
                 summary=(paper.get("summary") or paper.get("abstract") or "")[:2000],
                 evidence=evidence,
                 confidence=confidence,
                 anchors=anchors,
                 metrics={"upvotes": upvotes},
-                raw={"paper_id": paper.get("id")},
+                raw={"paper_id": paper.get("id"), "publishedAt": published},
             )
         )
     return signals

@@ -4,8 +4,8 @@ Intelligence map for world models — **not** an awesome list. Content first;
 verified ledger stays strict; discussion heat raises priority only and never
 decides inclusion alone.
 
-**Reader entry:** start from the [Weekly Digest](docs/digests/) (one-line judgment,
-map changes, new Briefs, pipeline health, watchlist ≤5). Each verified item has a
+**Reader entry:** start from the [Weekly Digest](docs/digests/)（本周可带走的结论 →
+地图与缺口 → 本周信号 → 核验 Brief → 管道健康）. Each verified item has a
 short Chinese [Brief](data/briefs/) (`claim` / `map_position` / `do` /
 `fake_demand` / `evidence_links`). Optional HTML deep reads remain under
 `docs/reviews/`.
@@ -14,11 +14,12 @@ short Chinese [Brief](data/briefs/) (`claim` / `map_position` / `do` /
 discovery → triage → brief → digest in a clean environment in ~30 minutes.
 
 ```bash
-# Offline (fixtures, no network)
+# Offline (fixtures, no network) — heat fixtures are distinct from papers.json
 python3 -m radar run --fixtures
 python3 -m unittest discover -s tests -v
 
-# Live (needs network; set GITHUB_TOKEN for better GitHub quota)
+# Live (needs network; actually calls HN Algolia + HF Daily Papers)
+# set GITHUB_TOKEN for better GitHub quota
 python3 -m radar run
 ```
 

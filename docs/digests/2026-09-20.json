@@ -1,0 +1,1097 @@
+{
+  "week": "2026-09-20",
+  "run_status": "success",
+  "labels": {
+    "verified_briefs": "核验 Brief（来自已核验清单 / ledger）",
+    "new_signals": "本周信号（来自热源/发现通道，非清单副本）"
+  },
+  "blocks": {
+    "takeaways": [
+      "【研·definition】给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+      "【研·runtime】主张从「好看的生成引擎」转向「可行动的物理 grounding 模拟器」。",
+      "【研·robot】从机器人学习视角系统综述世界模型：策略、学习型模拟器与视频世界模型。",
+      "【研·robot】梳理世界动作模型演进，诊断表征/标准/系统缺口，提出具身栈契约。",
+      "【研·definition】形式化图世界模型范式，并用关系归纳偏置 taxonomy（分类体系）组织现有工作。",
+      "【缺口·eval】缺：统一的 decision-centric 评价协议落地案例",
+      "【信号·热源】本周热源命中「A Survey of Interactive World Models for Embodied Agents」（通道：arxiv, huggingface）——只提权分诊，不自动进核验清单。"
+    ],
+    "map_and_gaps": [
+      {
+        "cluster_id": "runtime",
+        "label": "Runtime / 可执行模拟器",
+        "brief_count": 5,
+        "gap_note": "缺：跨域 runtime 契约与可审计 rollout 的代表条目",
+        "note": "代表核验 Brief ×5",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "video_sim",
+        "label": "Video → Sim",
+        "brief_count": 2,
+        "gap_note": "缺：从视频生成到可行动模拟的评价桥梁",
+        "note": "代表核验 Brief ×2",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "robot",
+        "label": "Robot / Embodied",
+        "brief_count": 7,
+        "gap_note": "缺：开源可复现的 embodied world-model 基准对照",
+        "note": "代表核验 Brief ×7",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "eval",
+        "label": "Evaluation / Admissibility",
+        "brief_count": 0,
+        "gap_note": "缺：统一的 decision-centric 评价协议落地案例",
+        "note": "缺：统一的 decision-centric 评价协议落地案例",
+        "has_gap": true
+      },
+      {
+        "cluster_id": "definition",
+        "label": "Definition / Taxonomy / Roadmap",
+        "brief_count": 4,
+        "gap_note": "缺：社区共识定义与争议点对照表",
+        "note": "代表核验 Brief ×4",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "code",
+        "label": "Code / Artifacts",
+        "brief_count": 1,
+        "gap_note": "缺：官方仓库与可运行 stack 的成熟度追踪",
+        "note": "代表核验 Brief ×1",
+        "has_gap": false
+      }
+    ],
+    "new_signals": [
+      {
+        "id": "cand-8ea9447e50dc",
+        "title": "A Survey of Interactive World Models for Embodied Agents",
+        "url": "https://arxiv.org/abs/2609.99999",
+        "channels": [
+          "arxiv",
+          "huggingface"
+        ],
+        "roles": [
+          "discovery",
+          "signal"
+        ],
+        "confidence": "high",
+        "priority_boost": 1.8399999999999999,
+        "signal_ids": [
+          "arxiv:2609.99999",
+          "hf:2609.99999"
+        ],
+        "discovered_at": "2026-09-18T08:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-1453197e4120",
+        "title": "Open-source world model simulator released",
+        "url": "https://example.com/world-model-sim",
+        "channels": [
+          "hackernews"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 2.42,
+        "signal_ids": [
+          "hn:40000001"
+        ],
+        "discovered_at": "2026-09-15T12:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-11ee260d686c",
+        "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+        "url": "https://example.com/worldmodelbench",
+        "channels": [
+          "hackernews"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 1.88,
+        "signal_ids": [
+          "hn:40000003"
+        ],
+        "discovered_at": "2026-09-16T09:30:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-b4aae94c1cfa",
+        "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+        "url": "https://arxiv.org/abs/2609.77777",
+        "channels": [
+          "huggingface"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 1.54,
+        "signal_ids": [
+          "hf:2609.77777"
+        ],
+        "discovered_at": "2026-09-17T11:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-abaf53bf5dea",
+        "title": "World Models for Open-World Robotics: A Position Paper",
+        "url": "https://openreview.net/forum?id=ORForumAAA",
+        "channels": [
+          "openreview"
+        ],
+        "roles": [
+          "discovery"
+        ],
+        "confidence": "high",
+        "priority_boost": 0.0,
+        "signal_ids": [
+          "openreview:ORForumAAA"
+        ],
+        "discovered_at": "2026-09-20T02:54:53+00:00",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-152f6710b882",
+        "title": "Ask HN: best laptop for ML?",
+        "url": "https://news.ycombinator.com/item?id=40000002",
+        "channels": [
+          "hackernews"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "low",
+        "priority_boost": 1.03,
+        "signal_ids": [
+          "hn:40000002"
+        ],
+        "discovered_at": "2026-09-14T12:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-bfe218c1ef3e",
+        "title": "example/world-models-toolkit",
+        "url": "https://github.com/example/world-models-toolkit",
+        "channels": [
+          "github"
+        ],
+        "roles": [
+          "discovery"
+        ],
+        "confidence": "medium",
+        "priority_boost": 0.0,
+        "signal_ids": [
+          "github:example/world-models-toolkit"
+        ],
+        "discovered_at": "2026-09-20T02:54:53+00:00",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-fdf08b17b271",
+        "title": "example/awesome-agents",
+        "url": "https://github.com/example/awesome-agents",
+        "channels": [
+          "github"
+        ],
+        "roles": [
+          "discovery"
+        ],
+        "confidence": "low",
+        "priority_boost": 0.0,
+        "signal_ids": [
+          "github:example/awesome-agents"
+        ],
+        "discovered_at": "2026-09-20T02:54:53+00:00",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      }
+    ],
+    "verified_briefs": [
+      {
+        "cluster_id": "runtime",
+        "label": "Runtime / 可执行模拟器",
+        "brief_count": 5,
+        "briefs": [
+          {
+            "id": "brief-chen-2026-generative-engines-actionable-simulators",
+            "title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
+            "claim": "主张从「好看的生成引擎」转向「可行动的物理 grounding 模拟器」。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "runtime · core · physical grounding and actionable simulators",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2601.15533"
+            ],
+            "cluster_id": "runtime",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-oefinger-2026-admissibility-world-model-simulators",
+            "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
+            "claim": "定义 L0–L4 可采信框架：何时可把世界模型模拟器判决当作保证证据。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "runtime · core · world-model simulator assurance",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2607.07196"
+            ],
+            "cluster_id": "runtime",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-zheng-2026-digital-twins-world-models-edge",
+            "title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
+            "claim": "综述数字孪生走向世界模型，及其在移动边缘通用智能中的机会与挑战。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "runtime · domain · digital twins and mobile edge intelligence",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2603.17420"
+            ],
+            "cluster_id": "runtime",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-han-2026-economic-world-models",
+            "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
+            "claim": "把经济世界模型定义为可执行生成环境，并给出六级能力阶梯与工程蓝图。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "runtime · domain · economic world models",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2608.06020",
+              "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models"
+            ],
+            "cluster_id": "runtime",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-liu-2026-medical-world-models",
+            "title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
+            "claim": "整理医疗世界模型散点工作，围绕患者状态、临床动力学与干预策略建路线图。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "runtime · domain · healthcare",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2606.16721",
+              "https://github.com/1999kevin/awesome_medical_world_models"
+            ],
+            "cluster_id": "runtime",
+            "source": "verified_ledger"
+          }
+        ]
+      },
+      {
+        "cluster_id": "video_sim",
+        "label": "Video → Sim",
+        "brief_count": 2,
+        "briefs": [
+          {
+            "id": "brief-liu-2026-interactive-video-world-modeling",
+            "title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
+            "claim": "系统综述交互式视频世界建模的前沿、挑战、基准与趋势。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "video_sim · core · interactive video world modeling",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2606.01164",
+              "https://github.com/liujiuming123/Awesome-Interactive-World-Model"
+            ],
+            "cluster_id": "video_sim",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-hu-2026-evolution-video-generative-foundations",
+            "title": "Evolution of Video Generative Foundations",
+            "claim": "泛视频生成综述；仅在把高级视频生成通向世界模型时作边界对照。",
+            "do": "忽略 — adjacent；仅作边界对照，不进主清单决策",
+            "action": "忽略",
+            "map_position": "video_sim · adjacent · video generation foundations",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2604.06339",
+              "https://github.com/sjtuplayer/Awesome-Video-Foundations"
+            ],
+            "cluster_id": "video_sim",
+            "source": "verified_ledger"
+          }
+        ]
+      },
+      {
+        "cluster_id": "robot",
+        "label": "Robot / Embodied",
+        "brief_count": 7,
+        "briefs": [
+          {
+            "id": "brief-liang-2026-world-action-models-embodied-brains",
+            "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+            "claim": "梳理世界动作模型演进，诊断表征/标准/系统缺口，提出具身栈契约。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "robot · core · world action models and embodied physical intelligence",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2607.11689"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-yu-2026-decision-centric-world-model-evaluation",
+            "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+            "claim": "主张以决策为中心评价世界模型，提出 L0–L7 证据阶梯并诊断主张/证据错配。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "robot · core · decision-centric world-model evaluation",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2606.15032"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-wang-2026-world-action-models",
+            "title": "World Action Models: The Next Frontier in Embodied AI",
+            "claim": "定义世界动作模型为「世界模型+具身行动」范式，并综述架构/数据/评价。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "robot · core · embodied AI and action generation",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2605.12090"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-hou-2026-world-model-robot-learning",
+            "title": "World Model for Robot Learning: A Comprehensive Survey",
+            "claim": "从机器人学习视角系统综述世界模型：策略、学习型模拟器与视频世界模型。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "robot · core · robot learning",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2605.00080",
+              "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-zhang-2026-driving-world-model-counterfactual-prediction",
+            "title": "How Can Driving World Models Do Counterfactual Prediction?",
+            "claim": "指出驾驶世界模型在反事实预测上的协议缺口，并给出可控评测基准。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "robot · domain · driving world models and counterfactual evaluation",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2608.11601"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-karcini-2026-robots-need-more-than-vla-world-models",
+            "title": "Robots Need More than VLA and World Models",
+            "claim": "立场文：机器人不能只靠 VLA（Vision-Language-Action，视觉-语言-动作）与世界模型。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "robot · domain · robotics, VLA, and world-model interfaces",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2606.06556"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-mei-2026-video-generation-models-robotics",
+            "title": "Video Generation Models in Robotics - Applications, Research Challenges, Future Directions",
+            "claim": "综述视频模型在机器人中作为具身世界模型的应用、挑战与方向。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "robot · domain · robotics and video generation world models",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2601.07823"
+            ],
+            "cluster_id": "robot",
+            "source": "verified_ledger"
+          }
+        ]
+      },
+      {
+        "cluster_id": "eval",
+        "label": "Evaluation / Admissibility",
+        "brief_count": 0,
+        "briefs": []
+      },
+      {
+        "cluster_id": "definition",
+        "label": "Definition / Taxonomy / Roadmap",
+        "brief_count": 4,
+        "briefs": [
+          {
+            "id": "brief-chen-2026-definition-roadmap-world-models",
+            "title": "A Definition and Roadmap for World Models",
+            "claim": "给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "definition · core · general definition",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2607.06401"
+            ],
+            "cluster_id": "definition",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-liu-2026-graph-world-models",
+            "title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
+            "claim": "形式化图世界模型范式，并用关系归纳偏置 taxonomy（分类体系）组织现有工作。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "definition · core · graph world models",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2604.27895"
+            ],
+            "cluster_id": "definition",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-zeng-2026-openworldlib",
+            "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+            "claim": "提出高级世界模型统一定义与能力分类，并给出标准化推理代码基座。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "definition · core · advanced world models",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2604.04707",
+              "https://github.com/OpenDCAI/OpenWorldLib"
+            ],
+            "cluster_id": "definition",
+            "source": "verified_ledger"
+          },
+          {
+            "id": "brief-zeng-2026-world-models-not-merely-injecting-world-knowledge",
+            "title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
+            "claim": "批评「往任务里灌世界知识」的碎片化做法，主张更统一的通用世界模型规格。",
+            "do": "研 — 领域级 framing，值得跟定义与评价争论",
+            "action": "研",
+            "map_position": "definition · core · world-model research framing",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2602.01630"
+            ],
+            "cluster_id": "definition",
+            "source": "verified_ledger"
+          }
+        ]
+      },
+      {
+        "cluster_id": "code",
+        "label": "Code / Artifacts",
+        "brief_count": 1,
+        "briefs": [
+          {
+            "id": "brief-maharaj-2026-code-world-modelling-survey",
+            "title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
+            "claim": "在代码智能非自回归范式综述中，把 Code World Models 作为一类关键路径。",
+            "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+            "action": "观望",
+            "map_position": "code · domain · code intelligence",
+            "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+            "evidence_links": [
+              "https://arxiv.org/abs/2606.23690"
+            ],
+            "cluster_id": "code",
+            "source": "verified_ledger"
+          }
+        ]
+      }
+    ],
+    "pipeline_health": [
+      {
+        "channel": "arxiv",
+        "channel_label": "arXiv（预印本库）",
+        "role": "discovery",
+        "role_label": "发现",
+        "status": "success",
+        "health": "ok",
+        "item_count": 1,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok",
+        "samples": [
+          {
+            "id": "arxiv:2609.99999",
+            "title": "A Survey of Interactive World Models for Embodied Agents",
+            "discovered_at": "2026-09-20T02:54:53+00:00",
+            "url": "https://arxiv.org/abs/2609.99999"
+          }
+        ],
+        "latest_discovered_at": "2026-09-20T02:54:53+00:00"
+      },
+      {
+        "channel": "openreview",
+        "channel_label": "OpenReview（公开审稿平台）",
+        "role": "discovery",
+        "role_label": "发现",
+        "status": "success",
+        "health": "ok",
+        "item_count": 1,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok",
+        "samples": [
+          {
+            "id": "openreview:ORForumAAA",
+            "title": "World Models for Open-World Robotics: A Position Paper",
+            "discovered_at": "2026-09-20T02:54:53+00:00",
+            "url": "https://openreview.net/forum?id=ORForumAAA"
+          }
+        ],
+        "latest_discovered_at": "2026-09-20T02:54:53+00:00"
+      },
+      {
+        "channel": "github",
+        "channel_label": "GitHub（代码托管）",
+        "role": "discovery",
+        "role_label": "发现",
+        "status": "success",
+        "health": "ok",
+        "item_count": 2,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok",
+        "samples": [
+          {
+            "id": "github:example/world-models-toolkit",
+            "title": "example/world-models-toolkit",
+            "discovered_at": "2026-09-20T02:54:53+00:00",
+            "url": "https://github.com/example/world-models-toolkit"
+          },
+          {
+            "id": "github:example/awesome-agents",
+            "title": "example/awesome-agents",
+            "discovered_at": "2026-09-20T02:54:53+00:00",
+            "url": "https://github.com/example/awesome-agents"
+          }
+        ],
+        "latest_discovered_at": "2026-09-20T02:54:53+00:00"
+      },
+      {
+        "channel": "hackernews",
+        "channel_label": "Hacker News（HN，黑客新闻）",
+        "role": "signal",
+        "role_label": "热源/信号",
+        "status": "success",
+        "health": "ok",
+        "item_count": 3,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok",
+        "samples": [
+          {
+            "id": "hn:40000001",
+            "title": "Open-source world model simulator released",
+            "discovered_at": "2026-09-15T12:00:00.000Z",
+            "url": "https://example.com/world-model-sim"
+          },
+          {
+            "id": "hn:40000003",
+            "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+            "discovered_at": "2026-09-16T09:30:00.000Z",
+            "url": "https://example.com/worldmodelbench"
+          },
+          {
+            "id": "hn:40000002",
+            "title": "Ask HN: best laptop for ML?",
+            "discovered_at": "2026-09-14T12:00:00.000Z",
+            "url": "https://news.ycombinator.com/item?id=40000002"
+          }
+        ],
+        "latest_discovered_at": "2026-09-16T09:30:00.000Z"
+      },
+      {
+        "channel": "huggingface",
+        "channel_label": "Hugging Face Papers（HF Papers，每日论文）",
+        "role": "signal",
+        "role_label": "热源/信号",
+        "status": "success",
+        "health": "ok",
+        "item_count": 2,
+        "error_code": null,
+        "reader_copy": "正常，有候选",
+        "message": "ok",
+        "samples": [
+          {
+            "id": "hf:2609.99999",
+            "title": "A Survey of Interactive World Models for Embodied Agents",
+            "discovered_at": "2026-09-18T08:00:00.000Z",
+            "url": "https://arxiv.org/abs/2609.99999"
+          },
+          {
+            "id": "hf:2609.77777",
+            "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+            "discovered_at": "2026-09-17T11:00:00.000Z",
+            "url": "https://arxiv.org/abs/2609.77777"
+          }
+        ],
+        "latest_discovered_at": "2026-09-18T08:00:00.000Z"
+      }
+    ],
+    "one_line_judgment": "【研·definition】给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+    "map_changes": [
+      {
+        "cluster_id": "runtime",
+        "label": "Runtime / 可执行模拟器",
+        "brief_count": 5,
+        "gap_note": "缺：跨域 runtime 契约与可审计 rollout 的代表条目",
+        "note": "代表核验 Brief ×5",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "video_sim",
+        "label": "Video → Sim",
+        "brief_count": 2,
+        "gap_note": "缺：从视频生成到可行动模拟的评价桥梁",
+        "note": "代表核验 Brief ×2",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "robot",
+        "label": "Robot / Embodied",
+        "brief_count": 7,
+        "gap_note": "缺：开源可复现的 embodied world-model 基准对照",
+        "note": "代表核验 Brief ×7",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "eval",
+        "label": "Evaluation / Admissibility",
+        "brief_count": 0,
+        "gap_note": "缺：统一的 decision-centric 评价协议落地案例",
+        "note": "缺：统一的 decision-centric 评价协议落地案例",
+        "has_gap": true
+      },
+      {
+        "cluster_id": "definition",
+        "label": "Definition / Taxonomy / Roadmap",
+        "brief_count": 4,
+        "gap_note": "缺：社区共识定义与争议点对照表",
+        "note": "代表核验 Brief ×4",
+        "has_gap": false
+      },
+      {
+        "cluster_id": "code",
+        "label": "Code / Artifacts",
+        "brief_count": 1,
+        "gap_note": "缺：官方仓库与可运行 stack 的成熟度追踪",
+        "note": "代表核验 Brief ×1",
+        "has_gap": false
+      }
+    ],
+    "new_briefs": [
+      {
+        "id": "brief-chen-2026-generative-engines-actionable-simulators",
+        "title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
+        "claim": "主张从「好看的生成引擎」转向「可行动的物理 grounding 模拟器」。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "runtime · core · physical grounding and actionable simulators",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2601.15533"
+        ],
+        "cluster_id": "runtime",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-oefinger-2026-admissibility-world-model-simulators",
+        "title": "Validate the Dream Before You Trust Its Verdict: Admissibility for World-Model Simulators",
+        "claim": "定义 L0–L4 可采信框架：何时可把世界模型模拟器判决当作保证证据。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "runtime · core · world-model simulator assurance",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.07196"
+        ],
+        "cluster_id": "runtime",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-zheng-2026-digital-twins-world-models-edge",
+        "title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
+        "claim": "综述数字孪生走向世界模型，及其在移动边缘通用智能中的机会与挑战。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "runtime · domain · digital twins and mobile edge intelligence",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2603.17420"
+        ],
+        "cluster_id": "runtime",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-han-2026-economic-world-models",
+        "title": "From Economic Agents to Agentic Economies: A Systems Blueprint for Economic World Models",
+        "claim": "把经济世界模型定义为可执行生成环境，并给出六级能力阶梯与工程蓝图。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "runtime · domain · economic world models",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2608.06020",
+          "https://github.com/FreedomIntelligence/Awesome-Economic-World-Models"
+        ],
+        "cluster_id": "runtime",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-liu-2026-medical-world-models",
+        "title": "Medical world models: representing medical states, modelling clinical dynamics and guiding intervention policies",
+        "claim": "整理医疗世界模型散点工作，围绕患者状态、临床动力学与干预策略建路线图。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "runtime · domain · healthcare",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.16721",
+          "https://github.com/1999kevin/awesome_medical_world_models"
+        ],
+        "cluster_id": "runtime",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-liu-2026-interactive-video-world-modeling",
+        "title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
+        "claim": "系统综述交互式视频世界建模的前沿、挑战、基准与趋势。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "video_sim · core · interactive video world modeling",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.01164",
+          "https://github.com/liujiuming123/Awesome-Interactive-World-Model"
+        ],
+        "cluster_id": "video_sim",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-hu-2026-evolution-video-generative-foundations",
+        "title": "Evolution of Video Generative Foundations",
+        "claim": "泛视频生成综述；仅在把高级视频生成通向世界模型时作边界对照。",
+        "do": "忽略 — adjacent；仅作边界对照，不进主清单决策",
+        "action": "忽略",
+        "map_position": "video_sim · adjacent · video generation foundations",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.06339",
+          "https://github.com/sjtuplayer/Awesome-Video-Foundations"
+        ],
+        "cluster_id": "video_sim",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-liang-2026-world-action-models-embodied-brains",
+        "title": "From World Action Models to Embodied Brains: A Roadmap for Open-World Physical Intelligence",
+        "claim": "梳理世界动作模型演进，诊断表征/标准/系统缺口，提出具身栈契约。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "robot · core · world action models and embodied physical intelligence",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.11689"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-yu-2026-decision-centric-world-model-evaluation",
+        "title": "How Should World Models Be Evaluated for Embodied Decision-Making? A Decision-Making-Centric Position",
+        "claim": "主张以决策为中心评价世界模型，提出 L0–L7 证据阶梯并诊断主张/证据错配。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "robot · core · decision-centric world-model evaluation",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.15032"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-wang-2026-world-action-models",
+        "title": "World Action Models: The Next Frontier in Embodied AI",
+        "claim": "定义世界动作模型为「世界模型+具身行动」范式，并综述架构/数据/评价。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "robot · core · embodied AI and action generation",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2605.12090"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-hou-2026-world-model-robot-learning",
+        "title": "World Model for Robot Learning: A Comprehensive Survey",
+        "claim": "从机器人学习视角系统综述世界模型：策略、学习型模拟器与视频世界模型。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "robot · core · robot learning",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2605.00080",
+          "https://github.com/NTUMARS/Awesome-World-Model-for-Robotics-Policy"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-zhang-2026-driving-world-model-counterfactual-prediction",
+        "title": "How Can Driving World Models Do Counterfactual Prediction?",
+        "claim": "指出驾驶世界模型在反事实预测上的协议缺口，并给出可控评测基准。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "robot · domain · driving world models and counterfactual evaluation",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2608.11601"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-karcini-2026-robots-need-more-than-vla-world-models",
+        "title": "Robots Need More than VLA and World Models",
+        "claim": "立场文：机器人不能只靠 VLA（Vision-Language-Action，视觉-语言-动作）与世界模型。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "robot · domain · robotics, VLA, and world-model interfaces",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.06556"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-mei-2026-video-generation-models-robotics",
+        "title": "Video Generation Models in Robotics - Applications, Research Challenges, Future Directions",
+        "claim": "综述视频模型在机器人中作为具身世界模型的应用、挑战与方向。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "robot · domain · robotics and video generation world models",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2601.07823"
+        ],
+        "cluster_id": "robot",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-chen-2026-definition-roadmap-world-models",
+        "title": "A Definition and Roadmap for World Models",
+        "claim": "给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "definition · core · general definition",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2607.06401"
+        ],
+        "cluster_id": "definition",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-liu-2026-graph-world-models",
+        "title": "Graph World Models: Concepts, Taxonomy, and Future Directions",
+        "claim": "形式化图世界模型范式，并用关系归纳偏置 taxonomy（分类体系）组织现有工作。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "definition · core · graph world models",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.27895"
+        ],
+        "cluster_id": "definition",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-zeng-2026-openworldlib",
+        "title": "OpenWorldLib: A Unified Codebase and Definition of Advanced World Models",
+        "claim": "提出高级世界模型统一定义与能力分类，并给出标准化推理代码基座。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "definition · core · advanced world models",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2604.04707",
+          "https://github.com/OpenDCAI/OpenWorldLib"
+        ],
+        "cluster_id": "definition",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-zeng-2026-world-models-not-merely-injecting-world-knowledge",
+        "title": "Research on World Models Is Not Merely Injecting World Knowledge into Specific Tasks",
+        "claim": "批评「往任务里灌世界知识」的碎片化做法，主张更统一的通用世界模型规格。",
+        "do": "研 — 领域级 framing，值得跟定义与评价争论",
+        "action": "研",
+        "map_position": "definition · core · world-model research framing",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2602.01630"
+        ],
+        "cluster_id": "definition",
+        "source": "verified_ledger"
+      },
+      {
+        "id": "brief-maharaj-2026-code-world-modelling-survey",
+        "title": "Beyond the Autoregressive Horizon: A Comprehensive Survey of Diffusion Models, World Modelling, and State Space Models for Code",
+        "claim": "在代码智能非自回归范式综述中，把 Code World Models 作为一类关键路径。",
+        "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
+        "action": "观望",
+        "map_position": "code · domain · code intelligence",
+        "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
+        "evidence_links": [
+          "https://arxiv.org/abs/2606.23690"
+        ],
+        "cluster_id": "code",
+        "source": "verified_ledger"
+      }
+    ],
+    "watchlist": [
+      {
+        "id": "cand-8ea9447e50dc",
+        "title": "A Survey of Interactive World Models for Embodied Agents",
+        "url": "https://arxiv.org/abs/2609.99999",
+        "channels": [
+          "arxiv",
+          "huggingface"
+        ],
+        "roles": [
+          "discovery",
+          "signal"
+        ],
+        "confidence": "high",
+        "priority_boost": 1.8399999999999999,
+        "signal_ids": [
+          "arxiv:2609.99999",
+          "hf:2609.99999"
+        ],
+        "discovered_at": "2026-09-18T08:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-1453197e4120",
+        "title": "Open-source world model simulator released",
+        "url": "https://example.com/world-model-sim",
+        "channels": [
+          "hackernews"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 2.42,
+        "signal_ids": [
+          "hn:40000001"
+        ],
+        "discovered_at": "2026-09-15T12:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-11ee260d686c",
+        "title": "Show HN: WorldModelBench — eval harness for actionable simulators",
+        "url": "https://example.com/worldmodelbench",
+        "channels": [
+          "hackernews"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 1.88,
+        "signal_ids": [
+          "hn:40000003"
+        ],
+        "discovered_at": "2026-09-16T09:30:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-b4aae94c1cfa",
+        "title": "Daily Papers Spotlight: Latent World Models for Robot Rollouts",
+        "url": "https://arxiv.org/abs/2609.77777",
+        "channels": [
+          "huggingface"
+        ],
+        "roles": [
+          "signal"
+        ],
+        "confidence": "medium",
+        "priority_boost": 1.54,
+        "signal_ids": [
+          "hf:2609.77777"
+        ],
+        "discovered_at": "2026-09-17T11:00:00.000Z",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      },
+      {
+        "id": "cand-abaf53bf5dea",
+        "title": "World Models for Open-World Robotics: A Position Paper",
+        "url": "https://openreview.net/forum?id=ORForumAAA",
+        "channels": [
+          "openreview"
+        ],
+        "roles": [
+          "discovery"
+        ],
+        "confidence": "high",
+        "priority_boost": 0.0,
+        "signal_ids": [
+          "openreview:ORForumAAA"
+        ],
+        "discovered_at": "2026-09-20T02:54:53+00:00",
+        "source": "heat_or_discovery",
+        "note": "本周热源/发现信号——非核验清单条目；热度只提权。"
+      }
+    ]
+  }
+}

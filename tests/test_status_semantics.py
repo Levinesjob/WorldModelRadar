@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from radar.schemas import ChannelResult, ChannelStatus, RunStatus, aggregate_run_status, status_reader_copy
+from radar.schemas import ChannelResult, ChannelStatus, RunStatus, aggregate_run_status, channel_health_label, status_reader_copy
 
 
 def _ch(name: str, role: str, status: ChannelStatus, n: int = 0) -> ChannelResult:
@@ -55,6 +55,12 @@ class StatusSemanticsTests(unittest.TestCase):
         self.assertIn("不可用", down_copy)
         self.assertNotEqual(empty_copy, down_copy)
         self.assertIn("≠", down_copy)
+
+    def test_channel_health_labels_never_silent(self):
+        self.assertEqual(channel_health_label(ChannelStatus.SUCCESS), "ok")
+        self.assertEqual(channel_health_label(ChannelStatus.EMPTY), "ok")
+        self.assertEqual(channel_health_label(ChannelStatus.UNAVAILABLE), "unavailable")
+        self.assertEqual(channel_health_label(ChannelStatus.ERROR), "partial")
 
 
 if __name__ == "__main__":

@@ -1,13 +1,13 @@
 {
   "id": "brief-chen-2026-generative-engines-actionable-simulators",
   "paper_id": "chen-2026-generative-engines-actionable-simulators",
-  "claim": "Survey-style argument reframing world models from visually realistic generators to physically grounded actionable simulators.",
+  "claim": "主张从「好看的生成引擎」转向「可行动的物理 grounding 模拟器」。",
   "map_position": "runtime · core · physical grounding and actionable simulators",
   "do": "研 — 领域级 framing，值得跟定义与评价争论",
   "evidence_links": [
     "https://arxiv.org/abs/2601.15533"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Generative Engines to Actionable Simulators: The Imperative of Physical Grounding in World Models",
   "cluster_id": "runtime"
 }

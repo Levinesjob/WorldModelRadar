@@ -1,13 +1,13 @@
 {
   "id": "brief-zheng-2026-digital-twins-world-models-edge",
   "paper_id": "zheng-2026-digital-twins-world-models-edge",
-  "claim": "Systematically surveys the transition from digital twins to world models and their role in edge general intelligence.",
+  "claim": "综述数字孪生走向世界模型，及其在移动边缘通用智能中的机会与挑战。",
   "map_position": "runtime · domain · digital twins and mobile edge intelligence",
   "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
   "evidence_links": [
     "https://arxiv.org/abs/2603.17420"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "From Digital Twins to World Models: Opportunities, Challenges, and Applications for Mobile Edge General Intelligence",
   "cluster_id": "runtime"
 }

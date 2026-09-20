@@ -21,6 +21,29 @@ AREA_CLUSTER_RULES: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"medical|economic|edge|digital twin", re.I), "runtime"),
 ]
 
+# Reader-facing Chinese claims (≤150 chars). Keys = papers.json id.
+CLAIM_ZH_BY_ID: dict[str, str] = {
+    "chen-2026-definition-roadmap-world-models": "给出世界模型的科学定义、关键技术面与分阶段路线图，作领域总览入口。",
+    "chen-2026-generative-engines-actionable-simulators": "主张从「好看的生成引擎」转向「可行动的物理 grounding 模拟器」。",
+    "han-2026-economic-world-models": "把经济世界模型定义为可执行生成环境，并给出六级能力阶梯与工程蓝图。",
+    "hou-2026-world-model-robot-learning": "从机器人学习视角系统综述世界模型：策略、学习型模拟器与视频世界模型。",
+    "hu-2026-evolution-video-generative-foundations": "泛视频生成综述；仅在把高级视频生成通向世界模型时作边界对照。",
+    "karcini-2026-robots-need-more-than-vla-world-models": "立场文：机器人不能只靠 VLA（Vision-Language-Action，视觉-语言-动作）与世界模型。",
+    "liang-2026-world-action-models-embodied-brains": "梳理世界动作模型演进，诊断表征/标准/系统缺口，提出具身栈契约。",
+    "liu-2026-graph-world-models": "形式化图世界模型范式，并用关系归纳偏置 taxonomy（分类体系）组织现有工作。",
+    "liu-2026-interactive-video-world-modeling": "系统综述交互式视频世界建模的前沿、挑战、基准与趋势。",
+    "liu-2026-medical-world-models": "整理医疗世界模型散点工作，围绕患者状态、临床动力学与干预策略建路线图。",
+    "maharaj-2026-code-world-modelling-survey": "在代码智能非自回归范式综述中，把 Code World Models 作为一类关键路径。",
+    "mei-2026-video-generation-models-robotics": "综述视频模型在机器人中作为具身世界模型的应用、挑战与方向。",
+    "oefinger-2026-admissibility-world-model-simulators": "定义 L0–L4 可采信框架：何时可把世界模型模拟器判决当作保证证据。",
+    "wang-2026-world-action-models": "定义世界动作模型为「世界模型+具身行动」范式，并综述架构/数据/评价。",
+    "yu-2026-decision-centric-world-model-evaluation": "主张以决策为中心评价世界模型，提出 L0–L7 证据阶梯并诊断主张/证据错配。",
+    "zeng-2026-openworldlib": "提出高级世界模型统一定义与能力分类，并给出标准化推理代码基座。",
+    "zeng-2026-world-models-not-merely-injecting-world-knowledge": "批评「往任务里灌世界知识」的碎片化做法，主张更统一的通用世界模型规格。",
+    "zhang-2026-driving-world-model-counterfactual-prediction": "指出驾驶世界模型在反事实预测上的协议缺口，并给出可控评测基准。",
+    "zheng-2026-digital-twins-world-models-edge": "综述数字孪生走向世界模型，及其在移动边缘通用智能中的机会与挑战。",
+}
+
 
 def infer_cluster(area: str, title: str = "") -> str:
     text = f"{area} {title}"
@@ -38,18 +61,25 @@ def do_from_relevance(relevance: str) -> str:
     return "忽略 — adjacent；仅作边界对照，不进主清单决策"
 
 
+def claim_zh_from_paper(paper: dict[str, Any]) -> str:
+    """Prefer curated Chinese claim; fall back to compressed why_included / title."""
+    paper_id = paper.get("id") or ""
+    if paper_id in CLAIM_ZH_BY_ID:
+        return CLAIM_ZH_BY_ID[paper_id]
+    why = (paper.get("why_included") or "").strip()
+    title = (paper.get("title") or "").strip()
+    src = why or title
+    return src if len(src) <= 150 else src[:147] + "…"
+
+
 def brief_from_paper(paper: dict[str, Any]) -> Brief:
     """Derive a scannable Chinese brief from a verified paper record."""
     paper_id = paper.get("id") or ""
     title = paper.get("title") or ""
     area = paper.get("area") or ""
-    why = paper.get("why_included") or ""
     relevance = paper.get("relevance") or "adjacent"
     cluster = infer_cluster(area, title)
-
-    # Keep claim ≤150 chars; prefer why_included compressed.
-    claim_src = why if why else title
-    claim = claim_src if len(claim_src) <= 150 else claim_src[:147] + "…"
+    claim = claim_zh_from_paper(paper)
 
     evidence = []
     if paper.get("url"):
@@ -66,7 +96,7 @@ def brief_from_paper(paper: dict[str, Any]) -> Brief:
         claim=claim,
         map_position=f"{cluster} · {relevance} · {area}",
         do=do_from_relevance(relevance),
-        fake_demand="把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+        fake_demand="把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
         evidence_links=evidence,
         cluster_id=cluster,
     )

@@ -1,13 +1,13 @@
 {
   "id": "brief-mei-2026-video-generation-models-robotics",
   "paper_id": "mei-2026-video-generation-models-robotics",
-  "claim": "Reviews video models and their applications as embodied world models in robotics, including data generation, action prediction, dynamics/reward mod…",
+  "claim": "综述视频模型在机器人中作为具身世界模型的应用、挑战与方向。",
   "map_position": "robot · domain · robotics and video generation world models",
   "do": "观望 — 领域切片，跟场景成熟度与可迁移协议",
   "evidence_links": [
     "https://arxiv.org/abs/2601.07823"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Video Generation Models in Robotics - Applications, Research Challenges, Future Directions",
   "cluster_id": "robot"
 }

@@ -1,14 +1,14 @@
 {
   "id": "brief-liu-2026-interactive-video-world-modeling",
   "paper_id": "liu-2026-interactive-video-world-modeling",
-  "claim": "Systematically reviews recent research trends, technical developments, benchmarks, and future directions in interactive world modeling.",
+  "claim": "系统综述交互式视频世界建模的前沿、挑战、基准与趋势。",
   "map_position": "video_sim · core · interactive video world modeling",
   "do": "研 — 领域级 framing，值得跟定义与评价争论",
   "evidence_links": [
     "https://arxiv.org/abs/2606.01164",
     "https://github.com/liujiuming123/Awesome-Interactive-World-Model"
   ],
-  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进 Verified）",
+  "fake_demand": "把讨论热度或星标当成收录理由（热度只提权，不单独进核验清单）",
   "title": "Towards Interactive Video World Modeling: Frontiers, Challenges, Benchmarks, and Future Trends",
   "cluster_id": "video_sim"
 }

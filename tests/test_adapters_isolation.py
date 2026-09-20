@@ -67,9 +67,17 @@ class AdapterIsolationTests(unittest.TestCase):
 
         hn = run_adapter(HackerNewsAdapter(), ctx)
         self.assertEqual(hn.status, ChannelStatus.SUCCESS)
+        self.assertGreaterEqual(hn.item_count, 2)
+        self.assertTrue(all(s.channel == "hackernews" for s in hn.signals))
+        self.assertTrue(all(s.discovered_at for s in hn.signals))
 
         hf = run_adapter(HuggingFaceAdapter(), ctx)
         self.assertEqual(hf.status, ChannelStatus.SUCCESS)
+        self.assertGreaterEqual(hf.item_count, 2)
+        self.assertTrue(all(s.channel == "huggingface" for s in hf.signals))
+        hf_ids = {s.anchors.get("arxiv_id") for s in hf.signals}
+        self.assertIn("2609.77777", hf_ids)
+        self.assertIn("2609.99999", hf_ids)
 
     def test_parse_atom_filters_non_overview(self):
         xml = (FIXTURES_DIR / "arxiv_atom.xml").read_bytes()
